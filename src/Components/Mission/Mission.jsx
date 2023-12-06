@@ -40,7 +40,6 @@ const Mission = () => {
 						sx={{
 							boxShadow: "none",
 							background: 'transparent'
-							// border: '2px solid green',
 						}}
 						className="missionImgContainer"
 					>
@@ -54,15 +53,13 @@ const Mission = () => {
 					</Card>
 				</Grid>
 				<Grid item xs={12} sm={6} md={5} lg={5} sx={{
-					// border: '2px solid blue'
 					display: 'flex',
 					justifyContent: 'center',
 					alignItems: 'center'
 				}}>
 					<Box
 						sx={{
-							// border: '2px solid blue',
-							width: { xs:'100%', xl: '75%' },
+							width: { xs: '100%', xl: '75%' },
 							padding: { xs: '0 1rem', sm: '0 2rem' },
 							textAlign: "start",
 							pr: { xs: 3, md: 0 },
@@ -87,7 +84,9 @@ const Mission = () => {
 							}}
 							gutterBottom
 							className="missionPara">
-							The mission of NFTree is to provide a sustainable solution for investors to impact the environment positively while earning income. Our goal is to create the world's largest sustainable forest using NFTs and to be a platform that cultivates a sense of responsibility among the masses towards the environment.
+							At NFTree, we aim to pioneer a transformative intersection of technology,
+							environmental sustainability, and community engagement and are committed to
+							foster positive change, thus promoting a healthier planet.
 						</Typography>
 					</Box>
 				</Grid>

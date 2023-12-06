@@ -83,11 +83,11 @@ const Home = () => {
                 marginBottom: "2rem",
               }}
             >
-              Welcome to NFTree, the platform that provides a new way to save
-              the environment and reward investors at the same time. With our
-              NFTree, you can exercise your social responsibility without
-              compromising your investment goals, and we can continue planting
-              more trees around the globe.
+              Welcome to NFTree, where digital innovation meets environmental stewardship.
+              As you explore the platform, you'll discover a dynamic ecosystem that fosters
+              contribution to a greener planet securely and transparently. From tree counting
+              to carbon sequestration, NFTree provides a comprehensive, real-time view of
+              your reforestation impact.
             </Typography>
 
             <Button
@@ -105,7 +105,6 @@ const Home = () => {
           sm={7}
           xl={5}
           sx={{
-            // border:'2px solid red',
             height: "80%",
             backgroundImage: `url(${home})`,
             backgroundPosition: "center",
@@ -117,7 +116,6 @@ const Home = () => {
         ></Grid>
         <Grid
           item
-          // xs={12}
           xs={1}
           sx={{ display: { xs: "none", xl: "block" } }}
         ></Grid>
