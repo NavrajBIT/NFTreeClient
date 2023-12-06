@@ -10,7 +10,7 @@
 .project-container {
   min-height: 100vh;
   height: 100%;
-  padding: 80px 8vw 80px;
+  padding: 0px 8vw 80px;
 }
 
 .projectHead {
@@ -21,9 +21,17 @@
 }
 
 .projectSearch {
+  width: 98%;
   margin-top: 3vh;
   display: flex;
   justify-content: space-between;
+}
+
+.filterBtn {
+  height: 3rem;
+  border-radius: 23px;
+  text-indent: 17px;
+  background: white;
 }
 
 .projectSearch input {
@@ -32,10 +40,7 @@
   border: 1px solid silver;
   border-radius: 30px;
   color: black;
-}
-
-.filterBtn {
-  width: 15%;
+  margin-right: 10px;
 }
 
 .projectContent {

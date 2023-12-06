@@ -37,9 +37,39 @@ export default function ProjectPage({ props }) {
     setFilterData(newData);
   };
 
+  const handleFilter = (e) => {
+    console.log(e);
+    const selectedFilter = e.target.value;
+
+    let filteredProjects = [];
+
+    switch (selectedFilter) {
+      case "all":
+        filteredProjects = data;
+        break;
+      case "donating":
+        filteredProjects = data.filter(
+          (project) => project.donation !== null && project.donation !== ""
+        );
+        break;
+      case "monitoring":
+        filteredProjects = data.filter(
+          (project) => !project.donation || project.donation === ""
+        );
+        break;
+      default:
+        break;
+    }
+
+    setFilterData(filteredProjects);
+  };
+
   return (
     <div className="project-container" style={{ minHeight: "100vh" }}>
-      <div className="primarybutton" style={{ width: "fit-content" }}>
+      <div
+        className="primarybutton"
+        style={{ width: "fit-content", position: "absolute" }}
+      >
         <button onClick={() => navigate("/projects/create")}>
           Create New Project +
         </button>
@@ -54,33 +84,29 @@ export default function ProjectPage({ props }) {
           placeholder="Search Project"
           onChange={handleSearch}
         />
+
         <FormControl className="filterBtn">
-          {/* <InputLabel id="demo-simple-select-label">Filter</InputLabel> */}
-          {/* <Select
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
-            // value={age}
-            label="Age"
-            // onChange={handleChange}
+          <select
+            name="filter"
+            id="filter"
+            className="filterBtn"
+            onChange={handleFilter}
           >
-            <MenuItem>Delhi</MenuItem>
-            <MenuItem>Mumbai</MenuItem>
-            <MenuItem>Kolkata</MenuItem>
-            <MenuItem>Chennai</MenuItem>
-          </Select> */}
+            <option value="all" selected defaultValue>
+              All
+            </option>
+            <option value="monitoring">Monitoring Projects </option>
+            <option value="donating">Funding + Monitoring Projects</option>
+          </select>
         </FormControl>
       </div>
 
       <div
         style={{
-          width: "100%",
-          maxWidth: "var(--max-width)",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-around",
-          gap: "var(--padding-main)",
-          flexWrap: "wrap",
-          padding: "var(--padding-main)",
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fill,minmax(300px,1fr))",
+          rowGap: "2rem",
+          marginTop: "2rem",
         }}
       >
         {filterData.map(

@@ -6,11 +6,12 @@ import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import home from "./assets/home.png";
 import "./Home.css";
 import Dashboard from "../Dashboard/Dashboard";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
+  const navigate = useNavigate();
   return (
     <>
-      <div id="home"></div>
       <Grid
         container
         spacing={2}
@@ -19,7 +20,7 @@ const Home = () => {
           zIndex: 1,
           display: "flex",
           alignItems: "center",
-          background: "#EBF3E8",
+          background: "var(--green-20)",
         }}
         id="homeContainer"
       >
@@ -83,16 +84,18 @@ const Home = () => {
                 marginBottom: "2rem",
               }}
             >
-              Welcome to NFTree, where digital innovation meets environmental stewardship.
-              As you explore the platform, you'll discover a dynamic ecosystem that fosters
-              contribution to a greener planet securely and transparently. From tree counting
-              to carbon sequestration, NFTree provides a comprehensive, real-time view of
+              Welcome to NFTree, where digital innovation meets environmental
+              stewardship. As you explore the platform, you'll discover a
+              dynamic ecosystem that fosters contribution to a greener planet
+              securely and transparently. From tree counting to carbon
+              sequestration, NFTree provides a comprehensive, real-time view of
               your reforestation impact.
             </Typography>
 
             <Button
               variant="contained"
               endIcon={<ArrowForwardIcon />}
+              onClick={() => navigate("/projects")}
               className="filledBtn"
             >
               Get Started
@@ -114,11 +117,7 @@ const Home = () => {
           }}
           id="homeImgContainer"
         ></Grid>
-        <Grid
-          item
-          xs={1}
-          sx={{ display: { xs: "none", xl: "block" } }}
-        ></Grid>
+        <Grid item xs={1} sx={{ display: { xs: "none", xl: "block" } }}></Grid>
       </Grid>
       <Dashboard />
       <About />
