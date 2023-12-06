@@ -16,6 +16,7 @@
   border-radius: 5px;
   display: grid;
   column-gap: 5vw;
+  max-width: unset !important;
   row-gap: 5vh;
   grid-template-rows: repeat(2, 1fr);
   grid-template-columns: repeat(2, 1fr);
