@@ -5,7 +5,7 @@ import { login, register, googleLogin } from "../../api/userApi";
 import googlelogo from "./img/google-login.png";
 import "./Auth.css";
 
-const Auth = () => {
+const Auth = ({ close }) => {
   const navigate = useNavigate();
   const [isRegistered, setIsRegistered] = useState(true);
   const [isError, setIsError] = useState("");
@@ -65,7 +65,12 @@ const Auth = () => {
           }, 1);
         } else {
           setIsLoggedIn(true);
-          navigate("/");
+
+          if (close) {
+            close();
+          } else {
+            navigate("/home");
+          }
         }
       }
     }
@@ -167,21 +172,17 @@ const Auth = () => {
               <Link to="/forget-password">Forgot password?</Link>
             )}
           </div>
-          <div className="form-button" style={{ marginBottom: "10px" }}>
+          <div className="primarybutton" style={{ marginBottom: "10px" }}>
             <button type="submit" className="submit-button">
               {isRegistered ? "Sign in" : "Sign up"}
             </button>
           </div>
         </form>
-        <div className="form-button" style={{ marginBottom: "30px" }}>
+        <div className="primarybutton" style={{ marginBottom: "30px" }}>
           {isRegistered && (
             <button className="googleLoginBtn" onClick={handleGoogleLogin}>
-              <div>
-                <div>
-                  <img src={googlelogo} alt="Google Login" />
-                  Sign in with Google
-                </div>
-              </div>
+              <img src={googlelogo} alt="Google Login" />
+              Sign in with Google
             </button>
           )}
         </div>

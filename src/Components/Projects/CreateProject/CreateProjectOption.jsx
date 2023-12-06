@@ -1,50 +1,81 @@
-import React from "react";
-import "./CreateProject.css";
-import CreateProjectPage from "./CreateProjectPage";
-import { useNavigate, useLocation } from "react-router-dom";
-
-export default function CreateProjectOption() {
-  const navigate = useNavigate();
-  const location = useLocation();
+const CreateProjectOption = ({ setSelectedOption }) => {
   return (
-    <div className="form-container" style={{ minHeight: "700px" }}>
-      <div className="form-box">
-        <h1 className="formHead">
-          Please Select Type of Project You Want to Create
-        </h1>
+    <div
+      style={{
+        minHeight: "var(--min-height-page)",
+        width: "100%",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        flexDirection: "column",
+        gap: "var(--padding-main)",
+        padding: "var(--padding-main)",
+      }}
+    >
+      <div
+        style={{
+          textAlign: "center",
+          fontSize: "2rem",
+          fontWeight: "700",
+          color: "var(--green-30)",
+        }}
+      >
+        Create New Project
+      </div>
+      <div
+        style={{
+          display: "flex",
+          gap: "var(--padding-main)",
+          flexWrap: "wrap",
 
-        <div className="projectTypeInfo">
-          <ol>
-            <li>
-              <b>Funding Project:</b> Initiatives seeking financial support to
-              realize their goals, whether for conservation, community
-              development, or environmental causes.
-            </li>
-            <li>
-              <b>Monitoring Project:</b> Projects aimed at tracking, analyzing,
-              or overseeing various aspects, such as environmental changes,
-              community progress, or specific objectives.
-            </li>
-          </ol>
-        </div>
-        <br />
-        <div className="form-button" style={{ marginBottom: "10px" }}>
-          <button
-            onClick={() => {
-              navigate(`${location.pathname}/funding-project`);
-            }}
-          >
-            Funding Project
-          </button>
-          <button
-            onClick={() => {
-              navigate(`${location.pathname}/monitoring-project`);
-            }}
-          >
-            Monitoring Project
-          </button>
-        </div>
+          justifyContent: "center",
+        }}
+      >
+        <OptionCard
+          title="Monitoring Project"
+          text="Projects aimed at tracking, analyzing or overseeing various aspects such as environmental changes, community progress or specific objectives."
+          action={() => setSelectedOption("monitoring")}
+        />
+        <OptionCard
+          title="Funding Project"
+          text="Initiatives seeking financial support to realize their goals, whether for conservation, community development or environmental causes."
+          action={() => setSelectedOption("funding")}
+        />
       </div>
     </div>
   );
-}
+};
+
+export default CreateProjectOption;
+
+const OptionCard = ({ title, text, action }) => (
+  <div
+    style={{
+      width: "100%",
+      maxWidth: "var(--max-width-card)",
+      background: "white",
+      padding: "var(--padding-main)",
+      borderRadius: "var(--border-radius-light)",
+      display: "flex",
+      flexDirection: "column",
+      gap: "var(--padding-main)",
+      alignItems: "center",
+      justifyContent: "space-between",
+    }}
+  >
+    <div
+      style={{
+        textAlign: "center",
+        fontSize: "1.5rem",
+        fontWeight: "700",
+        color: "var(--green-30)",
+      }}
+    >
+      {title}
+    </div>
+    <div style={{ textAlign: "justify" }}>{text}</div>
+    <div className="primarybutton">
+      <button onClick={action}>Create</button>
+    </div>
+  </div>
+);

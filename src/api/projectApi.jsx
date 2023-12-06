@@ -1,5 +1,7 @@
 import axios from "axios";
 
+const BASE_URL = import.meta.env.VITE_BACKEND_URL;
+
 const createTransaction = async (props) => {
   const url = "http://127.0.0.1:8000/project/transaction/";
   const data = props;
@@ -77,7 +79,8 @@ const updateProject = async (props, id) => {
 };
 
 const kycStatus = async (props) => {
-  const url = "http://127.0.0.1:8000/user/kyc/";
+  const endpoint = "user/kyc/";
+  const url = BASE_URL + endpoint;
   const config = {
     headers: {
       "Content-Type": "multipart/form-data",

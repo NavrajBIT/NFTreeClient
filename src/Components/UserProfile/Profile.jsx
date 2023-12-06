@@ -11,9 +11,7 @@ import UserTransaction from "../UserProfile/UserTransactions/UserTransaction";
 
 const Profile = ({ state }) => {
   const location = useLocation();
-  const [curPage, setCurPage] = useState(
-    location.state == null ? "user_profile" : location.state
-  );
+  const [curPage, setCurPage] = useState("kyc");
   const [editActive, setEditActive] = useState(false);
 
   const setPage = (page) => {
@@ -37,11 +35,11 @@ const Profile = ({ state }) => {
         marginTop: "4rem",
       }}
     >
-      <Sidebar
+      {/* <Sidebar
         props={setPage}
         editActive={editActive}
         setEditActive={setEditActive}
-      />
+      /> */}
 
       <div className="profileContent">{pageMap[curPage]}</div>
     </Grid>

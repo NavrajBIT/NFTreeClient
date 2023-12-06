@@ -1,0 +1,15 @@
+.imagecard {
+  width: 250px;
+  height: 250px;
+  background-color: var(--green-30);
+  border-radius: var(--border-radius);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--padding-light);
+}
+
+.imagecard:hover {
+  box-shadow: 0 0 10px 10px var(--green-15);
+}

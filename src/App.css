@@ -9,9 +9,29 @@ body {
 
 :root {
   --green-10: #ebf3e8;
+  --green-15: #ebf3e8ef;
   --green-20: #d2e3c8;
   --green-30: #86a789;
   --primary: #2563eb;
+
+  --blank-light: white;
+
+  --error: rgb(255, 0, 0);
+  --filter: rgba(0, 0, 0, 0.1);
+
+  --min-height-page: 90vh;
+
+  --max-width: 1400px;
+  --max-width-form: 600px;
+  --max-width-card: 400px;
+  --padding-main: 24px;
+  --padding-light: 10px;
+
+  --border-radius: 20px;
+  --border-radius-light: 10px;
+  --profile-pic-diameter: 200px;
+  --project-card-width: 300px;
+  --project-card-height: 500px;
 }
 
 * {
@@ -48,19 +68,58 @@ select option {
   padding: 5px;
 }
 
-small{
-  color:#ca1919;
-  margin-left:6px;
-  margin-bottom:8px;
+small {
+  color: #ca1919;
+  margin-left: 6px;
+  margin-bottom: 8px;
 }
 
 button {
-  font-size: 1rem;
+  font-size: 1.5rem;
   border: none;
   outline: none;
   cursor: pointer;
   color: white;
-  background-color: var(--green-30) !important;
+  background-color: var(--green-30);
+}
+
+.primarybutton button {
+  width: 100%;
+  font-size: 1.5rem;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  color: var(--blank-light);
+  padding: var(--padding-light);
+  background-color: var(--green-30);
+  border-radius: var(--border-radius-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--padding-light);
+}
+
+.secondarybutton button {
+  width: 100%;
+  font-size: 1.5rem;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  color: var(--blank-light);
+  padding: var(--padding-light);
+  background-color: var(--green-20);
+  border: 1px solid var(--green-30);
+  border-radius: var(--border-radius-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--padding-light);
+}
+
+button:hover {
+  color: white;
+  background-color: var(--primary);
+  box-shadow: 0 0 10px 5px var(--green-15);
 }
 
 button > span {
@@ -80,4 +139,63 @@ button > span {
 
 .activeStepper circle {
   color: var(--green-30) !important;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--green-15);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--green-30);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: black;
+}
+
+.projectCard {
+  width: var(--project-card-width);
+  height: var(--project-card-height);
+  background-color: var(--green-20);
+  padding: var(--padding-light);
+  border-radius: var(--border-radius);
+  border: 2px solid var(--green-30);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+}
+.projectCard:hover {
+  box-shadow: 0 0 10px 10px var(--green-20);
+  border: 2px solid var(--green-30);
+}
+.projectCard img {
+  width: 100%;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+  border-radius: var(--border-radius-light);
+}
+.projectCard .projectname {
+  font-size: 1.5rem;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.projectCard .projectdescription {
+  height: 100px;
+  overflow: hidden;
+}
+.projectCard .clickhandler {
+  background-color: transparent;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  height: 420px;
+  width: 100%;
 }

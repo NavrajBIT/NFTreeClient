@@ -111,7 +111,7 @@ const Kyc = () => {
           orientation="horizontal"
         >
           {steps.map((label, index) => (
-            <Step key={index}>
+            <Step key={index} onClick={() => stepperClick(index)}>
               <StepLabel
 
               // className={`${index === activeStep ? 'activeStepper' : ''}`}

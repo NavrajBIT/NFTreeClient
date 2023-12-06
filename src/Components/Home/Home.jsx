@@ -5,6 +5,7 @@ import { Box, Grid, Typography, Button } from "@mui/material";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import home from "./assets/home.png";
 import "./Home.css";
+import Dashboard from "../Dashboard/Dashboard";
 
 const Home = () => {
   return (
@@ -121,7 +122,7 @@ const Home = () => {
           sx={{ display: { xs: "none", xl: "block" } }}
         ></Grid>
       </Grid>
-
+      <Dashboard />
       <About />
       <Mission />
     </>
