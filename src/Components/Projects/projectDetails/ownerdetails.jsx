@@ -92,8 +92,6 @@ const Representative = ({ details }) => {
         width: "100%",
         maxWidth: "var(--max-width-form)",
         background: "var(--green-15)",
-        display: "flex",
-        flexDirection: "column",
         gap: "var(--padding-light)",
         padding: "var(--padding-light)",
         borderRadius: "var(--border-radius)",
@@ -104,37 +102,41 @@ const Representative = ({ details }) => {
       </div>
 
       <div
-        style={{
-          height: "var(--profile-pic-diameter)",
-          width: "var(--profile-pic-diameter)",
-          background: "var(--green-30)",
-          borderRadius: "var(--profile-pic-diameter)",
-          backgroundImage: `url("${src}")`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-      />
-      <div>
-        <Detail
-          label={"Name"}
-          value={
-            details.ownerdetails?.account[0].first_name +
-            " " +
-            details.ownerdetails?.account[0].last_name
-          }
+        style={{ display: "flex", flexDirection: "row", alignItems: "center" }}
+      >
+        <div
+          style={{
+            height: "var(--profile-pic-diameter)",
+            width: "var(--profile-pic-diameter)",
+            background: "var(--green-30)",
+            borderRadius: "var(--profile-pic-diameter)",
+            backgroundImage: `url("${src}")`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
         />
-        <Detail
-          label={"Email"}
-          value={details.ownerdetails?.account[0].email}
-        />
-        <Detail
-          label={"Phone"}
-          value={details.ownerdetails?.account[0].phone}
-        />
-        <Detail
-          label={"Wallet"}
-          value={details.ownerdetails?.account[0].wallet}
-        />
+        <div>
+          <Detail
+            label={"Name"}
+            value={
+              details.ownerdetails?.account[0].first_name +
+              " " +
+              details.ownerdetails?.account[0].last_name
+            }
+          />
+          <Detail
+            label={"Email"}
+            value={details.ownerdetails?.account[0].email}
+          />
+          <Detail
+            label={"Phone"}
+            value={details.ownerdetails?.account[0].phone}
+          />
+          <Detail
+            label={"Wallet"}
+            value={details.ownerdetails?.account[0].wallet}
+          />
+        </div>
       </div>
     </div>
   );

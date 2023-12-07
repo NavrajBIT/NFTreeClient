@@ -2,6 +2,11 @@
   width: 80% !important;
 }
 
+.projectCard img {
+  border: 1px solid;
+  height: 250px;
+}
+
 .projectsCard > div:first-child {
   border: 1px solid #c9c9c9;
   box-shadow: none;
@@ -21,7 +26,6 @@
 }
 
 .projectSearch {
-  width: 98%;
   margin-top: 3vh;
   display: flex;
   justify-content: space-between;

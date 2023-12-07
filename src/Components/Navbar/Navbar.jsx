@@ -15,9 +15,9 @@ import Projectreport from "../ProjectReport/Projectreport";
 import Updatereport from "../Projects/projectReport/updatereport";
 import Generatereport from "../Projects/projectReport/generatereport";
 import UserProfile from "../UserProfile/Profile";
-
 import NavContent from "./subcomponents/navcontent";
 import { useAuth } from "../../Contexts/AuthContext";
+import BitWallet from "../BitWallet/body";
 
 export default function Navbar() {
   const { authUser, setAuthUser, isLoggedIn, setIsLoggedIn } = useAuth();
@@ -41,8 +41,10 @@ export default function Navbar() {
           path="/myprojects/:projectId/update"
           element={<Updatereport />}
         />
+
         <Route path="/forget-password" element={<ForgetPassword />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/wallet" element={<BitWallet />} />
         <Route path="/kyc" element={<UserProfile />} />
         <Route path="*" element={<ErrorPage />} />
       </Routes>

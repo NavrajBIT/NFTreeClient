@@ -22,8 +22,11 @@ export default function ProjectPage({ props }) {
     const projectListData = async () => {
       const response = await projectList();
 
+      const filteredProjects = response.filter(
+        (project) => !project.donation || project.donation === ""
+      );
       setData(response);
-      setFilterData(response);
+      setFilterData(filteredProjects);
     };
 
     projectListData();
@@ -66,11 +69,11 @@ export default function ProjectPage({ props }) {
 
   return (
     <div className="project-container" style={{ minHeight: "100vh" }}>
-      <div
-        className="primarybutton"
-        style={{ width: "fit-content", position: "absolute" }}
-      >
-        <button onClick={() => navigate("/projects/create")}>
+      <div className="primarybutton" style={{ position: "relative" }}>
+        <button
+          onClick={() => navigate("/projects/create")}
+          style={{ width: "fit-content", position: "absolute", right: 0 }}
+        >
           Create New Project +
         </button>
       </div>
@@ -92,10 +95,10 @@ export default function ProjectPage({ props }) {
             className="filterBtn"
             onChange={handleFilter}
           >
-            <option value="all" selected defaultValue>
-              All
+            <option value="all">All</option>
+            <option value="monitoring" defaultValue selected>
+              Monitoring Projects{" "}
             </option>
-            <option value="monitoring">Monitoring Projects </option>
             <option value="donating">Funding + Monitoring Projects</option>
           </select>
         </FormControl>
@@ -104,7 +107,7 @@ export default function ProjectPage({ props }) {
       <div
         style={{
           display: "grid",
-          gridTemplateColumns: "repeat(auto-fill,minmax(300px,1fr))",
+          gridTemplateColumns: "repeat(auto-fill,minmax(350px,1fr))",
           rowGap: "2rem",
           marginTop: "2rem",
         }}

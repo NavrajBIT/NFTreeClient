@@ -27,8 +27,9 @@ const Projectdetails = ({ projectId, notMyProject }) => {
       }}
     >
       <PrimaryDetails details={details} notMyProject={notMyProject} />
-      <Projectdocs details={details} notMyProject={notMyProject} />
+
       <ProjectImages details={details} notMyProject={notMyProject} />
+      <Projectdocs details={details} notMyProject={notMyProject} />
       <Ownerdetails details={details} />
     </div>
   );
