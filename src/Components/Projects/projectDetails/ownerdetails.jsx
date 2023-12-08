@@ -1,5 +1,3 @@
-import React from "react";
-
 const Ownerdetails = ({ details }) => {
   return (
     <div
@@ -34,12 +32,8 @@ const Ownerdetails = ({ details }) => {
           justifyContent: "space-around",
         }}
       >
-        {details.ownerdetails && details.ownerdetails.organization && (
-          <Organization details={details} />
-        )}
-        {details.ownerdetails &&
-          details.ownerdetails.account &&
-          details.ownerdetails.email && <Representative details={details} />}
+        {details.project && <Organization details={details} />}
+        {details.project && <Representative details={details} />}
       </div>
     </div>
   );
@@ -48,6 +42,7 @@ const Ownerdetails = ({ details }) => {
 export default Ownerdetails;
 
 const Organization = ({ details }) => {
+  const data = details.project.owner.organization;
   return (
     <div
       style={{
@@ -66,25 +61,17 @@ const Organization = ({ details }) => {
         Organization details
       </div>
       <div>
-        <Detail
-          label={"Name"}
-          value={details.ownerdetails?.organization[0].name}
-        />
-        <Detail
-          label={"Description"}
-          value={details.ownerdetails?.organization[0].description}
-        />
-        <Detail
-          label={"Website"}
-          value={details.ownerdetails?.organization[0].website}
-        />
+        <Detail label={"Name"} value={data?.name} />
+        <Detail label={"Description"} value={data?.description} />
+        <Detail label={"Website"} value={data?.website} />
       </div>
     </div>
   );
 };
 const Representative = ({ details }) => {
-  const src = details?.ownerdetails?.profilePic?.picture
-    ? details?.ownerdetails?.profilePic?.picture
+  const data = details.project.owner.representative;
+  const src = data?.pic
+    ? `http://localhost:8000${data?.pic}`
     : "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png";
   return (
     <div
@@ -103,38 +90,28 @@ const Representative = ({ details }) => {
         Representative details
       </div>
 
-      <div
-        style={{
-          height: "var(--profile-pic-diameter)",
-          width: "var(--profile-pic-diameter)",
-          background: "var(--green-30)",
-          borderRadius: "var(--profile-pic-diameter)",
-          backgroundImage: `url("${src}")`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-      />
-      <div>
-        <Detail
-          label={"Name"}
-          value={
-            details.ownerdetails?.account[0].first_name +
-            " " +
-            details.ownerdetails?.account[0].last_name
-          }
+      <div style={{ display: "flex", gap: "var(--padding-light)" }}>
+        <div
+          style={{
+            height: "var(--profile-pic-diameter)",
+            width: "var(--profile-pic-diameter)",
+            background: "var(--green-30)",
+            borderRadius: "var(--profile-pic-diameter)",
+            backgroundImage: `url("${src}")`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
         />
-        <Detail
-          label={"Email"}
-          value={details.ownerdetails?.account[0].email}
-        />
-        <Detail
-          label={"Phone"}
-          value={details.ownerdetails?.account[0].phone}
-        />
-        <Detail
-          label={"Wallet"}
-          value={details.ownerdetails?.account[0].wallet}
-        />
+
+        <div>
+          <Detail
+            label={"Name"}
+            value={data?.first_name + " " + data?.last_name}
+          />
+          <Detail label={"Email"} value={data?.email} />
+          <Detail label={"Phone"} value={data?.phone} />
+          <Detail label={"Wallet"} value={data?.wallet} />
+        </div>
       </div>
     </div>
   );
@@ -146,7 +123,7 @@ const Detail = ({ label, value }) => {
       style={{
         width: "100%",
         display: "grid",
-        gridTemplateColumns: "5fr 1fr 5fr",
+        gridTemplateColumns: "3fr 1fr 5fr",
       }}
     >
       <div>{label}</div>

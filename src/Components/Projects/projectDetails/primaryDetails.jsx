@@ -1,25 +1,42 @@
 import ShareIcon from "@mui/icons-material/Share";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AssessmentIcon from "@mui/icons-material/Assessment";
+import AttachEmailIcon from "@mui/icons-material/AttachEmail";
 
 const PrimaryDetails = ({ details, notMyProject }) => {
   return (
     <div
       style={{
         width: "100%",
-        maxWidth: "var(--max-width)",
-        background: "var(--green-20)",
-        padding: "var(--padding-main)",
-        borderRadius: "var(--border-radius)",
-        display: "flex",
-        flexWrap: "wrap",
-        gap: "var(--padding-light)",
-        justifyContent: "space-around",
+        backgroundImage: `url("${details.project.image}")`,
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover",
+        padding: "var(--padding-main) 0",
+        minHeight: "var(--min-height-page)",
       }}
     >
-      <ProjectImage details={details} notMyProject={notMyProject} />
-      <ProjectData details={details} notMyProject={notMyProject} />
+      <div
+        style={{
+          margin: "auto",
+          width: "100%",
+          maxWidth: "var(--max-width)",
+          background: "transparent",
+          padding: "var(--padding-main)",
+          borderRadius: "var(--border-radius)",
+          display: "flex",
+          flexWrap: "wrap",
+          gap: "var(--padding-light)",
+          justifyContent: "space-around",
+        }}
+      >
+        <ProjectData details={details} notMyProject={notMyProject} />
+        {/* {!notMyProject && (
+          <ProjectImage details={details} notMyProject={notMyProject} />
+        )} */}
+        <ButtonsContainer details={details} notMyProject={notMyProject} />
+      </div>
     </div>
   );
 };
@@ -27,7 +44,6 @@ const PrimaryDetails = ({ details, notMyProject }) => {
 export default PrimaryDetails;
 
 const ProjectData = ({ details, notMyProject }) => {
-  const navigate = useNavigate();
   const project = details.project;
   const isMonitoring = project.donation ? false : true;
   const data = {
@@ -35,16 +51,18 @@ const ProjectData = ({ details, notMyProject }) => {
     "Donation Cost per Plant ($)": project.donation,
     "Type of Plants": project.plant_types,
     "Total number of plants planned": project.plant_planned,
-    Location: `${project.address}, ${project.city}, ${project.country}`,
+    Address: project.address,
+    City: project.city,
+    Country: project.country,
   };
 
-  if (isMonitoring) delete data.donation;
+  if (isMonitoring) delete data["Donation Cost per Plant ($)"];
 
   return (
     <div
       style={{
         width: "100%",
-        maxWidth: "var(--max-width-form)",
+        maxWidth: "var(--max-width)",
         background: "var(--green-15)",
         display: "flex",
         flexDirection: "column",
@@ -69,24 +87,7 @@ const ProjectData = ({ details, notMyProject }) => {
           alignItems: "center",
           justifyContent: "space-between",
         }}
-      >
-        <div className="primarybutton">
-          <button>
-            Share <ShareIcon />
-          </button>
-        </div>
-        {!notMyProject && (
-          <div className="primarybutton">
-            <button
-              onClick={() =>
-                navigate(`/myprojects/${details.projectId}/update`)
-              }
-            >
-              Update Report <AssessmentIcon />
-            </button>
-          </div>
-        )}
-      </div>
+      ></div>
       <div style={{ textAlign: "justify" }}>{project.description}</div>
       <div
         style={{
@@ -107,20 +108,107 @@ const ProjectData = ({ details, notMyProject }) => {
           gap: "var(--padding-light)",
           justifyContent: "space-between",
         }}
-      >
-        <div className="primarybutton">
+      ></div>
+    </div>
+  );
+};
+
+const ButtonsContainer = ({ details, notMyProject }) => {
+  const navigate = useNavigate();
+  const imageref = useRef(null);
+  const project = details.project;
+  const isMonitoring = project.donation ? false : true;
+  return (
+    <div
+      style={{
+        width: "100%",
+        maxWidth: "var(--max-width)",
+        background: "var(--filter)",
+        display: "flex",
+        justifyContent: "center",
+        gap: "var(--padding-light)",
+        padding: "var(--padding-light)",
+        borderRadius: "var(--border-radius)",
+      }}
+    >
+      <div className="primarybutton" style={{ width: "20%" }}>
+        <button
+          onClick={() => {
+            try {
+              const projectUrl = `${import.meta.env.VITE_LOCATION}projects/${
+                details.projectId
+              }`;
+              navigator.clipboard.writeText(projectUrl);
+              alert("Project link copied.");
+            } catch {}
+          }}
+        >
+          Share <ShareIcon />
+        </button>
+      </div>
+      <div className="primarybutton" style={{ width: "20%" }}>
+        <button
+          onClick={() => navigate(`/projects/report/${details.projectId}`)}
+        >
+          View Report <AssessmentIcon />
+        </button>
+      </div>
+      {!isMonitoring && notMyProject && (
+        <div className="primarybutton" style={{ width: "20%" }}>
           <button
-            onClick={() => navigate(`/projects/report/${details.projectId}`)}
+            onClick={() => navigate(`/projects/${details.projectId}/donate`)}
           >
-            View Report <AssessmentIcon />
+            Donate $
           </button>
         </div>
-        {!isMonitoring && (
-          <div className="primarybutton">
-            <button onClick={() => console.log(project)}>Donate $</button>
-          </div>
-        )}
-      </div>
+      )}
+      {!notMyProject && (
+        <div className="primarybutton" style={{ width: "20%" }}>
+          <button
+            onClick={() => navigate(`/myprojects/${details.projectId}/update`)}
+          >
+            Update Report <AssessmentIcon />
+          </button>
+        </div>
+      )}
+      {!notMyProject && (
+        <div className="primarybutton" style={{ width: "20%" }}>
+          <button
+            onClick={() => {
+              let recipients = "";
+              try {
+                details.recipients.map((recipient) => {
+                  recipients = recipients + " " + recipient.email;
+                });
+              } catch {}
+              const alerttext = `Project report sent to ${recipients}`;
+              alert(alerttext);
+            }}
+          >
+            Send Report <AttachEmailIcon />
+          </button>
+        </div>
+      )}
+      {!notMyProject && (
+        <div className="primarybutton" style={{ width: "20%" }}>
+          <button
+            onClick={() => {
+              imageref.current.click();
+            }}
+          >
+            Update Image
+          </button>
+          <input
+            type="file"
+            style={{ display: "none" }}
+            ref={imageref}
+            onChange={(e) => {
+              let file = e.target.files[0];
+              details.uploadProjectImage(file);
+            }}
+          />
+        </div>
+      )}
     </div>
   );
 };
@@ -134,7 +222,7 @@ const Detail = ({ label, value }) => {
         gridTemplateColumns: "5fr 1fr 5fr",
       }}
     >
-      <div>{label}</div>
+      <div style={{ fontWeight: "bold" }}>{label}</div>
       <div>:</div>
       <div>{value}</div>
     </div>
@@ -151,7 +239,6 @@ const ProjectImage = ({ details, notMyProject }) => {
         maxWidth: "var(--max-width-form)",
         background: "var(--green-15)",
         border: "2px solid var(--green-30)",
-        aspectRatio: "1/1",
         display: "flex",
         flexDirection: "column",
         gap: "var(--padding-light)",
@@ -162,22 +249,26 @@ const ProjectImage = ({ details, notMyProject }) => {
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
+        aspectRatio: "var(--image-aspect-ratio)",
       }}
       onClick={() => {
         if (!notMyProject) imageref.current.click();
       }}
     >
-      {!isImage && (
+      {!notMyProject && (
         <div
           style={{
             textAlign: "center",
+            background: "var(--green-15)",
+            borderRadius: "var(--border-radius-light)",
+            padding: "var(--padding-light)",
           }}
         >
           Upload Project Image
           <p>
             {"("}Click to Upload{")"}
           </p>
-          <p>Please Select a high quality in 1:1 aspect ratio</p>
+          <p>Please Select a high quality in 4:3 aspect ratio</p>
         </div>
       )}
       <input

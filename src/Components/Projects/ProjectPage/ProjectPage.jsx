@@ -1,35 +1,106 @@
-import "./Projects.css";
 import { useState, useEffect } from "react";
 import { projectList } from "../../../api/projectApi";
-import { useNavigate, useLocation } from "react-router-dom";
-import { InputLabel, MenuItem, FormControl, Select } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 import ShareIcon from "@mui/icons-material/Share";
 import AssessmentIcon from "@mui/icons-material/Assessment";
+import Input from "../../form/input";
+import SearchIcon from "@mui/icons-material/Search";
+import FilterAltIcon from "@mui/icons-material/FilterAlt";
+import useAPI from "../../../api/useAPI";
 
-export default function ProjectPage({ props }) {
-  const navigate = useNavigate();
-  const location = useLocation();
-  const [currentPage, setCurrentPage] = useState(1);
-  const [postPerPage, setPostPerPage] = useState(10);
-
-  const firstPostIndex = (currentPage - 1) * postPerPage;
-  const lastPostIndex = currentPage * postPerPage;
-
+export default function ProjectPage() {
+  const api = useAPI();
   const [data, setData] = useState([]);
   const [filterData, setFilterData] = useState([]);
 
   useEffect(() => {
     const projectListData = async () => {
-      const response = await projectList();
-
-      setData(response);
-      setFilterData(response);
+      await api
+        .crud("GET", "project/projectlist")
+        .then((response) => {
+          if (response.status === 200) {
+            setData(response);
+            setFilterData(() =>
+              response.filter(
+                (project) => !project.donation || project.donation === ""
+              )
+            );
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     };
 
     projectListData();
   }, []);
 
+  return (
+    <div
+      style={{
+        minHeight: "var(--min-height-page)",
+        maxWidth: "var(--max-width)",
+        margin: "auto",
+        padding: "var(--padding-main)",
+        display: "flex",
+        flexDirection: "column",
+        gap: "var(--padding-main)",
+      }}
+    >
+      <CreateProjectButton />
+      <SearchBar setFilterData={setFilterData} data={data} />
+
+      <div
+        style={{
+          display: "flex",
+          flexWrap: "wrap",
+          gap: "var(--padding-main)",
+        }}
+      >
+        {filterData.map((project, index) => (
+          <ProjectCard key={"project-" + index} project={project} />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+const CreateProjectButton = () => {
+  const navigate = useNavigate();
+  return (
+    <div
+      style={{
+        width: "100%",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "flex-end",
+      }}
+    >
+      <div className="primarybutton" style={{ width: "fit-content" }}>
+        <button onClick={() => navigate("/projects/create")}>
+          Create New Project +
+        </button>
+      </div>
+    </div>
+  );
+};
+
+const SearchBar = ({ setFilterData, data }) => {
+  const [searchValue, setSearchValue] = useState("");
+  const [filterValue, setFilterValue] = useState("Monitoring");
+  const filterOptions = [
+    {
+      label: "Monitoring",
+      value: "monitoring",
+    },
+    {
+      label: "Funding & Monitoring",
+      value: "donating",
+    },
+  ];
+
   const handleSearch = (e) => {
+    setSearchValue(e.target.value);
     const searchTerm = e.target.value.toLowerCase();
     const newData = data.filter((project) =>
       project.name.toLowerCase().includes(searchTerm)
@@ -38,8 +109,8 @@ export default function ProjectPage({ props }) {
   };
 
   const handleFilter = (e) => {
-    console.log(e);
-    const selectedFilter = e.target.value;
+    const selectedFilter = e.value;
+    setFilterValue(e.label);
 
     let filteredProjects = [];
 
@@ -65,83 +136,38 @@ export default function ProjectPage({ props }) {
   };
 
   return (
-    <div className="project-container" style={{ minHeight: "100vh" }}>
-      <div
-        className="primarybutton"
-        style={{ width: "fit-content", position: "absolute" }}
-      >
-        <button onClick={() => navigate("/projects/create")}>
-          Create New Project +
-        </button>
-      </div>
-      <div className="projectHead">
-        <h1> Projects</h1>
-      </div>
-
-      <div className="projectSearch">
-        <input
-          type="text"
-          placeholder="Search Project"
-          onChange={handleSearch}
-        />
-
-        <FormControl className="filterBtn">
-          <select
-            name="filter"
-            id="filter"
-            className="filterBtn"
-            onChange={handleFilter}
-          >
-            <option value="all" selected defaultValue>
-              All
-            </option>
-            <option value="monitoring">Monitoring Projects </option>
-            <option value="donating">Funding + Monitoring Projects</option>
-          </select>
-        </FormControl>
-      </div>
-
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fill,minmax(300px,1fr))",
-          rowGap: "2rem",
-          marginTop: "2rem",
+    <div
+      style={{
+        display: "grid",
+        gridTemplateColumns: "5fr 1fr",
+        gap: "var(--padding-light)",
+      }}
+    >
+      <Input
+        inputData={{
+          label: "",
+          type: "text",
+          icon: <SearchIcon />,
+          value: searchValue,
+          maxLength: 50,
+          onChange: handleSearch,
         }}
-      >
-        {filterData.map(
-          (project, index) => (
-            <ProjectCard key={"project-" + index} project={project} />
-          )
-          // (
-          //   <div
-          //     className="box"
-          //     key={project.id}
-          //     onClick={() =>
-          //       navigate(`${location.pathname}/${project.id}`, {
-          //         state: { data: project, user: "user" },
-          //       })
-          //     }
-          //   >
-          //     <img src={project.image} alt="" />
-          //     <h4>{project.name}</h4>
-          //     {/* <span>{project.location}</span> */}
-          //     <p style={{ height: "65px" }}>
-          //       {project.description.length > 100
-          //         ? `${project.description.substring(0, 100)}...`
-          //         : project.description}
-          //     </p>
-
-          //     <div className="primarybutton">
-          //       {project.donation && <button>Donate</button>}
-          //     </div>
-          //   </div>
-          // )
-        )}
-      </div>
+      />
+      <Input
+        inputData={{
+          label: "",
+          type: "select",
+          icon: <FilterAltIcon />,
+          value: filterValue,
+          select: true,
+          maxLength: 50,
+          options: filterOptions,
+          onChange: handleFilter,
+        }}
+      />
     </div>
   );
-}
+};
 
 const ProjectCard = ({ project }) => {
   const navigate = useNavigate();
@@ -164,7 +190,17 @@ const ProjectCard = ({ project }) => {
         }}
       >
         <div className="secondarybutton">
-          <button>
+          <button
+            onClick={() => {
+              try {
+                const projectUrl = `${import.meta.env.VITE_LOCATION}projects/${
+                  project.id
+                }`;
+                navigator.clipboard.writeText(projectUrl);
+                alert("Project link copied.");
+              } catch {}
+            }}
+          >
             Share <ShareIcon />
           </button>
         </div>

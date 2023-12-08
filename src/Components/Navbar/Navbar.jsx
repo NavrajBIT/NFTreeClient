@@ -15,7 +15,7 @@ import Projectreport from "../ProjectReport/Projectreport";
 import Updatereport from "../Projects/projectReport/updatereport";
 import Generatereport from "../Projects/projectReport/generatereport";
 import UserProfile from "../UserProfile/Profile";
-
+import Donate from "../Projects/donate/donate";
 import NavContent from "./subcomponents/navcontent";
 import { useAuth } from "../../Contexts/AuthContext";
 
@@ -36,6 +36,7 @@ export default function Navbar() {
           element={<Generatereport />}
         />
         <Route path="/projects/:projectId" element={<ProjectdetailPage />} />
+        <Route path="/projects/:projectId/donate" element={<Donate />} />
         <Route path="/myprojects/:projectId" element={<MyprojectDetails />} />
         <Route
           path="/myprojects/:projectId/update"

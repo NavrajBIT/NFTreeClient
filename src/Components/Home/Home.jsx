@@ -92,14 +92,11 @@ const Home = () => {
               your reforestation impact.
             </Typography>
 
-            <Button
-              variant="contained"
-              endIcon={<ArrowForwardIcon />}
-              onClick={() => navigate("/projects")}
-              className="filledBtn"
-            >
-              Get Started
-            </Button>
+            <div className="primarybutton" style={{ width: "fit-content" }}>
+              <button onClick={() => navigate("/projects")}>
+                Get Started <ArrowForwardIcon />
+              </button>
+            </div>
           </Box>
         </Grid>
         <Grid

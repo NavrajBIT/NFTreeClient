@@ -1,7 +1,7 @@
 import Input from "./input";
 import { useState } from "react";
 
-const Myform = ({ heading, formdata, formButton, handleSubmit }) => {
+const Myform = ({ heading, formdata, formButton, handleSubmit, close }) => {
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const handleFormSubmit = (e) => {
@@ -114,10 +114,26 @@ const Myform = ({ heading, formdata, formButton, handleSubmit }) => {
           </div>
         );
       })}
-      <div className="primarybutton">
-        <button type="submit" onClick={handleFormSubmit}>
-          {formButton}
-        </button>
+      <div
+        style={
+          close && {
+            width: "100%",
+            display: "grid",
+            gridTemplateColumns: "1fr 1fr",
+            gap: "var(--padding-light)",
+          }
+        }
+      >
+        {close && (
+          <div className="primarybutton">
+            <button onClick={close}>Cancel</button>
+          </div>
+        )}
+        <div className="primarybutton">
+          <button type="submit" onClick={handleFormSubmit}>
+            {formButton}
+          </button>
+        </div>
       </div>
     </form>
   );
