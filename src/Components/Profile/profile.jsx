@@ -7,6 +7,7 @@ import EditPrimaryDetails from "./subcomponents/popups/editPrimaryDetails";
 import OrganizationDetails from "./subcomponents/organizationDetails";
 import EditOrganizationPopup from "./subcomponents/popups/editOrganization";
 import Myprojects from "./subcomponents/myprojects";
+import Contributions from "./subcomponents/contributions";
 const Profile = () => {
   const script = useprofile();
 
@@ -28,6 +29,7 @@ const Profile = () => {
       <PrimaryDetails script={script} />
       <OrganizationDetails script={script} />
       <Myprojects script={script} />
+      <Contributions script={script} />
 
       {script.isLoading && <LocalLoading />}
       {script.editprofilePopup && <EditPrimaryDetails script={script} />}

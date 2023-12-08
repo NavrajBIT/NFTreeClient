@@ -1,0 +1,9 @@
+.menuitem {
+  padding: var(--padding-light);
+  text-align: center;
+  border-radius: var(--border-radius-light);
+}
+.menuitem:hover {
+  background-color: var(--filter);
+  cursor: context-menu;
+}

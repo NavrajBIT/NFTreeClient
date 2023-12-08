@@ -37,7 +37,7 @@ const CreateProjectOption = ({ setSelectedOption }) => {
           action={() => setSelectedOption("monitoring")}
         />
         <OptionCard
-          title="Funding Project"
+          title="Funding with Monitoring Project"
           text="Initiatives seeking financial support to realize their goals, whether for conservation, community development or environmental causes."
           action={() => setSelectedOption("funding")}
         />

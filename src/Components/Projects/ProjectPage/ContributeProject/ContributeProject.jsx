@@ -2,10 +2,12 @@ import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { createTransaction } from "../../../../api/projectApi";
 import "./ContributeProject.css";
+import { useParams } from "react-router-dom";
 
 const ContributeProject = () => {
-  const state = useLocation();
-  const { id, donation } = state.state;
+  const params = useParams();
+  const id = params.projectIs;
+  // const { id, donation } = state.state;
 
   const [formData, setFormData] = useState({
     amount: 0,
@@ -83,7 +85,7 @@ const ContributeProject = () => {
               placeholder="Bit Wallet Address"
             />
 
-            <p className="amount">Total = Rs.{formData.amount}/-</p>
+            <p className="amount">Total = ${formData.amount}/-</p>
 
             <button className="submit-button" onClick={handleSubmit}>
               Donate

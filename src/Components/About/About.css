@@ -12,10 +12,8 @@
     padding: 3rem 0;
 }
 
-.aboutDesc {
-    margin-bottom: 3rem;
-    margin-top: 1rem;
-    width: 45%;
+.aboutDiv .aboutDesc {
+    width: 80%;
     text-align: justify;
 }
 

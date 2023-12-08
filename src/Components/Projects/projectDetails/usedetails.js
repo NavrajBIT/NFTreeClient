@@ -8,13 +8,13 @@ const usedetails = (projectId, notMyProject) => {
   const [project, setProject] = useState(null);
   const [projectImages, setProjectImages] = useState(null);
   const [projectDocs, setProjectDocs] = useState(null);
-  const [ownerdetails, setOwnerdetails] = useState({});
+  const [recipients, setRecipients] = useState(null);
 
   useEffect(() => {
     poppulateProject();
     poppulateProjectImages();
     poppulateProjectDocs();
-    poppulateOwnerDetails();
+    poppulateRecipients();
   }, [isLoaggedIn]);
 
   const poppulateProject = async () => {
@@ -50,8 +50,6 @@ const usedetails = (projectId, notMyProject) => {
     await api
       .crud("GET", `project/${projectId}/docs`)
       .then((res) => {
-        console.log("docs here---");
-        console.log(res);
         if (res.status === 200) {
           setProjectDocs(res);
         }
@@ -61,65 +59,19 @@ const usedetails = (projectId, notMyProject) => {
       });
     setIsLoading(false);
   };
-  const poppulateOwnerDetails = async () => {
+
+  const poppulateRecipients = async () => {
     setIsLoading(true);
     await api
-      .crud("GET", "user/account")
+      .crud("GET", `project/project-recipient/${projectId}`)
       .then((res) => {
+        console.log(res);
         if (res.status === 200) {
-          setOwnerdetails((prev) => {
-            let newdetails = { ...prev };
-            newdetails["account"] = res;
-            return newdetails;
-          });
+          setRecipients(res);
         }
       })
       .catch((err) => {
-        // if (err === 401) setIsLoggedIn(false);
-      });
-    await api
-      .crud("GET", "user/avatar")
-      .then((res) => {
-        if (res.status === 200) {
-          console.log("here---");
-          console.log(res);
-          setOwnerdetails((prev) => {
-            let newdetails = { ...prev };
-            newdetails["profilePic"] = res[0];
-            return newdetails;
-          });
-        }
-      })
-      .catch((err) => {
-        // if (err === 401) setIsLoggedIn(false);
-      });
-    await api
-      .crud("GET", "user/email")
-      .then((res) => {
-        if (res.status === 200) {
-          setOwnerdetails((prev) => {
-            let newdetails = { ...prev };
-            newdetails["email"] = res;
-            return newdetails;
-          });
-        }
-      })
-      .catch((err) => {
-        // if (err === 401) setIsLoggedIn(false);
-      });
-    await api
-      .crud("GET", "user/organization")
-      .then((res) => {
-        if (res.status === 200) {
-          setOwnerdetails((prev) => {
-            let newdetails = { ...prev };
-            newdetails["organization"] = res;
-            return newdetails;
-          });
-        }
-      })
-      .catch((err) => {
-        // if (err === 401) setIsLoggedIn(false);
+        if (err === 401) setIsLoggedIn(false);
       });
     setIsLoading(false);
   };
@@ -196,6 +148,21 @@ const usedetails = (projectId, notMyProject) => {
     setIsLoading(false);
   };
 
+  const addRecipient = async (email, wallet) => {
+    setIsLoading(true);
+    await api
+      .crud("POST", `project/project-recipient/${projectId}`, {
+        project: projectId,
+        email: email,
+        wallet: wallet,
+      })
+      .then((res) => {
+        if (res.status >= 200 && res.status <= 299) poppulateRecipients();
+      })
+      .catch((err) => console.log(err));
+    setIsLoading(false);
+  };
+
   return {
     projectId,
     isLoading,
@@ -206,10 +173,12 @@ const usedetails = (projectId, notMyProject) => {
     setProjectImages,
     projectDocs,
     setProjectDocs,
-    ownerdetails,
+    recipients,
+
     uploadProjectImage,
     uploadGalleryImage,
     uploadProjectDoc,
+    addRecipient,
   };
 };
 

@@ -2,7 +2,6 @@ import Overview from "./subcomponents/overview";
 import usereport from "./usereport";
 import { useParams } from "react-router-dom";
 import DownloadIcon from "@mui/icons-material/Download";
-import AttachEmailIcon from "@mui/icons-material/AttachEmail";
 import Status from "./subcomponents/status";
 import Health from "./subcomponents/health";
 import Impact from "./subcomponents/impact";
@@ -24,12 +23,6 @@ const Generatereport = () => {
       }}
       ref={script.reportRef}
     >
-      <div
-        className="primarybutton"
-        style={{ width: "fit-content", padding: " 0 var(--padding-main)" }}
-      >
-        <button onClick={() => script.goBack()}>{"< Back"}</button>
-      </div>
       <div
         style={{
           fontSize: "2rem",
@@ -70,11 +63,6 @@ const Generatereport = () => {
         <div className="primarybutton">
           <button onClick={script.downloadReport}>
             Download report <DownloadIcon />
-          </button>
-        </div>
-        <div className="primarybutton">
-          <button>
-            Send to Email <AttachEmailIcon />
           </button>
         </div>
       </div>

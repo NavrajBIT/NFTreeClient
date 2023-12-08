@@ -13,7 +13,6 @@ body {
   --green-20: #d2e3c8;
   --green-30: #86a789;
   --primary: #2563eb;
-
   --blank-light: white;
 
   --error: rgb(255, 0, 0);
@@ -31,7 +30,9 @@ body {
   --border-radius-light: 10px;
   --profile-pic-diameter: 200px;
   --project-card-width: 300px;
-  --project-card-height: 500px;
+  --project-card-height: 420px;
+
+  --image-aspect-ratio: 4/3;
 }
 
 * {
@@ -165,7 +166,6 @@ button > span {
   padding: var(--padding-light);
   border-radius: var(--border-radius);
   border: 2px solid var(--green-30);
-
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -177,7 +177,7 @@ button > span {
 }
 .projectCard img {
   width: 100%;
-  aspect-ratio: 1/1;
+  aspect-ratio: var(--image-aspect-ratio);
   object-fit: cover;
   border-radius: var(--border-radius-light);
 }
@@ -196,6 +196,6 @@ button > span {
   position: absolute;
   top: 0px;
   left: 0px;
-  height: 420px;
+  height: 360px;
   width: 100%;
 }

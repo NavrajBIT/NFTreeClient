@@ -17,9 +17,6 @@ const Createform = ({ selectedOption, setSelectedOption }) => {
         padding: "var(--padding-main)",
       }}
     >
-      <div className="primarybutton" style={{ width: "fit-content" }}>
-        <button onClick={() => setSelectedOption(null)}>{"< Back"}</button>
-      </div>
       <div
         style={{
           width: "100%",
@@ -31,7 +28,7 @@ const Createform = ({ selectedOption, setSelectedOption }) => {
         <Myform
           heading={
             selectedOption === "funding"
-              ? "Create Funding Project"
+              ? "Create Funding with Monitoring Project"
               : "Create Monitoring Project"
           }
           formdata={
@@ -41,6 +38,7 @@ const Createform = ({ selectedOption, setSelectedOption }) => {
           }
           formButton="Get Started"
           handleSubmit={handleSubmit}
+          close={() => setSelectedOption(null)}
         />
       </div>
       {isLoading && <LocalLoading />}

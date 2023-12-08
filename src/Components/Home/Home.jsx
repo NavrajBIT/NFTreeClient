@@ -6,11 +6,12 @@ import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import home from "./assets/home.png";
 import "./Home.css";
 import Dashboard from "../Dashboard/Dashboard";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
+  const navigate = useNavigate();
   return (
     <>
-      <div id="home"></div>
       <Grid
         container
         spacing={2}
@@ -19,7 +20,7 @@ const Home = () => {
           zIndex: 1,
           display: "flex",
           alignItems: "center",
-          background: "#EBF3E8",
+          background: "var(--green-20)",
         }}
         id="homeContainer"
       >
@@ -83,20 +84,19 @@ const Home = () => {
                 marginBottom: "2rem",
               }}
             >
-              Welcome to NFTree, the platform that provides a new way to save
-              the environment and reward investors at the same time. With our
-              NFTree, you can exercise your social responsibility without
-              compromising your investment goals, and we can continue planting
-              more trees around the globe.
+              Welcome to NFTree, where digital innovation meets environmental
+              stewardship. As you explore the platform, you'll discover a
+              dynamic ecosystem that fosters contribution to a greener planet
+              securely and transparently. From tree counting to carbon
+              sequestration, NFTree provides a comprehensive, real-time view of
+              your reforestation impact.
             </Typography>
 
-            <Button
-              variant="contained"
-              endIcon={<ArrowForwardIcon />}
-              className="filledBtn"
-            >
-              Get Started
-            </Button>
+            <div className="primarybutton" style={{ width: "fit-content" }}>
+              <button onClick={() => navigate("/projects")}>
+                Get Started <ArrowForwardIcon />
+              </button>
+            </div>
           </Box>
         </Grid>
         <Grid
@@ -105,7 +105,6 @@ const Home = () => {
           sm={7}
           xl={5}
           sx={{
-            // border:'2px solid red',
             height: "80%",
             backgroundImage: `url(${home})`,
             backgroundPosition: "center",
@@ -115,12 +114,7 @@ const Home = () => {
           }}
           id="homeImgContainer"
         ></Grid>
-        <Grid
-          item
-          // xs={12}
-          xs={1}
-          sx={{ display: { xs: "none", xl: "block" } }}
-        ></Grid>
+        <Grid item xs={1} sx={{ display: { xs: "none", xl: "block" } }}></Grid>
       </Grid>
       <Dashboard />
       <About />

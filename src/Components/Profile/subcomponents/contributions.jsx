@@ -1,17 +1,10 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import useAPI from "../../../api/useAPI";
+import { useEffect } from "react";
 import ShareIcon from "@mui/icons-material/Share";
-import AssessmentIcon from "@mui/icons-material/Assessment";
 
-const Myprojects = ({ script }) => {
-  const navigate = useNavigate();
-
-  let projectsAvailable = script.myprojects ? true : false;
-  try {
-    if (script.myprojects.length === 0) {
-      projectsAvailable = false;
-    }
-  } catch {}
-
+const Contributions = ({ script }) => {
   return (
     <div className="primarycontainer" style={{ flexDirection: "column" }}>
       <div
@@ -21,23 +14,13 @@ const Myprojects = ({ script }) => {
           color: "var(--green-30)",
         }}
       >
-        My Projects
+        My Contributions
       </div>
-      <div>Projects Created by me</div>
-      <div
-        style={{ width: "100%", display: "flex", justifyContent: "flex-end" }}
-      >
-        <div className="primarybutton" style={{ width: "fit-content" }}>
-          <button onClick={() => navigate("/projects/create")}>
-            Create New Project +
-          </button>
-        </div>
-      </div>
-      {!projectsAvailable && "No Projects yet..."}
-      {/* <button onClick={() => console.log(script.myprojects.length)}>
-        Projects
-      </button> */}
-      {projectsAvailable && (
+      <div>Projects I have donated to...</div>
+
+      {!script.transactions && <div>No Contributions yet...</div>}
+
+      {script.transactions && (
         <div
           style={{
             display: "flex",
@@ -47,8 +30,11 @@ const Myprojects = ({ script }) => {
             flexWrap: "wrap",
           }}
         >
-          {script?.myprojects?.map((project, index) => (
-            <ProjectCard project={project} key={"my-project-" + index} />
+          {script?.transactions?.map((transaction, index) => (
+            <Transaction
+              transaction={transaction}
+              key={"my-contribution-" + index}
+            />
           ))}
         </div>
       )}
@@ -56,7 +42,36 @@ const Myprojects = ({ script }) => {
   );
 };
 
-export default Myprojects;
+export default Contributions;
+
+const Transaction = ({ transaction }) => {
+  const api = useAPI();
+  const [project, setProject] = useState(null);
+  useEffect(() => {
+    poppulateProject();
+  }, []);
+
+  const poppulateProject = () => {
+    api
+      .crud("GET", `/project/${transaction.project}`)
+      .then((res) => {
+        if (res.status === 200) {
+          setProject(res);
+        }
+      })
+      .catch((err) => console.log(err));
+  };
+
+  if (!project) return null;
+  return (
+    <div>
+      <ProjectCard project={project} />
+      <div style={{ fontSize: "1.25rem", fontWeight: "bold" }}>
+        Contribution: {transaction.amount}$
+      </div>
+    </div>
+  );
+};
 
 const ProjectCard = ({ project }) => {
   const navigate = useNavigate();
@@ -67,7 +82,7 @@ const ProjectCard = ({ project }) => {
       <div className="projectdescription">{project.description}</div>
       <div
         className="clickhandler"
-        onClick={() => navigate(`/myprojects/${project.id}`)}
+        onClick={() => navigate(`/projects/${project.id}`)}
       />
       <div
         style={{
@@ -93,11 +108,6 @@ const ProjectCard = ({ project }) => {
             Share <ShareIcon />
           </button>
         </div>
-        {/* <div className="secondarybutton">
-          <button onClick={() => navigate(`/myprojects/${project.id}/update`)}>
-            Update <AssessmentIcon />
-          </button>
-        </div> */}
       </div>
     </div>
   );

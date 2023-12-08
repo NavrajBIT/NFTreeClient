@@ -14,6 +14,7 @@ const useprofile = () => {
   const [editorganizationPopup, setEditorganizationPopup] = useState(false);
 
   const [myprojects, setMyprojects] = useState(null);
+  const [transactions, setTransactions] = useState(null);
 
   const endpoints = [
     { endpoint: "user/avatar", state: setProfilePic },
@@ -28,6 +29,7 @@ const useprofile = () => {
       poppulateData(endpoint.endpoint, endpoint.state);
     });
     poppulateData("project/myproject", setMyprojects, true);
+    poppulateData("project/transaction", setTransactions, true);
   }, [isLoggedIn]);
 
   const poppulateData = async (endpoint, setState, isArray) => {
@@ -36,7 +38,7 @@ const useprofile = () => {
     await api
       .crud("GET", endpoint)
       .then((res) => {
-        console.log(res);
+        if (isArray) console.log(res);
         if (res.status === 200 && !isArray) setState(res[0]);
         if (res.status === 200 && isArray) setState(res);
       })
@@ -91,6 +93,7 @@ const useprofile = () => {
     setEditorganizationPopup,
     myprojects,
     setMyprojects,
+    transactions,
   };
 };
 
