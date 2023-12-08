@@ -4,6 +4,7 @@ import { useState } from "react";
 import ReactDOMServer from "react-dom/server";
 import { useFormik } from "formik";
 import { contactUsSchema } from "../../ValidationSchema/ValidationSchema";
+import axios from "axios";
 
 export default function Contact() {
   const [isLoading, setIsLoading] = useState(true);
@@ -19,22 +20,27 @@ export default function Contact() {
       sessionStorage.getItem("id") == null
         ? "from unregistered user"
         : "from registered user",
-    message_type: null,
+    message_type: "General Inquiry",
     message: "",
   };
 
   const { values, errors, handleChange, touched, handleSubmit } = useFormik({
     initialValues: initialValues,
     validationSchema: contactUsSchema,
-    onSubmit: (values) => {
-      console.log(values);
-      handleSend();
+    onSubmit: async (values) => {
+      try {
+        await axios.post("http://127.0.0.1:8000/contact/contact-us/", values);
+        const messageResponse =
+          "Thank you for reaching out! Your message has been received, and we appreciate your interest. We will review your inquiry and get back to you as soon as possible.";
+        handleSend(messageResponse);
+      } catch (error) {
+        const messageResponse = "Error Sending Message";
+        handleSend(messageResponse);
+      }
     },
   });
 
-  console.log(errors);
-
-  const handleSend = () => {
+  const handleSend = (messageResponse) => {
     const loader = ReactDOMServer.renderToString(
       <FadeLoader
         color={"green"}
@@ -52,8 +58,7 @@ export default function Contact() {
     const elementToReplace = document.getElementsByClassName("form-input")[0];
 
     setTimeout(() => {
-      elementToReplace.textContent =
-        "Thank you for reaching out! Your message has been received, and we appreciate your interest. We will review your inquiry and get back to you as soon as possible.";
+      elementToReplace.textContent = messageResponse;
       elementToReplace.classList.add("contactRespond");
     }, 3000);
   };

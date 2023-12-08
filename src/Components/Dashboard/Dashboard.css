@@ -8,7 +8,6 @@
   margin: 10vh 0px;
 }
 
-<<<<<<< HEAD
 .dashboardPage {
   margin-top: 5vh;
   width: 50%;
@@ -21,7 +20,7 @@
   grid-template-rows: repeat(2, 1fr);
   grid-template-columns: repeat(2, 1fr);
   box-shadow: 5px 5px 15px 0px;
-=======
+}
 .dashboard-box {
   border: 1px solid white;
   background: white;
@@ -38,5 +37,4 @@
   font-size: 4rem;
   color: silver;
   font-weight: 800;
->>>>>>> d6336da218d0af7b754ce82320b065ec75adedc0
 }

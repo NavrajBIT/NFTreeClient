@@ -18,6 +18,7 @@ import UserProfile from "../UserProfile/Profile";
 import Donate from "../Projects/donate/donate";
 import NavContent from "./subcomponents/navcontent";
 import { useAuth } from "../../Contexts/AuthContext";
+import BitWallet from "../BitWallet/body";
 
 export default function Navbar() {
   const { authUser, setAuthUser, isLoggedIn, setIsLoggedIn } = useAuth();
@@ -45,6 +46,7 @@ export default function Navbar() {
         <Route path="/forget-password" element={<ForgetPassword />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/kyc" element={<UserProfile />} />
+        <Route path="/wallet" element={<BitWallet />} />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
     </>
