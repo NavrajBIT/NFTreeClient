@@ -63,7 +63,7 @@ const BitWallet = () => {
   };
 
   return (
-    <div style={{ backgroundColor: "#89a195" }} className="main_body">
+    <div style={{ backgroundColor: "#86a789" }} className="main_body">
       <motion.div
         initial={"offscreen"}
         whileInView={"onscreen"}
@@ -113,12 +113,7 @@ const BitWallet = () => {
               className="md:w-[40vw] order-1 md:order-2"
             >
               <div className="image md:w-[40vw] mx-auto">
-                <img
-                  style={{ backgroundColor: "#59069a" }}
-                  src={image}
-                  alt=""
-                  className="w-80 h-96 mx-auto"
-                />
+                <img src={image} alt="" className="w-80 h-96 mx-auto" />
               </div>
             </motion.div>
           </div>
