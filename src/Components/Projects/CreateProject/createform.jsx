@@ -1,6 +1,6 @@
-import Myform from "../../form/myform";
+import Myform from "../../Subcomponents/form/myform";
 import usecreate from "./usecreate";
-import LocalLoading from "../../loading/localloading";
+import LocalLoading from "../../Subcomponents/loading/localloading";
 
 const Createform = ({ selectedOption, setSelectedOption }) => {
   const { formdatafunding, formdatamonitoring, handleSubmit, isLoading } =

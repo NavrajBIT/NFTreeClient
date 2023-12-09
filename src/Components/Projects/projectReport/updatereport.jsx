@@ -1,8 +1,8 @@
 import usereport from "./usereport";
 import Auth from "../../Auth/Auth";
-import Myform from "../../form/myform";
+import Myform from "../../Subcomponents/form/myform";
 import { useParams } from "react-router-dom";
-import LocalLoading from "../../loading/localloading";
+import LocalLoading from "../../Subcomponents/loading/localloading";
 
 const Updatereport = () => {
   const params = useParams();

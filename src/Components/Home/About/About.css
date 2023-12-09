@@ -1,0 +1,28 @@
+.aboutDiv {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--padding-main);
+  gap: var(--padding-main);
+}
+
+.aboutDiv .aboutDesc {
+  text-align: justify;
+}
+
+.aboutcardcontainer {
+  display: grid;
+
+  gap: var(--padding-main);
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+@media screen and (max-width: 600px) {
+  .aboutcardcontainer {
+    display: flex;
+    flex-direction: column;
+  }
+}

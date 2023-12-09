@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import Popup from "../../../Popup/popup";
-import Myform from "../../../form/myform";
+import Popup from "../../../Subcomponents/Popup/popup";
+import Myform from "../../../Subcomponents/form/myform";
 import useAPI from "../../../../api/useAPI";
 
 const EditOrganizationPopup = ({ script }) => {

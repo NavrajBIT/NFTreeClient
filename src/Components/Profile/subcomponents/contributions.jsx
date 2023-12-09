@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import useAPI from "../../../api/useAPI";
 import { useEffect } from "react";
 import ShareIcon from "@mui/icons-material/Share";
+import ProjectCard from "../../Subcomponents/projectCard/projectCard";
 
 const Contributions = ({ script }) => {
   return (
@@ -68,46 +69,6 @@ const Transaction = ({ transaction }) => {
       <ProjectCard project={project} />
       <div style={{ fontSize: "1.25rem", fontWeight: "bold" }}>
         Contribution: {transaction.amount}$
-      </div>
-    </div>
-  );
-};
-
-const ProjectCard = ({ project }) => {
-  const navigate = useNavigate();
-  return (
-    <div className="projectCard">
-      <img src={project.image} alt={project.name} />
-      <div className="projectname">{project.name}</div>
-      <div className="projectdescription">{project.description}</div>
-      <div
-        className="clickhandler"
-        onClick={() => navigate(`/projects/${project.id}`)}
-      />
-      <div
-        style={{
-          width: "100%",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          gap: "var(--padding-light)",
-        }}
-      >
-        <div className="secondarybutton">
-          <button
-            onClick={() => {
-              try {
-                const projectUrl = `${import.meta.env.VITE_LOCATION}projects/${
-                  project.id
-                }`;
-                navigator.clipboard.writeText(projectUrl);
-                alert("Project link copied.");
-              } catch {}
-            }}
-          >
-            Share <ShareIcon />
-          </button>
-        </div>
       </div>
     </div>
   );

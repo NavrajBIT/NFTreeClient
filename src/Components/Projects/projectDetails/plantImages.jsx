@@ -7,7 +7,7 @@ const PlantImages = ({ details, notMyProject }) => {
 
   useEffect(() => {
     try {
-      poppulateImages();
+      // poppulateImages();
     } catch (err) {
       console.log(err);
     }

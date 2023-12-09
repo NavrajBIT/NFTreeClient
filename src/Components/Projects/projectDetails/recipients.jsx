@@ -1,8 +1,9 @@
 import { useState } from "react";
 import AddIcon from "@mui/icons-material/Add";
-import Popup from "../../Popup/popup";
-import Input from "../../form/input";
-import Myform from "../../form/myform";
+import Popup from "../../Subcomponents/Popup/popup";
+import Input from "../../Subcomponents/form/input";
+import Myform from "../../Subcomponents/form/myform";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 const Recipients = ({ details, notMyProject }) => {
   const [isAdding, setIsAdding] = useState(false);
@@ -42,7 +43,11 @@ const Recipients = ({ details, notMyProject }) => {
         {details.recipients &&
           details.recipients.length > 0 &&
           details.recipients.map((recipient, index) => (
-            <RecipientTag key={"recipient" + index} recipient={recipient} />
+            <RecipientTag
+              key={"recipient" + index}
+              recipient={recipient}
+              details={details}
+            />
           ))}
       </div>
       {isAdding && <AddPopup details={details} setIsAdding={setIsAdding} />}
@@ -52,7 +57,7 @@ const Recipients = ({ details, notMyProject }) => {
 
 export default Recipients;
 
-const RecipientTag = ({ recipient }) => {
+const RecipientTag = ({ recipient, details }) => {
   return (
     <div
       className="imagecard"
@@ -60,12 +65,17 @@ const RecipientTag = ({ recipient }) => {
         color: "white",
         alignItems: "start",
         padding: "var(--padding-light)",
-        overflow: "hidden",
         height: "100px",
       }}
     >
       <div>Email: {recipient.email}</div>
       <div>Wallet: {recipient.wallet}</div>
+      <div
+        className="deletebutton"
+        onClick={() => details.deleteRecipient(recipient.id)}
+      >
+        X
+      </div>
     </div>
   );
 };

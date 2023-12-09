@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import ShareIcon from "@mui/icons-material/Share";
-import AssessmentIcon from "@mui/icons-material/Assessment";
+import ProjectCard from "../../Subcomponents/projectCard/projectCard";
 
 const Myprojects = ({ script }) => {
   const navigate = useNavigate();
@@ -34,9 +34,7 @@ const Myprojects = ({ script }) => {
         </div>
       </div>
       {!projectsAvailable && "No Projects yet..."}
-      {/* <button onClick={() => console.log(script.myprojects.length)}>
-        Projects
-      </button> */}
+
       {projectsAvailable && (
         <div
           style={{
@@ -48,7 +46,11 @@ const Myprojects = ({ script }) => {
           }}
         >
           {script?.myprojects?.map((project, index) => (
-            <ProjectCard project={project} key={"my-project-" + index} />
+            <ProjectCard
+              project={project}
+              key={"my-project-" + index}
+              isMyProject
+            />
           ))}
         </div>
       )}
@@ -57,48 +59,3 @@ const Myprojects = ({ script }) => {
 };
 
 export default Myprojects;
-
-const ProjectCard = ({ project }) => {
-  const navigate = useNavigate();
-  return (
-    <div className="projectCard">
-      <img src={project.image} alt={project.name} />
-      <div className="projectname">{project.name}</div>
-      <div className="projectdescription">{project.description}</div>
-      <div
-        className="clickhandler"
-        onClick={() => navigate(`/myprojects/${project.id}`)}
-      />
-      <div
-        style={{
-          width: "100%",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          gap: "var(--padding-light)",
-        }}
-      >
-        <div className="secondarybutton">
-          <button
-            onClick={() => {
-              try {
-                const projectUrl = `${import.meta.env.VITE_LOCATION}projects/${
-                  project.id
-                }`;
-                navigator.clipboard.writeText(projectUrl);
-                alert("Project link copied.");
-              } catch {}
-            }}
-          >
-            Share <ShareIcon />
-          </button>
-        </div>
-        {/* <div className="secondarybutton">
-          <button onClick={() => navigate(`/myprojects/${project.id}/update`)}>
-            Update <AssessmentIcon />
-          </button>
-        </div> */}
-      </div>
-    </div>
-  );
-};

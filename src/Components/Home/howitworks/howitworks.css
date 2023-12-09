@@ -1,0 +1,12 @@
+.stepscontainer {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  gap: var(--padding-light);
+}
+
+@media screen and (max-width: 600px) {
+  .stepscontainer {
+    flex-direction: column;
+  }
+}

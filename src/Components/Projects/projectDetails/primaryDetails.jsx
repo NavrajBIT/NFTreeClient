@@ -3,6 +3,9 @@ import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AssessmentIcon from "@mui/icons-material/Assessment";
 import AttachEmailIcon from "@mui/icons-material/AttachEmail";
+import ImageIcon from "@mui/icons-material/Image";
+import EditIcon from "@mui/icons-material/Edit";
+import EditProjectPopup from "./editProjectPopup";
 
 const PrimaryDetails = ({ details, notMyProject }) => {
   return (
@@ -32,18 +35,17 @@ const PrimaryDetails = ({ details, notMyProject }) => {
         }}
       >
         <ProjectData details={details} notMyProject={notMyProject} />
-        {/* {!notMyProject && (
-          <ProjectImage details={details} notMyProject={notMyProject} />
-        )} */}
+
         <ButtonsContainer details={details} notMyProject={notMyProject} />
       </div>
+      {details.updateProjectPopup && <EditProjectPopup details={details} />}
     </div>
   );
 };
 
 export default PrimaryDetails;
 
-const ProjectData = ({ details, notMyProject }) => {
+const ProjectData = ({ details }) => {
   const project = details.project;
   const isMonitoring = project.donation ? false : true;
   const data = {
@@ -101,14 +103,8 @@ const ProjectData = ({ details, notMyProject }) => {
       {Object.keys(data).map((key, index) => (
         <Detail label={key} value={data[key]} key={"project-data-" + index} />
       ))}
-      <div
-        style={{
-          width: "100%",
-          display: "flex",
-          gap: "var(--padding-light)",
-          justifyContent: "space-between",
-        }}
-      ></div>
+
+      <DonationProgress details={details} />
     </div>
   );
 };
@@ -119,19 +115,8 @@ const ButtonsContainer = ({ details, notMyProject }) => {
   const project = details.project;
   const isMonitoring = project.donation ? false : true;
   return (
-    <div
-      style={{
-        width: "100%",
-        maxWidth: "var(--max-width)",
-        background: "var(--filter)",
-        display: "flex",
-        justifyContent: "center",
-        gap: "var(--padding-light)",
-        padding: "var(--padding-light)",
-        borderRadius: "var(--border-radius)",
-      }}
-    >
-      <div className="primarybutton" style={{ width: "20%" }}>
+    <div className="primarybuttonscontainer">
+      <div className="primarybutton">
         <button
           onClick={() => {
             try {
@@ -146,15 +131,15 @@ const ButtonsContainer = ({ details, notMyProject }) => {
           Share <ShareIcon />
         </button>
       </div>
-      <div className="primarybutton" style={{ width: "20%" }}>
+      <div className="primarybutton">
         <button
-          onClick={() => navigate(`/projects/report/${details.projectId}`)}
+          onClick={() => navigate(`/projects/${details.projectId}/report`)}
         >
           View Report <AssessmentIcon />
         </button>
       </div>
       {!isMonitoring && notMyProject && (
-        <div className="primarybutton" style={{ width: "20%" }}>
+        <div className="primarybutton">
           <button
             onClick={() => navigate(`/projects/${details.projectId}/donate`)}
           >
@@ -163,7 +148,7 @@ const ButtonsContainer = ({ details, notMyProject }) => {
         </div>
       )}
       {!notMyProject && (
-        <div className="primarybutton" style={{ width: "20%" }}>
+        <div className="primarybutton">
           <button
             onClick={() => navigate(`/myprojects/${details.projectId}/update`)}
           >
@@ -172,7 +157,7 @@ const ButtonsContainer = ({ details, notMyProject }) => {
         </div>
       )}
       {!notMyProject && (
-        <div className="primarybutton" style={{ width: "20%" }}>
+        <div className="primarybutton">
           <button
             onClick={() => {
               let recipients = "";
@@ -181,8 +166,12 @@ const ButtonsContainer = ({ details, notMyProject }) => {
                   recipients = recipients + " " + recipient.email;
                 });
               } catch {}
-              const alerttext = `Project report sent to ${recipients}`;
-              alert(alerttext);
+              if (recipients === "") {
+                alert("Please add recipients to send project report.");
+              } else {
+                const alerttext = `Project report sent to ${recipients}`;
+                alert(alerttext);
+              }
             }}
           >
             Send Report <AttachEmailIcon />
@@ -196,7 +185,7 @@ const ButtonsContainer = ({ details, notMyProject }) => {
               imageref.current.click();
             }}
           >
-            Update Image
+            Update Image <ImageIcon />
           </button>
           <input
             type="file"
@@ -207,6 +196,17 @@ const ButtonsContainer = ({ details, notMyProject }) => {
               details.uploadProjectImage(file);
             }}
           />
+        </div>
+      )}
+      {!notMyProject && (
+        <div className="primarybutton" style={{ width: "20%" }}>
+          <button
+            onClick={() => {
+              details.setUpdateProjectPopup(true);
+            }}
+          >
+            Edit Project <EditIcon />
+          </button>
         </div>
       )}
     </div>
@@ -229,57 +229,71 @@ const Detail = ({ label, value }) => {
   );
 };
 
-const ProjectImage = ({ details, notMyProject }) => {
-  const isImage = details.project.image ? true : false;
-  const imageref = useRef(null);
+const DonationProgress = ({ details }) => {
+  if (
+    !details.project ||
+    !details.project.donation ||
+    details.project.donation === 0
+  )
+    return null;
+
+  const target = details?.project?.funding?.total;
+  const progress = details?.project?.funding?.raised;
+
+  const calculatePercentage = () => {
+    let result = 0;
+    try {
+      result = Math.round((progress / target) * 100);
+    } catch {}
+    return result;
+  };
+  const progressPercentage = calculatePercentage();
+
   return (
     <div
       style={{
         width: "100%",
-        maxWidth: "var(--max-width-form)",
-        background: "var(--green-15)",
-        border: "2px solid var(--green-30)",
+        padding: "var(--padding-light)",
         display: "flex",
-        flexDirection: "column",
-        gap: "var(--padding-light)",
+        flexWrap: "wrap",
         alignItems: "center",
         justifyContent: "center",
-        borderRadius: "var(--border-radius)",
-        backgroundImage: `url("${details.project.image}")`,
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-        backgroundSize: "cover",
-        aspectRatio: "var(--image-aspect-ratio)",
-      }}
-      onClick={() => {
-        if (!notMyProject) imageref.current.click();
+        gap: "var(--padding-light)",
       }}
     >
-      {!notMyProject && (
+      <div style={{ fontWeight: "bold" }}>
+        Funding Progress {`(${progressPercentage}%)`}
+      </div>
+
+      <div
+        style={{
+          width: "100%",
+          height: "2rem",
+          maxWidth: "var(--max-width-form)",
+          background: "var(--filter)",
+          borderRadius: "var(--border-radius)",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          position: "relative",
+        }}
+      >
         <div
           style={{
-            textAlign: "center",
-            background: "var(--green-15)",
-            borderRadius: "var(--border-radius-light)",
-            padding: "var(--padding-light)",
+            width: `${progressPercentage}%`,
+            height: "2rem",
+            maxWidth: "var(--max-width-form)",
+            background: "var(--green-30)",
+            borderRadius: "var(--border-radius)",
+            position: "absolute",
+            top: 0,
+            left: 0,
           }}
-        >
-          Upload Project Image
-          <p>
-            {"("}Click to Upload{")"}
-          </p>
-          <p>Please Select a high quality in 4:3 aspect ratio</p>
+        />
+        <div style={{ zIndex: 1 }}>
+          {progress}$ / {target}$
         </div>
-      )}
-      <input
-        type="file"
-        style={{ display: "none" }}
-        ref={imageref}
-        onChange={(e) => {
-          let file = e.target.files[0];
-          details.uploadProjectImage(file);
-        }}
-      />
+      </div>
     </div>
   );
 };

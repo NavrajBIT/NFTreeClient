@@ -4,16 +4,19 @@ import ProjectImages from "./projectImages";
 import Ownerdetails from "./ownerdetails";
 import Projectdocs from "./projectdocs";
 import PlantImages from "./plantImages";
-import Loading from "../../loading/loading";
+import Loading from "../../Subcomponents/loading/loading";
 import Recipients from "./recipients";
+import { useParams } from "react-router-dom";
 import Auth from "../../Auth/Auth";
 
-const Projectdetails = ({ projectId, notMyProject }) => {
+const Projectdetails = ({ notMyProject }) => {
+  const params = useParams();
+  const projectId = params.projectId;
+
   const details = usedetails(projectId, notMyProject);
 
-  // if (!details.isLoaggedIn)
-  //   return <Auth close={() => details.setIsLoggedIn(true)} />;
-
+  if (!details.isLoaggedIn)
+    return <Auth close={() => details.setIsLoggedIn(true)} />;
   if (details.isLoading || !details.project) return <Loading />;
 
   return (

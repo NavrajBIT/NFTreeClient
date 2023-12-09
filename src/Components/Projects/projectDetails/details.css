@@ -8,8 +8,54 @@
   align-items: center;
   justify-content: center;
   gap: var(--padding-light);
+  position: relative;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.deletebutton {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  width: 30px;
+  height: 30px;
+  background: var(--green-30);
+  border-radius: var(--border-radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: context-menu;
+}
+
+.deletebutton:hover {
+  background: var(--error);
+}
+
+.imagecard .clickhandler {
+  background-color: transparent;
+  position: absolute;
+  width: 100%;
+  top: 10%;
+  height: 90%;
 }
 
 .imagecard:hover {
   box-shadow: 0 0 10px 10px var(--green-15);
+}
+
+.primarybuttonscontainer {
+  width: 100%;
+  max-width: var(--max-width);
+  background: var(--filter);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--padding-light);
+  padding: var(--padding-light);
+  border-radius: var(--border-radius);
+}
+
+.primarybuttonscontainer .primarybutton {
+  width: 20%;
+  min-width: fit-content;
 }

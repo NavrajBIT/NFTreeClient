@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseURL = "http://127.0.0.1:8000";
+const baseURL = import.meta.env.VITE_BACKEND_URL;
 
 const KycApiForID = async (data) => {
   try {
@@ -17,7 +17,7 @@ const KycApiForID = async (data) => {
 const ApplyKyc = async () => {
   try {
     const id = await KycApiForID("kyc");
-    const url = `${baseURL}/user/kyc/${id.data[0].id}/`;
+    const url = `${baseURL}user/kyc/${id.data[0].id}/`;
     const data = id.data[0];
     data.is_applied = true;
     const method = "put";
@@ -32,7 +32,7 @@ const ApplyKyc = async () => {
 const accountDetails = async (data) => {
   try {
     const id = await KycApiForID("account");
-    const url = `${baseURL}/user/account/${id.data[0].id}/`;
+    const url = `${baseURL}user/account/${id.data[0].id}/`;
     const method = "put";
     const response = await axiosPerformAction(url, data, method);
   } catch (error) {
@@ -43,7 +43,7 @@ const accountDetails = async (data) => {
 const userDetailApi = async (data = null) => {
   const userId = sessionStorage.getItem("id");
   try {
-    const url = `${baseURL}/users/${userId}/`;
+    const url = `${baseURL}users/${userId}/`;
     const method = data == null ? "post" : "put";
     let response;
     if (data === null) {
@@ -61,7 +61,7 @@ const userDetailApi = async (data = null) => {
 const organizationDetails = async (data) => {
   try {
     const id = await KycApiForID("organization");
-    const url = `${baseURL}/user/organization/${id.data[0].id}/`;
+    const url = `${baseURL}user/organization/${id.data[0].id}/`;
     const method = "put";
     const response = await axiosPerformAction(url, data, method);
   } catch (error) {

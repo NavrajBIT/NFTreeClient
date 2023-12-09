@@ -1,7 +1,7 @@
 import useprofile from "./useprofile";
 import PrimaryDetails from "./subcomponents/primaryDetails";
 import Auth from "../Auth/Auth";
-import LocalLoading from "../loading/localloading";
+import LocalLoading from "../Subcomponents/loading/localloading";
 import "./profile.css";
 import EditPrimaryDetails from "./subcomponents/popups/editPrimaryDetails";
 import OrganizationDetails from "./subcomponents/organizationDetails";

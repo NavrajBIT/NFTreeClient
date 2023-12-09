@@ -39,7 +39,12 @@ const ProjectImages = ({ details, notMyProject }) => {
         {details.projectImages &&
           details.projectImages.length > 0 &&
           details.projectImages.map((image, index) => (
-            <ImageCard image={image} key={"project-image-" + index} />
+            <ImageCard
+              image={image}
+              key={"project-image-" + index}
+              details={details}
+              notMyProject={notMyProject}
+            />
           ))}
       </div>
     </div>
@@ -73,6 +78,21 @@ const AddImage = ({ details }) => {
     </div>
   );
 };
-const ImageCard = ({ image }) => {
-  return <img src={image.image} alt={image.id} className="imagecard" />;
+const ImageCard = ({ image, details, notMyProject }) => {
+  return (
+    <div
+      className="imagecard"
+      style={{ backgroundImage: `url("${image.image}")` }}
+    >
+      {!notMyProject && (
+        <div
+          className="deletebutton"
+          onClick={() => details.deleteGalleryImage(image.id)}
+        >
+          X
+        </div>
+      )}
+      <div className="clickhandler" onClick={() => window.open(image.image)} />
+    </div>
+  );
 };

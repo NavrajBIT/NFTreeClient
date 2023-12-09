@@ -9,12 +9,15 @@ const usedetails = (projectId, notMyProject) => {
   const [projectImages, setProjectImages] = useState(null);
   const [projectDocs, setProjectDocs] = useState(null);
   const [recipients, setRecipients] = useState(null);
+  const [updateProjectPopup, setUpdateProjectPopup] = useState(false);
 
   useEffect(() => {
     poppulateProject();
     poppulateProjectImages();
     poppulateProjectDocs();
-    poppulateRecipients();
+    if (!notMyProject) {
+      poppulateRecipients();
+    }
   }, [isLoaggedIn]);
 
   const poppulateProject = async () => {
@@ -65,7 +68,6 @@ const usedetails = (projectId, notMyProject) => {
     await api
       .crud("GET", `project/project-recipient/${projectId}`)
       .then((res) => {
-        console.log(res);
         if (res.status === 200) {
           setRecipients(res);
         }
@@ -92,7 +94,9 @@ const usedetails = (projectId, notMyProject) => {
       await api
         .crud("PATCH", endpoint, formdata, true)
         .then((res) => {})
-        .catch((err) => alert("Could not upload image."));
+        .catch((err) => {
+          if (err === 401) setIsLoggedIn(false);
+        });
       await poppulateProject();
       setIsLoading(false);
     } else {
@@ -137,9 +141,7 @@ const usedetails = (projectId, notMyProject) => {
     setIsLoading(true);
     await api
       .crud("POST", endpoint, formdata, true)
-      .then((res) => {
-        console.log(res);
-      })
+      .then((res) => {})
       .catch((err) => {
         alert("Could not upload document.");
         if (err === 401) setIsLoggedIn(false);
@@ -159,7 +161,66 @@ const usedetails = (projectId, notMyProject) => {
       .then((res) => {
         if (res.status >= 200 && res.status <= 299) poppulateRecipients();
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        if (err === 401) setIsLoggedIn(false);
+      });
+    setIsLoading(false);
+  };
+
+  const deleteRecipient = async (id) => {
+    setIsLoading(true);
+    await api
+      .crud("DELETE", `project/project-recipient-detail/${id}`)
+      .then((res) => {
+        if (res.status >= 200 && res.status <= 299) poppulateRecipients();
+      })
+      .catch((err) => {
+        if (err === 401) setIsLoggedIn(false);
+      });
+    setIsLoading(false);
+  };
+  const deleteGalleryImage = async (id) => {
+    setIsLoading(true);
+    await api
+      .crud("DELETE", `project/plant_images/${id}/update`)
+      .then((res) => {
+        if (res.status >= 200 && res.status <= 299) poppulateProjectImages();
+      })
+      .catch((err) => {
+        if (err === 401) setIsLoggedIn(false);
+      });
+    setIsLoading(false);
+  };
+  const deleteDoc = async (id) => {
+    setIsLoading(true);
+    await api
+      .crud("DELETE", `project/docs/${id}/update`)
+      .then((res) => {
+        if (res.status >= 200 && res.status <= 299) poppulateProjectDocs();
+      })
+      .catch((err) => {
+        if (err === 401) setIsLoggedIn(false);
+      });
+    setIsLoading(false);
+  };
+
+  const updateProject = async () => {
+    setIsLoading(true);
+    let apiData = { ...project };
+    delete apiData.image;
+    delete apiData.document;
+    await api
+      .crud("PATCH", `project/update/${projectId}`, apiData)
+      .then((res) => {
+        if (res.status === 200) {
+          setProject(res);
+        }
+      })
+      .catch((err) => {
+        if (err === 401) setIsLoggedIn(false);
+      });
+    poppulateProject();
+    setUpdateProjectPopup(false);
     setIsLoading(false);
   };
 
@@ -169,6 +230,7 @@ const usedetails = (projectId, notMyProject) => {
     isLoaggedIn,
     setIsLoggedIn,
     project,
+    setProject,
     projectImages,
     setProjectImages,
     projectDocs,
@@ -179,6 +241,12 @@ const usedetails = (projectId, notMyProject) => {
     uploadGalleryImage,
     uploadProjectDoc,
     addRecipient,
+    deleteRecipient,
+    deleteGalleryImage,
+    deleteDoc,
+    updateProjectPopup,
+    setUpdateProjectPopup,
+    updateProject,
   };
 };
 

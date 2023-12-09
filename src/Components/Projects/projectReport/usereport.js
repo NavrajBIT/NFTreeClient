@@ -148,7 +148,7 @@ const usereport = (projectId) => {
       ];
 
   const goBack = () => {
-    navigate(-1);
+    navigate(`/myprojects/${projectId}`);
   };
 
   const handleSubmit = async () => {
@@ -162,7 +162,7 @@ const usereport = (projectId) => {
       .then((res) => {
         if (res.status >= 200 && res.status <= 299) {
           alert("Report Updated Successfully!");
-          navigate(`/projects/report/${projectId}`);
+          navigate(`/myprojects/${projectId}/report`);
         }
       })
       .catch((err) => {
@@ -201,6 +201,7 @@ const usereport = (projectId) => {
   };
 
   return {
+    projectId,
     isLoading,
     isLoggedIn,
     setIsLoggedIn,
