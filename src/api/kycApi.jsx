@@ -4,7 +4,7 @@ const baseURL = import.meta.env.VITE_BACKEND_URL;
 
 const KycApiForID = async (data) => {
   try {
-    const url = `${baseURL}/user/${data}/`;
+    const url = `${baseURL}user/${data}/`;
     const method = "get";
     const response = await axiosPerformAction(url, method);
 
