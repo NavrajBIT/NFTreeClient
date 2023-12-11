@@ -22,7 +22,6 @@ const OrganizationDetails = ({ script }) => {
       </div>
       <div>{script?.organization?.description}</div>
       <div>
-        <button onClick={() => console.log(script.organization)}>Click</button>
         <DataDisplay label="Website" value={script?.organization?.website} />
         <DataDisplay label="Country" value={script?.organization?.country} />
         <DataDisplay label="Reg. Id" value={script?.organization?.reg_id} />
