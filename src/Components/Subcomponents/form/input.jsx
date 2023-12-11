@@ -73,17 +73,20 @@ const Input = ({ inputData, error }) => {
 
 export default Input;
 
-const CharCount = ({ maxCount, value, error }) => (
-  <div
-    style={{
-      position: "absolute",
-      bottom: error ? "var(--padding-main)" : "var(--padding-light)",
-      right: "var(--padding-light)",
-    }}
-  >
-    {value.length}/{maxCount}
-  </div>
-);
+const CharCount = ({ maxCount, value, error }) => {
+  const length = value ? value.length : 0;
+  return (
+    <div
+      style={{
+        position: "absolute",
+        bottom: error ? "var(--padding-main)" : "var(--padding-light)",
+        right: "var(--padding-light)",
+      }}
+    >
+      {length}/{maxCount}
+    </div>
+  );
+};
 
 const DropDownIcon = ({ isSelected }) => {
   return (

@@ -40,6 +40,7 @@ const login = async (formData) => {
 
   try {
     const response = await performAction("login", data);
+
     sessionStorage.setItem("token", response.data.access);
     sessionStorage.setItem("id", response.data.id);
     return response;
