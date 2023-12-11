@@ -8,6 +8,7 @@ import Impact from "./subcomponents/impact";
 import AttachEmailIcon from "@mui/icons-material/AttachEmail";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useNavigate } from "react-router-dom";
+import SendReportButton from "../../Subcomponents/sendReport/sendReportButton";
 
 const Generatereport = ({ isMyProject }) => {
   const params = useParams();
@@ -90,6 +91,8 @@ const ButtonsContainer = ({ script, isMyProject }) => {
           onClick={() => {
             if (isMyProject) {
               navigate(`/myprojects/${script.projectId}`);
+            } else {
+              navigate(`/projects/${script.projectId}`);
             }
           }}
         >
@@ -109,9 +112,7 @@ const ButtonsContainer = ({ script, isMyProject }) => {
           className="primarybutton"
           style={{ width: "30%", minWidth: "fit-content" }}
         >
-          <button onClick={script.downloadReport}>
-            Send Report <AttachEmailIcon />
-          </button>
+          <SendReportButton projectId={script.projectId} />
         </div>
       )}
     </div>

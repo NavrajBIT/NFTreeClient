@@ -19,9 +19,9 @@ export default function Dashboard() {
           gap: "var(--padding-main)",
         }}
       >
-        <KPICard kpi={{ heading: "Total Projects", value: 10 }} />
-        <KPICard kpi={{ heading: "Total Users", value: 1000 }} />
-        <KPICard kpi={{ heading: "Tress Planted", value: 10000 }} />
+        <KPICard kpi={{ heading: "Total Projects", value: 1000 }} />
+        {/* <KPICard kpi={{ heading: "Total Users", value: 1000 }} /> */}
+        <KPICard kpi={{ heading: " Total Trees Monitored", value: 10000 }} />
       </div>
     </div>
   );
@@ -32,7 +32,7 @@ const KPICard = ({ kpi }) => {
     <div
       style={{
         width: "100%",
-        maxWidth: "var(--project-card-width)",
+        maxWidth: "var(--max-width-card)",
         background: "white",
         borderRadius: "var(--border-radius)",
         padding: "var(--padding-main)",

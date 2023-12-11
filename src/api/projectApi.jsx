@@ -3,7 +3,7 @@ import axios from "axios";
 const BASE_URL = import.meta.env.VITE_BACKEND_URL;
 
 const createTransaction = async (props) => {
-  const url = "http://127.0.0.1:8000/project/transaction/";
+  const url = BASE_URL + "project/transaction/";
   const data = props;
   const config = {
     headers: {
@@ -20,7 +20,7 @@ const createTransaction = async (props) => {
 };
 
 const viewTransaction = async (props) => {
-  const url = "http://127.0.0.1:8000/project/transaction/";
+  const url = BASE_URL + "project/transaction/";
   const config = {
     headers: {
       "Content-Type": "multipart/form-data",
@@ -37,7 +37,7 @@ const viewTransaction = async (props) => {
 };
 
 const createProject = async (props) => {
-  const url = "http://127.0.0.1:8000/project/create/";
+  const url = BASE_URL + "project/create/";
   const data = props;
   const config = {
     headers: {
@@ -56,7 +56,7 @@ const createProject = async (props) => {
 };
 
 const updateProject = async (props, id) => {
-  const url = `http://127.0.0.1:8000/project/update/${id}/`;
+  const url = BASE_URL + `project/update/${id}/`;
   if (props.image == "img") {
     delete props.image;
   }
@@ -97,7 +97,7 @@ const kycStatus = async (props) => {
 };
 
 const projectList = async () => {
-  const url = "http://127.0.0.1:8000/project/projectlist/";
+  const url = BASE_URL + "project/projectlist/";
   try {
     const response = await axios.get(url);
     return response.data;

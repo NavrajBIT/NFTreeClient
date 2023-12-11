@@ -9,7 +9,7 @@ export default function Contact() {
   const [isLoading, setIsLoading] = useState(true);
   setTimeout(() => setIsLoading(false), 2000);
 
-  const url = "http://127.0.0.1:8000/contact/contact-us/";
+  const url = "http://127.0.0.1:8000/api/v1/contact/contact-us/";
 
   const initialValues = {
     full_name: "",

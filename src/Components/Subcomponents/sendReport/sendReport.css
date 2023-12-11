@@ -1,0 +1,15 @@
+.loadingstate {
+  animation: rotate 1s linear infinite;
+
+  display: flex;
+  align-items: center;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  from {
+    transform: rotate(360deg);
+  }
+}

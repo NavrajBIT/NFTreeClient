@@ -6,6 +6,7 @@ import AttachEmailIcon from "@mui/icons-material/AttachEmail";
 import ImageIcon from "@mui/icons-material/Image";
 import EditIcon from "@mui/icons-material/Edit";
 import EditProjectPopup from "./editProjectPopup";
+import SendReportButton from "../../Subcomponents/sendReport/sendReportButton";
 
 const PrimaryDetails = ({ details, notMyProject }) => {
   return (
@@ -158,24 +159,7 @@ const ButtonsContainer = ({ details, notMyProject }) => {
       )}
       {!notMyProject && (
         <div className="primarybutton">
-          <button
-            onClick={() => {
-              let recipients = "";
-              try {
-                details.recipients.map((recipient) => {
-                  recipients = recipients + " " + recipient.email;
-                });
-              } catch {}
-              if (recipients === "") {
-                alert("Please add recipients to send project report.");
-              } else {
-                const alerttext = `Project report sent to ${recipients}`;
-                alert(alerttext);
-              }
-            }}
-          >
-            Send Report <AttachEmailIcon />
-          </button>
+          <SendReportButton projectId={details.projectId} />
         </div>
       )}
       {!notMyProject && (

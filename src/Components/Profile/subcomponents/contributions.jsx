@@ -54,7 +54,7 @@ const Transaction = ({ transaction }) => {
 
   const poppulateProject = () => {
     api
-      .crud("GET", `/project/${transaction.project}`)
+      .crud("GET", `project/${transaction.project}`)
       .then((res) => {
         if (res.status === 200) {
           setProject(res);
