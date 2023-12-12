@@ -1,0 +1,40 @@
+.projectCard {
+  width: var(--project-card-width);
+  height: var(--project-card-height);
+  background-color: var(--green-20);
+  padding: var(--padding-light);
+  border-radius: var(--border-radius);
+  border: 2px solid var(--green-30);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+}
+.projectCard:hover {
+  box-shadow: 0 0 10px 10px var(--green-20);
+  border: 2px solid var(--green-30);
+}
+.projectCard img {
+  width: 100%;
+  aspect-ratio: var(--image-aspect-ratio);
+  object-fit: cover;
+  border-radius: var(--border-radius-light);
+}
+.projectCard .projectname {
+  font-size: 1.5rem;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.projectCard .projectdescription {
+  height: 140px;
+  overflow: hidden;
+}
+.projectCard .clickhandler {
+  background-color: transparent;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  height: 360px;
+  width: 100%;
+}

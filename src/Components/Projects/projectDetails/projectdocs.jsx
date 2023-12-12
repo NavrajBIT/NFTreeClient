@@ -40,7 +40,12 @@ const Projectdocs = ({ details, notMyProject }) => {
         {details.projectDocs &&
           details.projectDocs.length > 0 &&
           details.projectDocs.map((doc, index) => (
-            <DocCard doc={doc} key={"project-doc-" + index} />
+            <DocCard
+              notMyProject={notMyProject}
+              doc={doc}
+              key={"project-doc-" + index}
+              details={details}
+            />
           ))}
       </div>
     </div>
@@ -75,21 +80,22 @@ const AddDoc = ({ details }) => {
   );
 };
 
-const DocCard = ({ doc }) => {
+const DocCard = ({ doc, details, notMyProject }) => {
   let filename = "";
   try {
     let splits = doc.file.split("/");
     filename = splits[splits.length - 1];
   } catch {}
   return (
-    <div
-      className="imagecard"
-      onClick={() => {
-        window.open(doc.file);
-      }}
-    >
+    <div className="imagecard">
       <DescriptionIcon style={{ fontSize: "10rem" }} />
       <div style={{ fontSize: "1.5rem", color: "white" }}>{filename}</div>
+      {!notMyProject && (
+        <div className="deletebutton" onClick={() => details.deleteDoc(doc.id)}>
+          X
+        </div>
+      )}
+      <div className="clickhandler" onClick={() => window.open(doc.file)} />
     </div>
   );
 };

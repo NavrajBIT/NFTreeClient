@@ -3,7 +3,7 @@ import { useGoogleLogin } from "@react-oauth/google";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../Contexts/AuthContext";
 
-const BASE_URL = "http://127.0.0.1:8000/user/";
+const BASE_URL = import.meta.env.VITE_BACKEND_URL + "user/";
 
 const performAction = async (endpoint, formData) => {
   try {
@@ -40,6 +40,7 @@ const login = async (formData) => {
 
   try {
     const response = await performAction("login", data);
+
     sessionStorage.setItem("token", response.data.access);
     sessionStorage.setItem("id", response.data.id);
     return response;

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import Loading from "../../loading/loading";
-import NoKYC from "../../noKycPage/nokyc";
+import Loading from "../../Subcomponents/loading/loading";
+import NoKYC from "../../Subcomponents/noKycPage/nokyc";
 import useAPI from "../../../api/useAPI";
 import Auth from "../../Auth/Auth";
 import CreateProjectOption from "./CreateProjectOption";

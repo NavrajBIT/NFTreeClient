@@ -1,0 +1,75 @@
+.navbarTitle {
+  width: 33.33%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.navbarTitle img:hover {
+  animation: scaleup 0.3s;
+}
+
+.navLinksContainer {
+  width: 33.33%;
+}
+
+.navLinksContainer .navbarLinks {
+  text-decoration: none;
+  margin: auto;
+  margin: 0 2rem;
+  font-weight: 600;
+  font-size: 1.5rem;
+}
+
+.navLinksContainer .projectLink {
+  cursor: default;
+  text-decoration: none;
+
+  font-weight: 600;
+}
+
+.navbarLinks:hover {
+  color: var(--primary);
+}
+.contactLink:hover {
+  color: var(--primary);
+}
+.contactLink {
+  font-size: 1.5rem;
+}
+
+.dropdownLinks {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: var(--padding-light);
+  color: black;
+  padding: var(--padding-main);
+  border-radius: var(--border-radius-light);
+}
+
+.dropdownLinks:hover {
+  background: var(--green-15);
+  color: var(--primary);
+}
+
+/* MEDIA QUERY */
+@media only screen and (min-width: 600px) and (max-width: 768px) {
+  .navLinksContainer .navbarLinks,
+  .navLinksContainer .projectLink {
+    margin: 0 1rem;
+  }
+}
+
+@keyframes scaleup {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.15);
+  }
+  100% {
+    transform: scale(1);
+  }
+}

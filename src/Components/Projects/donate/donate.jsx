@@ -1,10 +1,10 @@
 import { useParams } from "react-router-dom";
 import useAPI from "../../../api/useAPI";
 import { useNavigate } from "react-router-dom";
-import Myform from "../../form/myform";
+import Myform from "../../Subcomponents/form/myform";
 import { useState } from "react";
 import Auth from "../../Auth/Auth";
-import Loading from "../../loading/loading";
+import Loading from "../../Subcomponents/loading/loading";
 import { useEffect } from "react";
 
 const Donate = () => {

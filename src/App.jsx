@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
-import Navbar from "./Components/Navbar/Navbar";
-import Footer from "./Components/Footer/Footer";
+import Navbar from "./Components/Subcomponents/Navbar/Navbar";
+import Footer from "./Components/Subcomponents/Footer/Footer";
 import { BrowserRouter } from "react-router-dom";
 import "./App.css";
 import { GoogleOAuthProvider } from "@react-oauth/google";

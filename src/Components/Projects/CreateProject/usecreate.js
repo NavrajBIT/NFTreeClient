@@ -25,7 +25,6 @@ const usecreate = () => {
     await api
       .crud("POST", "project/myproject", apidata)
       .then((res) => {
-        console.log(res);
         if (res.status >= 200 && res.status <= 299) {
           navigate(`/myprojects/${res.id}`);
         }

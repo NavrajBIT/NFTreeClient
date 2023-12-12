@@ -28,7 +28,10 @@ const useAPI = () => {
         throw 401;
       }
 
+      if (requestMethod === "DELETE") return { status: response.status };
+
       const responseData = await response.json();
+
       if (responseData["status"]) {
         responseData["modelStatus"] = responseData["status"];
       }
