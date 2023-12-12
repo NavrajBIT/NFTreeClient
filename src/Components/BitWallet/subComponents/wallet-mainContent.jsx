@@ -4,7 +4,7 @@ import image2 from "../Assets/wallet-illo.svg";
 import image3 from "../Assets/Explore-illo.png";
 import image4 from "../Assets/Browse-illo.png";
 
-export default function WalletMainContent() {
+export default function WalletMainContent({ scrollFunc }) {
   return (
     <div className="walletMainContainer">
       <div className="walletMainContainer-row">
@@ -14,7 +14,7 @@ export default function WalletMainContent() {
             Improve your user experience with BitWallet, the key to the
             blockchain world
           </p>
-          <button>Download Now</button>
+          <button onClick={scrollFunc}>Download Now</button>
         </div>
 
         <div className="first-div">
