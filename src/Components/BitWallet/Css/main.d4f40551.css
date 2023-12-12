@@ -1037,3 +1037,167 @@ code {
 }
 
 /*# sourceMappingURL=main.d4f40551.css.map*/
+
+/* Wallet Benefit */
+
+.walletMainContainer-row {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.walletMainContainer-row {
+  padding-bottom: 100px;
+}
+
+.walletMainContainer-row h3 {
+  font-size: 2.5rem;
+  color: white;
+  font-weight: 1000;
+  letter-spacing: 3px;
+}
+
+.walletMainContainer-row p {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  color: white;
+  margin-top: 0.75rem;
+}
+
+.walletMainContainer-row img {
+  width: 35vw;
+}
+
+.walletMainContainer-row button {
+  border-radius: 1rem;
+  padding: 0.625rem 1.35rem;
+  background: #2563eb;
+  font-weight: bold;
+  margin-top: 1rem;
+}
+
+.walletBenefitContainer {
+  border-radius: 0.75rem;
+  background: #374151;
+  padding: 4vh 5vw;
+}
+
+.walletBenefitHead {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.walletBenefitHead h2 {
+  color: white;
+  margin-bottom: 1rem;
+}
+
+.walletBenefitHead p {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  color: #99a3af;
+}
+
+.walletBenefitContent {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 3rem;
+}
+
+.walletBenefitContent div {
+  border-radius: 0.75rem;
+  padding: 1.5rem 1.5rem;
+  box-shadow: 0px 0px 20px 0px;
+}
+
+.walletBenefitContentBox h3 {
+  font-size: 1.25rem;
+}
+
+.boxIconStyle {
+  height: 1.5rem;
+  width: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+/* wallet download */
+.walletDownloadContentBox {
+  background: #1f2937;
+  max-width: 18rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.walletDownloadContentBox h3 {
+  color: white;
+  font-size: 1.25rem;
+}
+
+.walletDownloadContentBox button {
+  background: #2563eb;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  color: white;
+  text-decoration: underline;
+  padding: 0.5rem 0.75rem;
+  display: flex;
+  align-items: center;
+  font-size: 0.875rem;
+  width: fit-content;
+}
+
+.walletDownloadContentBox button:hover {
+  box-shadow: unset;
+  background: #1d59dc;
+}
+
+.walletDownloadContentBox button img {
+  width: 2rem;
+  height: 2rem;
+}
+
+.row-content {
+  width: 40vw;
+}
+
+@media only screen and (max-width: 1024px) {
+  .walletBenefitContent {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 3rem;
+  }
+}
+
+@media only screen and (max-width: 771px) {
+  .walletMainContainer-row {
+    flex-direction: column;
+  }
+
+  .first-div {
+    order: -1;
+  }
+
+  .row-content {
+    width: 80%;
+  }
+
+  .customImage img {
+    width: 45rem;
+  }
+
+  .walletBenefitContainer {
+    padding: 4vh 2vw;
+  }
+
+  .walletBenefitContent {
+    gap: 1rem;
+  }
+}
+
+@media only screen and (max-width: 580px) {
+  .walletBenefitContent {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
