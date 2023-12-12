@@ -64,6 +64,15 @@
   gap: 3rem;
 }
 
+.walletBenefitContentBox:hover {
+  transform: scale(0.8);
+  transition: transform 0.2s;
+}
+
+.walletBenefitContentBox {
+  transition: transform 0.2s;
+}
+
 .walletBenefitContent div {
   border-radius: 0.75rem;
   padding: 1.5rem 1.5rem;
@@ -83,10 +92,16 @@
 /* wallet download */
 .walletDownloadContentBox {
   background: #1f2937;
-  max-width: 18rem;
+  max-width: 20rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  transition: transform 0.2s;
+}
+
+.walletDownloadContentBox:hover {
+  transition: transform 0.2s;
+  transform: scale(1.05);
 }
 
 .walletDownloadContentBox h3 {
