@@ -13,10 +13,7 @@ const BitWallet = () => {
   };
 
   return (
-    <div
-      style={{ backgroundColor: "#86a789", padding: "4vh 9vw" }}
-      className="main_body"
-    >
+    <div className="main_body">
       <WalletMainContent scrollFunc={handleClickScroll} />
       <div id="download">
         <WalletDownload />
