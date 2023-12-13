@@ -6,7 +6,34 @@ import chrome from "../Assets/chrome.svg";
 import android from "../Assets/android.png";
 import qrcode3 from "../Assets/appleqr.png";
 
-export default function WalletDownload() {
+const downloadLink = (url) => {
+  window.open(url);
+};
+
+const WalletDownload = () => {
+  const downloadButton = (text, imageUrl, storeUrl) => {
+    return (
+      <div className="walletDownloadContentBox">
+        <img src={imageUrl} alt="QR Code" />
+        <br />
+        <h3>{text}</h3>
+        <button onClick={() => downloadLink(storeUrl)}>
+          Download{" "}
+          <img
+            src={
+              imageUrl === qrcode
+                ? chrome
+                : imageUrl === qrcode2
+                ? android
+                : apple
+            }
+            alt=""
+          />{" "}
+        </button>
+      </div>
+    );
+  };
+
   return (
     <div className="walletBenefitContainer">
       <div className="walletBenefitHead">
@@ -17,63 +44,24 @@ export default function WalletDownload() {
         className="walletBenefitContent"
         style={{ gridTemplateRows: "unset", justifyItems: "center" }}
       >
-        <div className="walletDownloadContentBox">
-          <>
-            <img className="" src={qrcode} alt="img" />
-          </>
-          <br />
-          <>
-            <h3>Download the Chrome extension</h3>
-            <button
-              onClick={() => {
-                window.open(
-                  "https://chrome.google.com/webstore/detail/bit-wallet/ddphokhghjkekfdoddpeffdpojdofcan"
-                );
-              }}
-            >
-              Download <img src={chrome} alt="" />{" "}
-            </button>
-          </>
-        </div>
-
-        <div className="walletDownloadContentBox">
-          <>
-            <img className="" src={qrcode3} alt="img" />
-          </>
-          <br />
-          <>
-            <h3>Download the IOS app</h3>
-            <button
-              onClick={() => {
-                window.open(
-                  "https://apps.apple.com/us/app/be-imagine-technology-wallet/id6443855034"
-                );
-              }}
-            >
-              Download <img src={apple} alt="" />{" "}
-            </button>
-          </>
-        </div>
-
-        <div className="walletDownloadContentBox">
-          <>
-            <img className="" src={qrcode2} alt="img" />
-          </>
-          <br />
-          <>
-            <h3>Download the Android app</h3>
-            <button
-              onClick={() => {
-                window.open(
-                  "https://play.google.com/store/apps/details?id=beimagine.tech"
-                );
-              }}
-            >
-              Download <img src={android} alt="" />{" "}
-            </button>
-          </>
-        </div>
+        {downloadButton(
+          "Download the Chrome extension",
+          qrcode,
+          "https://chrome.google.com/webstore/detail/bit-wallet/ddphokhghjkekfdoddpeffdpojdofcan"
+        )}
+        {downloadButton(
+          "Download the IOS app",
+          qrcode3,
+          "https://apps.apple.com/us/app/be-imagine-technology-wallet/id6443855034"
+        )}
+        {downloadButton(
+          "Download the Android app",
+          qrcode2,
+          "https://play.google.com/store/apps/details?id=beimagine.tech"
+        )}
       </div>
     </div>
   );
-}
+};
+
+export default WalletDownload;
