@@ -23,7 +23,7 @@ const Profile = () => {
         flexDirection: "column",
         alignItems: "center",
         gap: "var(--padding-main)",
-        padding: "var(--padding-main) 0",
+        padding: "var(--nav-height) 0",
       }}
     >
       <PrimaryDetails script={script} />

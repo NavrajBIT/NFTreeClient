@@ -6,14 +6,14 @@ import "./Navbar.css";
 import Contact from "../../Contact_us/Contact";
 import ErrorPage from "../../Error_page/ErrorPage";
 import Profile from "../../Profile/profile";
-import ForgetPassword from "../../Auth/ForgetPassword";
+// import ForgetPassword from "../../Auth/ForgetPassword";
 import ProjectPage from "../../Projects/ProjectPage/ProjectPage";
 import Updatereport from "../../Projects/projectReport/updatereport";
 import Generatereport from "../../Projects/projectReport/generatereport";
 import Donate from "../../Projects/donate/donate";
 import NavContent from "./subcomponents/navcontent";
 import Projectdetails from "../../Projects/projectDetails/projectdetails";
-import KYCPage from "../../kyc/kyc";
+import KYCPage from "../../kyc/kycPage";
 import BitWallet from "../../BitWallet/body";
 
 export default function Navbar() {
@@ -47,7 +47,7 @@ export default function Navbar() {
           element={<Generatereport isMyProject />}
         />
 
-        <Route path="/forget-password" element={<ForgetPassword />} />
+        {/* <Route path="/forget-password" element={<ForgetPassword />} /> */}
         <Route path="/profile" element={<Profile />} />
         <Route path="/kyc" element={<KYCPage />} />
         <Route path="/wallet" element={<BitWallet />} />

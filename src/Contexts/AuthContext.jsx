@@ -9,28 +9,23 @@ export function useAuth() {
 
 export function AuthProvider(props) {
   const api = useAPI();
-  const [authUser, setAuthUser] = useState(null);
   const [avatar, setAvatar] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
-    if (sessionStorage.getItem("token") != null) {
-      setIsLoggedIn(true);
-    }
-    poppulateUser();
-  }, [isLoggedIn]);
+    const sessionToken = sessionStorage.getItem("token");
+    const localToken = localStorage.getItem("token");
 
-  const poppulateUser = () => {
-    api
-      .crud("GET", "user/account")
-      .then((res) => {
-        if (res.status === 200) {
-          setAuthUser(res[0]);
-          poppulateProfilePic();
-        }
-      })
-      .catch((err) => {});
-  };
+    const isSessionToken =
+      sessionToken && sessionToken !== "undefined" && sessionToken !== "null";
+    const isLocalToken =
+      localToken && localToken !== "undefined" && localToken !== "null";
+
+    if (isSessionToken || isLocalToken) {
+      setIsLoggedIn(true);
+      poppulateProfilePic();
+    }
+  }, [isLoggedIn]);
 
   const poppulateProfilePic = () => {
     api
@@ -42,8 +37,6 @@ export function AuthProvider(props) {
   };
 
   const value = {
-    authUser,
-    setAuthUser,
     avatar,
     isLoggedIn,
     setIsLoggedIn,

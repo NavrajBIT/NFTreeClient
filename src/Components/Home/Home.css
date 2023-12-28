@@ -29,7 +29,6 @@
 .heroheading {
   font-size: 5rem;
   font-weight: 700;
-  color: var(--green-30);
 }
 
 @media only screen and (max-width: 768px) {

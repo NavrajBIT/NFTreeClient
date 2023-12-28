@@ -5,6 +5,7 @@ import { BrowserRouter } from "react-router-dom";
 import "./App.css";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { AuthProvider, useAuth } from "./Contexts/AuthContext";
+import ScrollToTop from "./Components/Subcomponents/Navbar/subcomponents/scrollToTop";
 
 function App() {
   var client_id =
@@ -13,6 +14,7 @@ function App() {
     <AuthProvider>
       <GoogleOAuthProvider clientId={client_id}>
         <BrowserRouter>
+          <ScrollToTop />
           <Navbar />
           <Footer />
         </BrowserRouter>

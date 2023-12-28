@@ -28,7 +28,7 @@ const Projectdetails = ({ notMyProject }) => {
         alignItems: "center",
         flexDirection: "column",
         gap: "var(--padding-main)",
-        padding: "var(--padding-main) 0",
+        padding: "var(--nav-height) 0",
       }}
     >
       <PrimaryDetails details={details} notMyProject={notMyProject} />

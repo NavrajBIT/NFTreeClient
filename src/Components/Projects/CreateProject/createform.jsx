@@ -15,6 +15,7 @@ const Createform = ({ selectedOption, setSelectedOption }) => {
         flexDirection: "column",
         gap: "var(--padding-main)",
         padding: "var(--padding-main)",
+        paddingTop: "var(--nav-height)",
       }}
     >
       <div

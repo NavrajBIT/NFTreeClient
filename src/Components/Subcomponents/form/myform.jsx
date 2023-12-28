@@ -1,7 +1,15 @@
 import Input from "./input";
 import { useState } from "react";
 
-const Myform = ({ heading, formdata, formButton, handleSubmit, close }) => {
+const Myform = ({
+  heading,
+  formdata,
+  formButton,
+  handleSubmit,
+  close,
+  error,
+  children,
+}) => {
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const handleFormSubmit = (e) => {
@@ -40,7 +48,7 @@ const Myform = ({ heading, formdata, formButton, handleSubmit, close }) => {
   };
 
   return (
-    <form
+    <div
       style={{
         width: "100%",
         maxWidth: "var(--max-width-form)",
@@ -52,90 +60,111 @@ const Myform = ({ heading, formdata, formButton, handleSubmit, close }) => {
         borderRadius: "var(--border-radius-light)",
       }}
     >
-      <div
+      <form
         style={{
-          textAlign: "center",
-          fontSize: "1.5rem",
-          fontWeight: "bold",
-          color: "var(--green-30)",
+          width: "100%",
+          display: "flex",
+          flexDirection: "column",
+          gap: "var(--padding-light)",
+          borderRadius: "var(--border-radius-light)",
         }}
       >
-        {heading}
-      </div>
-      {formdata.map((inputGroup, index) => {
-        return (
-          <div
-            key={"input-group-" + index}
-            style={{
-              width: "100%",
-              display: "flex",
-              flexDirection: "column",
-              gap: "var(--padding-light)",
-            }}
-          >
-            {inputGroup.map((inputData, i) => {
-              if (inputData.isHalf) {
+        <div
+          style={{
+            textAlign: "center",
+            fontSize: "1.5rem",
+            fontWeight: "bold",
+            color: "var(--green-30)",
+          }}
+        >
+          {heading}
+        </div>
+        {formdata.map((inputGroup, index) => {
+          return (
+            <div
+              key={"input-group-" + index}
+              style={{
+                width: "100%",
+                display: "flex",
+                flexDirection: "column",
+                gap: "var(--padding-light)",
+              }}
+            >
+              {inputGroup.map((inputData, i) => {
+                if (inputData.isHalf) {
+                  return (
+                    <div
+                      style={{
+                        width: "100%",
+                        display: "grid",
+                        gap: "var(--padding-light)",
+                        gridTemplateColumns: "1fr 1fr",
+                      }}
+                      key={"input-field-" + index + "-" + i}
+                    >
+                      {inputData.isHalf.map((inputdata2, index3) => {
+                        return (
+                          <Input
+                            key={
+                              "input-field-" + index + "-" + i + "-" + index3
+                            }
+                            inputData={inputdata2}
+                            error={isSubmitted && !checkEmptyValue(inputdata2)}
+                          />
+                        );
+                      })}
+                    </div>
+                  );
+                }
+
                 return (
                   <div
-                    style={{
-                      width: "100%",
-                      display: "grid",
-                      gap: "var(--padding-light)",
-                      gridTemplateColumns: "1fr 1fr",
-                    }}
+                    style={{ width: "100%" }}
                     key={"input-field-" + index + "-" + i}
                   >
-                    {inputData.isHalf.map((inputdata2, index3) => {
-                      return (
-                        <Input
-                          key={"input-field-" + index + "-" + i + "-" + index3}
-                          inputData={inputdata2}
-                          error={isSubmitted && !checkEmptyValue(inputdata2)}
-                        />
-                      );
-                    })}
+                    <Input
+                      inputData={inputData}
+                      error={isSubmitted && !checkEmptyValue(inputData)}
+                    />
                   </div>
                 );
-              }
+              })}
 
-              return (
-                <div
-                  style={{ width: "100%" }}
-                  key={"input-field-" + index + "-" + i}
+              {error && (
+                <span
+                  id="errMsg"
+                  style={{ color: "var(--error)", fontSize: "small" }}
                 >
-                  <Input
-                    inputData={inputData}
-                    error={isSubmitted && !checkEmptyValue(inputData)}
-                  />
-                </div>
-              );
-            })}
-            <br />
-          </div>
-        );
-      })}
-      <div
-        style={
-          close && {
-            width: "100%",
-            display: "grid",
-            gridTemplateColumns: "1fr 1fr",
-            gap: "var(--padding-light)",
+                  {error}
+                </span>
+              )}
+            </div>
+          );
+        })}
+        <div
+          style={
+            close && {
+              width: "100%",
+              display: "grid",
+              gridTemplateColumns: "1fr 1fr",
+              gap: "var(--padding-light)",
+            }
           }
-        }
-      >
-        {close && (
+        >
+          {close && (
+            <div className="primarybutton">
+              <button onClick={close}>Cancel</button>
+            </div>
+          )}
           <div className="primarybutton">
-            <button onClick={close}>Cancel</button>
+            <button type="submit" onClick={handleFormSubmit}>
+              {formButton}
+            </button>
           </div>
-        )}
-        <div className="primarybutton">
-          <button type="submit" onClick={handleFormSubmit}>
-            {formButton}
-          </button>
         </div>
-      </div>
-    </form>
+      </form>
+      {children}
+    </div>
   );
 };
 

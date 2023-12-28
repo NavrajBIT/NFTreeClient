@@ -17,8 +17,10 @@ body {
 
   --error: rgb(255, 0, 0);
   --filter: rgba(0, 0, 0, 0.1);
+  --filter-dark: rgba(0, 0, 0, 0.4);
 
-  --min-height-page: 90vh;
+  --min-height-page: 100vh;
+  --min-height-section: 700px;
 
   --max-width: 1400px;
   --max-width-form: 600px;
@@ -33,6 +35,8 @@ body {
   --project-card-height: 420px;
 
   --image-aspect-ratio: 4/3;
+
+  --nav-height: 64px;
 }
 
 * {

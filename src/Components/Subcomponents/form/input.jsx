@@ -3,14 +3,27 @@ import InputAdornment from "@mui/material/InputAdornment";
 import { useState } from "react";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
+import Checkbox from "@mui/material/Checkbox";
 import "./input.css";
 
 const Input = ({ inputData, error }) => {
   const [isSelected, setIsSelected] = useState(false);
+
+  if (inputData.type === "checkbox") {
+    return (
+      <div style={{ display: "flex", alignItems: "center" }}>
+        <Checkbox
+          onChange={() => inputData.onChange(!inputData.value)}
+          checked={inputData.value}
+        />
+        {inputData.label}
+      </div>
+    );
+  }
+
   return (
     <div style={{ position: "relative" }}>
       <TextField
-        id="outlined-basic"
         label={inputData.label}
         variant="outlined"
         type={inputData.type}
@@ -21,8 +34,6 @@ const Input = ({ inputData, error }) => {
         value={inputData.value ? inputData.value : ""}
         onChange={inputData.onChange}
         onClick={() => setIsSelected((prev) => !prev)}
-        // onFocus={() => setIsSelected(true)}
-        // onBlur={() => setIsSelected(false)}
         error={error}
         autoComplete={inputData.select ? "off" : "on"}
         inputProps={{

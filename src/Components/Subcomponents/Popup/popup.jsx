@@ -1,4 +1,5 @@
 import CloseIcon from "@mui/icons-material/Close";
+import "./popup.css";
 const Popup = ({ children, close }) => {
   return (
     <div
@@ -24,6 +25,9 @@ const Popup = ({ children, close }) => {
           padding: "var(--padding-main)",
           boxShadow: "0 0 20px 1px var(--green-30)",
           position: "relative",
+          maxHeight: "90vh",
+          overflowY: "auto",
+          animation: "popup 0.3s",
         }}
       >
         {close && (

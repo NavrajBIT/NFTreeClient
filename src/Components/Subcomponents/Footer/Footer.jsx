@@ -10,11 +10,7 @@ const Footer = () => {
       <Grid container className="footerDiv">
         <Grid item xs={1}></Grid>
         <Grid item xs={12} sm={5} md={6} lg={6} id="footerLogo">
-          <img
-            src={logo}
-            alt=""
-            id="footerImg"
-          />
+          <img src={logo} alt="" id="footerImg" />
         </Grid>
         <Grid
           item
@@ -36,10 +32,28 @@ const Footer = () => {
                 transform: "scale(1.4)",
                 cursor: "pointer",
               }}
+              onClick={() =>
+                window.open("https://www.instagram.com/bitmemoir/")
+              }
             />
-            <Twitter className="footerIcons" />
-            <LinkedIn className="footerIcons" />
-            <Telegram className="footerIcons" />
+            <Twitter
+              className="footerIcons"
+              onClick={() =>
+                window.open(
+                  "https://twitter.com/Bit_memoir?t=dPPpNawrSKg3mn3BLyYxWA&s=08"
+                )
+              }
+            />
+            <LinkedIn
+              className="footerIcons"
+              onClick={() =>
+                window.open("https://www.linkedin.com/company/bitmemoir/")
+              }
+            />
+            <Telegram
+              className="footerIcons"
+              onClick={() => window.open("https://t.me/bitmemoirofficial")}
+            />
           </Box>
         </Grid>
         <Grid item xs={1}></Grid>

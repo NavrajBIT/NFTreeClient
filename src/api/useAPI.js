@@ -2,7 +2,11 @@ const API_URL = import.meta.env.VITE_BACKEND_URL;
 
 const useAPI = () => {
   async function crud(requestMethod, endpoint, data, isFormdata) {
-    const token = sessionStorage.getItem("token");
+    let token = localStorage.getItem("token");
+
+    if (!token || token === undefined || token === "undefined") {
+      token = sessionStorage.getItem("token");
+    }
 
     const requestOptions = isFormdata
       ? {

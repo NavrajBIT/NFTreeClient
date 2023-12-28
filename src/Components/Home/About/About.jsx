@@ -6,7 +6,14 @@ import "./About.css";
 
 const About = () => {
   return (
-    <div>
+    <div
+      style={{
+        minHeight: "var(--min-height-page)",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
       <div className="aboutDiv">
         <h1 className="heroheading" style={{ fontSize: "3rem" }}>
           What is NFTree?

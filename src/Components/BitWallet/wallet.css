@@ -1,0 +1,164 @@
+.main_body {
+  width: 100%;
+  min-height: var(--min-height-page);
+  max-width: var(--max-width);
+  margin: auto;
+  padding: var(--padding-main);
+}
+
+.walletMainContainer {
+  width: 100%;
+  min-height: var(--min-height-page);
+  margin-top: var(--nav-height);
+}
+
+.walletMainContainer-row {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: var(--min-height-section);
+}
+
+.row-content {
+  width: 100%;
+  max-width: var(--max-width-form);
+  display: flex;
+  flex-direction: column;
+  gap: var(--padding-light);
+}
+.row-content-img {
+  width: 100%;
+  max-width: var(--max-width-card);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.row-content-img img {
+  width: 100%;
+}
+
+.row-content h3 {
+  font-size: 3rem;
+  font-weight: 1000;
+  color: var(--green-30);
+}
+.row-content p {
+  font-weight: 700;
+}
+
+.walletDownloadContentBox {
+  background: #1f2937;
+  max-width: 20rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.2s;
+}
+
+.walletDownloadContentBox:hover {
+  transition: transform 0.2s;
+  transform: scale(1.05);
+}
+
+.walletDownloadContentBox h3 {
+  color: white;
+  font-size: 1.25rem;
+}
+
+.walletDownloadContentBox button {
+  background: var(--green-20);
+  border-radius: var(--border-radius-light);
+  cursor: pointer;
+  color: black;
+  text-decoration: underline;
+  padding: var(--padding-light);
+  display: flex;
+  align-items: center;
+  font-size: 0.875rem;
+  width: fit-content;
+}
+
+.walletDownloadContentBox button:hover {
+  box-shadow: unset;
+  background: var(--green-30);
+}
+
+.walletDownloadContentBox img {
+  width: 100%;
+}
+
+.walletDownloadContentBox button img {
+  width: 2rem;
+  height: 2rem;
+}
+
+.walletBenefitContainer {
+  border-radius: var(--border-radius);
+
+  max-width: var(--max-width);
+}
+
+.walletBenefitHead {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  min-height: 100px;
+  font-size: 3rem;
+  font-weight: 700;
+}
+
+.downloadCardsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--padding-main);
+  justify-content: space-around;
+}
+
+.downloadCardsContainer div {
+  border-radius: var(--border-radius-light);
+  padding: var(--padding-main);
+  box-shadow: 0px 0px 20px 0px;
+}
+
+.walletBenefitsContainer {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: var(--padding-main);
+}
+
+.walletBenefitContentBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--padding-main);
+  text-align: center;
+  border-radius: var(--border-radius);
+  font-size: 4rem;
+}
+
+.walletBenefitContentBox h3 {
+  font-size: 1.5rem;
+}
+
+@media screen and (max-width: 600px) {
+  .walletMainContainer-row {
+    flex-wrap: wrap;
+  }
+  .row-content-img {
+    max-width: unset;
+  }
+  .first-div {
+    order: -1 !important;
+  }
+}
+@media screen and (max-width: 700px) {
+  .walletBenefitsContainer {
+    display: flex;
+    flex-direction: column;
+  }
+}

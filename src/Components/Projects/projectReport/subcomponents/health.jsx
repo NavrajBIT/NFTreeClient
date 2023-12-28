@@ -41,7 +41,7 @@ const Health = ({ script }) => {
       >
         Project Health
       </div>
-      {script?.report?.soil_nitrogen}
+
       <Detail label={"Leaf Health"} value={script?.report?.leaf_health} />
       <Detail label={"Root Health"} value={script?.report?.root_health} />
       <div

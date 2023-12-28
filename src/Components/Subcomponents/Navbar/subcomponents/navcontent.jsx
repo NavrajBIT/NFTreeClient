@@ -2,7 +2,6 @@ import { AppBar, CssBaseline, Box, Toolbar } from "@mui/material";
 import SideDrawer from "./drawer";
 import usenavbar from "./usenavbar";
 import NavLinks from "./navlinks";
-import NavbarPlaceholder from "./navbarPlaceholder";
 
 const NavContent = () => {
   const script = usenavbar();
@@ -19,7 +18,7 @@ const NavContent = () => {
         sx={{
           zIndex: 10,
           boxShadow: script.scroll ? "4" : "none",
-          background: "var(--green-15)",
+          background: script.scroll ? "var(--green-15)" : "transparent",
           position: "fixed",
           top: 0,
         }}
@@ -35,7 +34,6 @@ const NavContent = () => {
         </Toolbar>
       </AppBar>
       <SideDrawer script={script} />
-      <NavbarPlaceholder />
     </Box>
   );
 };

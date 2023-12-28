@@ -71,7 +71,7 @@ const Organization = ({ details }) => {
 const Representative = ({ details }) => {
   const data = details.project.owner.representative;
   const src = data?.pic
-    ? `http://localhost:8000${data?.pic}`
+    ? data.pic
     : "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png";
   return (
     <div

@@ -6,20 +6,22 @@ import { useState } from "react";
 import Auth from "../../Auth/Auth";
 import Loading from "../../Subcomponents/loading/loading";
 import { useEffect } from "react";
+import { useAuth } from "../../../Contexts/AuthContext";
 
 const Donate = () => {
   const params = useParams();
   const id = params.projectId;
   const api = useAPI();
+  const authContext = useAuth();
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+
   const [project, setProject] = useState(null);
   const [trees, setTrees] = useState("");
 
   useEffect(() => {
     poppulateProject();
-  }, [isLoggedIn]);
+  }, []);
 
   const poppulateProject = async () => {
     setIsLoading(true);
@@ -33,7 +35,8 @@ const Donate = () => {
     setIsLoading(false);
   };
 
-  if (!isLoggedIn) return <Auth close={() => setIsLoggedIn(true)} />;
+  if (!authContext.isLoggedIn)
+    return <Auth close={() => authContext.setIsLoggedIn(true)} />;
 
   if (isLoading || !project) return <Loading />;
 
@@ -52,11 +55,11 @@ const Donate = () => {
       })
       .then((res) => {
         alert("Thankyou for your contribution.");
-        navigate(-1);
+        navigate("/profile");
       })
       .catch((err) => {
         console.log(err);
-        if (err === 401) setIsLoggedIn(false);
+        if (err === 401) authContext.setIsLoggedIn(false);
       });
     setIsLoading(false);
   };
@@ -69,6 +72,7 @@ const Donate = () => {
         minHeight: "var(--min-height-page)",
         alignItems: "center",
         justifyContent: "center",
+        paddingTop: "var(--nav-height)",
       }}
     >
       <Myform

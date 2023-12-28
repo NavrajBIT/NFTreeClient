@@ -37,6 +37,7 @@ export default function ProjectPage() {
         minHeight: "var(--min-height-page)",
         maxWidth: "var(--max-width)",
         margin: "auto",
+        marginTop: "var(--nav-height)",
         padding: "var(--padding-main)",
         display: "flex",
         flexDirection: "column",

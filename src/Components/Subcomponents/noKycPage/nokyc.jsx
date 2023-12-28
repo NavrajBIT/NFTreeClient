@@ -7,7 +7,7 @@ const NoKYC = () => {
   return (
     <div
       style={{
-        minHeight: "90vh",
+        minHeight: "var(--min-height-page)",
         width: "100%",
         display: "flex",
         flexDirection: "column",
@@ -15,6 +15,7 @@ const NoKYC = () => {
         justifyContent: "center",
         gap: "var(--padding-main)",
         textAlign: "center",
+        paddingTop: "var(--nav-height)",
       }}
     >
       <div

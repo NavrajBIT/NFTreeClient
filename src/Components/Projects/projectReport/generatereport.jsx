@@ -24,7 +24,7 @@ const Generatereport = ({ isMyProject }) => {
           display: "flex",
           flexDirection: "column",
           gap: "var(--padding-main)",
-          padding: "var(--padding-main) 0",
+          padding: "var(--nav-height) 0",
           background: "var(--green-10)",
         }}
         ref={script.reportRef}
