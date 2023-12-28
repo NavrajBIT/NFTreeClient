@@ -85,7 +85,7 @@ const ButtonsContainer = ({ script, isMyProject }) => {
     >
       <div
         className="primarybutton"
-        style={{ width: "30%", minWidth: "fit-content" }}
+        style={{ width: "30%", minWidth: "250px" }}
       >
         <button
           onClick={() => {
@@ -101,7 +101,7 @@ const ButtonsContainer = ({ script, isMyProject }) => {
       </div>
       <div
         className="primarybutton"
-        style={{ width: "30%", minWidth: "fit-content" }}
+        style={{ width: "30%", minWidth: "250px" }}
       >
         <button onClick={script.downloadReport}>
           Download report <DownloadIcon />
@@ -110,7 +110,7 @@ const ButtonsContainer = ({ script, isMyProject }) => {
       {isMyProject && (
         <div
           className="primarybutton"
-          style={{ width: "30%", minWidth: "fit-content" }}
+          style={{ width: "30%", minWidth: "250px" }}
         >
           <SendReportButton projectId={script.projectId} />
         </div>

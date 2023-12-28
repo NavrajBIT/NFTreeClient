@@ -39,9 +39,21 @@ const SearchBar = ({ setFilterData, data }) => {
   const [countryfilterValue, setcountryFilterValue] = useState(
     countryFilters[0]
   );
+  const [gridColumns, setGridColumns] = useState(
+    window.innerWidth > 720 ? "5fr 3fr" : "none"
+  );
 
   useEffect(() => {
     applyFilters();
+    const handleResize = () => {
+      setGridColumns(window.innerWidth > 720 ? "5fr 3fr" : "none");
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
   }, [searchValue, filterValue, cityfilterValue, countryfilterValue]);
 
   const applyFilters = () => {
@@ -88,56 +100,66 @@ const SearchBar = ({ setFilterData, data }) => {
     <div
       style={{
         display: "grid",
-        gridTemplateColumns: "5fr 1fr 1fr 1fr",
+        gridTemplateColumns: gridColumns,
         gap: "var(--padding-light)",
       }}
     >
-      <Input
-        inputData={{
-          label: "",
-          type: "text",
-          icon: <SearchIcon />,
-          value: searchValue,
-          maxLength: 50,
-          onChange: (e) => setSearchValue(e.target.value),
+      <div>
+        <Input
+          inputData={{
+            label: "",
+            type: "text",
+            icon: <SearchIcon />,
+            value: searchValue,
+            maxLength: 50,
+            onChange: (e) => setSearchValue(e.target.value),
+          }}
+        />
+      </div>
+
+      <div
+        style={{
+          display: "flex",
+          gap: "var(--padding-light)",
         }}
-      />
-      <Input
-        inputData={{
-          label: "Type",
-          type: "select",
-          icon: <FilterAltIcon />,
-          value: filterValue.label,
-          select: true,
-          maxLength: 50,
-          options: filterOptions,
-          onChange: (e) => setFilterValue(e),
-        }}
-      />
-      <Input
-        inputData={{
-          label: "City",
-          type: "select",
-          icon: <FilterAltIcon />,
-          value: cityfilterValue.label,
-          select: true,
-          maxLength: 50,
-          options: cityFilters,
-          onChange: (e) => setcityFilterValue(e),
-        }}
-      />
-      <Input
-        inputData={{
-          label: "Country",
-          type: "select",
-          icon: <FilterAltIcon />,
-          value: countryfilterValue.label,
-          select: true,
-          maxLength: 50,
-          options: countryFilters,
-          onChange: (e) => setcountryFilterValue(e),
-        }}
-      />
+      >
+        <Input
+          inputData={{
+            label: "Type",
+            type: "select",
+            icon: <FilterAltIcon />,
+            value: filterValue.label,
+            select: true,
+            maxLength: 50,
+            options: filterOptions,
+            onChange: (e) => setFilterValue(e),
+          }}
+        />
+        <Input
+          inputData={{
+            label: "City",
+            type: "select",
+            icon: <FilterAltIcon />,
+            value: cityfilterValue.label,
+            select: true,
+            maxLength: 50,
+            options: cityFilters,
+            onChange: (e) => setcityFilterValue(e),
+          }}
+        />
+        <Input
+          inputData={{
+            label: "Country",
+            type: "select",
+            icon: <FilterAltIcon />,
+            value: countryfilterValue.label,
+            select: true,
+            maxLength: 50,
+            options: countryFilters,
+            onChange: (e) => setcountryFilterValue(e),
+          }}
+        />
+      </div>
     </div>
   );
 };

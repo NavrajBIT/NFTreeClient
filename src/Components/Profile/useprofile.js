@@ -34,7 +34,6 @@ const useprofile = () => {
 
   const poppulateData = async (endpoint, setState, isArray) => {
     setIsLoading(true);
-    console.log("poppulating data");
     await api
       .crud("GET", endpoint)
       .then((res) => {

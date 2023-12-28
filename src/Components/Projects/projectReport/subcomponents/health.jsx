@@ -52,7 +52,7 @@ const Health = ({ script }) => {
           justifyContent: "space-around",
         }}
       >
-        <div style={{ padding: "var(--padding-main)" }}>
+        <div>
           <PieChart width={250} height={250}>
             <Pie
               data={data}

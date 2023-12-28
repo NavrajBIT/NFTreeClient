@@ -49,9 +49,11 @@ export default function ProjectPage() {
 
       <div
         style={{
-          display: "flex",
-          flexWrap: "wrap",
+          display: "grid",
           gap: "var(--padding-main)",
+          gridTemplateColumns:
+            "repeat(auto-fit, minmax(var(--project-card-width), 1fr) )",
+          justifyItems: "center",
         }}
       >
         {filterData.map((project, index) => (

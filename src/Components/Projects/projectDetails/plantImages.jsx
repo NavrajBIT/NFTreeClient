@@ -67,8 +67,8 @@ const PlantImages = ({ details, notMyProject }) => {
       <div
         style={{
           width: "100%",
-          display: "flex",
-          flexWrap: "wrap",
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fit,minmax(250px,1fr))",
           gap: "var(--padding-light)",
         }}
       >
@@ -94,7 +94,7 @@ const ImageCard = ({ image }) => {
         justifyContent: "center",
       }}
     >
-      <img src={image.image} alt={image.id} className="imagecard" />;
+      <img src={image.image} alt={image.id} className="imagecard" />
       <div style={{ fontWeight: "bold", fontSize: "1.5rem" }}>{image.name}</div>
     </div>
   );

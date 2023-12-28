@@ -117,7 +117,7 @@ const ButtonsContainer = ({ details, notMyProject }) => {
   const isMonitoring = project.donation ? false : true;
   return (
     <div className="primarybuttonscontainer">
-      <div className="primarybutton">
+      <div className="primarybutton" style={{ minWidth: "200px" }}>
         <button
           onClick={() => {
             try {
@@ -132,7 +132,7 @@ const ButtonsContainer = ({ details, notMyProject }) => {
           Share <ShareIcon />
         </button>
       </div>
-      <div className="primarybutton">
+      <div className="primarybutton" style={{ minWidth: "200px" }}>
         <button
           onClick={() => navigate(`/projects/${details.projectId}/report`)}
         >
@@ -140,7 +140,7 @@ const ButtonsContainer = ({ details, notMyProject }) => {
         </button>
       </div>
       {!isMonitoring && notMyProject && (
-        <div className="primarybutton">
+        <div className="primarybutton" style={{ minWidth: "200px" }}>
           <button
             onClick={() => navigate(`/projects/${details.projectId}/donate`)}
           >
@@ -149,7 +149,7 @@ const ButtonsContainer = ({ details, notMyProject }) => {
         </div>
       )}
       {!notMyProject && (
-        <div className="primarybutton">
+        <div className="primarybutton" style={{ minWidth: "200px" }}>
           <button
             onClick={() => navigate(`/myprojects/${details.projectId}/update`)}
           >
@@ -158,12 +158,12 @@ const ButtonsContainer = ({ details, notMyProject }) => {
         </div>
       )}
       {!notMyProject && (
-        <div className="primarybutton">
+        <div className="primarybutton" style={{ minWidth: "200px" }}>
           <SendReportButton projectId={details.projectId} />
         </div>
       )}
       {!notMyProject && (
-        <div className="primarybutton" style={{ width: "20%" }}>
+        <div className="primarybutton" style={{ minWidth: "200px" }}>
           <button
             onClick={() => {
               imageref.current.click();
@@ -183,7 +183,7 @@ const ButtonsContainer = ({ details, notMyProject }) => {
         </div>
       )}
       {!notMyProject && (
-        <div className="primarybutton" style={{ width: "20%" }}>
+        <div className="primarybutton" style={{ minWidth: "200px" }}>
           <button
             onClick={() => {
               details.setUpdateProjectPopup(true);

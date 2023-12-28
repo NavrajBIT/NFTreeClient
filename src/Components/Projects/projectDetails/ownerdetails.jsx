@@ -90,7 +90,14 @@ const Representative = ({ details }) => {
         Representative details
       </div>
 
-      <div style={{ display: "flex", gap: "var(--padding-light)" }}>
+      <div
+        style={{
+          display: "grid",
+          gap: "var(--padding-light)",
+          alignItems: "center",
+          gridTemplateColumns: "repeat(auto-fit,minmax(200px,1fr))",
+        }}
+      >
         <div
           style={{
             height: "var(--profile-pic-diameter)",
@@ -128,7 +135,7 @@ const Detail = ({ label, value }) => {
     >
       <div>{label}</div>
       <div>:</div>
-      <div>{value}</div>
+      <div style={{ wordBreak: "break-all" }}>{value}</div>
     </div>
   );
 };
