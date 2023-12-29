@@ -85,7 +85,7 @@ const usereport = (projectId) => {
         ],
         [
           {
-            label: "CO2 Absorption (kg)",
+            label: "CO₂ Absorption (kg)",
             type: "number",
             value: report.co2_absorption,
             onChange: (e) => changeValue("co2_absorption", e),
@@ -93,7 +93,7 @@ const usereport = (projectId) => {
             required: true,
           },
           {
-            label: "Oxygen Emission",
+            label: "O₂ Emission",
             type: "text",
             value: report.oxygen_emission,
             onChange: (e) => changeValue("oxygen_emission", e),

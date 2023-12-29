@@ -27,6 +27,8 @@ body {
   --max-width-card: 400px;
   --padding-main: 24px;
   --padding-light: 10px;
+  --project-button: 240px;
+  --project-image-dimension: 250px;
 
   --border-radius: 20px;
   --border-radius-light: 10px;

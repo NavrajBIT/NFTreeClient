@@ -50,6 +50,7 @@ const Health = ({ script }) => {
           gap: "var(--padding-light)",
           alignItems: "center",
           justifyContent: "space-around",
+          flexWrap: "wrap",
         }}
       >
         <div>

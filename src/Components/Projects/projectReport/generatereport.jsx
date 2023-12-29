@@ -101,7 +101,7 @@ const ButtonsContainer = ({ script, isMyProject }) => {
       </div>
       <div
         className="primarybutton"
-        style={{ width: "30%", minWidth: "250px" }}
+        style={{ width: "30%", minWidth: "var(--project-button)" }}
       >
         <button onClick={script.downloadReport}>
           Download report <DownloadIcon />
@@ -110,7 +110,7 @@ const ButtonsContainer = ({ script, isMyProject }) => {
       {isMyProject && (
         <div
           className="primarybutton"
-          style={{ width: "30%", minWidth: "250px" }}
+          style={{ width: "30%", minWidth: "var(--project-button)" }}
         >
           <SendReportButton projectId={script.projectId} />
         </div>

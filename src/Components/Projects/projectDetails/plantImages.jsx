@@ -68,8 +68,10 @@ const PlantImages = ({ details, notMyProject }) => {
         style={{
           width: "100%",
           display: "grid",
-          gridTemplateColumns: "repeat(auto-fit,minmax(250px,1fr))",
+          gridTemplateColumns:
+            "repeat(auto-fill,minmax(var(--project-image-dimension),1fr))",
           gap: "var(--padding-light)",
+          justifyItems: "center",
         }}
       >
         {images &&

@@ -27,14 +27,23 @@ const Impact = ({ script }) => {
           width: "100%",
           alignItems: "center",
           justifyContent: "space-around",
+          flexWrap: "wrap",
         }}
       >
         <Detail
-          label={"CO2 Absorption"}
+          label={
+            <>
+              Co<sub>2</sub> Emission
+            </>
+          }
           value={script?.report?.co2_absorption + " kg"}
         />
         <Detail
-          label={"Oxygen Emission"}
+          label={
+            <>
+              O<sub>2</sub> Emission
+            </>
+          }
           value={script?.report?.oxygen_emission + " kg"}
         />
       </div>

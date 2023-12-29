@@ -31,9 +31,11 @@ const Projectdocs = ({ details, notMyProject }) => {
       <div
         style={{
           width: "100%",
-          display: "flex",
-          flexWrap: "wrap",
+          display: "grid",
+          gridTemplateColumns:
+            "repeat(auto-fill,minmax(var(--project-image-dimension),1fr))",
           gap: "var(--padding-light)",
+          justifyItems: "center",
         }}
       >
         {!notMyProject && <AddDoc details={details} />}
