@@ -37,8 +37,7 @@ const Dropdown = ({ handleMouseLeave, setMobileOpen, dropdown }) => {
                 if (elem.name === "Logout") {
                   localStorage.removeItem("token");
                   sessionStorage.removeItem("token");
-                  localStorage.removeItem("id");
-                  sessionStorage.removeItem("id");
+
                   authContext.setIsLoggedIn(false);
                 }
               }}

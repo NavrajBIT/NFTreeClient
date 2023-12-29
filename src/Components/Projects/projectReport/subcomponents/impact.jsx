@@ -33,7 +33,7 @@ const Impact = ({ script }) => {
         <Detail
           label={
             <>
-              Co<sub>2</sub> Emission
+              CO<sub>2</sub> Emission
             </>
           }
           value={script?.report?.co2_absorption + " kg"}

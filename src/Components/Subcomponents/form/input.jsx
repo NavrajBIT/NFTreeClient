@@ -28,6 +28,7 @@ const Input = ({ inputData, error }) => {
         variant="outlined"
         type={inputData.type}
         fullWidth
+        placeholder={inputData.placeholder ? inputData.placeholder : ""}
         required={inputData.required}
         multiline={inputData.multiline}
         rows={inputData.rows}

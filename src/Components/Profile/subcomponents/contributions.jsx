@@ -31,18 +31,12 @@ const Contributions = ({ script }) => {
             flexWrap: "wrap",
           }}
         >
-          {script?.transactions
-            ?.filter(
-              (tnx) =>
-                tnx.user == localStorage.getItem("id") ||
-                tnx.user == sessionStorage.getItem("id")
-            )
-            .map((transaction, index) => (
-              <Transaction
-                transaction={transaction}
-                key={"my-contribution-" + index}
-              />
-            ))}
+          {script?.transactions?.map((transaction, index) => (
+            <Transaction
+              transaction={transaction}
+              key={"my-contribution-" + index}
+            />
+          ))}
         </div>
       )}
     </div>

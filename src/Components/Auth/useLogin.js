@@ -61,14 +61,12 @@ const useLogin = (close) => {
         if (res.status === 200) {
           if (checkBox) {
             sessionStorage.removeItem("token");
-            sessionStorage.removeItem("id");
+
             localStorage.setItem("token", res.access);
-            localStorage.setItem("id", res.id);
           } else {
             localStorage.removeItem("token");
-            localStorage.removeItem("id");
+
             sessionStorage.setItem("token", res.access);
-            sessionStorage.setItem("id", res.id);
           }
           authContext.setIsLoggedIn(true);
           if (close) {

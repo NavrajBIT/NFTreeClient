@@ -8,7 +8,7 @@ const usecreate = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [formvalues, setFormvalues] = useState({
     name: "",
-    description: "Tell us a little about the project...",
+    description: "",
     plant_types: "",
     area: "",
     plant_planned: "",
@@ -56,6 +56,7 @@ const usecreate = () => {
         type: "text",
         required: true,
         multiline: true,
+        placeholder: "Tell us a little about the project...",
         rows: 4,
         value: formvalues["description"],
         onChange: (e) => changeValue("description", e.target.value),
@@ -148,6 +149,7 @@ const usecreate = () => {
         required: true,
         multiline: true,
         rows: 4,
+        placeholder: "Tell us a little about the project...",
         value: formvalues["description"],
         onChange: (e) => changeValue("description", e.target.value),
         maxLength: 500,
