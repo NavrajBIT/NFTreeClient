@@ -3,10 +3,10 @@ import Myform from "../../Subcomponents/form/myform";
 
 const EditProjectPopup = ({ details }) => {
   const formvalues = details.project;
-  let selectedOption = "funding";
+  let selectedOption = "monitoring";
 
   if (formvalues.donation && formvalues.donation > 0)
-    selectedOption = "monitoring";
+    selectedOption = "funding";
 
   const formdatafunding = [
     [
