@@ -12,6 +12,8 @@ body {
   --green-15: #ebf3e8ef;
   --green-20: #d2e3c8;
   --green-30: #86a789;
+  --green-50: #7be495;
+  --green-100: #1b4242;
   --primary: #2563eb;
   --blank-light: white;
 
@@ -28,13 +30,16 @@ body {
   --padding-main: 24px;
   --padding-light: 10px;
   --project-button: 240px;
+  --project-button-small: 150px;
   --project-image-dimension: 250px;
 
   --border-radius: 20px;
   --border-radius-light: 10px;
+  --border-radius-big: 100px;
   --profile-pic-diameter: 200px;
   --project-card-width: 300px;
   --project-card-height: 420px;
+  --home-card-image: 350px;
 
   --image-aspect-ratio: 4/3;
 
@@ -98,7 +103,7 @@ button {
   cursor: pointer;
   color: var(--blank-light);
   padding: var(--padding-light);
-  background-color: var(--green-30);
+  background-color: var(--green-100);
   border-radius: var(--border-radius-light);
   display: flex;
   align-items: center;
@@ -121,6 +126,10 @@ button {
   align-items: center;
   justify-content: center;
   gap: var(--padding-light);
+}
+
+.homeButtonProp button {
+  padding: var(--padding-light) var(--padding-main);
 }
 
 button:hover {

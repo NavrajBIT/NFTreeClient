@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import useAPI from "../../api/useAPI";
 import LocalLoading from "../Subcomponents/loading/localloading";
 
-const Contact = () => {
+const Contact = ({ page }) => {
   const api = useAPI();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -64,11 +64,15 @@ const Contact = () => {
     <div
       style={{
         width: "100%",
-        minHeight: "var(--min-height-page)",
+        minHeight:
+          page == "home"
+            ? "var(--min-height-section)"
+            : "var(--min-height-page)",
         paddingTop: "var(--nav-height)",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
+        background: "var(--green-10)",
       }}
     >
       <div
@@ -86,12 +90,12 @@ const Contact = () => {
         <div
           style={{ fontSize: "2rem", fontWeight: "700", textAlign: "center" }}
         >
-          We would love to hear from you 😃
+          {page == "home" ? "Contact Us" : "We would love to hear from you 😃"}
         </div>
         <Myform
-          heading="Contact Us"
+          heading={page == "home" ? "" : "Contact Us"}
           formdata={formData}
-          formButton={"Submit"}
+          formButton={"Send"}
           handleSubmit={handleSubmit}
         />
       </div>

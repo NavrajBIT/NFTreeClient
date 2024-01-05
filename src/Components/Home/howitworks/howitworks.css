@@ -1,8 +1,10 @@
 .stepscontainer {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--padding-main);
+  color: white;
+  justify-items: center;
   justify-content: center;
-  text-align: center;
-  gap: var(--padding-light);
 }
 
 @media screen and (max-width: 600px) {

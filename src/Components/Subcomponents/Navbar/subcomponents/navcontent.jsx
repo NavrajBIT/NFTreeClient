@@ -18,7 +18,7 @@ const NavContent = () => {
         sx={{
           zIndex: 10,
           boxShadow: script.scroll ? "4" : "none",
-          background: script.scroll ? "var(--green-15)" : "transparent",
+          background: script.scroll ? "var(--green-100)" : "transparent",
           position: "fixed",
           top: 0,
         }}

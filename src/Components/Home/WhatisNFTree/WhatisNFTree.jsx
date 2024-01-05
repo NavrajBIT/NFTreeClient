@@ -1,24 +1,15 @@
-import "./Mission.css";
-import mission from "./assets/mission.png";
+import React from "react";
 import img1 from "../assets/home-img-1.png";
-import img2 from "../assets/home-img-2.png";
 
-const Mission = () => {
+export default function WhatisNFTree() {
   return (
-    <div
-      style={{
-        background: "var(--green-10)",
-        minHeight: "var(--min-height-section)",
-      }}
-    >
+    <div style={{}}>
       <div
         className="heroContainer"
         style={{
-          background: "var(--green-10)",
-          minHeight: "var(--min-height-section)",
+          minHeight: "unset",
         }}
       >
-        <MissionContent />
         <div
           style={{
             display: "flex",
@@ -30,20 +21,14 @@ const Mission = () => {
           <img
             src={img1}
             alt="img1"
-            style={{ width: "var(--home-card-image)", alignSelf: "flex-end" }}
-          />
-          <img
-            src={img2}
-            alt="img2"
             style={{ width: "var(--home-card-image)", alignSelf: "flex-start" }}
           />
         </div>
+        <MissionContent />
       </div>
     </div>
   );
-};
-
-export default Mission;
+}
 
 const MissionContent = () => (
   <div
@@ -53,7 +38,6 @@ const MissionContent = () => (
       gap: "var(--padding-light)",
       height: "100%",
       justifyContent: "space-around",
-      padding: "var(--padding-main)",
     }}
   >
     <div
@@ -64,7 +48,7 @@ const MissionContent = () => (
         fontWeight: "bold",
       }}
     >
-      The Impact and Mission of NFTree
+      What is NFTree?
     </div>
     <br />
     <br />
@@ -77,9 +61,13 @@ const MissionContent = () => (
         color: "var(--green-100)",
       }}
     >
-      At NFTree, we aim to pioneer a transformative intersection of technology,
-      environmental sustainability, and community engagement and are committed
-      to foster positive change, thus promoting a healthier planet.
+      A blockchain-based digital monitoring, reporting, and verification
+      platform, NFTree is dedicated to reforesting open spaces within and beyond
+      urban landscapes. Empowering stakeholders with a secure and traceable
+      channel for expressing their eco-consciousness, the platform leverages NFT
+      technology to enhance the transparency and traceability of donation
+      campaigns, specifically targeting mitigation of adverse effects caused by
+      human activities on the environment.
     </div>
   </div>
 );

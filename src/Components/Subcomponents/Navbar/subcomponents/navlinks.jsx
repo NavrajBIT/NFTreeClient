@@ -1,6 +1,6 @@
 import { useNavigate, Link } from "react-router-dom";
 import { Grid, Box } from "@mui/material";
-import logo1 from "/logo_colored.png";
+import logo1 from "/logo_white.png";
 import ContactLoginItems from "./login";
 import MenuIcon from "@mui/icons-material/Menu";
 
@@ -41,6 +41,7 @@ const NavLinks = ({ script }) => {
             margin: "auto",
             marginTop: ".5rem",
             cursor: "pointer",
+            paddingLeft: "var(--padding-light)",
           }}
           id="navbarLogo"
         />

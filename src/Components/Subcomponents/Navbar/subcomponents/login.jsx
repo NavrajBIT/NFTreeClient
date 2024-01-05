@@ -17,12 +17,30 @@ const ContactLoginItems = ({ script }) => {
         justifyContent: "flex-end",
       }}
     >
-      <Link to="/contact" className="contactLink">
-        Contact
-      </Link>
+      <div className="secondarybutton homeButtonProp">
+        <button
+          onClick={() => navigate("/contact")}
+          style={{
+            background: "white",
+            color: "var(--green-100)",
+            width: "var(--project-button-small)",
+          }}
+        >
+          Contact
+        </button>
+      </div>
       {!isLoggedIn ? (
-        <div className="primarybutton">
-          <button onClick={() => navigate("/login")}>Login</button>
+        <div className="secondarybutton homeButtonProp">
+          <button
+            onClick={() => navigate("/login")}
+            style={{
+              background: "var(--green-50)",
+              color: "var(--green-100)",
+              width: "var(--project-button-small)",
+            }}
+          >
+            Login
+          </button>
         </div>
       ) : (
         <div

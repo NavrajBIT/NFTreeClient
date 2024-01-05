@@ -12,6 +12,37 @@ const Footer = () => {
         <Grid item xs={12} sm={5} md={6} lg={6} id="footerLogo">
           <img src={logo} alt="" id="footerImg" />
         </Grid>
+      </Grid>
+      <Grid
+        container
+        sx={{
+          color: "white",
+          background: "var(--green-100)",
+          height: "fit-content",
+          padding: "var(--padding-light) 0",
+          gap: "var(--padding-light)",
+        }}
+      >
+        <Grid item xs={1}></Grid>
+        <Grid
+          item
+          xs={12}
+          sm={5}
+          md={6}
+          lg={6}
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            borderLeft: "2px solid",
+            color: "white",
+            paddingLeft: "var(--padding-main)",
+          }}
+        >
+          <p>
+            NFTree: Transforming Eco-Consciousness with Blockchain <br />
+            Transparency for Sustainable Reforestation.
+          </p>
+        </Grid>
         <Grid
           item
           xs={12}
@@ -60,14 +91,15 @@ const Footer = () => {
       </Grid>
       <p
         style={{
-          color: "white",
+          color: "grey",
           fontSize: "14px",
           textAlign: "center",
-          paddingBottom: "1rem",
-          background: "var(--green-30)",
+          padding: "1rem 0",
+          background: "var(--green-100)",
         }}
       >
-        © 2023 Beyond Imagination Technologies Pvt. Ltd.
+        © Copyright 2022, All Rights Reserved by <br /> Beyond Imagination
+        Technologies Pvt
       </p>
     </>
   );
