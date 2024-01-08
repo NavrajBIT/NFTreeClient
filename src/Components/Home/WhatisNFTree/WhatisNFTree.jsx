@@ -11,6 +11,7 @@ export default function WhatisNFTree() {
         }}
       >
         <div
+          className="homeimg"
           style={{
             display: "flex",
             flexDirection: "column",
