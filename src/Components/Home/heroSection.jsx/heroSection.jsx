@@ -70,7 +70,7 @@ const HeroContent = () => {
           justifyContent: "center",
         }}
       >
-        <div className="heroheading">NFTree</div>
+        <div className="heroheading">BITbhoomi</div>
         <div
           style={{
             width: "100%",
@@ -82,10 +82,10 @@ const HeroContent = () => {
             paddingLeft: "var(--padding-main)",
           }}
         >
-          Welcome to NFTree, where digital innovation meets environmental
+          Welcome to BITbhoomi, where digital innovation meets environmental
           stewardship. As you explore the platform, you'll discover a dynamic
           ecosystem that fosters contribution to a greener planet securely and
-          transparently. From tree counting to carbon sequestration, NFTree
+          transparently. From tree counting to carbon sequestration, BITbhoomi
           provides a comprehensive, real-time view of your reforestation impact.
         </div>
         <div

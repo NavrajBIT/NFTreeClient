@@ -48,7 +48,7 @@ const MissionContent = () => (
         fontWeight: "bold",
       }}
     >
-      What is NFTree?
+      What is BITbhoomi?
     </div>
     <br />
     <br />
@@ -62,12 +62,12 @@ const MissionContent = () => (
       }}
     >
       A blockchain-based digital monitoring, reporting, and verification
-      platform, NFTree is dedicated to reforesting open spaces within and beyond
-      urban landscapes. Empowering stakeholders with a secure and traceable
-      channel for expressing their eco-consciousness, the platform leverages NFT
-      technology to enhance the transparency and traceability of donation
-      campaigns, specifically targeting mitigation of adverse effects caused by
-      human activities on the environment.
+      platform, BITbhoomi is dedicated to reforesting open spaces within and
+      beyond urban landscapes. Empowering stakeholders with a secure and
+      traceable channel for expressing their eco-consciousness, the platform
+      leverages NFT technology to enhance the transparency and traceability of
+      donation campaigns, specifically targeting mitigation of adverse effects
+      caused by human activities on the environment.
     </div>
   </div>
 );

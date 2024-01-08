@@ -64,7 +64,7 @@ const MissionContent = () => (
         fontWeight: "bold",
       }}
     >
-      The Impact and Mission of NFTree
+      The Impact and Mission of BITbhoomi
     </div>
     <br />
     <br />
@@ -77,9 +77,9 @@ const MissionContent = () => (
         color: "var(--green-100)",
       }}
     >
-      At NFTree, we aim to pioneer a transformative intersection of technology,
-      environmental sustainability, and community engagement and are committed
-      to foster positive change, thus promoting a healthier planet.
+      At BITbhoomi, we aim to pioneer a transformative intersection of
+      technology, environmental sustainability, and community engagement and are
+      committed to foster positive change, thus promoting a healthier planet.
     </div>
   </div>
 );

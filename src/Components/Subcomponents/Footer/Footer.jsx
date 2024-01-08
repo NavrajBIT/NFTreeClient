@@ -39,7 +39,7 @@ const Footer = () => {
           }}
         >
           <p>
-            NFTree: Transforming Eco-Consciousness with Blockchain <br />
+            BITbhoomi: Transforming Eco-Consciousness with Blockchain <br />
             Transparency for Sustainable Reforestation.
           </p>
         </Grid>
