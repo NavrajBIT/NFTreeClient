@@ -19,7 +19,7 @@ const NavContent = () => {
           zIndex: 10,
           boxShadow: script.scroll ? "4" : "none",
           // background: script.scroll ? "var(--green-100)" : "transparent",
-          background: "var(--green-100)",
+          background: "#1b4242e6",
           position: "fixed",
           top: 0,
         }}
