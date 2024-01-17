@@ -38,7 +38,9 @@ const Projectdetails = ({ notMyProject }) => {
       <PlantImages details={details} notMyProject={notMyProject} />
       <Projectdocs details={details} notMyProject={notMyProject} />
       <ProjectImages details={details} notMyProject={notMyProject} />
-      <Ownerdetails details={details} />
+      {details.project.carbonCredit_enabled != true && (
+        <Ownerdetails details={details} />
+      )}
     </div>
   );
 };

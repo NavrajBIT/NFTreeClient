@@ -153,7 +153,7 @@ const ButtonsContainer = ({ details, notMyProject }) => {
           <button
             onClick={() => navigate(`/projects/${details.projectId}/donate`)}
           >
-            Donate $
+            {details.project.carbonCredit_enabled ? "Invest $" : "Donate $"}
           </button>
         </div>
       )}

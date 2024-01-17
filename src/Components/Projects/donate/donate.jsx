@@ -64,6 +64,8 @@ const Donate = () => {
     setIsLoading(false);
   };
 
+  const donationText = project.carbonCredit_enabled ? "Invest" : "Donate";
+
   return (
     <div
       style={{
@@ -76,8 +78,10 @@ const Donate = () => {
       }}
     >
       <Myform
-        heading={`Donate for ${project.name} (${project.donation}$/tree)`}
-        formButton={totalValue > 0 ? `Donate ${totalValue}$` : "Donate"}
+        heading={`${donationText} for ${project.name} (${project.donation}$/tree)`}
+        formButton={
+          totalValue > 0 ? `${donationText} ${totalValue}$` : `${donationText}`
+        }
         close={() => navigate(-1)}
         handleSubmit={handleSubmit}
         formdata={[

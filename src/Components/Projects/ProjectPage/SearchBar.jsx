@@ -10,8 +10,12 @@ const SearchBar = ({ setFilterData, data }) => {
       value: "monitoring",
     },
     {
-      label: "Funding & Monitoring",
+      label: "Donation & Monitoring",
       value: "donating",
+    },
+    {
+      label: "Carbon Credit",
+      value: "carboncredit",
     },
   ];
   const cityList = [];
@@ -65,20 +69,28 @@ const SearchBar = ({ setFilterData, data }) => {
       if (
         searchValue !== "" &&
         !project.name.toLowerCase().includes(searchValue.toLowerCase())
-      )
+      ) {
         isApplicable = false;
+      }
+
       if (
         filterValue.value === "monitoring" &&
         project.donation &&
         project.donation > 0
-      )
+      ) {
         isApplicable = false;
+      }
       if (
         filterValue.value === "donating" &&
         (!project.donation || project.donation === 0)
       )
         isApplicable = false;
-
+      if (
+        filterValue.value === "carboncredit" &&
+        project.carbonCredit_enabled === false
+      ) {
+        isApplicable = false;
+      }
       if (
         cityfilterValue.value !== "all" &&
         project.city !== cityfilterValue.value
@@ -90,8 +102,10 @@ const SearchBar = ({ setFilterData, data }) => {
       )
         isApplicable = false;
 
-      if (isApplicable && !filteredProjects.includes(project))
+      if (isApplicable && !filteredProjects.includes(project)) {
+        console.log(project);
         filteredProjects.push(project);
+      }
     });
     setFilterData(filteredProjects);
   };
@@ -99,8 +113,8 @@ const SearchBar = ({ setFilterData, data }) => {
   return (
     <div
       style={{
-        display: "grid",
-        gridTemplateColumns: gridColumns,
+        display: "flex",
+        flexDirection: "column",
         gap: "var(--padding-light)",
       }}
     >
@@ -121,44 +135,51 @@ const SearchBar = ({ setFilterData, data }) => {
         style={{
           display: "flex",
           gap: "var(--padding-light)",
+          justifyContent: "space-between",
         }}
       >
-        <Input
-          inputData={{
-            label: "Type",
-            type: "select",
-            icon: <FilterAltIcon />,
-            value: filterValue.label,
-            select: true,
-            maxLength: 50,
-            options: filterOptions,
-            onChange: (e) => setFilterValue(e),
-          }}
-        />
-        <Input
-          inputData={{
-            label: "City",
-            type: "select",
-            icon: <FilterAltIcon />,
-            value: cityfilterValue.label,
-            select: true,
-            maxLength: 50,
-            options: cityFilters,
-            onChange: (e) => setcityFilterValue(e),
-          }}
-        />
-        <Input
-          inputData={{
-            label: "Country",
-            type: "select",
-            icon: <FilterAltIcon />,
-            value: countryfilterValue.label,
-            select: true,
-            maxLength: 50,
-            options: countryFilters,
-            onChange: (e) => setcountryFilterValue(e),
-          }}
-        />
+        <div style={{ width: "33%" }}>
+          <Input
+            inputData={{
+              label: "Type",
+              type: "select",
+              icon: <FilterAltIcon />,
+              value: filterValue.label,
+              select: true,
+              maxLength: 50,
+              options: filterOptions,
+              onChange: (e) => setFilterValue(e),
+            }}
+          />
+        </div>
+        <div style={{ width: "33%" }}>
+          <Input
+            inputData={{
+              label: "City",
+              type: "select",
+              icon: <FilterAltIcon />,
+              value: cityfilterValue.label,
+              select: true,
+              maxLength: 50,
+              options: cityFilters,
+              onChange: (e) => setcityFilterValue(e),
+            }}
+          />
+        </div>
+        <div style={{ width: "33%" }}>
+          <Input
+            inputData={{
+              label: "Country",
+              type: "select",
+              icon: <FilterAltIcon />,
+              value: countryfilterValue.label,
+              select: true,
+              maxLength: 50,
+              options: countryFilters,
+              onChange: (e) => setcountryFilterValue(e),
+            }}
+          />
+        </div>
       </div>
     </div>
   );
