@@ -8,6 +8,7 @@ import OrganizationDetails from "./subcomponents/organizationDetails";
 import EditOrganizationPopup from "./subcomponents/popups/editOrganization";
 import Myprojects from "./subcomponents/myprojects";
 import Contributions from "./subcomponents/contributions";
+import Nfts from "./subcomponents/nfts";
 const Profile = () => {
   const script = useprofile();
 
@@ -30,6 +31,7 @@ const Profile = () => {
       <OrganizationDetails script={script} />
       <Myprojects script={script} />
       <Contributions script={script} />
+      <Nfts script={script} />
 
       {script.isLoading && <LocalLoading />}
       {script.editprofilePopup && <EditPrimaryDetails script={script} />}

@@ -15,6 +15,7 @@ const useprofile = () => {
 
   const [myprojects, setMyprojects] = useState(null);
   const [transactions, setTransactions] = useState(null);
+  const [nftData, setNftData] = useState(null);
 
   const endpoints = [
     { endpoint: "user/avatar", state: setProfilePic },
@@ -30,6 +31,7 @@ const useprofile = () => {
     });
     poppulateData("project/myproject", setMyprojects, true);
     poppulateData("project/transaction", setTransactions, true);
+    poppulateData("project/nft", setNftData, true);
   }, [isLoggedIn]);
 
   const poppulateData = async (endpoint, setState, isArray) => {
@@ -93,6 +95,7 @@ const useprofile = () => {
     myprojects,
     setMyprojects,
     transactions,
+    nftData,
   };
 };
 

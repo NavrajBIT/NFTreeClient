@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import "./projectcard.css";
 
-const ProjectCard = ({ project, isMyProject }) => {
+const ProjectCard = ({ project, isMyProject, Nftproject }) => {
   const navigate = useNavigate();
 
   const navLink = isMyProject
@@ -9,7 +9,10 @@ const ProjectCard = ({ project, isMyProject }) => {
     : `/projects/${project.id}`;
 
   return (
-    <div className="projectCard" onClick={() => navigate(navLink)}>
+    <div
+      className="projectCard"
+      onClick={() => (Nftproject ? null : navigate(navLink))}
+    >
       <img src={project.image} alt={project.name} />
       <div className="projectname">{project.name}</div>
       <div className="projectdescription">{project.description}</div>
