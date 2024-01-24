@@ -101,10 +101,33 @@ const Nft = () => {
           justifyContent: "space-around",
         }}
       >
+        {project && <ProjectCard project={project} />}
         {nftData && (
           <NftCard nftData={nftData} tx={transaction} withdraw={withdraw} />
         )}
-        {project && <ProjectCard project={project} />}
+      </div>
+      <br />
+      <br />
+      <div style={{ width: "95%" }}>
+        <div
+          style={{
+            width: "100%",
+            maxWidth: "var(--max-width)",
+            gap: "var(--padding-main)",
+            justifyContent: "space-around",
+            margin: "auto",
+          }}
+        >
+          <h2>Reward History</h2>
+          <br />
+          <table style={{ width: "100%", background: "white" }}>
+            <tr>
+              <th style={{ width: "33%" }}>Serial No.</th>
+              <th style={{ width: "33%" }}>Date</th>
+              <th style={{ width: "33%" }}>Amount</th>
+            </tr>
+          </table>
+        </div>
       </div>
     </div>
   );
@@ -118,47 +141,63 @@ const NftCard = ({ nftData, tx, withdraw }) => {
       style={{
         background: "white",
         width: "100%",
-        maxWidth: "var(--project-card-width)",
+        maxWidth: "50%",
         padding: "var(--padding-light)",
         borderRadius: "var(--border-radius)",
         display: "flex",
         justifyContent: "space-between",
         flexDirection: "column",
+        minWidth: "var(--project-card-width)",
       }}
     >
-      <div style={{ fontSize: "1.5rem", fontWeight: "700" }}>NFT Details</div>
+      <div style={{ fontSize: "1.5rem", fontWeight: "700", margin: "0 auto" }}>
+        NFT Details
+      </div>
       <div>
-        <div style={{ display: "grid", gridTemplateColumns: "3fr 1fr 3fr" }}>
-          <div>Token Id</div>
-          <div>:</div>
-          <div>{nftData?.id}</div>
-          <div>Amount Paid</div>
+        <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr 3fr" }}>
+          <div
+            style={{ fontWeight: "bold", marginBottom: "var(--padding-light)" }}
+          >
+            Amount Paid
+          </div>
           <div>:</div>
           <div>{tx?.amount} $</div>
-          <div>No. of Trees</div>
+          <div
+            style={{ fontWeight: "bold", marginBottom: "var(--padding-light)" }}
+          >
+            No. of Trees
+          </div>
           <div>:</div>
           <div>{tx?.trees_count}</div>
-        </div>
-        <div>{tx?.date}</div>
-      </div>
-      {nftData?.is_active && (
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "3fr 1fr 3fr",
-            fontSize: "1.25rem",
-          }}
-        >
-          <div>Reward</div>
+          <div
+            style={{ fontWeight: "bold", marginBottom: "var(--padding-light)" }}
+          >
+            Date and Time
+          </div>
           <div>:</div>
-          <div>{nftData?.reward} $</div>
+          <div>{tx?.date}</div>
         </div>
-      )}
-      {nftData?.is_active && (
-        <div className="primarybutton">
-          <button onClick={withdraw}>Claim Rewards</button>
-        </div>
-      )}
+      </div>
+      <div>
+        {nftData?.is_active && (
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "2fr 1fr 3fr",
+              fontSize: "1.25rem",
+            }}
+          >
+            <div style={{ marginBottom: "var(--padding-light)" }}>Reward</div>
+            <div>:</div>
+            <div>{nftData?.reward} $</div>
+          </div>
+        )}
+        {nftData?.is_active && (
+          <div className="primarybutton">
+            <button onClick={withdraw}>Claim Rewards</button>
+          </div>
+        )}
+      </div>
     </div>
   );
 };
