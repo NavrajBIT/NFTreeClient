@@ -31,7 +31,7 @@ const useprofile = () => {
     });
     poppulateData("project/myproject", setMyprojects, true);
     poppulateData("project/transaction", setTransactions, true);
-    poppulateData("project/nft", setNftData, true);
+    poppulateData("project/nfts", setNftData, true);
   }, [isLoggedIn]);
 
   const poppulateData = async (endpoint, setState, isArray) => {

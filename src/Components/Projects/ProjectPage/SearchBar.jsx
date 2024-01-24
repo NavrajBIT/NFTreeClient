@@ -82,7 +82,9 @@ const SearchBar = ({ setFilterData, data }) => {
       }
       if (
         filterValue.value === "donating" &&
-        (!project.donation || project.donation === 0)
+        (!project.donation ||
+          project.donation === 0 ||
+          project.carbonCredit_enabled)
       )
         isApplicable = false;
       if (
@@ -103,7 +105,6 @@ const SearchBar = ({ setFilterData, data }) => {
         isApplicable = false;
 
       if (isApplicable && !filteredProjects.includes(project)) {
-        console.log(project);
         filteredProjects.push(project);
       }
     });

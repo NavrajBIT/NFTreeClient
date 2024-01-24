@@ -7,31 +7,38 @@ import Auth from "../../Auth/Auth";
 import Loading from "../../Subcomponents/loading/loading";
 import { useEffect } from "react";
 import { useAuth } from "../../../Contexts/AuthContext";
-import axios from "axios";
+import usewallet from "./usewallet";
 
 const Donate = () => {
   const params = useParams();
   const id = params.projectId;
   const api = useAPI();
+
   const authContext = useAuth();
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
 
   const [project, setProject] = useState(null);
   const [trees, setTrees] = useState("");
-  const [walletAddress, setWalletAddress] = useState("");
-  const [walletInstalled, setWalletInstalled] = useState("");
-  const [walletConnected, setWalletConnected] = useState("");
+
+  const wallet = usewallet(setIsLoading, id, trees);
 
   useEffect(() => {
-    checkWallet();
-    setWalletInstalled(window.bit !== "undefined");
     poppulateProject();
+    checkLogIn();
   }, []);
 
-  useEffect(() => {
-    connectWallet();
-  }, [walletInstalled == true]);
+  const checkLogIn = async () => {
+    setIsLoading(true);
+    await api
+      .crud("GET", "user/kyc")
+      .then((res) => console.log(res))
+      .catch((err) => {
+        if (err === 401) setIsLoggedIn(false);
+      });
+    setIsLoading(false);
+  };
 
   const poppulateProject = async () => {
     setIsLoading(true);
@@ -39,39 +46,13 @@ const Donate = () => {
     await api
       .crud("GET", `project/${id}`)
       .then((res) => {
-        console.log(res);
         if (res.status === 200) setProject(res);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {});
     setIsLoading(false);
   };
 
-  const checkWallet = () => {
-    if (typeof window !== "undefined") {
-      if (window.bit !== undefined) {
-        setWalletInstalled(true);
-      } else {
-        setWalletInstalled(false);
-      }
-    }
-  };
-
-  const connectWallet = async () => {
-    while (walletInstalled == "") {
-      pass;
-    }
-
-    if (walletInstalled && walletAddress == "") {
-      await window.bit.connect();
-      let address = window.bit.accountId;
-      setWalletAddress(address);
-    } else {
-      setWalletConnected("rejected");
-    }
-  };
-
-  if (!authContext.isLoggedIn)
-    return <Auth close={() => authContext.setIsLoggedIn(true)} />;
+  if (!isLoggedIn) return <Auth close={() => setIsLoggedIn(true)} />;
 
   if (isLoading || !project) return <Loading />;
 
@@ -79,65 +60,6 @@ const Donate = () => {
   try {
     totalValue = project.donation * trees;
   } catch {}
-
-  const handleSubmit = async () => {
-    setIsLoading(true);
-    await api
-      .crud("POST", "project/transaction", {
-        project: id,
-        amount: totalValue,
-        trees_count: trees,
-      })
-      .then((res) => {
-        alert("Thankyou for your contribution.");
-        navigate("/profile");
-      })
-      .catch((err) => {
-        console.log(err);
-        if (err === 401) authContext.setIsLoggedIn(false);
-      });
-    setIsLoading(false);
-  };
-
-  const saveNftData = async () => {
-    await api
-      .crud("POST", "project/nft", {
-        project: id,
-        amount: totalValue,
-        trees_count: trees,
-      })
-      .catch((err) => {
-        console.log(err);
-        if (err === 401) authContext.setIsLoggedIn(false);
-      });
-  };
-
-  const verifyTransaction = async (trx_hash, account_id) => {
-    const url = "https://rpc.testnet.near.org/";
-    const body = {
-      jsonrpc: "2.0",
-      id: "dontcare",
-      method: "tx",
-      params: [trx_hash, account_id],
-    };
-
-    try {
-      const response = await axios.post(url, body, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-
-      console.log("API Response:", response.data.result.status);
-    } catch (error) {
-      console.error("Error:", error);
-    }
-  };
-
-  verifyTransaction(
-    "4uatA87C6XrzeHABg1iWsQQoXdRvgk4dRKVnFwKLfip8",
-    "t-e-s-t-1.testnet"
-  );
 
   const donationText = project.carbonCredit_enabled ? "Invest" : "Donate";
 
@@ -160,9 +82,8 @@ const Donate = () => {
         }
         close={() => {
           navigate(-1);
-          setWalletAddress("");
         }}
-        handleSubmit={handleSubmit}
+        handleSubmit={() => wallet.transact(totalValue)}
         formdata={[
           [
             {
@@ -175,13 +96,13 @@ const Donate = () => {
             {
               type: "text",
               label: "Wallet Address",
-              value: walletAddress,
+              value: wallet.walletAddress,
               required: true,
             },
           ],
         ]}
       />
-      {walletInstalled == false && (
+      {!wallet.walletInstalled && (
         <div style={{ padding: "var(--padding-main)", color: "red" }}>
           <p>
             It seems Wallet is not Installed, Please Install{" "}
@@ -197,9 +118,12 @@ const Donate = () => {
           </p>
         </div>
       )}
-      {walletConnected == "rejected" && (
+      {wallet.walletInstalled && !wallet.walletConnected && (
         <div style={{ padding: "var(--padding-main)", color: "red" }}>
-          Please refresh the wallet for connection Request
+          Please connect BitWallet to make the investment.
+          <div className="primarybutton">
+            <button onClick={() => wallet.connectWallet()}>Connect</button>
+          </div>
         </div>
       )}
     </div>

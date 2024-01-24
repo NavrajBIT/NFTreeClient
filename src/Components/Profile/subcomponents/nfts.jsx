@@ -6,7 +6,6 @@ import ShareIcon from "@mui/icons-material/Share";
 import ProjectCard from "../../Subcomponents/projectCard/projectCard";
 
 const Nfts = ({ script }) => {
-  console.log(script);
   return (
     <div className="primarycontainer" style={{ flexDirection: "column" }}>
       <div
@@ -20,8 +19,6 @@ const Nfts = ({ script }) => {
       </div>
 
       {!script.nftData && <div>No NFTs Available...</div>}
-      <div>No NFTs Available...</div>
-
       {script.nftData && (
         <div
           style={{
@@ -46,13 +43,26 @@ export default Nfts;
 const NFTDataFunction = ({ nft }) => {
   const api = useAPI();
   const [project, setProject] = useState(null);
+  const [projectId, setProjectId] = useState(null);
+  const [transaction, setTransaction] = useState(null);
   useEffect(() => {
-    poppulateProject();
+    poppulateTransaction();
   }, []);
 
-  const poppulateProject = () => {
-    api
-      .crud("GET", `project/${nft.project}`)
+  const poppulateTransaction = async () => {
+    await api
+      .crud("GET", `project/transaction/${nft.transaction}`)
+      .then((res) => {
+        if (res.status === 200) {
+          setTransaction(res);
+          poppulateProject(res.project);
+        }
+      })
+      .catch((err) => console.log(err));
+  };
+  const poppulateProject = async (projectId) => {
+    await api
+      .crud("GET", `project/${projectId}`)
       .then((res) => {
         if (res.status === 200) {
           setProject(res);
@@ -64,7 +74,9 @@ const NFTDataFunction = ({ nft }) => {
   if (!project) return null;
   return (
     <div>
-      <ProjectCard project={project} Nftproject={true} />
+      <ProjectCard project={project} Nftproject={true} nftId={nft.id} />
+      <div>Contribution: {transaction?.amount} $</div>
+      <div>Trees: {transaction?.trees_count}</div>
     </div>
   );
 };
