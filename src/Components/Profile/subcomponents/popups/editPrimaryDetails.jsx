@@ -7,81 +7,82 @@ const EditPrimaryDetails = ({ script }) => {
   const api = useAPI();
   const [isLoading, setIsLoading] = useState(false);
   const [hasChanged, sethasChanged] = useState(false);
-  const [hasEmailChanged, sethasEmailChanged] = useState(false);
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [phone, setPhone] = useState("");
-  const [wallet, setWallet] = useState("");
+  const [userData, setUserdata] = useState({
+    designation: script?.account?.designation,
+    phone: script?.account?.phone,
+    nin: script?.account?.nin,
+  });
+  const ninproof = script?.account?.nin_proof;
+  const signed_note = script?.account?.signed_note;
 
-  useEffect(() => {
-    poppulateInitialvalues();
-  }, [script]);
-  const poppulateInitialvalues = () => {
-    setFirstName(
-      script?.account?.first_name ? script?.account?.first_name : ""
-    );
-    setLastName(script?.account?.last_name ? script?.account?.last_name : "");
-    setPhone(script?.account?.phone ? script?.account?.phone : "");
-    setWallet(script?.account?.wallet ? script?.account?.wallet : "");
+  const updateData = (key, value) => {
+    setUserdata((prev) => {
+      let newData = { ...prev };
+      newData[key] = value;
+      return newData;
+    });
   };
   const formData = [
     [
       {
-        label: "First Name",
+        label: "Designation",
         type: "text",
-        value: firstName,
+        value: userData.designation,
         onChange: (e) => {
           sethasChanged(true);
-          setFirstName(e.target.value);
+          updateData("designation", e.target.value);
         },
-        maxLength: 50,
-      },
-      {
-        label: "Last Name",
-        type: "text",
-        value: lastName,
-        onChange: (e) => {
-          sethasChanged(true);
-          setLastName(e.target.value);
-        },
-        maxLength: 50,
+        maxLength: 100,
       },
       {
         label: "Phone",
         type: "text",
-        value: phone,
+        value: userData.phone,
         onChange: (e) => {
           sethasChanged(true);
-          setPhone(e.target.value);
-        },
-        maxLength: 15,
-      },
-      {
-        label: "Wallet",
-        type: "text",
-        value: wallet,
-        onChange: (e) => {
-          sethasChanged(true);
-          setWallet(e.target.value);
+          updateData("phone", e.target.value);
         },
         maxLength: 100,
+      },
+      {
+        label: "National Identification Number(NIN)",
+        type: "text",
+        value: userData.nin,
+        onChange: (e) => {
+          sethasChanged(true);
+          updateData("nin", e.target.value);
+        },
+        maxLength: 100,
+      },
+      {
+        label: "NIN Proof",
+        type: "file",
+        value: ninproof,
+        onChange: (e) => {
+          uploadFile(e.target.files[0], "nin_proof");
+        },
+      },
+      {
+        label: "Signed Note",
+        type: "file",
+        value: signed_note,
+        onChange: (e) => {
+          uploadFile(e.target.files[0], "signed_note");
+        },
       },
     ],
   ];
 
   const handleSubmit = async (e) => {
     if (isLoading) return;
-    if (!hasChanged && !hasEmailChanged) {
+    if (!hasChanged) {
       script.setEditprofilePopup(false);
       return;
     }
     setIsLoading(true);
     await api
       .crud("PATCH", `user/account/${script.account.id}`, {
-        first_name: firstName,
-        last_name: lastName,
-        phone: phone,
-        wallet: wallet,
+        ...userData,
       })
       .then((res) => {
         console.log(res);
@@ -93,33 +94,28 @@ const EditPrimaryDetails = ({ script }) => {
         if (err === 401) script.setIsLoggedIn(false);
       });
 
-    if (hasEmailChanged) {
-      await api
-        .crud("PATCH", `user/email/${script.account.id}`, {
-          first_name: firstName,
-          last_name: lastName,
-          phone: phone,
-          wallet: wallet,
-        })
-        .then((res) => {
-          console.log(res);
-          if (res.status >= 200 && res.status <= 299) {
-            script.poppulateData("user/account", script.setAccount);
-          }
-        })
-        .catch((err) => {
-          if (err === 401) script.setIsLoggedIn(false);
-        });
-    }
     setIsLoading(false);
     script.setEditprofilePopup(false);
   };
 
-  const buttonText = isLoading
-    ? "Saving"
-    : hasChanged || hasEmailChanged
-    ? "Save"
-    : "OK";
+  const uploadFile = async (file, key) => {
+    setIsLoading(true);
+    let formdata = new FormData();
+    formdata.append(key, file);
+    await api
+      .crud("PATCH", `user/account/${script.account.id}`, formdata, true)
+      .then((res) => {
+        if (res.status >= 200 && res.status <= 299) {
+          script.poppulateData("user/account", script.setAccount);
+        }
+      })
+      .catch((err) => {
+        if (err === 401) script.setIsLoggedIn(false);
+      });
+    setIsLoading(false);
+  };
+
+  const buttonText = isLoading ? "Saving" : hasChanged ? "Save" : "OK";
 
   return (
     <Popup close={() => script.setEditprofilePopup(false)}>

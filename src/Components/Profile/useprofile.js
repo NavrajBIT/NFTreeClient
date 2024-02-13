@@ -5,24 +5,21 @@ const useprofile = () => {
   const api = useAPI();
   const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
-  const [profilePic, setProfilePic] = useState(null);
+  const [user, setuser] = useState(null);
   const [account, setAccount] = useState(null);
   const [email, setEmail] = useState(null);
   const [organization, setOrganization] = useState(null);
   const [kyc, setKyc] = useState(null);
   const [editprofilePopup, setEditprofilePopup] = useState(false);
   const [editorganizationPopup, setEditorganizationPopup] = useState(false);
-
   const [myprojects, setMyprojects] = useState(null);
   const [transactions, setTransactions] = useState(null);
   const [nftData, setNftData] = useState(null);
 
   const endpoints = [
-    { endpoint: "user/avatar", state: setProfilePic },
+    { endpoint: "user", state: setuser },
     { endpoint: "user/account", state: setAccount },
-    { endpoint: "user/email", state: setEmail },
     { endpoint: "user/organization", state: setOrganization },
-    { endpoint: "user/kyc", state: setKyc },
   ];
 
   useEffect(() => {
@@ -39,7 +36,7 @@ const useprofile = () => {
     await api
       .crud("GET", endpoint)
       .then((res) => {
-        if (isArray) console.log(res);
+        console.log(res);
         if (res.status === 200 && !isArray) setState(res[0]);
         if (res.status === 200 && isArray) setState(res);
       })
@@ -61,13 +58,13 @@ const useprofile = () => {
 
       const formdata = new FormData();
       formdata.append("picture", newFile);
-      const endpoint = `user/avatar/${profilePic.id}`;
+      const endpoint = `user/account/${account.id}`;
       setIsLoading(true);
       await api
         .crud("PATCH", endpoint, formdata, true)
         .then((res) => {})
         .catch((err) => alert("Could not upload image."));
-      await poppulateData("user/avatar", setProfilePic);
+      await poppulateData("user/account", setAccount);
       setIsLoading(false);
     } else {
       alert("Please select a valid image file.");
@@ -79,7 +76,7 @@ const useprofile = () => {
     setIsLoggedIn,
     isLoading,
     setIsLoading,
-    profilePic,
+    user,
     account,
     setAccount,
     email,

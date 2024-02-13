@@ -1,49 +1,52 @@
 import React, { useEffect, useState } from "react";
 import Loading from "../../Subcomponents/loading/loading";
-import NoKYC from "../../Subcomponents/noKycPage/nokyc";
-import useAPI from "../../../api/useAPI";
 import Auth from "../../Auth/Auth";
-import CreateProjectOption from "./CreateProjectOption";
+import Representative from "../../Subcomponents/form/forms/representative";
 import Createform from "./createform";
+import Stepper from "../../Subcomponents/stepper/stepper";
+import Organization from "../../Subcomponents/form/forms/organization";
+import Project from "../../Subcomponents/form/forms/project";
+import ProjectData from "../../Subcomponents/form/forms/projectData";
+import { useNavigate } from "react-router-dom";
 
 function CreateProject() {
-  const [isLoading, setIsLoading] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
-  const [isKycComplete, setIsKycComplete] = useState(false);
-  const [selectedOption, setSelectedOption] = useState(null);
-  const api = useAPI();
-
-  useEffect(() => {
-    checkKycStatus();
-  }, [isLoggedIn]);
-
-  const checkKycStatus = async () => {
-    setIsLoading(true);
-    await api
-      .crud("GET", "user/kyc")
-      .then((res) => {
-        if (res.status === 200) {
-          if (res[0].status === "Approved") setIsKycComplete(true);
-        }
-      })
-      .catch((err) => {
-        if (err === 401) setIsLoggedIn(false);
-      });
-    setIsLoading(false);
-  };
-  if (!isLoggedIn) return <Auth close={() => setIsLoggedIn(true)} />;
-
-  if (isLoading) return <Loading />;
-  if (!isKycComplete) return <NoKYC />;
-
-  if (!selectedOption)
-    return <CreateProjectOption setSelectedOption={setSelectedOption} />;
+  const navigate = useNavigate();
+  const [step, setStep] = useState(1);
+  const [projectId, setProjectId] = useState(null);
 
   return (
-    <Createform
-      selectedOption={selectedOption}
-      setSelectedOption={setSelectedOption}
-    />
+    <div
+      style={{
+        width: "100%",
+        minHeight: "var(--min-height-page)",
+        display: "flex",
+        flexDirection: "column",
+        gap: "var(--padding-main)",
+        padding: "var(--padding-main)",
+        paddingTop: "var(--nav-height)",
+        alignItems: "center",
+      }}
+    >
+      <Stepper steps={4} step={step} />
+      {step === 1 && <Representative submit={() => setStep(2)} />}
+      {step === 2 && <Organization submit={() => setStep(3)} />}
+      {step === 3 && (
+        <Project
+          submit={(e) => {
+            setProjectId(e);
+            setStep(4);
+          }}
+        />
+      )}
+      {step === 4 && (
+        <ProjectData
+          submit={() => {
+            navigate(`/myprojects/${projectId}`);
+          }}
+          projectId={projectId}
+        />
+      )}
+    </div>
   );
 }
 

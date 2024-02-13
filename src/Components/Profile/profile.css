@@ -7,6 +7,7 @@
   display: flex;
   gap: var(--padding-light);
   position: relative;
+  margin: var(--padding-main);
 }
 
 .profilepicedit {

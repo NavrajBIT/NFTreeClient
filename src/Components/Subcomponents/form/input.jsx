@@ -1,13 +1,54 @@
 import { TextField } from "@mui/material";
 import InputAdornment from "@mui/material/InputAdornment";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
 import Checkbox from "@mui/material/Checkbox";
 import "./input.css";
+import AttachFileIcon from "@mui/icons-material/AttachFile";
 
 const Input = ({ inputData, error }) => {
   const [isSelected, setIsSelected] = useState(false);
+  const inputref = useRef(null);
+
+  if (inputData.type === "file") {
+    let filename = (function () {
+      try {
+        return inputData?.value?.split("/")[
+          inputData?.value?.split("/").length - 1
+        ];
+      } catch {
+        return "Uploaded Successfully.";
+      }
+    })();
+
+    return (
+      <div
+        style={{
+          width: "100%",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          border: "1px solid grey",
+          cursor: "pointer",
+          padding: "var(--padding-light) var(--padding-main)",
+          borderRadius: "var(--border-radius)",
+        }}
+        onClick={() => inputref.current.click()}
+      >
+        <div>{inputData.label}:</div>
+        <div>{inputData.value ? filename : "Click to Upload"}</div>
+
+        <input
+          type="file"
+          ref={inputref}
+          style={{ display: "none" }}
+          onChange={inputData.onChange}
+        />
+        <AttachFileIcon />
+      </div>
+    );
+  }
 
   if (inputData.type === "checkbox") {
     return (

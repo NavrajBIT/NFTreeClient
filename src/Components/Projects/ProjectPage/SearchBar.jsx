@@ -7,15 +7,15 @@ const SearchBar = ({ setFilterData, data }) => {
   const filterOptions = [
     {
       label: "Monitoring",
-      value: "monitoring",
+      value: 1,
     },
     {
       label: "Donation & Monitoring",
-      value: "donating",
+      value: 2,
     },
     {
-      label: "Carbon Credit",
-      value: "carboncredit",
+      label: "Investment",
+      value: 3,
     },
   ];
   const cityList = [];
@@ -73,24 +73,11 @@ const SearchBar = ({ setFilterData, data }) => {
         isApplicable = false;
       }
 
-      if (
-        filterValue.value === "monitoring" &&
-        project.donation &&
-        project.donation > 0
-      ) {
+      if (filterValue.value === 1 && project.type !== 1) {
         isApplicable = false;
       }
-      if (
-        filterValue.value === "donating" &&
-        (!project.donation ||
-          project.donation === 0 ||
-          project.carbonCredit_enabled)
-      )
-        isApplicable = false;
-      if (
-        filterValue.value === "carboncredit" &&
-        project.carbonCredit_enabled === false
-      ) {
+      if (filterValue.value === 2 && project.type !== 2) isApplicable = false;
+      if (filterValue.value === 3 && project.type !== 3) {
         isApplicable = false;
       }
       if (

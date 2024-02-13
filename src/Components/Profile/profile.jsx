@@ -23,7 +23,6 @@ const Profile = () => {
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        gap: "var(--padding-main)",
         padding: "var(--nav-height) 0",
       }}
     >

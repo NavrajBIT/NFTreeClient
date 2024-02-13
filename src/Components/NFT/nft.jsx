@@ -102,7 +102,12 @@ const Nft = () => {
         }}
       >
         {nftData && (
-          <NftCard nftData={nftData} tx={transaction} withdraw={withdraw} />
+          <NftCard
+            nftData={nftData}
+            tx={transaction}
+            withdraw={withdraw}
+            project={project}
+          />
         )}
         {project && <ProjectCard project={project} />}
       </div>
@@ -112,7 +117,7 @@ const Nft = () => {
 
 export default Nft;
 
-const NftCard = ({ nftData, tx, withdraw }) => {
+const NftCard = ({ nftData, tx, withdraw, project }) => {
   return (
     <div
       style={{
@@ -127,6 +132,9 @@ const NftCard = ({ nftData, tx, withdraw }) => {
       }}
     >
       <div style={{ fontSize: "1.5rem", fontWeight: "700" }}>NFT Details</div>
+      <div>
+        <img src={project?.image} alt="NFT" style={{ width: "100%" }} />
+      </div>
       <div>
         <div style={{ display: "grid", gridTemplateColumns: "3fr 1fr 3fr" }}>
           <div>Token Id</div>

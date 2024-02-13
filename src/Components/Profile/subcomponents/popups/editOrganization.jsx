@@ -15,6 +15,7 @@ const EditOrganizationPopup = ({ script }) => {
     website: "",
     country: "",
     reg_id: "",
+    social_links: "",
   });
 
   useEffect(() => {
@@ -112,6 +113,22 @@ const EditOrganizationPopup = ({ script }) => {
           });
         },
         maxLength: 50,
+      },
+      {
+        label: "Social links (comma separated)",
+        type: "text",
+        value: organization.social_links,
+        onChange: (e) => {
+          sethasChanged(true);
+          setOrganization((prev) => {
+            let newdata = { ...prev };
+            newdata["social_links"] = e.target.value;
+            return newdata;
+          });
+        },
+        maxLength: 500,
+        multiline: true,
+        rows: 4,
       },
     ],
   ];

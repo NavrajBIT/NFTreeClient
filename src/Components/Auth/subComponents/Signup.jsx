@@ -1,8 +1,10 @@
 import GoogleLogin from "./GoogleLogin";
 import "../Auth.css";
 import Myform from "../../Subcomponents/form/myform";
+import { Enterotp } from "./enterotp";
 
 const Signup = ({ script }) => {
+  if (script.isOtp) return <Enterotp script={script} />;
   return (
     <div
       style={{

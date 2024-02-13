@@ -23,17 +23,17 @@ export function AuthProvider(props) {
 
     if (isSessionToken || isLocalToken) {
       setIsLoggedIn(true);
-      poppulateProfilePic();
+      poppulateUserData();
     }
   }, [isLoggedIn]);
 
-  const poppulateProfilePic = () => {
-    api
-      .crud("GET", "user/avatar")
-      .then((res) => {
-        if (res.status === 200) setAvatar(res[0]);
-      })
-      .catch((err) => console.log(err));
+  const poppulateUserData = () => {
+    // api
+    //   .crud("GET", "user/account")
+    //   .then((res) => {
+    //     if (res.status === 200) setAvatar(res[0].picture);
+    //   })
+    //   .catch((err) => console.log(err));
   };
 
   const value = {

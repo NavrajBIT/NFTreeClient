@@ -55,11 +55,11 @@ const ProjectData = ({ details }) => {
     "Type of Plants": project.plant_types,
     "Total number of plants planned": project.plant_planned,
     Address: project.address,
-    City: project.city,
+    State: project.city,
     Country: project.country,
   };
 
-  if (isMonitoring) delete data["Donation Cost per Plant ($)"];
+  if (project.type === 1) delete data["Donation Cost per Plant ($)"];
 
   return (
     <div
@@ -153,7 +153,7 @@ const ButtonsContainer = ({ details, notMyProject }) => {
           <button
             onClick={() => navigate(`/projects/${details.projectId}/donate`)}
           >
-            {details.project.carbonCredit_enabled ? "Invest $" : "Donate $"}
+            {details.project.type === 3 ? "Invest $" : "Donate $"}
           </button>
         </div>
       )}
