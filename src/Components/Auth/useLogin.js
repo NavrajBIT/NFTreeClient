@@ -16,11 +16,11 @@ const useLogin = (close) => {
   const [cnfPassword, setCnfPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
-  const [currentPage, setCurrentPage] = useState("login");
-  const [isOtp, setIsOtp] = useState(false);
+  const [currentPage, setCurrentPage] = useState("loginoptions");
   const [otp, setOtp] = useState("");
 
-  const handleSignup = async () => {
+  const handleSignup = async (e) => {
+    e.preventDefault();
     if (!checkBox) {
       setErrorMessage("Please accept terms & conditions.");
       return;
@@ -36,7 +36,7 @@ const useLogin = (close) => {
         })
         .then((res) => {
           if (res.status === 200) {
-            setIsOtp(true);
+            setCurrentPage("otp");
           }
         })
         .catch((err) => {
@@ -46,7 +46,8 @@ const useLogin = (close) => {
     }
   };
 
-  const verifyOtp = async () => {
+  const verifyOtp = async (e) => {
+    e.preventDefault();
     setIsLoading(true);
     await api
       .crud("POST", "user/verify", {
@@ -58,7 +59,7 @@ const useLogin = (close) => {
       })
       .then((res) => {
         if (res.status === 200) {
-          setIsOtp(false);
+          setErrorMessage("");
           setCurrentPage("login");
         }
         if (res.status === 404) {
@@ -71,7 +72,8 @@ const useLogin = (close) => {
     setIsLoading(false);
   };
 
-  const handleLogin = async () => {
+  const handleLogin = async (e) => {
+    e.preventDefault();
     setErrorMessage("");
     setIsLoading(true);
     await api
@@ -80,11 +82,9 @@ const useLogin = (close) => {
         if (res.status === 200) {
           if (checkBox) {
             sessionStorage.removeItem("token");
-
             localStorage.setItem("token", res.access);
           } else {
             localStorage.removeItem("token");
-
             sessionStorage.setItem("token", res.access);
           }
           authContext.setIsLoggedIn(true);
@@ -102,141 +102,6 @@ const useLogin = (close) => {
     setIsLoading(false);
   };
 
-  const ForgetPasswordformdata = [
-    [
-      {
-        label: "Username",
-        type: "text",
-        required: true,
-        value: password,
-        onChange: (e) => setUserName(e.target.value),
-        maxLength: 50,
-      },
-    ],
-  ];
-
-  const Loginformdata = [
-    [
-      {
-        label: "Username",
-        type: "text",
-        required: true,
-        value: userName,
-        onChange: (e) => {
-          setErrorMessage("");
-          setUserName(e.target.value);
-        },
-        maxLength: 50,
-      },
-      {
-        label: "Password",
-        type: "password",
-        required: true,
-        value: password,
-        onChange: (e) => {
-          setErrorMessage("");
-          setPassword(e.target.value);
-        },
-        maxLength: 50,
-      },
-      {
-        label: "Remember Me",
-        type: "checkbox",
-        required: false,
-        value: checkBox,
-        onChange: (e) => setCheckBox(e),
-        maxLength: 50,
-      },
-    ],
-  ];
-  const Otpformdata = [
-    [
-      {
-        label: "OTP",
-        type: "text",
-        required: true,
-        value: otp,
-        onChange: (e) => {
-          setErrorMessage("");
-          setOtp(e.target.value);
-        },
-        maxLength: 10,
-      },
-    ],
-  ];
-
-  const Signupformdata = [
-    [
-      {
-        isHalf: [
-          {
-            label: "First Name",
-            type: "text",
-            required: true,
-            value: firstname,
-            onChange: (e) => {
-              setErrorMessage("");
-              setFirstname(e.target.value);
-            },
-            maxLength: 50,
-          },
-          {
-            label: "Last Name",
-            type: "text",
-            required: true,
-            value: lastname,
-            onChange: (e) => {
-              setErrorMessage("");
-              setLastname(e.target.value);
-            },
-            maxLength: 50,
-          },
-        ],
-      },
-
-      {
-        label: "Email",
-        type: "email",
-        required: true,
-        value: userName,
-        onChange: (e) => {
-          setErrorMessage("");
-          setUserName(e.target.value);
-        },
-        maxLength: 50,
-      },
-      {
-        label: "Password",
-        type: "password",
-        required: true,
-        value: password,
-        onChange: (e) => {
-          setErrorMessage("");
-          setPassword(e.target.value);
-        },
-        maxLength: 50,
-      },
-      {
-        label: "Confirm Password",
-        type: "password",
-        required: true,
-        value: cnfPassword,
-        onChange: (e) => {
-          setErrorMessage("");
-          setCnfPassword(e.target.value);
-        },
-        maxLength: 50,
-      },
-      {
-        label: "I Accept the Terms and Conditions",
-        type: "checkbox",
-        value: checkBox,
-        onChange: (e) => setCheckBox(e),
-        maxLength: 50,
-      },
-    ],
-  ];
-
   return {
     userName,
     setUserName,
@@ -245,20 +110,23 @@ const useLogin = (close) => {
     handleLogin,
     isLoading,
     setIsLoading,
-    Loginformdata,
-    Signupformdata,
-    ForgetPasswordformdata,
     handleSignup,
     errorMessage,
     setErrorMessage,
     currentPage,
     setCurrentPage,
     checkBox,
+    setCheckBox,
     close,
-    isOtp,
     otp,
-    Otpformdata,
+    setOtp,
     verifyOtp,
+    cnfPassword,
+    setCnfPassword,
+    firstname,
+    setFirstname,
+    lastname,
+    setLastname,
   };
 };
 

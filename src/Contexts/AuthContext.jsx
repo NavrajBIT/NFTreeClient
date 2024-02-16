@@ -28,18 +28,25 @@ export function AuthProvider(props) {
   }, [isLoggedIn]);
 
   const poppulateUserData = () => {
-    // api
-    //   .crud("GET", "user/account")
-    //   .then((res) => {
-    //     if (res.status === 200) setAvatar(res[0].picture);
-    //   })
-    //   .catch((err) => console.log(err));
+    api
+      .crud("GET", "user/account")
+      .then((res) => {
+        if (res.status === 200) setAvatar(res[0].picture);
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const logout = () => {
+    localStorage.removeItem("token");
+    sessionStorage.removeItem("token");
+    setIsLoggedIn(false);
   };
 
   const value = {
     avatar,
     isLoggedIn,
     setIsLoggedIn,
+    logout,
   };
 
   return (

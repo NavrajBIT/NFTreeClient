@@ -1,0 +1,104 @@
+.inputcontainer {
+  position: relative;
+  width: 100%;
+  max-width: var(--max-width-button);
+}
+.input {
+  width: 100%;
+  padding: var(--padding-light);
+  border-radius: var(--border-radius-extra-light);
+  font-size: 1.2rem;
+  border: 1px solid var(--text-grey);
+  box-shadow: 0 0 10px 1px var(--shadow-3);
+  position: relative;
+}
+
+.input::placeholder,
+.openinput::placeholder {
+  color: var(--text-extra-light);
+}
+
+.input:focus {
+  border: 1px solid var(--text-black);
+  outline: none;
+}
+
+/* ------------------------------ */
+.openinput {
+  width: 100%;
+  padding: var(--padding-light);
+  font-size: 1.2rem;
+  border: none;
+  border-bottom: 1px solid var(--text-grey);
+  position: relative;
+  resize: none;
+}
+
+.openinput:focus {
+  border-bottom: 1px solid var(--text-black);
+  outline: none;
+}
+
+/* ---------------------------------------- */
+
+.label {
+  position: absolute;
+  top: -0.6rem;
+  left: var(--padding-light);
+  background-color: var(--bg-bright);
+}
+
+.textlength {
+  position: absolute;
+  bottom: 0.6rem;
+  right: 0;
+  background-color: var(--bg-bright);
+  color: var(--text-extra-light);
+}
+
+.checkboxcontainer {
+  width: 100%;
+  max-width: var(--max-width-button);
+  display: flex;
+  gap: var(--padding-light);
+  align-items: center;
+}
+
+.checkboxlabel {
+  color: var(--text-black);
+}
+
+.checkboxcontainer input[type="checkbox"] {
+  width: 1rem;
+  height: 1rem;
+  outline: none;
+  border: none;
+  background: red;
+}
+
+.otpcontainer {
+  display: flex;
+  gap: var(--padding-light);
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: var(--max-width-button);
+}
+
+.otpinputfield {
+  width: 2rem;
+  outline: none;
+  border: none;
+  border-bottom: 1px solid var(--text-black);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+.otpinputfield::-webkit-outer-spin-button,
+.otpinputfield::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}

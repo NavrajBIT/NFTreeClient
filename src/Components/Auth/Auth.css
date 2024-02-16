@@ -1,150 +1,57 @@
-.link {
-  text-decoration: underline;
-  cursor: pointer;
-  color: var(--green-30);
-}
-
-/* .form-container {
-  position: relative;
-  text-align: center;
-  height: 100vh;
-  background: #ebf3e8;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.form-box {
-  border: 1px solid white;
-  width: 540px;
-  min-width: 540px;
-  border-radius: 1rem;
-  background: white;
-  padding: 3rem;
-  position: relative;
-}
-
-.switch-option {
-  position: absolute;
-  bottom: 15px;
-  left: 50%;
-  transform: translate(-50%, 0px);
-  display: block;
-  margin: auto;
-  width: max-content;
-}
-
-.formHead {
-  margin-bottom: 2rem;
-}
-
-.form-input {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 6px;
-  justify-content: center;
-}
-
-.form-input input,
-.form-input textarea {
-  border: 1px solid #e4e4e7;
+.formcontainer {
   width: 100%;
-  padding: 3% 15px;
-  border-radius: 5px;
-  min-height: 40px;
+  max-width: var(--max-width-form);
+  min-height: var(--min-height-form);
+  background-color: var(--bg-bright);
+  border-radius: var(--border-radius-light);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  box-shadow: 0 0 20px 2px var(--shadow-1);
 }
 
-.form-checkbox {
-  display: flex;
-  justify-content: space-between;
-  margin: 4vh 0 2vh 0;
-  color: #373737;
-  align-items: center;
-}
-
-.checkBoxDiv {
-  display: flex;
-  gap: 6px;
-}
-
-.form-button {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.form-button button {
-  border-radius: 5px;
-  font-weight: 600;
-  min-height: 40px;
-  height: 50px;
-  background: #86a789;
-  color: white;
-}
-
-.submit-button {
-  background: var(--primary);
-  color: white;
-}
-
-.googleLoginBtn {
-  background: #e9e9e9;
-
-  border: 1px solid #e9e9e9;
-}
-
-.googleLoginBtn div {
-  position: absolute;
+.illustration {
+  width: 100%;
+  background: url("./img/bg.png");
+  background-position: right;
+  background-size: cover;
   display: flex;
   align-items: center;
-  width: max-content;
-  left: 50%;
-  transform: translate(-50%, 0%);
   justify-content: center;
-  gap: 10px;
+  padding: var(--padding-light);
+  border-radius: var(--border-radius-light);
+  animation: slide-in 1s;
+  transform-origin: left;
 }
 
-.googleLoginBtn img {
-  height: 1.8rem;
+.illustration img {
+  width: 80%;
+  animation: fade-in 2s;
 }
 
-.switch-option {
-  position: absolute;
-  bottom: 15px;
-  display: block;
-  margin: auto;
-  width: max-content;
-}
-
-.errorText {
-  color: red;
-  font-size: small;
-  display: flex;
-}
-
-.forgetPwdForm h2 {
-  margin: 0;
-  font-size: 30px;
-}
-.forgetPwdForm p {
-  margin-top: 10px;
-  font-size: 20px;
-}
-
-@media only screen and (max-width: 550px) {
-  .form-checkbox {
-    flex-direction: column;
+@keyframes fade-in {
+  from {
+    opacity: 0%;
   }
-  .form-box {
-    width: 90vw;
-    min-width: unset;
+  to {
+    opacity: 100%;
+  }
+}
+@keyframes slide-in {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
   }
 }
 
-@media only screen and (max-width: 450px) {
-  .form-box {
-    width: 90vw;
-    padding: 3rem 1.5rem;
+@media screen and (max-width: 600px) {
+  .illustration {
+    display: none;
   }
-} */
+  .formcontainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}

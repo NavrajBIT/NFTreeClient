@@ -1,29 +1,44 @@
-import Myform from "../../Subcomponents/form/myform";
+import Otp from "../../Subcomponents/form/inputs/otp";
+import Button from "../../Subcomponents/buttons/button";
 
-export const Enterotp = ({ script }) => {
+const Enterotp = ({ script }) => {
   return (
-    <div
+    <form
       style={{
         width: "100%",
-        minHeight: "var(--min-height-page)",
         display: "flex",
+        flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        paddingTop: "var(--nav-height)",
+        padding: "var(--padding-large)",
+        gap: "var(--padding-large)",
       }}
+      type="submit"
+      onSubmit={script.handleLogin}
     >
-      <Myform
-        heading={"Verify Email"}
-        formdata={script.Otpformdata}
-        formButton="Verify"
-        handleSubmit={script.verifyOtp}
-        error={script.errorMessage}
+      <div
+        style={{
+          fontSize: "1.4rem",
+          fontWeight: "600",
+          color: "var(--text-green)",
+        }}
       >
-        <div>
-          One time password (OTP) has been sent to{" "}
-          <span>{script.userName}</span>
-        </div>
-      </Myform>
-    </div>
+        One Time Password
+      </div>
+      <div
+        style={{
+          textAlign: "center",
+        }}
+      >
+        Please enter the OTP sent to {script.userName}
+      </div>
+      <Otp length={4} value={script.otp} setValue={script.setOtp} />
+      {script.errorMessage && (
+        <div style={{ color: "var(--error)" }}>{script.errorMessage}</div>
+      )}
+      <Button title="Submit" variant={"green"} onClick={script.verifyOtp} />
+    </form>
   );
 };
+
+export default Enterotp;

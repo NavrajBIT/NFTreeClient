@@ -1,0 +1,88 @@
+.green {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--padding-light);
+  font-size: 1rem;
+  padding: var(--padding-main);
+  width: 100%;
+  max-width: var(--max-width-button);
+  border-radius: var(--border-radius-light);
+  box-shadow: 0 0 10px 1px var(--shadow-2);
+  background-color: var(--green-100);
+}
+
+.green:hover,
+.white:hover {
+  box-shadow: 0 0 10px 1px var(--shadow-1);
+}
+
+.white {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--padding-light);
+  font-size: 1rem;
+  padding: var(--padding-main);
+  width: 100%;
+  max-width: var(--max-width-button);
+  border-radius: var(--border-radius-light);
+  box-shadow: 0 0 10px 1px var(--shadow-2);
+  background-color: var(--bg-dark);
+  color: var(--text-black);
+  border: 1px solid var(--text-black);
+}
+.link {
+  font-size: 1rem;
+  background-color: transparent;
+  color: var(--text-black);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.green img,
+.white img {
+  width: 1rem;
+  height: 1rem;
+}
+
+.primary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--padding-light);
+  font-size: 1.2rem;
+  font-weight: 600;
+  padding: var(--padding-light) var(--padding-large);
+  width: 100%;
+  max-width: var(--max-width-button);
+  border-radius: var(--border-radius-big);
+  background-image: var(--primary-button-gradient);
+  color: var(--text-black);
+  box-shadow: inset var(--shadow-2) 0 -6px 7px 0px;
+}
+
+.primary:hover {
+  background-image: var(--primary-button-gradient-inverted);
+  box-shadow: inset var(--shadow-2) 0 6px 7px 0px;
+}
+
+.secondary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--padding-light);
+  font-size: 1.2rem;
+  padding: var(--padding-light) var(--padding-light);
+  width: 100%;
+  max-width: var(--max-width-button);
+  border-radius: var(--border-radius-big);
+  color: var(--text-bright);
+  background: none;
+  background-color: var(--bg-green-100);
+  border: 2px solid var(--text-green);
+}
+
+.secondary:hover {
+  box-shadow: 0 0 10px 1px var(--bg-bright);
+}

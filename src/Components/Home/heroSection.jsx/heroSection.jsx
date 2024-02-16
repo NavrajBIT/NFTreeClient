@@ -2,111 +2,30 @@ import home from "../assets/home-top-bg.png";
 import img1 from "../assets/home-img-1.png";
 import img2 from "../assets/home-img-2.png";
 import { useNavigate } from "react-router-dom";
-import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import Herocontainer from "../../Subcomponents/containers/herocontainer";
+import Button from "../../Subcomponents/buttons/button";
 
 const HeroSection = () => {
+  const navigate = useNavigate();
   return (
-    <div
-      style={{
-        backgroundImage: `url(${home})`,
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-        backgroundSize: "cover",
-        paddingTop: "var(--nav-height)",
-        minHeight: "var(--min-height-page)",
-
-        borderRadius: "0 0 0 var(--border-radius-big)",
-      }}
-    >
-      <div
-        className="heroContainer"
-        style={{
-          maxWidth: "var(--max-width)",
-        }}
-      >
-        <HeroContent />
-        <div
-          className="homeimg"
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            width: "40%",
-            flexWrap: "wrap",
-          }}
-        >
-          <img
-            src={img1}
-            alt="img1"
-            style={{ width: "var(--home-card-image)", alignSelf: "flex-start" }}
-          />
-          <img
-            src={img2}
-            alt="img2"
-            style={{ width: "var(--home-card-image)", alignSelf: "flex-end" }}
-          />
-        </div>
+    <Herocontainer>
+      <div className="landingText">TECHNOLOGY MEETS SUSTAINABLITY</div>
+      <div className="landingdescription">
+        Step into the world of digital innovation meets environmental
+        stewardship with Bitbhoomi. Uncover a vibrant ecosystem that enables
+        secure and transparent participation in creating a greener planet
+        through tokenized ownership. From tree counting to carbon sequestration,
+        get a comprehensive, real-time view of your reforestation initiatives.
       </div>
-    </div>
+      <div style={{ width: "fit-content" }}>
+        <Button
+          title="Get Started"
+          variant="primary"
+          onClick={() => navigate("/projects")}
+        />
+      </div>
+    </Herocontainer>
   );
 };
 
 export default HeroSection;
-
-const HeroContent = () => {
-  const navigate = useNavigate();
-  return (
-    <div
-      style={{
-        display: "flex",
-        flexWrap: "wrap",
-        gap: "var(--padding-main)",
-        justifyContent: "space-between",
-      }}
-    >
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          gap: "var(--padding-light)",
-          justifyContent: "center",
-        }}
-      >
-        <div className="heroheading">BITbhoomi</div>
-        <div
-          style={{
-            width: "100%",
-            maxWidth: "var(--max-width-form)",
-            textAlign: "justify",
-            color: "white",
-            borderLeft: "2px solid white",
-            padding: "var(--padding-light)",
-            paddingLeft: "var(--padding-main)",
-          }}
-        >
-          Welcome to BITbhoomi, where digital innovation meets environmental
-          stewardship. As you explore the platform, you'll discover a dynamic
-          ecosystem that fosters contribution to a greener planet securely and
-          transparently. From tree counting to carbon sequestration, BITbhoomi
-          provides a comprehensive, real-time view of your reforestation impact.
-        </div>
-        <div
-          className="secondarybutton homeButtonProp"
-          style={{
-            width: "fit-content",
-            paddingTop: "var(--padding-main)",
-          }}
-        >
-          <button
-            onClick={() => navigate("/projects")}
-            style={{
-              background: "white",
-              color: "var(--green-100)",
-            }}
-          >
-            Get Started
-          </button>
-        </div>
-      </div>
-    </div>
-  );
-};

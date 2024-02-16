@@ -16,6 +16,7 @@ import Projectdetails from "../../Projects/projectDetails/projectdetails";
 import KYCPage from "../../kyc/kycPage";
 import BitWallet from "../../BitWallet/body";
 import Nft from "../../NFT/nft";
+import Forgotpassword from "../../ForgotPassword/forgotpassword";
 
 export default function Navbar() {
   return (
@@ -26,6 +27,7 @@ export default function Navbar() {
         <Route path="/home" element={<Home />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/login" element={<Auth />} />
+        <Route path="/forgotpassword" element={<Forgotpassword />} />
         <Route path="/projects" element={<ProjectPage />} />
         <Route path="/projects/create" element={<CreateProject />} />
         <Route

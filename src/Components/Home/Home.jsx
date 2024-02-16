@@ -12,12 +12,12 @@ const Home = () => {
     <>
       <HeroSection />
       {/* <Dashboard /> */}
-      <WhatisNFTree />
+      {/* <WhatisNFTree />
       <About />
 
       <Mission />
       <HowItWorks />
-      <Contact page="home" />
+      <Contact page="home" /> */}
     </>
   );
 };

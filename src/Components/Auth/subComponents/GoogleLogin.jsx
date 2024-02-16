@@ -1,8 +1,9 @@
 import { useGoogleLogin } from "@react-oauth/google";
-import GoogleIcon from "@mui/icons-material/Google";
 import useAPI from "../../../api/useAPI";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../../Contexts/AuthContext";
+import Button from "../../Subcomponents/buttons/button";
+import googleIcon from "../img/google.png";
 
 const GoogleLogin = ({ script, isSignUp }) => {
   const api = useAPI();
@@ -66,12 +67,12 @@ const GoogleLogin = ({ script, isSignUp }) => {
   });
 
   return (
-    <div className="primarybutton">
-      <button onClick={login}>
-        <GoogleIcon />
-        {isSignUp ? "Signup" : "Login"} with Google
-      </button>
-    </div>
+    <Button
+      title={isSignUp ? "Sign up with Google" : "Log in with Google"}
+      variant="green"
+      onClick={login}
+      startIcon={googleIcon}
+    />
   );
 };
 

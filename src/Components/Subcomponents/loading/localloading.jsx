@@ -15,6 +15,7 @@ const LocalLoading = () => {
         top: "0px",
         left: "0px",
         background: "var(--filter)",
+        zIndex: 100,
       }}
     >
       <img src="/loading.svg" alt="loading..." className="loadingimage" />

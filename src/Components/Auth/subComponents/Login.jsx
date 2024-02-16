@@ -1,47 +1,93 @@
-import GoogleLogin from "./GoogleLogin";
 import "../Auth.css";
-import Myform from "../../Subcomponents/form/myform";
+import Input from "../../Subcomponents/form/inputs/input";
+import Button from "../../Subcomponents/buttons/button";
+import Checkbox from "../../Subcomponents/form/inputs/checkbox";
+import { useNavigate } from "react-router-dom";
 
 const Login = ({ script }) => {
+  const navigate = useNavigate();
   return (
-    <div
+    <form
       style={{
         width: "100%",
-        minHeight: "var(--min-height-page)",
         display: "flex",
+        flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        paddingTop: "var(--nav-height)",
+        padding: "var(--padding-large)",
+        gap: "var(--padding-light)",
       }}
+      type="submit"
+      onSubmit={script.handleLogin}
     >
-      <Myform
-        heading={"Login"}
-        formdata={script.Loginformdata}
-        formButton="Login"
-        handleSubmit={script.handleLogin}
-        error={script.errorMessage}
+      <div
+        style={{
+          fontSize: "1.4rem",
+          fontWeight: "600",
+          color: "var(--text-green)",
+        }}
       >
-        <GoogleLogin script={script} />
-        {/* <div style={{ textAlign: "center" }}>
-          Forgot Password?{" "}
-          <span
-            className="link"
-            onClick={() => script.setCurrentPage("forgotpassword")}
-          >
-            Click Here
-          </span>
-        </div> */}
-        <div style={{ textAlign: "center" }}>
-          Don't have an Account?{" "}
-          <span
-            className="link"
-            onClick={() => script.setCurrentPage("signup")}
-          >
-            Signup
-          </span>
+        Log in to BitBhoomi
+      </div>
+      <Input
+        label="Email"
+        type="email"
+        required
+        value={script.userName}
+        onChange={(e) => script.setUserName(e.target.value)}
+      />
+      <div
+        style={{
+          width: "100%",
+          maxWidth: "var(--max-width-button)",
+          display: "flex",
+          flexDirection: "column",
+        }}
+      >
+        <Input
+          label="Password"
+          type="password"
+          required
+          value={script.password}
+          onChange={(e) => script.setPassword(e.target.value)}
+        />
+        <div
+          style={{
+            width: "100%",
+            maxWidth: "var(--max-width-button)",
+            display: "flex",
+            justifyContent: "flex-end",
+          }}
+        >
+          <Button
+            title="forgot password"
+            variant={"link"}
+            onClick={() => navigate("/forgotpassword")}
+          />
         </div>
-      </Myform>
-    </div>
+      </div>
+      <Checkbox
+        label={"Remember Me"}
+        checked={script.checkBox}
+        onChange={(e) => script.setCheckBox((prev) => !prev)}
+      />
+      {script.errorMessage && (
+        <div style={{ color: "var(--error)" }}>{script.errorMessage}</div>
+      )}
+      <Button title="Login" type={"submit"} variant={"green"} />
+      <div>
+        {"Don't have an Account? "}
+        <span>
+          <Button
+            title={"Signup"}
+            variant="link"
+            onClick={() => {
+              script.setCurrentPage("signupoptions");
+            }}
+          />
+        </span>
+      </div>
+    </form>
   );
 };
 
