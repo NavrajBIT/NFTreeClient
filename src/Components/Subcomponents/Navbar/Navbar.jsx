@@ -1,6 +1,6 @@
 import { Routes, Route, useNavigate, Link } from "react-router-dom";
 import Home from "../../Home/Home";
-import CreateProject from "../../Projects/CreateProject/CreateProject";
+import CreateProjectContainer from "../../Projects/CreateProject/CreateProjectContainer";
 import Auth from "../../Auth/Auth";
 import "./Navbar.css";
 import Contact from "../../Contact_us/Contact";
@@ -29,7 +29,7 @@ export default function Navbar() {
         <Route path="/login" element={<Auth />} />
         <Route path="/forgotpassword" element={<Forgotpassword />} />
         <Route path="/projects" element={<ProjectPage />} />
-        <Route path="/projects/create" element={<CreateProject />} />
+        <Route path="/projects/create" element={<CreateProjectContainer />} />
         <Route
           path="/projects/:projectId"
           element={<Projectdetails notMyProject={true} />}

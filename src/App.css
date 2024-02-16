@@ -4,6 +4,8 @@ html {
 }
 
 :root {
+  --green-80: #40561a;
+
   --green-100: #3d462c;
   --green-110: #203300;
   --bg-bright: white;

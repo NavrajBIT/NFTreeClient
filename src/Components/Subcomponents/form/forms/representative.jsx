@@ -155,49 +155,51 @@ const Representative = ({ submit }) => {
     : "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png";
 
   return (
-    <Myform
-      heading={"Representative Details"}
-      formdata={accountFormData}
-      formButton={isComplete() ? "Next >>" : "Save"}
-      handleSubmit={async () => {
-        await handleSubmit();
-        if (isComplete()) {
-          submit();
-        } else {
-          setError("Please complete the form.");
-        }
-      }}
-      error={error}
-    >
-      <div
-        style={{
-          height: "var(--profile-pic-diameter)",
-          width: "var(--profile-pic-diameter)",
-          background: "var(--green-30)",
-          borderRadius: "var(--profile-pic-diameter)",
-          backgroundImage: `url("${src}")`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
-          textAlign: "center",
-          color: "var(--green-10)",
-          margin: "auto",
+    <>
+      <Myform
+        heading={"Representative Details"}
+        formdata={accountFormData}
+        formButton={isComplete() ? "Next >>" : "Save"}
+        handleSubmit={async () => {
+          await handleSubmit();
+          if (isComplete()) {
+            submit();
+          } else {
+            setError("Please complete the form.");
+          }
         }}
-        onClick={() => profilepicrref.current.click()}
+        error={error}
       >
-        <div>Profile Pic</div>
-        Click to Upload
-        <input
-          type="file"
-          style={{ display: "none" }}
-          ref={profilepicrref}
-          onChange={(e) => uploadFile(e.target.files[0], "picture")}
-        />
-      </div>
-    </Myform>
+        <div
+          style={{
+            height: "var(--profile-pic-diameter)",
+            width: "var(--profile-pic-diameter)",
+            background: "var(--green-30)",
+            borderRadius: "var(--profile-pic-diameter)",
+            backgroundImage: `url("${src}")`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            textAlign: "center",
+            color: "var(--green-10)",
+            margin: "auto",
+          }}
+          onClick={() => profilepicrref.current.click()}
+        >
+          <div>Profile Pic</div>
+          Click to Upload
+          <input
+            type="file"
+            style={{ display: "none" }}
+            ref={profilepicrref}
+            onChange={(e) => uploadFile(e.target.files[0], "picture")}
+          />
+        </div>
+      </Myform>
+    </>
   );
 };
 

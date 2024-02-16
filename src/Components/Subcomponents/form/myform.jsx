@@ -72,14 +72,14 @@ const Myform = ({
       >
         <div
           style={{
-            textAlign: "center",
             fontSize: "1.5rem",
             fontWeight: "bold",
-            color: "var(--green-30)",
+            color: "var(--green-80)",
           }}
         >
           {heading}
         </div>
+        <hr />
         {formdata.map((inputGroup, index) => {
           return (
             <div
