@@ -1,10 +1,10 @@
-import Myform from "../myform";
+import Myform from "../myformnew";
 import useAPI from "../../../../api/useAPI";
 import { useState, useEffect } from "react";
 import Auth from "../../../Auth/Auth";
 import Loading from "../../loading/loading";
 
-const Organization = ({ submit }) => {
+const Organization = ({ submit, backStep }) => {
   const api = useAPI();
   const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
@@ -17,6 +17,7 @@ const Organization = ({ submit }) => {
 
   const isComplete = () => {
     let status = true;
+
     if (userData) {
       Object.keys(userData).map((key) => {
         if (!userData[key] || userData[key] === "") {
@@ -24,6 +25,7 @@ const Organization = ({ submit }) => {
         }
       });
     }
+
     return status;
   };
 
@@ -71,6 +73,8 @@ const Organization = ({ submit }) => {
 
     setIsLoading(false);
   };
+
+  const back = () => {};
 
   const accountFormData = [
     [
@@ -171,7 +175,8 @@ const Organization = ({ submit }) => {
     <Myform
       heading={"Organization Details"}
       formdata={accountFormData}
-      formButton={isComplete() ? "Next >>" : "Save"}
+      formButton={isComplete() ? "Next" : "Save"}
+      back={back}
       handleSubmit={async () => {
         await handleSubmit();
         if (isComplete()) {

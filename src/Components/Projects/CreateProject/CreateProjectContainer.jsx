@@ -8,7 +8,7 @@ import Organization from "../../Subcomponents/form/forms/organization";
 import Project from "../../Subcomponents/form/forms/project";
 import ProjectData from "../../Subcomponents/form/forms/projectData";
 import { useNavigate } from "react-router-dom";
-import Myform from "../../Subcomponents/form/myform";
+import Myform from "../../Subcomponents/form/myformnew";
 
 import "./CreateProject.css";
 
@@ -47,13 +47,20 @@ function CreateProject() {
           gap: "var(--padding-light)",
           borderRadius: "var(--border-radius)",
           boxShadow: "3px 4px 30px 0px",
+          margin: "10% 0",
         }}
       >
         <Stepper data={stepperData} step={step} />
+
         {step === 1 && <Representative submit={() => setStep(2)} />}
-        {/* <Stepper steps={4} step={step} />
-        {step === 1 && <Representative submit={() => setStep(2)} />}
-        {step === 2 && <Organization submit={() => setStep(3)} />}
+        {step === 2 && (
+          <Organization
+            submit={() => setStep(3)}
+            backStep={() => {
+              setStep(2);
+            }}
+          />
+        )}
         {step === 3 && (
           <Project
             submit={(e) => {
@@ -69,7 +76,7 @@ function CreateProject() {
             }}
             projectId={projectId}
           />
-        )} */}
+        )}
       </div>
     </div>
   );

@@ -1,4 +1,4 @@
-import Myform from "../../Subcomponents/form/myform";
+import Myform from "../../Subcomponents/form/myformnew";
 import usecreate from "./usecreate";
 import LocalLoading from "../../Subcomponents/loading/localloading";
 
