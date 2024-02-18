@@ -99,7 +99,7 @@ const MyNearButton = ({isSignedIn, wallet}) => {
             }}>
             Connect MyNear Wallet{" "}
             <img
-              src='/public/assets/near-wallet.webp'
+              src='/assets/near-wallet.webp'
               alt='near logo'
               height={20}
             />
