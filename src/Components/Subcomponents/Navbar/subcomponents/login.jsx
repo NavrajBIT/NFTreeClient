@@ -1,12 +1,16 @@
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import { useNavigate, Link } from "react-router-dom";
-import { useAuth } from "../../../../Contexts/AuthContext";
+import {useNavigate, Link} from "react-router-dom";
+import {useAuth} from "../../../../Contexts/AuthContext";
 import Dropdown from "./Dropdown";
+// import {useMyNearWallet} from "../../../../Contexts/MyNearWalletContext";
 import Avatar from "@mui/material/Avatar";
+import MyNearButton from "./MyNearButton";
 
-const ContactLoginItems = ({ script }) => {
-  const { isLoggedIn, avatar } = useAuth();
+const ContactLoginItems = ({script, isSignedIn, wallet}) => {
+  const {isLoggedIn, avatar} = useAuth();
+
   const navigate = useNavigate();
+
   return (
     <div
       style={{
@@ -14,47 +18,43 @@ const ContactLoginItems = ({ script }) => {
         display: "flex",
         gap: "var(--padding-light)",
         alignItems: "center",
-        justifyContent: "flex-end",
-      }}
-    >
-      <div className="secondarybutton homeButtonProp">
+        justifyContent: "flex-end"
+      }}>
+      <div className='secondarybutton homeButtonProp'>
         <button
           onClick={() => navigate("/contact")}
           style={{
             background: "white",
             color: "var(--green-100)",
-            width: "var(--project-button-small)",
-          }}
-        >
+            width: "var(--project-button-small)"
+          }}>
           Contact
         </button>
       </div>
       {!isLoggedIn ? (
-        <div className="secondarybutton homeButtonProp">
+        <div className='secondarybutton homeButtonProp'>
           <button
             onClick={() => navigate("/login")}
             style={{
               background: "var(--green-50)",
               color: "var(--green-100)",
-              width: "var(--project-button-small)",
-            }}
-          >
+              width: "var(--project-button-small)"
+            }}>
             Login
           </button>
         </div>
       ) : (
         <div
-          style={{ position: "relative" }}
+          style={{position: "relative"}}
           onMouseOver={script.handleMouseEnterProfile}
-          onMouseOut={script.handleMouseLeaveProfile}
-        >
+          onMouseOut={script.handleMouseLeaveProfile}>
           {avatar && avatar.picture ? (
             <Avatar
               src={avatar.picture}
               sx={{
                 color: "var(--green-30)",
                 fontSize: "2.5rem",
-                cursor: "pointer",
+                cursor: "pointer"
               }}
             />
           ) : (
@@ -62,7 +62,7 @@ const ContactLoginItems = ({ script }) => {
               sx={{
                 color: "var(--green-30)",
                 fontSize: "2.5rem",
-                cursor: "pointer",
+                cursor: "pointer"
               }}
               onClick={() => navigate("/profile")}
             />
@@ -77,6 +77,10 @@ const ContactLoginItems = ({ script }) => {
           )}
         </div>
       )}
+      <MyNearButton
+        isSignedIn={isSignedIn}
+        wallet={wallet}
+      />
     </div>
   );
 };

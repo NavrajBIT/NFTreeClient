@@ -1,37 +1,38 @@
-import { AppBar, CssBaseline, Box, Toolbar } from "@mui/material";
+import {AppBar, CssBaseline, Box, Toolbar} from "@mui/material";
 import SideDrawer from "./drawer";
 import usenavbar from "./usenavbar";
 import NavLinks from "./navlinks";
 
-const NavContent = () => {
+const NavContent = ({isSignedIn, wallet}) => {
   const script = usenavbar();
 
   return (
     <Box
       sx={{
-        display: "flex",
-      }}
-    >
+        display: "flex"
+      }}>
       <CssBaseline />
       <AppBar
-        component="nav"
+        component='nav'
         sx={{
           zIndex: 10,
           boxShadow: script.scroll ? "4" : "none",
           // background: script.scroll ? "var(--green-100)" : "transparent",
           background: "#1b4242e6",
           position: "fixed",
-          top: 0,
-        }}
-      >
+          top: 0
+        }}>
         <Toolbar
           sx={{
             width: "100%",
             maxWidth: "var(--max-width)",
-            margin: "auto",
-          }}
-        >
-          <NavLinks script={script} />
+            margin: "auto"
+          }}>
+          <NavLinks
+            script={script}
+            isSignedIn={isSignedIn}
+            wallet={wallet}
+          />
         </Toolbar>
       </AppBar>
       <SideDrawer script={script} />

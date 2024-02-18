@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, {useState, useEffect, useContext} from "react";
 
 const AuthContext = React.createContext();
 import useAPI from "../api/useAPI";
@@ -11,6 +11,7 @@ export function AuthProvider(props) {
   const api = useAPI();
   const [avatar, setAvatar] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [nearAccountId, setNearAccountId] = useState(null);
 
   useEffect(() => {
     const sessionToken = sessionStorage.getItem("token");
@@ -30,19 +31,19 @@ export function AuthProvider(props) {
   const poppulateProfilePic = () => {
     api
       .crud("GET", "user/avatar")
-      .then((res) => {
+      .then(res => {
         if (res.status === 200) setAvatar(res[0]);
       })
-      .catch((err) => console.log(err));
+      .catch(err => console.log(err));
   };
 
   const value = {
     avatar,
     isLoggedIn,
     setIsLoggedIn,
+    setNearAccountId,
+    nearAccountId
   };
 
-  return (
-    <AuthContext.Provider value={value}>{props.children}</AuthContext.Provider>
-  );
+  return <AuthContext.Provider value={value}>{props.children}</AuthContext.Provider>;
 }
