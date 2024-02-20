@@ -3,7 +3,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import FilterAltIcon from "@mui/icons-material/FilterAlt";
 import { useState, useEffect } from "react";
 
-const SearchBar = ({ setFilterData, data }) => {
+const SearchBar = ({ setFilterData, setsearchData }) => {
   const filterOptions = [
     {
       label: "Monitoring",

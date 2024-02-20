@@ -441,7 +441,7 @@ const Project = ({ submit }) => {
         <div style={{ color: "var(--error)" }}>{error}</div>
         <div style={{ display: "flex", gap: "var(--padding-large)" }}>
           <button
-            onClick={""}
+            onClick={handleSubmit}
             style={{
               padding: "var(--padding-light)",
 

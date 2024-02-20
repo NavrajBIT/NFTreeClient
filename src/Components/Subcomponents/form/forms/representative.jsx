@@ -41,7 +41,6 @@ const Representative = ({ submit }) => {
     await api
       .crud("GET", "user/account")
       .then((res) => {
-        console.log(res);
         if (res.status === 200) setUserdata(res[0]);
       })
       .catch((err) => {
@@ -173,39 +172,41 @@ const Representative = ({ submit }) => {
 
   return (
     <>
+      <div
+        style={{
+          fontSize: "1.5rem",
+          fontWeight: "bold",
+          color: "var(--green-80)",
+          width: "86%",
+          margin: "auto",
+        }}
+      >
+        Representative Details
+        <p
+          style={{
+            border: "1px solid #E6E6E6",
+            margin: "var(--padding-light) 0 0",
+          }}
+        />
+      </div>
       <form
         style={{
           display: "flex",
           minHeight: "var(--min-height-form)",
           width: "90%",
           margin: "auto",
+          flexWrap: "wrap-reverse",
         }}
       >
         <div
           style={{
-            width: "60%",
+            flex: "60%",
             padding: "0 var(--padding-main)",
             display: "flex",
             flexDirection: "column",
             gap: "20px",
           }}
         >
-          <div
-            style={{
-              fontSize: "1.5rem",
-              fontWeight: "bold",
-              color: "var(--green-80)",
-            }}
-          >
-            Representative Details
-            <p
-              style={{
-                border: "1px solid #E6E6E6",
-                margin: "var(--padding-light) 0 0",
-              }}
-            />
-          </div>
-
           <ProjectFormInput
             label="Designation"
             type="text"
@@ -231,7 +232,7 @@ const Representative = ({ submit }) => {
             maxLength="50"
           />
 
-          <div style={{ display: "flex", gap: "50px" }}>
+          <div style={{ display: "flex", gap: "var(--padding-large)" }}>
             <ProjectFormInput
               label="NIN Proof"
               type="file"
@@ -249,6 +250,7 @@ const Representative = ({ submit }) => {
               maxLength="50"
             />
           </div>
+          <div style={{ color: "red", height: "30px" }}>{error}</div>
           <button
             style={{
               padding: "var(--padding-light)",
@@ -257,6 +259,8 @@ const Representative = ({ submit }) => {
               borderRadius: "5px",
               marginTop: "var(--padding-large)",
               marginBottom: "100px",
+              color: "white",
+              borderColor: "transparent",
             }}
             onClick={submitForm}
           >
@@ -265,7 +269,7 @@ const Representative = ({ submit }) => {
         </div>
         <div
           style={{
-            width: "40%",
+            flex: "40%",
             display: "flex",
             flexDirection: "column",
             alignItems: "center",

@@ -57,7 +57,7 @@ const Myform = ({
           flexDirection: "column",
           gap: "var(--padding-light)",
           borderRadius: "var(--border-radius-light)",
-          padding: "0 60px",
+          padding: "0 var(--padding-large)",
         }}
       >
         <div

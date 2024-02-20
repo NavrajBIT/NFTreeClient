@@ -3,18 +3,21 @@ import { useNavigate } from "react-router-dom";
 import useAPI from "../../../api/useAPI";
 import SearchBar from "./SearchBar";
 import ProjectCard from "../../Subcomponents/projectCard/projectCard";
+import Sidebar from "./subComponent/sidebar";
+import Main from "./subComponent/main";
+import "./main.css";
 
 export default function ProjectPage() {
-  const api = useAPI();
-  const [data, setData] = useState([]);
   const [filterData, setFilterData] = useState([]);
+  const api = useAPI();
+
+  const [data, setData] = useState([]);
 
   useEffect(() => {
     const projectListData = async () => {
       await api
         .crud("GET", "project/projectlist")
         .then((response) => {
-          console.log(response);
           if (response.status === 200) {
             setData(response);
             setFilterData(() =>
@@ -32,55 +35,39 @@ export default function ProjectPage() {
     projectListData();
   }, []);
 
+  // const sortData = () => {
+  //   const sortedData = [...filterData];
+  //   sortedData.sort((a, b) => console.log(a, b));
+  // };
+
+  // sortData();
+
   return (
     <div
       style={{
         minHeight: "var(--min-height-page)",
-        maxWidth: "var(--max-width)",
-        margin: "auto",
-        marginTop: "var(--nav-height)",
-        padding: "var(--padding-main)",
+        marginTop: "var(--nav-height-small)",
         display: "flex",
-        flexDirection: "column",
-        gap: "var(--padding-main)",
       }}
     >
-      <CreateProjectButton />
-      <SearchBar setFilterData={setFilterData} data={data} />
-
       <div
         style={{
-          display: "grid",
-          gap: "var(--padding-main)",
-          gridTemplateColumns:
-            "repeat(auto-fit, minmax(var(--project-card-width), 1fr) )",
-          justifyItems: "center",
+          width: "15%",
+          minWidth: "280px",
+          background: "#335D51",
+          color: "white",
         }}
+        className="projectSidebar"
       >
-        {filterData.map((project, index) => (
-          <ProjectCard key={"project-" + index} project={project} />
-        ))}
+        <Sidebar
+          filterData={filterData}
+          data={data}
+          setFilterData={setFilterData}
+        />
+      </div>
+      <div style={{ width: "100%" }}>
+        <Main filterData={filterData} data={data} />
       </div>
     </div>
   );
 }
-
-const CreateProjectButton = () => {
-  const navigate = useNavigate();
-  return (
-    <div
-      style={{
-        width: "100%",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "flex-end",
-      }}
-    >
-      <div className="primarybutton" style={{ width: "fit-content" }}>
-        <button onClick={() => navigate("/projects/create")}>
-          Create New Project +
-        </button>
-      </div>
-    </div>
-  );
-};

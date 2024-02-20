@@ -4,7 +4,7 @@ import Input from "../inputnew";
 import Auth from "../../../Auth/Auth";
 import Loading from "../../loading/loading";
 
-const ProjectData = ({ submit, projectId }) => {
+const ProjectData = ({ submit, projectId, backStep }) => {
   const [species, setSpecies] = useState([{ plant: "", percentage: "" }]);
   const [docs, setdocs] = useState([{ file: null }]);
   const api = useAPI();
@@ -149,14 +149,11 @@ const ProjectData = ({ submit, projectId }) => {
               {index != 0 && (
                 <button
                   onClick={() => {
-                    setSpecies((prev) => {
-                      let newvalues = [...prev];
-                      if (newvalues.length === 1) {
-                        return newvalues;
-                      }
-                      newvalues.pop();
-                      return newvalues;
-                    });
+                    setSpecies(
+                      species.filter((item, itemIndex) => {
+                        return itemIndex != index;
+                      })
+                    );
                   }}
                   style={{
                     width: "var(--project-button-small)",
@@ -264,14 +261,11 @@ const ProjectData = ({ submit, projectId }) => {
                 {index != 0 && (
                   <button
                     onClick={() => {
-                      setdocs((prev) => {
-                        let newvalues = [...prev];
-                        if (newvalues.length === 1) {
-                          return newvalues;
-                        }
-                        newvalues.pop();
-                        return newvalues;
-                      });
+                      setdocs(
+                        docs.filter((item, itemIndex) => {
+                          return itemIndex != index;
+                        })
+                      );
                     }}
                     style={{
                       width: "var(--project-button-small)",
@@ -322,7 +316,7 @@ const ProjectData = ({ submit, projectId }) => {
         </div>
         <div style={{ display: "flex", gap: "var(--padding-large)" }}>
           <button
-            onClick={""}
+            onClick={backStep}
             style={{
               padding: "var(--padding-light)",
 
@@ -339,7 +333,6 @@ const ProjectData = ({ submit, projectId }) => {
 
           <button
             type="submit"
-            onClick={"handleFormSubmit"}
             style={{
               padding: "var(--padding-light)",
               background: "#354A12",

@@ -15,7 +15,7 @@ import "./CreateProject.css";
 function CreateProject() {
   const navigate = useNavigate();
   const [projectId, setProjectId] = useState(null);
-  const [step, setStep] = useState(1);
+  const [step, setStep] = useState(4);
 
   const stepperData = [
     "Representative Details",
@@ -57,7 +57,7 @@ function CreateProject() {
           <Organization
             submit={() => setStep(3)}
             backStep={() => {
-              setStep(2);
+              setStep(1);
             }}
           />
         )}
@@ -67,12 +67,18 @@ function CreateProject() {
               setProjectId(e);
               setStep(4);
             }}
+            backStep={() => {
+              setStep(2);
+            }}
           />
         )}
         {step === 4 && (
           <ProjectData
             submit={() => {
               navigate(`/myprojects/${projectId}`);
+            }}
+            backStep={() => {
+              setStep(3);
             }}
             projectId={projectId}
           />
