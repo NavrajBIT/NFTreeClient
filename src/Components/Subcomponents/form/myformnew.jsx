@@ -145,7 +145,7 @@ const Myform = ({
             </div>
           )}
           <div style={{ display: "flex", gap: "var(--padding-large)" }}>
-            {back != "undefined" && (
+            {back != undefined && (
               <button
                 onClick={back}
                 style={{

@@ -6,27 +6,42 @@ import ShareIcon from "@mui/icons-material/Share";
 import ProjectCard from "../../Subcomponents/projectCard/projectCard";
 
 const Nfts = ({ script }) => {
+  const navigate = useNavigate();
   return (
-    <div className="primarycontainer" style={{ flexDirection: "column" }}>
+    <div
+      className="primarycontainer"
+      style={{ flexDirection: "column", margin: "var(--padding-large) 0" }}
+    >
       <div
         style={{
           fontSize: "2rem",
           fontWeight: "700",
           color: "var(--green-30)",
+          padding: "var(--padding-main) 0",
+          justifyContent: "flex-start",
+          display: "flex",
         }}
       >
-        My NFTs
+        <p
+          style={{ cursor: "pointer" }}
+          onClick={() => {
+            navigate("mynft");
+          }}
+        >
+          {" "}
+          My NFTs
+        </p>
       </div>
 
-      {!script.nftData && <div>No NFTs Available...</div>}
+      {script.nftData == "" && <div>No NFTs Available...</div>}
       {script.nftData && (
         <div
           style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-around",
-            gap: "var(--padding-main)",
-            flexWrap: "wrap",
+            display: "grid",
+            gridTemplateColumns:
+              "repeat(auto-fill, minmax(var(--project-card-width), 1fr) )",
+            gap: "30px",
+            justifyItems: "center",
           }}
         >
           {script?.nftData?.map((nft, index) => (
@@ -74,9 +89,12 @@ const NFTDataFunction = ({ nft }) => {
   if (!project) return null;
   return (
     <div>
-      <ProjectCard project={project} Nftproject={true} nftId={nft.id} />
-      <div>Contribution: {transaction?.amount} $</div>
-      <div>Trees: {transaction?.trees_count}</div>
+      <ProjectCard
+        project={project}
+        Nftproject={true}
+        nftId={nft.id}
+        treecount={transaction?.trees_count}
+      />
     </div>
   );
 };

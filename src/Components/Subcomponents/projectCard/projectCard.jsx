@@ -1,7 +1,14 @@
 import { useNavigate } from "react-router-dom";
 import "./projectcard.css";
 
-const ProjectCard = ({ project, isMyProject, Nftproject, nftId }) => {
+const ProjectCard = ({
+  project,
+  isMyProject,
+  Nftproject,
+  nftId,
+  contribution,
+  treecount,
+}) => {
   const navigate = useNavigate();
 
   const filterOptions = [
@@ -35,16 +42,22 @@ const ProjectCard = ({ project, isMyProject, Nftproject, nftId }) => {
         <span className="locationName">{project.country}</span>
       </div>
       <div className="projectdescription">
-        {project.description.length > 50 ? (
+        {project.description.length > 140 ? (
           <>
-            {project.description.substring(0, 140)}
-            <span style={{ fontWeight: "600" }}>...Read More</span>
+            {project.description.substring(0, 140)}...
+            <p style={{ fontWeight: "600" }}>Read More</p>
           </>
         ) : (
           project.description
         )}
       </div>
-      <div className="projectType">{filterOptions[project.type - 1].label}</div>
+      <div className="trxInfo">
+        {contribution && <div>Contribution: {contribution}$</div>}
+        {treecount && <div>Trees: {treecount}</div>}
+        {!contribution && !treecount && (
+          <div>{filterOptions[project.type - 1].label}</div>
+        )}
+      </div>
     </div>
   );
 };

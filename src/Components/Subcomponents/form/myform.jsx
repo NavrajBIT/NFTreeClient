@@ -158,7 +158,15 @@ const Myform = ({
             </div>
           )}
           <div className="primarybutton">
-            <button type="submit" onClick={handleFormSubmit}>
+            <button
+              type="submit"
+              onClick={handleFormSubmit}
+              style={{
+                background: "var(--green-110)",
+                padding: "var(--padding-light) var(--padding-large)",
+                borderRadius: "10px",
+              }}
+            >
               {formButton}
             </button>
           </div>

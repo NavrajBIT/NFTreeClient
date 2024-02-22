@@ -77,11 +77,11 @@ const Main = ({ filterData, data }) => {
       <div
         style={{
           display: "grid",
-          gap: "var(--padding-main)",
+          gap: "var(--padding-large)",
           gridTemplateColumns:
-            "repeat(auto-fit, minmax(var(--project-card-width), 1fr) )",
+            "repeat(auto-fill, minmax(var(--project-card-width), 1fr) )",
+
           justifyItems: "center",
-          rowGap: "var(--padding-large)",
         }}
       >
         {searchData.map((project, index) => (

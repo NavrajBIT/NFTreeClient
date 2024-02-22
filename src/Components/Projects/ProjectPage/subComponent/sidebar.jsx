@@ -71,7 +71,7 @@ const Sidebar = ({ filterData, data, setFilterData }) => {
           return (
             <div style={{ display: "flex", padding: "10px" }}>
               <input type="checkbox" value={type.value} name="projectType" />
-              <p>{type.label}</p>
+              <p style={{ paddingLeft: "5px" }}>{type.label}</p>
             </div>
           );
         })}
@@ -83,7 +83,7 @@ const Sidebar = ({ filterData, data, setFilterData }) => {
           return (
             <div style={{ display: "flex", padding: "10px" }}>
               <input type="checkbox" value={type.label} name="invType" />
-              <p>{type.label}</p>
+              <p style={{ paddingLeft: "5px" }}>{type.label}</p>
             </div>
           );
         })}
@@ -97,7 +97,7 @@ const Sidebar = ({ filterData, data, setFilterData }) => {
           return (
             <div style={{ display: "flex", padding: "10px" }}>
               <input type="checkbox" value={type} name="country" />
-              <p>{type}</p>
+              <p style={{ paddingLeft: "5px" }}>{type}</p>
             </div>
           );
         })}
@@ -109,7 +109,7 @@ const Sidebar = ({ filterData, data, setFilterData }) => {
           return (
             <div style={{ display: "flex", padding: "10px" }}>
               <input type="checkbox" value={type} name="city" />
-              <p>{type}</p>
+              <p style={{ paddingLeft: "5px" }}>{type}</p>
             </div>
           );
         })}

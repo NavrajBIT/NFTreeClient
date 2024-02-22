@@ -15,7 +15,7 @@ import "./CreateProject.css";
 function CreateProject() {
   const navigate = useNavigate();
   const [projectId, setProjectId] = useState(null);
-  const [step, setStep] = useState(4);
+  const [step, setStep] = useState(1);
 
   const stepperData = [
     "Representative Details",

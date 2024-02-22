@@ -4,17 +4,19 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import FileOpenIcon from "@mui/icons-material/FileOpen";
 import useAPI from "../../../api/useAPI";
-const PrimaryDetails = ({ script }) => {
+import coverPic from "../subcomponents/image/profile_cover.png";
+
+const BasicDetails = ({ script }) => {
   return (
-    <div className="primarycontainer">
-      <ProfilePic script={script} />
+    <div style={{ marginTop: "var(--nav-height-small)", marginBottom: "-3px" }}>
+      <CoverPicComponent />
       <Details script={script} />
-      <EditButton script={script} />
+      {/* <EditButton script={script} /> */}
     </div>
   );
 };
 
-export default PrimaryDetails;
+export default BasicDetails;
 
 const EditButton = ({ script }) => {
   return (
@@ -33,41 +35,41 @@ const EditButton = ({ script }) => {
   );
 };
 
-const ProfilePic = ({ script }) => {
-  const [isHovered, setisHovered] = useState(false);
-  const inputref = useRef(null);
-  const src = script?.account?.picture
-    ? script?.account?.picture
-    : "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png";
-  return (
-    <div
-      style={{
-        height: "var(--profile-pic-diameter)",
-        width: "var(--profile-pic-diameter)",
-        background: "var(--green-30)",
-        borderRadius: "var(--profile-pic-diameter)",
-        backgroundImage: `url("${src}")`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-      }}
-      onMouseEnter={() => setisHovered(true)}
-      onMouseLeave={() => setisHovered(false)}
-      onClick={() => inputref.current.click()}
-    >
-      {isHovered && (
-        <div className="profilepicedit">
-          <div>Click to edit</div>
-        </div>
-      )}
-      <input
-        type="file"
-        ref={inputref}
-        onChange={(e) => script.uploadProfilepic(e.target.files[0])}
-        style={{ display: "none" }}
-      />
-    </div>
-  );
-};
+// const ProfilePic = ({ script }) => {
+//   const [isHovered, setisHovered] = useState(false);
+//   const inputref = useRef(null);
+//   const src = script?.account?.picture
+//     ? script?.account?.picture
+//     : "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png";
+//   return (
+//     <div
+//       style={{
+//         height: "var(--profile-pic-diameter)",
+//         width: "var(--profile-pic-diameter)",
+//         background: "var(--green-30)",
+//         borderRadius: "var(--profile-pic-diameter)",
+//         backgroundImage: `url("${src}")`,
+//         backgroundSize: "cover",
+//         backgroundPosition: "center",
+//       }}
+//       onMouseEnter={() => setisHovered(true)}
+//       onMouseLeave={() => setisHovered(false)}
+//       onClick={() => inputref.current.click()}
+//     >
+//       {isHovered && (
+//         <div className="profilepicedit">
+//           <div>Click to edit</div>
+//         </div>
+//       )}
+//       <input
+//         type="file"
+//         ref={inputref}
+//         onChange={(e) => script.uploadProfilepic(e.target.files[0])}
+//         style={{ display: "none" }}
+//       />
+//     </div>
+//   );
+// };
 
 // phone = models.CharField(max_length=15, blank=True, null=True)
 // wallet = models.CharField(max_length=100, blank=True, null=True)
@@ -77,7 +79,26 @@ const ProfilePic = ({ script }) => {
 // picture = models.ImageField(upload_to=fileupload, blank=True, null=True)
 // nin_proof
 
+const CoverPicComponent = () => {
+  return (
+    <div>
+      <img
+        src={coverPic}
+        alt=""
+        style={{
+          width: "100vw",
+          minHeight: "200px",
+          maxHeight: "var(--home-card-image)",
+        }}
+      />
+    </div>
+  );
+};
+
 const Details = ({ script }) => {
+  const src = script?.account?.picture
+    ? script?.account?.picture
+    : "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png";
   const navigate = useNavigate();
   const api = useAPI();
   const connectWallet = () => {
@@ -107,8 +128,35 @@ const Details = ({ script }) => {
     }
   };
   return (
-    <div>
-      <div
+    <div
+      style={{
+        position: "absolute",
+        left: "50%",
+        transform: "translate(-50%,-34%)",
+        textAlign: "center",
+      }}
+    >
+      <div className="profileDetails">
+        <img
+          src={src}
+          alt=""
+          style={{
+            width: "var(--profile-pic-diameter)",
+            height: "var(--profile-pic-diameter)",
+            border: "1px solid",
+            borderRadius: "50%",
+          }}
+        />
+      </div>
+      <div style={{ fontSize: "x-large", fontWeight: "500" }}>
+        {!script?.user?.first_name && "Anonymous"}
+        {script?.user?.first_name} {script?.user?.last_name}
+      </div>
+      <div style={{ fontSize: "larger", fontWeight: "500" }}>
+        {script?.account?.designation}
+      </div>
+      <div>{script?.user?.email}</div>
+      {/* <div
         style={{
           fontSize: "2rem",
           fontWeight: "700",
@@ -145,7 +193,7 @@ const Details = ({ script }) => {
             <button onClick={connectWallet}>Connect Wallet</button>
           </div>
         )}
-      </div>
+      </div> */}
     </div>
   );
 };

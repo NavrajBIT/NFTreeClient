@@ -1,7 +1,7 @@
 .projectCard {
   padding: var(--padding-light);
   border-radius: var(--border-radius-light);
-  width: var(--project-card-width);
+  /* width: var(--project-card-width); */
   border: 1px solid transparent;
   background: #e5e5e5;
   box-shadow: 4px 4px 8px 2px #aca3a3;
@@ -15,8 +15,8 @@
 }
 .projectCard:hover {
   box-shadow: 0px 0px 10px 2px black;
-  border: 2px solid var(--green-30);
 }
+
 .projectCard .projectname {
   font-size: 2rem;
   font-weight: 600;
@@ -25,17 +25,17 @@
   color: var(--green-110);
 }
 
-.projectCard .projectLocation {
+.projectLocation {
   color: var(--green-90);
   font-weight: 600;
   padding: 10px 0;
 }
 .projectCard .projectdescription {
-  height: 100px;
+  height: 120px;
   overflow: hidden;
   padding-bottom: 10px;
 }
-.projectCard .projectType {
+.trxInfo {
   padding: 10px 0;
   font-weight: 600;
   color: var(--green-90);

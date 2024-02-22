@@ -52,6 +52,7 @@ export default function Navbar() {
 
         {/* <Route path="/forget-password" element={<ForgetPassword />} /> */}
         <Route path="/profile" element={<Profile />} />
+        <Route path="/profile/mynft" element={<Profile myNft={true} />} />
         <Route path="/kyc" element={<KYCPage />} />
         <Route path="/wallet" element={<BitWallet />} />
         <Route path="/nft/:nftid" element={<Nft />} />

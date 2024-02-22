@@ -5,6 +5,7 @@ html {
 
 :root {
   --green-80: #40561a;
+  --green-85: #1e5310;
   --green-90: #174f4f;
   --green-100: #3d462c;
   --green-110: #203300;
@@ -71,7 +72,8 @@ html {
   --border-radius-extra-light: 6px;
   --border-radius-big: 100px;
   --profile-pic-diameter: 200px;
-  --project-card-width: 300px;
+  --profile-pic-small: 140px;
+  --project-card-width: 280px;
   --project-card-height: 420px;
   --home-card-image: 350px;
 
