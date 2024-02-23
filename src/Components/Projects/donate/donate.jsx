@@ -92,7 +92,7 @@ const Donate = () => {
         onChange: (e) => setTrees(e.target.value),
       },
       {
-        type: "text",
+        type: "number",
         label: "Total amount in selected token",
         value: wallet.walletAddress,
         onChange: (e) => setTrees(e.target.value),
@@ -114,6 +114,8 @@ const Donate = () => {
       },
     ],
   ];
+
+  console.log(project);
 
   return (
     <div
@@ -171,14 +173,20 @@ const Donate = () => {
           <Input
             inputData={{
               label: "Invest In",
-              type: "select",
+              type: "text",
               required: true,
-              value: {},
-              options: [],
-              select: true,
-              onChange: (e) => {
-                changeValue("type", e.target.value);
-              },
+              value: project.name,
+              maxLength: 50,
+            }}
+          />
+
+          <Input
+            inputData={{
+              label: "Enter number of trees",
+              type: "number",
+              required: true,
+              value: trees,
+              onChange: (e) => setTrees(e.target.value),
               maxLength: 50,
             }}
           />
@@ -198,61 +206,61 @@ const Donate = () => {
           />
           <Input
             inputData={{
-              label: "Enter number of trees",
-              type: "text",
-              required: true,
-              value: project["name"],
-              onChange: (e) => changeValue("name", e.target.value),
-              maxLength: 50,
-            }}
-          />
-          <Input
-            inputData={{
               label: "Total amount in selected token",
-              type: "text",
-              required: true,
+              type: "number",
+
               value: project["description"],
               onChange: (e) => changeValue("description", e.target.value),
               maxLength: 500,
             }}
           />
 
-          <Input
-            inputData={{
-              label: "Connected Wallet Address",
-              type: "text",
-              required: true,
-              value: project["coordinates"],
-              onChange: (e) => changeValue("coordinates", e.target.value),
-              maxLength: 500,
-            }}
-          />
-          <Input
-            inputData={{
-              label: "Connected Wallet Balance",
-              type: "text",
-              required: true,
-              value: project["address"],
-              onChange: (e) => changeValue("address", e.target.value),
-              maxLength: 500,
-            }}
-          />
+          {wallet.walletConnected && (
+            <div>
+              <Input
+                inputData={{
+                  label: "Connected Wallet Address",
+                  type: "text",
+                  value: wallet.walletAddress,
+                  maxLength: 500,
+                }}
+              />
+              <Input
+                inputData={{
+                  label: "Connected Wallet Balance",
+                  type: "text",
+                  value: wallet.walletAddress,
+                  maxLength: 500,
+                }}
+              />
+            </div>
+          )}
 
           {/* <div style={{ color: "var(--error)" }}>{error}</div> */}
-          <div style={{ display: "flex", gap: "var(--padding-large)" }}>
+          <div
+            style={{
+              display: "flex",
+              gap: "var(--padding-large)",
+              justifyContent: "center",
+            }}
+          >
             <button
               type="submit"
-              onClick={""}
+              onClick={() =>
+                wallet.walletConnected
+                  ? wallet.transact(totalValue)
+                  : wallet.connectWallet()
+              }
               style={{
                 padding: "var(--padding-light)",
                 background: "#354A12",
-                width: "var(--project-button-small)",
+                width: "var(--project-button)",
                 borderRadius: "5px",
                 marginTop: "var(--padding-large)",
                 marginBottom: "100px",
               }}
             >
-              Next
+              {wallet.walletConnected ? "Invest" : "Connect"}
             </button>
           </div>
         </form>
@@ -272,14 +280,14 @@ const Donate = () => {
             </p>
           </div>
         )}
-        {wallet.walletInstalled && !wallet.walletConnected && (
+        {/* {wallet.walletInstalled && !wallet.walletConnected && (
           <div style={{ padding: "var(--padding-main)", color: "red" }}>
             Please connect BitWallet to make the investment.
             <div className="primarybutton">
               <button onClick={() => wallet.connectWallet()}>Connect</button>
             </div>
           </div>
-        )}
+        )} */}
       </div>
     </div>
   );

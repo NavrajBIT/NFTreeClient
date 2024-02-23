@@ -23,7 +23,9 @@ const Main = ({ filterData, data }) => {
         style={{ textAlign: "center", color: "var(--green-110)" }}
         className="mainHeading"
       >
-        <h1>Welcome to BitBhoomi Sustainability Marketplace!!</h1>
+        <h1 style={{ fontSize: "clamp(2rem,10vw,3rem)" }}>
+          Welcome to BitBhoomi Sustainability Marketplace!!
+        </h1>
       </div>
 
       {/* search area */}
