@@ -17,6 +17,7 @@ import KYCPage from "../../kyc/kycPage";
 import BitWallet from "../../BitWallet/body";
 import Nft from "../../NFT/nft";
 import Forgotpassword from "../../ForgotPassword/forgotpassword";
+import ProjectReport from "../ProjectReport/ProjectReport";
 
 export default function Navbar() {
   return (
@@ -34,10 +35,7 @@ export default function Navbar() {
           path="/projects/:projectId"
           element={<Projectdetails notMyProject={true} />}
         />
-        <Route
-          path="/projects/:projectId/report"
-          element={<Generatereport />}
-        />
+        <Route path="/projects/:projectId/report" element={<ProjectReport />} />
         <Route path="/projects/:projectId/donate" element={<Donate />} />
 
         <Route path="/myprojects/:projectId" element={<Projectdetails />} />

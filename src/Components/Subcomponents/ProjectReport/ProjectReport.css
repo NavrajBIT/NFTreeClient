@@ -1,0 +1,92 @@
+.reports {
+  /* margin: 2rem; */
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(600px, 1fr));
+  width: 100%;
+}
+
+.GridBox {
+  border-radius: 40px;
+  background: linear-gradient(253.85deg, #d6ffc9 1.63%, #ffffff 99.06%);
+  padding: 2rem;
+}
+
+.gridBoxHeading {
+  height: 15%;
+  color: var(--green-80);
+}
+
+.gridBoxContent {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  height: 85%;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+
+table,
+th,
+td {
+  border: 1px solid var(--green-85);
+  border-collapse: collapse;
+}
+
+th,
+td {
+  text-align: center;
+  height: 35px;
+  padding: 0 20px;
+}
+
+td img {
+  height: 20px;
+}
+
+th {
+  background-color: #50623a;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  border-color: var(--green-85);
+}
+
+tbody tr:nth-child(1) {
+  background-color: #95b984;
+}
+
+tbody tr:nth-child(2) {
+  background-color: #aed39c;
+}
+
+tbody tr:nth-child(3) {
+  background-color: #bce0aa;
+}
+
+tbody tr:nth-child(4) {
+  background-color: #c7ebb6;
+}
+
+tbody tr:nth-child(5) {
+  background-color: #d0edc2;
+}
+
+tbody tr:nth-child(6) {
+  background-color: #ddf1d3;
+}
+
+@media screen and (max-width: 1000px) {
+  .gridContainer {
+    grid-template-columns: unset !important;
+    grid-auto-rows: unset !important;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  th,
+  td {
+    text-align: center;
+    height: 35px;
+    padding: 0 0px;
+  }
+}

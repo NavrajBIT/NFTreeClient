@@ -7,7 +7,7 @@ import Contact from "../Contact_us/Contact";
 import HowItWorks from "./howitworks/howItWorks";
 import WhatisNFTree from "./WhatisNFTree/WhatisNFTree";
 
-import $ from "jquery";
+// import $ from "jquery";
 
 // $(window).on("scroll", () => {
 //   if ($(window).scrollTop() == 0) {

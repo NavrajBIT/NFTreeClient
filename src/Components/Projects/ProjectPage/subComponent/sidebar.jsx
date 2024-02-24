@@ -1,16 +1,16 @@
 import React, { useState } from "react";
 import filter from "./image/filter.png";
-import $ from "jquery";
+// import $ from "jquery";
 
 const Sidebar = ({ filterData, data, setFilterData }) => {
-  var filterCheckbox = $('input[type="checkbox"]');
+  // var filterCheckbox = $('input[type="checkbox"]');
 
-  var filterFunc = () => {
-    var selectedFilters = {};
-    filterCheckbox.filter(":checked").each(() => {
-      selectedFilters[this.name].push(this.value);
-    });
-  };
+  // var filterFunc = () => {
+  //   var selectedFilters = {};
+  //   filterCheckbox.filter(":checked").each(() => {
+  //     selectedFilters[this.name].push(this.value);
+  //   });
+  // };
 
   const projectType = [
     {
