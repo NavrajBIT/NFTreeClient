@@ -3,7 +3,7 @@ import SideDrawer from "./drawer";
 import usenavbar from "./usenavbar";
 import NavLinks from "./navlinks";
 
-const NavContent = ({isSignedIn, wallet}) => {
+const NavContent = () => {
   const script = usenavbar();
 
   return (
@@ -28,11 +28,7 @@ const NavContent = ({isSignedIn, wallet}) => {
             maxWidth: "var(--max-width)",
             margin: "auto"
           }}>
-          <NavLinks
-            script={script}
-            isSignedIn={isSignedIn}
-            wallet={wallet}
-          />
+          <NavLinks script={script} />
         </Toolbar>
       </AppBar>
       <SideDrawer script={script} />

@@ -11,7 +11,7 @@ export function AuthProvider(props) {
   const api = useAPI();
   const [avatar, setAvatar] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [nearAccountId, setNearAccountId] = useState(null);
+  const [walletAddress, setWalletAddress] = useState(null);
 
   useEffect(() => {
     const sessionToken = sessionStorage.getItem("token");
@@ -41,8 +41,8 @@ export function AuthProvider(props) {
     avatar,
     isLoggedIn,
     setIsLoggedIn,
-    setNearAccountId,
-    nearAccountId
+    walletAddress,
+    setWalletAddress
   };
 
   return <AuthContext.Provider value={value}>{props.children}</AuthContext.Provider>;

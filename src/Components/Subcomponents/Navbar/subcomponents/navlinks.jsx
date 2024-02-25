@@ -4,7 +4,7 @@ import logo1 from "/logo_white.png";
 import ContactLoginItems from "./login";
 import MenuIcon from "@mui/icons-material/Menu";
 
-const NavLinks = ({script, isSignedIn, wallet}) => {
+const NavLinks = ({script}) => {
   const navigate = useNavigate();
   return (
     <Grid
@@ -81,11 +81,7 @@ const NavLinks = ({script, isSignedIn, wallet}) => {
           </Link>
         </Box>
       </Grid>
-      <ContactLoginItems
-        script={script}
-        isSignedIn={isSignedIn}
-        wallet={wallet}
-      />
+      <ContactLoginItems script={script} />
     </Grid>
   );
 };

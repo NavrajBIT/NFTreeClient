@@ -17,13 +17,10 @@ import KYCPage from "../../kyc/kycPage";
 import BitWallet from "../../BitWallet/body";
 import Nft from "../../NFT/nft";
 
-export default function Navbar({isSignedIn, wallet}) {
+export default function Navbar() {
   return (
     <>
-      <NavContent
-        isSignedIn={isSignedIn}
-        wallet={wallet}
-      />
+      <NavContent />
       <Routes>
         <Route
           index

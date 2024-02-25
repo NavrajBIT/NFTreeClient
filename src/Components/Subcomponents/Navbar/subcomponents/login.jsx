@@ -4,9 +4,9 @@ import {useAuth} from "../../../../Contexts/AuthContext";
 import Dropdown from "./Dropdown";
 // import {useMyNearWallet} from "../../../../Contexts/MyNearWalletContext";
 import Avatar from "@mui/material/Avatar";
-import MyNearButton from "./MyNearButton";
+import Wallets from "./Wallets";
 
-const ContactLoginItems = ({script, isSignedIn, wallet}) => {
+const ContactLoginItems = ({script}) => {
   const {isLoggedIn, avatar} = useAuth();
 
   const navigate = useNavigate();
@@ -77,10 +77,7 @@ const ContactLoginItems = ({script, isSignedIn, wallet}) => {
           )}
         </div>
       )}
-      <MyNearButton
-        isSignedIn={isSignedIn}
-        wallet={wallet}
-      />
+      <Wallets />
     </div>
   );
 };
