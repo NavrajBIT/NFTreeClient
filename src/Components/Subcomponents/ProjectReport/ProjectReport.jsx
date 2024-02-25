@@ -98,6 +98,7 @@ const ProjectReport = () => {
                   </tbody>
                 </table>
               </div>
+
               <div>
                 <BioChart />
               </div>
@@ -110,7 +111,9 @@ const ProjectReport = () => {
             </div>
 
             <div className="gridBoxContent">
-              <CarbonChart />
+              <div style={{ width: "100%" }}>
+                <CarbonChart />
+              </div>
             </div>
           </div>
 
@@ -120,7 +123,9 @@ const ProjectReport = () => {
             </div>
 
             <div className="gridBoxContent">
-              <CarbonChart />
+              <div style={{ width: "90%" }}>
+                <CarbonChart />
+              </div>
             </div>
           </div>
 

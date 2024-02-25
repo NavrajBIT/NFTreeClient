@@ -8,21 +8,29 @@
 .GridBox {
   border-radius: 40px;
   background: linear-gradient(253.85deg, #d6ffc9 1.63%, #ffffff 99.06%);
-  padding: 2rem;
+  padding: 2rem 1rem;
+  max-height: 700px;
+  width: 99.5%;
 }
 
 .gridBoxHeading {
-  height: 15%;
   color: var(--green-80);
+  padding-bottom: 20px;
 }
 
 .gridBoxContent {
   display: flex;
   align-items: center;
   justify-content: space-around;
-  height: 85%;
+  width: 100%;
   flex-wrap: wrap;
   gap: 30px;
+  height: 85%;
+  align-content: center;
+}
+
+.gridBoxContent div {
+  align-self: stretch;
 }
 
 table,

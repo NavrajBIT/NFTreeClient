@@ -131,15 +131,17 @@ const Input = ({ inputData, error }) => {
         />
       )}
 
-      <div
-        style={{
-          color: "var(--error)",
-          fontSize: "0.8rem",
-          height: "15px",
-        }}
-      >
-        {error ? "This field is required." : ""}
-      </div>
+      {inputData.errorField != "None" && (
+        <div
+          style={{
+            color: "var(--error)",
+            fontSize: "0.8rem",
+            height: "15px",
+          }}
+        >
+          {error ? "This field is required." : ""}
+        </div>
+      )}
     </div>
   );
 };

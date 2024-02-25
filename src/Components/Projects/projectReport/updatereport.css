@@ -1,0 +1,12 @@
+.reportField {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  padding: var(--padding-light);
+}
+
+@media screen and (max-width: 600px) {
+  .containerPadding {
+    padding: var(--padding-light) !important;
+  }
+}
