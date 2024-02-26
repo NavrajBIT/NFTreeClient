@@ -2,6 +2,8 @@
 import BioChart from "./BioChart";
 import CarbonChart from "./CarbonChart";
 import "./ProjectReport.css";
+import { HiMiniShare } from "react-icons/hi2";
+import { MdEdit } from "react-icons/md";
 
 const ProjectReport = () => {
   return (
@@ -14,7 +16,14 @@ const ProjectReport = () => {
       }}
     >
       <div style={{ width: "95%", margin: "auto" }}>
-        <div style={{ padding: "30px" }}>
+        <div
+          style={{
+            padding: "30px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+          }}
+        >
           <p
             style={{
               fontSize: "xxx-large",
@@ -24,6 +33,16 @@ const ProjectReport = () => {
           >
             Project report
           </p>
+          {true && (
+            <div className="reportButton">
+              <button>
+                <p>Edit</p> <MdEdit />
+              </button>
+              <button>
+                <p>Share</p> <HiMiniShare />
+              </button>
+            </div>
+          )}
         </div>
 
         <div

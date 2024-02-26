@@ -5,6 +5,23 @@
   width: 100%;
 }
 
+.reportButton {
+  display: flex;
+  align-items: center;
+}
+
+.reportButton button {
+  padding: 5px 10px;
+  border-radius: 20px;
+  width: 100px;
+  margin-left: 18px;
+  background-image: linear-gradient(to top, black, var(--green-100));
+  font-size: 20px;
+  display: inline-flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
 .GridBox {
   border-radius: 40px;
   background: linear-gradient(253.85deg, #d6ffc9 1.63%, #ffffff 99.06%);
@@ -96,5 +113,14 @@ tbody tr:nth-child(6) {
     text-align: center;
     height: 35px;
     padding: 0 0px;
+  }
+
+  .reportButton button {
+    background: transparent;
+    width: unset;
+  }
+
+  .reportButton button p {
+    display: none;
   }
 }
