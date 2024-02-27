@@ -17,6 +17,7 @@ import KYCPage from "../../kyc/kycPage";
 import BitWallet from "../../BitWallet/body";
 import Nft from "../../NFT/nft";
 import Forgotpassword from "../../ForgotPassword/forgotpassword";
+import UserView from "../../Projects/ProjectPage/UserView/userView";
 
 export default function Navbar() {
   return (
@@ -56,6 +57,8 @@ export default function Navbar() {
         <Route path="/wallet" element={<BitWallet />} />
         <Route path="/nft/:nftid" element={<Nft />} />
         <Route path="*" element={<ErrorPage />} />
+        <Route path="/userView" element={<UserView isOwnerView={false} />} />
+        <Route path="/ownerView" element={<UserView isOwnerView={true}  />} />
       </Routes>
     </>
   );
