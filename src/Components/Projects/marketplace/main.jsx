@@ -60,7 +60,7 @@ export default function ProjectPage() {
       <div
         style={{
           width: "100%",
-          height: "var(--nav-height)",
+          height: "var(--nav-height-small)",
           backgroundImage: "linear-gradient(170deg, #1B2F2F, #224629)",
         }}
       />

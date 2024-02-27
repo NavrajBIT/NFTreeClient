@@ -1,4 +1,4 @@
-import "./mission.css";
+import "./Mission.css";
 import img1 from "../assets/cardimg1.png";
 import img2 from "../assets/cardimg2.png";
 import img3 from "../assets/cardimg3.png";

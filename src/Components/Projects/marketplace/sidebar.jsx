@@ -119,7 +119,7 @@ const Sidebar = ({ filters, setFilters, data, isMobile }) => {
     <div
       className="sidebarcontainer"
       style={{
-        top: scroll ? "var(--nav-height-small)" : "var(--nav-height)",
+        top: "var(--nav-height-small)",
         ...mobileStyle,
       }}
     >
