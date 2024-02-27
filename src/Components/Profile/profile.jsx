@@ -9,6 +9,10 @@ import EditOrganizationPopup from "./subcomponents/popups/editOrganization";
 import Myprojects from "./subcomponents/myprojects";
 import Contributions from "./subcomponents/contributions";
 import Nfts from "./subcomponents/nfts";
+import ProfilePicture from "./subcomponents/profilePicture";
+import MyProject from "./subcomponents/myProject";
+import MyContribution from "./subcomponents/myContribution";
+import MyNFTs from "./subcomponents/myNFTS";
 const Profile = () => {
   const script = useprofile();
 
@@ -19,24 +23,25 @@ const Profile = () => {
     <div
       style={{
         width: "100%",
+        paddingTop: "0px",
         minHeight: "var(--min-height-page)",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        padding: "var(--nav-height) 0",
+        backgroundColor: "#D4E5DC",
       }}
     >
-      <PrimaryDetails script={script} />
-      <OrganizationDetails script={script} />
-      <Myprojects script={script} />
-      <Contributions script={script} />
-      <Nfts script={script} />
-
-      {script.isLoading && <LocalLoading />}
-      {script.editprofilePopup && <EditPrimaryDetails script={script} />}
-      {script.editorganizationPopup && (
-        <EditOrganizationPopup script={script} />
-      )}
+      <div
+        style={{
+          width: "100%",
+          height: "var(--nav-height)",
+          backgroundImage: "linear-gradient(170deg, #1B2F2F, #224629)",
+        }}
+      />
+      <ProfilePicture script={script} />
+      <MyProject script={script} />
+      <MyContribution script={script} />
+      <MyNFTs script={script} />
     </div>
   );
 };

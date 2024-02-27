@@ -13,12 +13,27 @@ const Nft = () => {
   const [project, setProject] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
+  const [rewardData, setRewardData] = useState([]);
 
   useEffect(() => {
     poppulateNft();
+    poppulateRewardData();
   }, []);
 
   if (!isLoggedIn) return <Auth close={() => setIsLoggedIn(true)} />;
+
+  const poppulateRewardData = async () => {
+    await api
+      .crud("GET", `project/rewardTnx`)
+      .then((res) => {
+        if (res.status === 200) {
+          setRewardData(res);
+        }
+      })
+      .catch((err) => {
+        if (err === 401) setIsLoggedIn(false);
+      });
+  };
 
   const poppulateNft = async () => {
     await api
@@ -85,12 +100,16 @@ const Nft = () => {
         minHeight: "var(--min-height-page)",
         alignItems: "center",
 
-        // justifyContent: "center",
-        marginTop: "var(--nav-height)",
-        padding: "var(--padding-main)",
         flexDirection: "column",
       }}
     >
+      <div
+        style={{
+          width: "100%",
+          height: "var(--nav-height)",
+          backgroundImage: "linear-gradient(170deg, #1B2F2F, #224629)",
+        }}
+      />
       <div
         style={{
           width: "100%",
@@ -101,6 +120,7 @@ const Nft = () => {
           justifyContent: "space-around",
         }}
       >
+        {project && <ProjectCard project={project} />}
         {nftData && (
           <NftCard
             nftData={nftData}
@@ -109,7 +129,37 @@ const Nft = () => {
             project={project}
           />
         )}
-        {project && <ProjectCard project={project} />}
+      </div>
+      <br />
+      <br />
+      <div style={{ width: "95%" }}>
+        <div
+          style={{
+            width: "100%",
+            maxWidth: "var(--max-width)",
+            gap: "var(--padding-main)",
+            justifyContent: "space-around",
+            margin: "auto",
+          }}
+        >
+          <h2>Reward History</h2>
+          <br />
+          <table style={{ width: "100%", background: "white" }}>
+            <tr style={{ background: "silver" }}>
+              <th style={{ width: "33%" }}>Serial No.</th>
+              <th style={{ width: "33%" }}>Date</th>
+              <th style={{ width: "33%" }}>Amount</th>
+            </tr>
+
+            {rewardData.map((trx) => (
+              <tr key={trx.id}>
+                <td>{trx.id}</td>
+                <td>{trx.date.split("T")[0]}</td>
+                <td>{trx.reward}</td>
+              </tr>
+            ))}
+          </table>
+        </div>
       </div>
     </div>
   );
@@ -123,50 +173,63 @@ const NftCard = ({ nftData, tx, withdraw, project }) => {
       style={{
         background: "white",
         width: "100%",
-        maxWidth: "var(--project-card-width)",
+        maxWidth: "50%",
         padding: "var(--padding-light)",
         borderRadius: "var(--border-radius)",
         display: "flex",
         justifyContent: "space-between",
         flexDirection: "column",
+        minWidth: "var(--project-card-width)",
       }}
     >
-      <div style={{ fontSize: "1.5rem", fontWeight: "700" }}>NFT Details</div>
-      <div>
-        <img src={project?.image} alt="NFT" style={{ width: "100%" }} />
+      <div style={{ fontSize: "1.5rem", fontWeight: "700", margin: "0 auto" }}>
+        NFT Details
       </div>
       <div>
-        <div style={{ display: "grid", gridTemplateColumns: "3fr 1fr 3fr" }}>
-          <div>Token Id</div>
-          <div>:</div>
-          <div>{nftData?.id}</div>
-          <div>Amount Paid</div>
+        <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr 3fr" }}>
+          <div
+            style={{ fontWeight: "bold", marginBottom: "var(--padding-light)" }}
+          >
+            Amount Paid
+          </div>
           <div>:</div>
           <div>{tx?.amount} $</div>
-          <div>No. of Trees</div>
+          <div
+            style={{ fontWeight: "bold", marginBottom: "var(--padding-light)" }}
+          >
+            No. of Trees
+          </div>
           <div>:</div>
           <div>{tx?.trees_count}</div>
-        </div>
-        <div>{tx?.date}</div>
-      </div>
-      {nftData?.is_active && (
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "3fr 1fr 3fr",
-            fontSize: "1.25rem",
-          }}
-        >
-          <div>Reward</div>
+          <div
+            style={{ fontWeight: "bold", marginBottom: "var(--padding-light)" }}
+          >
+            Date and Time
+          </div>
           <div>:</div>
-          <div>{nftData?.reward} $</div>
+          <div>{tx?.date}</div>
         </div>
-      )}
-      {nftData?.is_active && (
-        <div className="primarybutton">
-          <button onClick={withdraw}>Claim Rewards</button>
-        </div>
-      )}
+      </div>
+      <div>
+        {nftData?.is_active && (
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "2fr 1fr 3fr",
+              fontSize: "1.25rem",
+            }}
+          >
+            <div style={{ marginBottom: "var(--padding-light)" }}>Reward</div>
+            <div>:</div>
+            <div>{nftData?.reward} $</div>
+          </div>
+        )}
+        {nftData?.is_active && (
+          <div className="primarybutton">
+            <button onClick={withdraw}>Claim Rewards</button>
+          </div>
+        )}
+      </div>
     </div>
   );
 };

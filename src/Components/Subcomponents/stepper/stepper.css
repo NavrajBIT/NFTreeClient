@@ -1,24 +1,42 @@
 .steppercontainer {
-  width: 100%;
+  width: 80%;
   max-width: var(--max-width-form);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin: var(--padding-main) 0;
+  margin: 0 auto;
+  padding: var(--padding-large) 0;
+  gap: 10px;
 }
 
-.unselectedStep {
-  min-width: 1.5rem;
-  height: 1.5rem;
+.stepperText {
+  font-size: 12px;
+  font-weight: 600;
+  color: #00000060;
+  padding-bottom: 5px;
+}
+
+.stepperBar {
+  width: 100%;
+  height: 0.5rem;
   border-radius: 1rem;
-  background-color: var(--green-100);
+  background-color: #00000060;
 }
 
-.completedStep {
-  background-color: var(--green-50);
+@media only screen and (max-width: 730px) {
+  .stepperText {
+    width: 0;
+    display: flex;
+    margin: auto;
+    justify-content: center;
+  }
 }
 
-.selectedStep {
-  background-color: var(--primary);
-  box-shadow: 0 0 10px 5px var(--green-30);
+@media (max-width: 420px) {
+  .steppercontainer {
+    width: 100%;
+  }
+  .stepperText {
+    display: none;
+  }
 }

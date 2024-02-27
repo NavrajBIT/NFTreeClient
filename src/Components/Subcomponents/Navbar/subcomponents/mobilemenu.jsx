@@ -21,7 +21,6 @@ const MenuOptions = ({ setIsmenu }) => {
   const navlinks = {
     Home: "/",
     Projects: "/projects",
-    Wallet: "/wallet",
     "Contact Us": "/contact",
   };
   return (

@@ -12,7 +12,7 @@ const Popup = ({ children, close }) => {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        background: "var(--filter)",
+        background: "rgba(0,0,0,0.8)",
         zIndex: 10,
       }}
     >
@@ -32,7 +32,6 @@ const Popup = ({ children, close }) => {
       >
         {close && (
           <div
-            className="primarybutton"
             style={{
               position: "absolute",
               top: "0px",
@@ -41,8 +40,13 @@ const Popup = ({ children, close }) => {
           >
             <button
               style={{
-                borderRadius: "var(--border-radius)",
+                borderRadius: "50px",
                 background: "var(--error)",
+                height: "40px",
+                width: "40px",
+                display: "felx",
+                alignItems: "center",
+                justifyContent: "center",
               }}
               onClick={close}
             >

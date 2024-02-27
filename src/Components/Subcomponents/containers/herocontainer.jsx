@@ -1,4 +1,4 @@
-import bg from "./assets/hero.png";
+import bg from "./assets/hero2.png";
 
 const Herocontainer = ({ children, innerStyle, style }) => {
   return (

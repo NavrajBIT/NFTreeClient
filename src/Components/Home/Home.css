@@ -1,6 +1,15 @@
+@font-face {
+  font-family: "Ethnocentric";
+  src: local("Ethnocentric"),
+    url("./assets/ethnocentricrg.otf") format("opentype");
+}
+
 .landingText {
-  font-size: 5rem;
+  font-size: 4rem;
   color: var(--text-bright);
+  font-family: "Ethnocentric";
+  /* width: 100%; */
+  max-width: var(--max-width-content);
 }
 
 .landingdescription {
@@ -8,4 +17,67 @@
   text-align: justify;
   width: 100%;
   max-width: var(--max-width-content);
+  font-size: 1.5rem;
+  font-family: "Fira Sans", sans-serif;
+}
+
+.heroillustration img {
+  width: 100%;
+}
+
+.herobuttoncontainer {
+  width: fit-content;
+}
+
+.heroillustrationmobile {
+  display: none;
+}
+
+@media screen and (max-width: 1400px) {
+  .landingText {
+    font-size: 3rem;
+  }
+  .landingdescription {
+    font-size: 1rem;
+  }
+}
+@media screen and (max-width: 900px) {
+  .landingText {
+    font-size: 2.5rem;
+  }
+  .landingdescription {
+    font-size: 0.75rem;
+  }
+}
+@media screen and (max-width: 700px) {
+  .landingText {
+    text-align: center;
+  }
+  .heroillustration {
+    display: none;
+  }
+  .herobuttoncontainer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  .heroillustrationmobile {
+    display: flex;
+    align-items: end;
+    justify-content: end;
+  }
+  .heroillustrationmobile img {
+    max-width: 30%;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .landingText {
+    font-size: 2rem;
+  }
+}
+@media screen and (max-width: 400px) {
+  .landingText {
+    font-size: 1.5rem;
+  }
 }

@@ -33,7 +33,9 @@ export function AuthProvider(props) {
       .then((res) => {
         if (res.status === 200) setAvatar(res[0].picture);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        if (err === 401) logout();
+      });
   };
 
   const logout = () => {

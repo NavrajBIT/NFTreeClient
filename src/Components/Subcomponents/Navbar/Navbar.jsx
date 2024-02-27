@@ -6,8 +6,7 @@ import "./Navbar.css";
 import Contact from "../../Contact_us/Contact";
 import ErrorPage from "../../Error_page/ErrorPage";
 import Profile from "../../Profile/profile";
-// import ForgetPassword from "../../Auth/ForgetPassword";
-import ProjectPage from "../../Projects/ProjectPage/ProjectPage";
+import ProjectPage from "../../Projects/marketplace/main";
 import Updatereport from "../../Projects/projectReport/updatereport";
 import Generatereport from "../../Projects/projectReport/generatereport";
 import Donate from "../../Projects/donate/donate";
@@ -17,6 +16,8 @@ import KYCPage from "../../kyc/kycPage";
 import BitWallet from "../../BitWallet/body";
 import Nft from "../../NFT/nft";
 import Forgotpassword from "../../ForgotPassword/forgotpassword";
+import UserView from "../../Projects/projectDetails/userView";
+import ProjectReport from "../../Projects/projectReport/subcomponents/ProjectReport/ProjectReport";
 
 export default function Navbar() {
   return (
@@ -30,24 +31,21 @@ export default function Navbar() {
         <Route path="/forgotpassword" element={<Forgotpassword />} />
         <Route path="/projects" element={<ProjectPage />} />
         <Route path="/projects/create" element={<CreateProject />} />
-        <Route
-          path="/projects/:projectId"
-          element={<Projectdetails notMyProject={true} />}
-        />
-        <Route
-          path="/projects/:projectId/report"
-          element={<Generatereport />}
-        />
+        <Route path="/projects/:projectId" element={<UserView />} />
+        <Route path="/projects/:projectId/report" element={<ProjectReport />} />
         <Route path="/projects/:projectId/donate" element={<Donate />} />
 
-        <Route path="/myprojects/:projectId" element={<Projectdetails />} />
+        <Route
+          path="/myprojects/:projectId"
+          element={<UserView isOwnerView />}
+        />
         <Route
           path="/myprojects/:projectId/update"
           element={<Updatereport />}
         />
         <Route
           path="/myprojects/:projectId/report"
-          element={<Generatereport isMyProject />}
+          element={<ProjectReport isMyProject />}
         />
 
         {/* <Route path="/forget-password" element={<ForgetPassword />} /> */}

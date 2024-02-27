@@ -1,10 +1,10 @@
 import useAPI from "../../../../api/useAPI";
 import { useState } from "react";
-import Auth from "../../../Auth/Auth";
+import AuthPopup from "../../../Auth/authPopup";
 import Loading from "../../loading/loading";
-import Input from "../input";
+import Input from "../inputnew";
 
-const Project = ({ submit }) => {
+const Project = ({ submit, backStep }) => {
   const api = useAPI();
   const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
@@ -38,6 +38,7 @@ const Project = ({ submit }) => {
       return newValues;
     });
   };
+
   const typeOptions = [
     {
       label: "Monitoring & Reporting",
@@ -83,7 +84,7 @@ const Project = ({ submit }) => {
     },
   ];
 
-  if (!isLoggedIn) return <Auth close={() => setIsLoggedIn(true)} />;
+  if (!isLoggedIn) return <AuthPopup close={() => setIsLoggedIn(true)} />;
   if (isLoading) return <Loading />;
 
   const handleSubmit = async (e) => {
@@ -100,6 +101,7 @@ const Project = ({ submit }) => {
     api
       .crud("POST", "project/myproject", formdata, true)
       .then((res) => {
+        console.log(res);
         if (res.status === 201) {
           submit(res.id);
         }
@@ -112,17 +114,16 @@ const Project = ({ submit }) => {
   };
 
   return (
-    <div style={{ width: "100%" }}>
-      <div
-        style={{
-          fontSize: "1.5rem",
-          color: "var(--green-30)",
-          fontWeight: "700",
-          textAlign: "center",
-        }}
-      >
-        Project Details
-      </div>
+    <div
+      style={{
+        width: "90%",
+        padding: "0 var(--padding-main)",
+        display: "flex",
+        flexDirection: "column",
+        gap: "20px",
+        margin: "0 auto",
+      }}
+    >
       <form
         style={{
           width: "100%",
@@ -135,6 +136,21 @@ const Project = ({ submit }) => {
         id={"formId"}
         onSubmit={handleSubmit}
       >
+        <div
+          style={{
+            fontSize: "1.5rem",
+            fontWeight: "bold",
+            color: "var(--green-80)",
+          }}
+        >
+          Project Details
+          <p
+            style={{
+              border: "1px solid #E6E6E6",
+              margin: "var(--padding-light) 0 var(--padding-large)",
+            }}
+          />
+        </div>
         <Input
           inputData={{
             label: "Project Type",
@@ -143,21 +159,22 @@ const Project = ({ submit }) => {
             value: (function () {
               let label = "";
               typeOptions.map((type) => {
-                if (type.value === project.type) {
+                if (type.value == project.type) {
                   label = type.label;
                 }
               });
+
               return label;
             })(),
             options: typeOptions,
             select: true,
             onChange: (e) => {
-              changeValue("type", e.value);
+              changeValue("type", e.target.value);
             },
             maxLength: 50,
           }}
         />
-        {project.type === 3 && (
+        {project.type == 3 && (
           <Input
             inputData={{
               label: "Investment Type",
@@ -175,7 +192,7 @@ const Project = ({ submit }) => {
               options: investOptions,
               select: true,
               onChange: (e) => {
-                changeValue("investment_type", e.value);
+                changeValue("investment_type", e.target.value);
               },
               maxLength: 50,
             }}
@@ -221,7 +238,7 @@ const Project = ({ submit }) => {
             value: (function () {
               let label = "";
               phaseOptions.map((type) => {
-                if (type.value === project.phase) {
+                if (type.value == project.phase) {
                   label = type.label;
                 }
               });
@@ -230,12 +247,12 @@ const Project = ({ submit }) => {
             options: phaseOptions,
             select: true,
             onChange: (e) => {
-              changeValue("phase", e.value);
+              changeValue("phase", e.target.value);
             },
             maxLength: 50,
           }}
         />
-        {project.phase === 2 && (
+        {project.phase == 2 && (
           <Input
             inputData={{
               label: "Project Age (Months)",
@@ -247,25 +264,21 @@ const Project = ({ submit }) => {
             }}
           />
         )}
-        {project.phase === 2 && (
+        {project.phase == 2 && (
           <Input
             inputData={{
               label: "Have you Produced Carbon/Green Credits Earlier?",
               type: "select",
               required: true,
-              value: (function () {
-                let label = "";
-                creditsProducedOptions.map((type) => {
-                  if (type.value === project.credits_produced) {
-                    label = type.label;
-                  }
-                });
-                return label;
-              })(),
+              value: project.credits_produced ? "Yes" : "No",
               options: creditsProducedOptions,
               select: true,
               onChange: (e) => {
-                changeValue("credits_produced", e.value);
+                setproject((prev) => {
+                  let newvalues = { ...prev };
+                  newvalues["credits_produced"] = e.target.value === "true";
+                  return newvalues;
+                });
               },
               maxLength: 50,
             }}
@@ -281,13 +294,13 @@ const Project = ({ submit }) => {
             maxLength: 100,
           }}
         />
-        {project.type !== 1 && (
+        {project.type != 1 && (
           <Input
             inputData={{
               label:
                 project.type === 2
                   ? "Donation per plant($)"
-                  : "Investment per plant(NEAR)",
+                  : "Investment per plant($SOL)",
               type: "number",
               required: true,
               value: project["donation"],
@@ -296,8 +309,8 @@ const Project = ({ submit }) => {
             }}
           />
         )}
-        {project.type !== 1 && (
-          <div>
+        {project.type != 1 && (
+          <div style={{ padding: "var(--padding-main) 0" }}>
             Total amount to be raised ={" "}
             {(function () {
               let total =
@@ -306,10 +319,10 @@ const Project = ({ submit }) => {
               if (!total) total = 0;
               return total;
             })()}
-            {project.type === 2 ? "$" : "NEAR"}
+            {project.type === 2 ? "$" : "SOL"}
           </div>
         )}
-        {project.type === 3 && (
+        {project.type == 3 && (
           <Input
             inputData={{
               label: "Revenue Distribution Cycle Details",
@@ -324,7 +337,7 @@ const Project = ({ submit }) => {
             }}
           />
         )}
-        {project.type === 3 && (
+        {project.type == 3 && (
           <Input
             inputData={{
               label: "Upcoming Revenue Distribution Date ",
@@ -336,7 +349,7 @@ const Project = ({ submit }) => {
             }}
           />
         )}
-        {project.type === 3 && (
+        {project.type == 3 && (
           <Input
             inputData={{
               label: "Expected Approximate ROI(%)",
@@ -423,8 +436,35 @@ const Project = ({ submit }) => {
           }}
         />
         <div style={{ color: "var(--error)" }}>{error}</div>
-        <div className="primarybutton">
-          <button type="submit">Next</button>
+        <div style={{ display: "flex", gap: "var(--padding-large)" }}>
+          <button
+            onClick={backStep}
+            style={{
+              padding: "var(--padding-light)",
+              width: "var(--project-button-small)",
+              borderRadius: "5px",
+              marginTop: "var(--padding-large)",
+              marginBottom: "100px",
+              border: "2px solid #B6B6B6",
+              color: "#525252",
+            }}
+          >
+            Back
+          </button>
+
+          <button
+            type="submit"
+            style={{
+              padding: "var(--padding-light)",
+              background: "#354A12",
+              width: "var(--project-button-small)",
+              borderRadius: "5px",
+              marginTop: "var(--padding-large)",
+              marginBottom: "100px",
+            }}
+          >
+            Next
+          </button>
         </div>
       </form>
     </div>

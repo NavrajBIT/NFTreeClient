@@ -1,3 +1,7 @@
+textarea {
+  font-family: Inter;
+}
+
 .inputcontainer {
   position: relative;
   width: 100%;
@@ -101,4 +105,57 @@
 .otpinputfield::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
+}
+
+/* ---------------------------------------- */
+
+.projectFormContainer {
+  position: relative;
+  width: 100%;
+  max-width: var(--max-width-form);
+}
+
+.input::placeholder,
+.projectFormInput::placeholder {
+  color: var(--text-extra-light);
+}
+
+.input:focus {
+  border: 1px solid #e6e6e6;
+  outline: none;
+}
+
+.projectFormInput {
+  width: 100%;
+  padding: var(--padding-light);
+  font-size: 1.2rem;
+  border: 2px solid #e6e6e6;
+  position: relative;
+  resize: none;
+  border-radius: 5px;
+}
+
+.projectFormFileupload {
+  border: 2px solid #e6e6e6;
+  border-radius: 5px;
+}
+
+.projectFormFileupload div {
+  display: flex;
+
+  width: 100%;
+  position: absolute;
+  top: 50%;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--padding-main);
+  color: #00000060;
+  font-size: 15px;
+}
+
+.projectFormFileupload input {
+  width: 100%;
+  opacity: 0;
+  cursor: pointer;
+  height: 46px;
 }

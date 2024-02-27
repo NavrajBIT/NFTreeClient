@@ -14,7 +14,6 @@ const NavContent = () => {
   const navlinks = {
     Home: "/",
     Projects: "/projects",
-    Wallet: "/wallet",
   };
 
   const handleScroll = () => {
@@ -34,6 +33,9 @@ const NavContent = () => {
       className="navbarcontainer"
       style={{
         backgroundColor: scroll ? "var(--green-100)" : "transparent",
+        backgroundImage: scroll
+          ? "linear-gradient(170deg, #1B2F2F, #224629)"
+          : "none",
         height: scroll ? "var(--nav-height-small)" : "var(--nav-height)",
       }}
     >

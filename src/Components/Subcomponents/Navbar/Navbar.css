@@ -8,6 +8,8 @@
   position: fixed;
   top: 0;
   left: 0;
+  font-family: "Fira Sans", sans-serif;
+  z-index: 10;
 }
 .navcontentcontainer {
   width: 100%;
