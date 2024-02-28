@@ -12,7 +12,7 @@ const Forgotpassword = () => {
     <Herocontainer
       style={{
         alignItems: "center",
-        background: "var(--bg-blue)",
+        background: "var(--bg-green-gradient)",
       }}
       innerStyle={{
         display: "flex",
@@ -43,8 +43,8 @@ const Forgotpassword = () => {
           <div>
             <div
               style={{
-                fontSize: "1.6rem",
-                fontWeight: "800",
+                fontSize: "30px",
+                fontWeight: "700",
                 color: "var(--text-black)",
               }}
             >
@@ -52,7 +52,10 @@ const Forgotpassword = () => {
             </div>
             <div
               style={{
-                fontSize: "1rem",
+                fontSize: "13px",
+                fontWeight:"400",
+                color:"#3D462C",
+                marginTop:"1rem"
               }}
             >
               No worries, we'll send you reset instructions.
@@ -67,7 +70,12 @@ const Forgotpassword = () => {
           />
           <div>
             <Button title={"Reset Password"} variant={"green"} />
-            <div>
+            <div style={{
+              fontSize:"13px",
+              fontWeight:"400",
+              color:'#3D462CCC',
+              marginTop:"1rem",
+            }}>
               Did you remember your password?{" "}
               <span>
                 <Button
