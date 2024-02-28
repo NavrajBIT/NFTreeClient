@@ -5,7 +5,8 @@ const OpenInput = ({ label, type, required, value, onChange, maxLength }) => {
   const labelDisplay = required ? `${label}*` : label;
   const [isFocused, setIsFocused] = useState(false);
 
-  const isLabel = isFocused || (value && value.length > 0);
+  // const isLabel = isFocused || (value && value.length > 0);
+  const isLabel = false;
 
   return (
     <div

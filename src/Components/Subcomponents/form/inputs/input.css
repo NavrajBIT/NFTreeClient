@@ -7,6 +7,7 @@ textarea {
   width: 100%;
   max-width: var(--max-width-button);
 }
+
 .input {
   width: 100%;
   padding: var(--padding-light);
@@ -19,7 +20,7 @@ textarea {
 
 .input::placeholder,
 .openinput::placeholder {
-  color: var(--text-extra-light);
+  color: var(--green-100);
 }
 
 .input:focus {
@@ -30,10 +31,11 @@ textarea {
 /* ------------------------------ */
 .openinput {
   width: 100%;
-  padding: var(--padding-light);
-  font-size: 1.2rem;
+  margin: 10px 0;
+  padding: 4px 0;
+  font-size: 14px;
   border: none;
-  border-bottom: 1px solid var(--text-grey);
+  border-bottom: 2px solid var(--green-100);
   position: relative;
   resize: none;
 }
