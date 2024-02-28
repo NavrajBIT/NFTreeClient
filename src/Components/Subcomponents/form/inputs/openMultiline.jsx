@@ -13,7 +13,9 @@ const OpenMultiline = ({
   const labelDisplay = required ? `${label}*` : label;
   const [isFocused, setIsFocused] = useState(false);
 
-  const isLabel = isFocused || (value && value.length > 0);
+  // const isLabel = isFocused || (value && value.length > 0);
+  const isLabel = false;
+
   return (
     <div
       className="inputcontainer"
@@ -29,9 +31,10 @@ const OpenMultiline = ({
         onChange={onChange}
         maxLength={maxLength}
         rows={rows}
+        style={{ height: '1.6rem' }}
       />
       {isLabel && <Label label={labelDisplay} />}
-      <TextLength value={value} maxLength={maxLength} />
+      {/* <TextLength value={value} maxLength={maxLength} /> */}
     </div>
   );
 };

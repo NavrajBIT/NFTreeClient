@@ -9,7 +9,8 @@
   max-width: var(--max-width-button);
   border-radius: var(--border-radius-light);
   box-shadow: 0 0 10px 1px var(--shadow-2);
-  background-color: var(--green-100);
+  background-color: var(--green-110);
+  cursor: pointer;
 }
 
 .green:hover,
@@ -32,6 +33,7 @@
   color: var(--text-black);
   border: 1px solid var(--text-black);
 }
+
 .link {
   font-size: 1rem;
   background-color: transparent;
