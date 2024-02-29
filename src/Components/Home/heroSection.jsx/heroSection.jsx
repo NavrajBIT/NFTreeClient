@@ -17,13 +17,7 @@ const HeroSection = () => {
         justifyContent: "space-between",
       }}
     >
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          gap: "var(--padding-large)",
-        }}
-      >
+      <div className="landingdatacontainer">
         <div className="landingText">TECHNOLOGY MEETS SUSTAINABLITY</div>
         <div className="heroillustrationmobile">
           <img
@@ -43,11 +37,13 @@ const HeroSection = () => {
           reforestation initiatives.
         </div>
         <div className="herobuttoncontainer">
-          <Button
-            title="Get Started"
-            variant="primary"
-            onClick={() => navigate("/projects")}
-          />
+          <div style={{ width: "fit-content" }}>
+            <Button
+              title="Get Started"
+              variant="primary"
+              onClick={() => navigate("/projects")}
+            />
+          </div>
         </div>
       </div>
       <div className="heroillustration">

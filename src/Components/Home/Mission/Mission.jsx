@@ -100,7 +100,7 @@ const Carousel = ({ content, isSelected, onClick }) => {
         style={{ backgroundColor: content.color }}
       >
         {content.title}
-        <CarouselIcon isSelected={isSelected} />
+        <CarouselIcon isSelected={isSelected} color={content.color} />
       </div>
       {isSelected && (
         <div
@@ -117,8 +117,15 @@ const Carousel = ({ content, isSelected, onClick }) => {
   );
 };
 
-const CarouselIcon = ({ isSelected }) => (
-  <div className="missioncarouselicon">{isSelected ? "-" : "+"}</div>
+const CarouselIcon = ({ isSelected, color }) => (
+  <div
+    className="missioncarouselicon"
+    style={{
+      color: color,
+    }}
+  >
+    {isSelected ? "-" : "+"}
+  </div>
 );
 
 const WhyBitCards = () => {
@@ -151,17 +158,16 @@ const WhyBitCards = () => {
           >
             <div
               style={{
-                fontSize: "2rem",
+                fontSize: "30px",
                 fontFamily: `"DM Serif Display", serif`,
-                //   fontWeight: "bold",
               }}
             >
               Eco-Collaborators Uniting Stakeholders for a Sustainable Tomorrow
             </div>
             <div
               style={{
-                fontSize: "1.5rem",
-                fontWeight: "bold",
+                fontSize: "20px",
+                lineHeight: "36px",
               }}
             >
               BitBhoomi is a hub for diverse stakeholders committed to a greener
@@ -170,30 +176,50 @@ const WhyBitCards = () => {
           </div>
         </div>
 
-        <div
-          style={{ backgroundImage: `url(${img1})` }}
-          className="whybitcardimage"
+        <WhyBitImagecard
+          src={img1}
+          description={
+            "Lead the green revolution! Initiate and coordinate reforestation projects, manage visions, strategies, and project oversight. BitBhoomi offers a comprehensive platform for project owners to showcase, manage, and report on their initiatives with transparency."
+          }
+          title={"Project Owners"}
+          color={"#669909"}
         />
       </div>
 
       <div className="whybitcardrow2">
-        <div
-          style={{ backgroundImage: `url(${img2})` }}
-          className="whybitcardimage"
+        <WhyBitImagecard
+          src={img2}
+          description={
+            "Foster sustainability! Businesses, join BitBhoomi to support CSR initiatives, engage in partnerships, and utilize the platform for your operations. Showcase your commitment to environmental conservation and easily generate sustainability reports."
+          }
+          title={"Corporates"}
+          color={"#99ea05"}
         />
-        <div
-          style={{ backgroundImage: `url(${img3})` }}
-          className="whybitcardimage"
+        <WhyBitImagecard
+          src={img3}
+          description={
+            " Invest with impact! Individuals and entities can now invest and support various projects listed on BitBhoom. Investors actively contribute to and benefit from the success of reforestation initiatives."
+          }
+          title={"Investors"}
+          color={"#8bcf0f"}
         />
-        <div
-          style={{ backgroundImage: `url(${img4})` }}
-          className="whybitcardimage"
+        <WhyBitImagecard
+          src={img4}
+          description={
+            "Show your commitment! Present and transparently communicate tree plantation campaigns conducted as part of CSR activities. Generate impact reports and strengthen your commitment to a sustainable future."
+          }
+          title={"CSR Organizations"}
+          color={"#172400"}
         />
       </div>
       <div className="whybitcardrow3">
-        <div
-          style={{ backgroundImage: `url(${img5})` }}
-          className="whybitcardimage"
+        <WhyBitImagecard
+          src={img5}
+          description={
+            "Make a difference! Individuals and organizations contributing funds or resources to projects on BitBhoomi play a crucial role in driving positive change. Your donations contribute to charitable and developmental purposes, fostering environmental sustainability."
+          }
+          title={"Donors"}
+          color={"#446902"}
         />
 
         <div
@@ -216,7 +242,8 @@ const WhyBitCards = () => {
           >
             <div
               style={{
-                fontSize: "1.5rem",
+                fontSize: "20px",
+                lineHeight: "36px",
               }}
             >
               Each stakeholder plays a crucial role, and here's how they can
@@ -224,7 +251,8 @@ const WhyBitCards = () => {
             </div>
             <div
               style={{
-                fontSize: "1.5rem",
+                fontSize: "20px",
+                lineHeight: "36px",
               }}
             >
               Become an EcoCollaborator on BitBhoomi and be a part of a global
@@ -234,6 +262,59 @@ const WhyBitCards = () => {
           </div>
         </div>
       </div>
+    </div>
+  );
+};
+
+const WhyBitImagecard = ({ src, title, description, color }) => {
+  const [isHovered, setisHovered] = useState(false);
+  return (
+    <div
+      style={{
+        position: "relative",
+      }}
+      onMouseEnter={() => setisHovered(true)}
+      onMouseLeave={() => setisHovered(false)}
+    >
+      <div
+        style={{ backgroundImage: `url(${src})` }}
+        className="whybitcardimage"
+      />
+      {isHovered && (
+        <div
+          className="whybitcardimage"
+          style={{
+            position: "absolute",
+            top: "0px",
+            left: "0px",
+            width: "100%",
+            height: "100%",
+            background: color,
+            padding: "20px",
+            display: "flex",
+            cursor: "context-menu",
+            animation: "scale-up 0.5s",
+            // transformOrigin: "bottom",
+          }}
+        >
+          <div
+            style={{
+              border: "4px solid white",
+              padding: "10px",
+              borderRadius: "20px",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "space-between",
+              textAlign: "center",
+              lineHeight: "21px",
+            }}
+          >
+            <div style={{ fontWeight: "700", fontSize: "24px" }}>{title}</div>
+            <div style={{ fontSize: "14px" }}>{description}</div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

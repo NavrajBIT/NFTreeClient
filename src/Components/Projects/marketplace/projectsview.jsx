@@ -3,6 +3,7 @@ import ProjectCard from "../../Subcomponents/projectCard/projectCard";
 import SearchBar from "./SearchBar";
 import { CreateButton } from "./SearchBar";
 import filtericon from "./assets/filter.png";
+import filterunselectedicon from "./assets/filterunselected.png";
 import Sidebar from "./sidebar";
 
 const Projectsview = ({
@@ -23,13 +24,13 @@ const Projectsview = ({
         <div
           className="filterIcon"
           style={{
-            background: "#335D51",
+            background: filterMenu ? "#335D51" : "transparent",
             borderRadius: filterMenu ? "10px 10px 0px 0px" : "10px",
             position: "relative",
           }}
         >
           <img
-            src={filtericon}
+            src={filterMenu ? filtericon : filterunselectedicon}
             alt=""
             onClick={() => setFilterMenu(!filterMenu)}
           />

@@ -1,5 +1,7 @@
 import SearchIcon from "@mui/icons-material/Search";
 import { useNavigate } from "react-router-dom";
+import buttonimage from "./assets/Plus.png";
+import buttonimage2 from "./assets/Plus2.png";
 
 const SearchBar = ({ searchValue, setSearchValue }) => {
   return (
@@ -11,16 +13,19 @@ const SearchBar = ({ searchValue, setSearchValue }) => {
     >
       <input
         type="text"
+        className="marketplacesearchbar"
         style={{
           padding: "var(--padding-light)",
           borderColor: "grey",
-          borderRadius: "var(--border-radius-big)",
           width: "100%",
           outline: "none",
           background: "#F4F4F4",
           position: "relative",
           textIndent: "30px",
           height: "50px",
+          border: "none",
+          boxShadow: "-3px 3px 5px #aaaaaa inset",
+          fontSize: "20px",
         }}
         onFocus={(e) => {
           e.target.style.borderColor = "var(--green-110)";
@@ -53,34 +58,13 @@ export const CreateButton = () => {
   return (
     <div>
       <button
-        className="createButton"
+        className="marketplacecreateButton"
         onClick={() => navigate("/projects/create")}
-        style={{
-          background: "var(--green-110)",
-          borderColor: "transparent",
-          borderRadius: "var(--border-radius-big)",
-          fontWeight: "600",
-          color: "white",
-          display: "flex",
-          justifyContent: "space-around",
-          alignItems: "center",
-          fontSize: "unset",
-          height: "50px",
-        }}
       >
-        <p>Create New Project</p>
+        <p>Create new project</p>
 
-        <span
-          style={{
-            borderRadius: "50%",
-            fontSize: "2rem",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          +
-        </span>
+        <img src={buttonimage} alt="" className="desktop" />
+        <img src={buttonimage2} alt="" className="mobile" />
       </button>
     </div>
   );

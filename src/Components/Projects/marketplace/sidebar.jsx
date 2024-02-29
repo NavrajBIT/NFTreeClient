@@ -128,23 +128,23 @@ const Sidebar = ({ filters, setFilters, data, isMobile }) => {
           display: "flex",
           alignItems: "center",
           gap: "var(--padding-light)",
-          fontSize: "1.5rem",
+          fontSize: "22px",
           fontWeight: "700",
           padding: "var(--padding-main)",
           borderBottom: "2px solid white",
           width: "100%",
         }}
       >
-        <img src={filterimage} alt="" />
+        {!isMobile && <img src={filterimage} alt="" />}
         Filter
       </div>
       <div className="singlefiltercontainer">
-        <div style={{ fontSize: "1.5rem" }}>Project Type</div>
+        <div style={{ fontSize: "18px" }}>Project Type</div>
         {typefilterOptions.map((type, index) => (
           <TypeFilter index={index} key={"type-filter-" + index} />
         ))}
         <br />
-        <div style={{ fontSize: "1.5rem" }}>Investment Type</div>
+        <div style={{ fontSize: "18px" }}>Investment Type</div>
         {investmentTypeList.map((type, index) => (
           <Filter
             type={"investment_type"}
@@ -155,7 +155,7 @@ const Sidebar = ({ filters, setFilters, data, isMobile }) => {
         ))}
       </div>
       <div className="singlefiltercontainer">
-        <div style={{ fontSize: "1.5rem" }}>Country</div>
+        <div style={{ fontSize: "18px" }}>Country</div>
         {countryList.map((type, index) => (
           <Filter
             type={"country"}
@@ -165,7 +165,7 @@ const Sidebar = ({ filters, setFilters, data, isMobile }) => {
           />
         ))}
         <br />
-        <div style={{ fontSize: "1.5rem" }}>State</div>
+        <div style={{ fontSize: "18px" }}>State</div>
         {cityList.map((type, index) => (
           <Filter
             type={"city"}

@@ -14,7 +14,7 @@ const ProjectCard = ({ project, isMyProject, Nftproject, nftId }) => {
     : `/projects/${project.id}`;
 
   return (
-    <div className="projectCard" onClick={() => navigate(navLink)}>
+    <div className="projectCardMain" onClick={() => navigate(navLink)}>
       <img src={project.image} alt={project.name} />
       <div className="projectname">{project.name}</div>
       <div className="projectlocation">

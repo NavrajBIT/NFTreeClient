@@ -66,8 +66,7 @@ export default function ProjectPage() {
       />
       <div style={{ display: "flex" }}>
         <Sidebar filters={filters} setFilters={setFilters} data={data} />
-        {data.length === 0 &&
-          "No Projects yet... Start by creating a new project."}
+
         <Projectsview
           filteredData={filterData}
           filters={filters}
