@@ -1,6 +1,7 @@
 import ProjectCard from "../../Subcomponents/projectCard/projectCard";
 import useAPI from "../../../api/useAPI";
 import { useState, useEffect } from "react";
+import "./profile.css"
 const MyContribution = ({ script }) => {
   return (
     <div
@@ -14,28 +15,25 @@ const MyContribution = ({ script }) => {
         style={{
           display: "flex",
           justifyContent: "space-between",
+          alignItems:"center"
         }}
       >
         <div>
           <p
-            style={{
-              fontSize: "1.6rem",
-              fontWeight: "600",
-            }}
+          className="pTitle"
+          
           >
             My Contributions
           </p>
           <p
-            style={{
-              marginTop: "0.5rem",
-            }}
+          className="pPara"
           >
             Contributions made by you
           </p>
         </div>
         <div>
           <button className="profileButtons">
-            <img src="./VectorPlus.png" alt="Plus" />
+            <img src="./VectorPlus.svg" alt="Plus" />
             <span style={{}}>Make Contribution</span>
           </button>
         </div>

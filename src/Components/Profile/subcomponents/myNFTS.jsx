@@ -1,6 +1,7 @@
 import ProjectCard from "../../Subcomponents/projectCard/projectCard";
 import { useState, useEffect } from "react";
 import useAPI from "../../../api/useAPI";
+import "./profile.css"
 
 const MyNFTs = ({ script }) => {
   return (
@@ -19,10 +20,7 @@ const MyNFTs = ({ script }) => {
       >
         <div>
           <p
-            style={{
-              fontSize: "1.6rem",
-              fontWeight: "600",
-            }}
+            className="pTitle"
           >
             My NFTs
           </p>

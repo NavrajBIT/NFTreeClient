@@ -34,6 +34,7 @@
   cursor: context-menu;
 }
 
+
 .logincontainer {
   display: flex;
   gap: var(--padding-main);

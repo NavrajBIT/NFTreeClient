@@ -1,5 +1,6 @@
 import ProjectCard from "../../Subcomponents/projectCard/projectCard";
 import { useNavigate } from "react-router-dom";
+import "./profile.css"
 const MyProject = ({ script }) => {
   const navigate = useNavigate();
   return (
@@ -7,30 +8,31 @@ const MyProject = ({ script }) => {
       style={{
         backgroundColor: "#D2E0D6",
         width: "100%",
-        padding: "2rem",
-        marginTop: "5rem",
+        padding: "18rem 2rem 2rem 2rem",
+        // marginTop: "5rem",
         height: "auto",
+        // '@media (max-width: 800px)': {
+        //   display:"flex" 
+        // }
       }}
     >
       <div
         style={{
           display: "flex",
           justifyContent: "space-between",
+          alignItems:"center"
         }}
       >
         <div>
           <p
-            style={{
-              fontSize: "1.6rem",
-              fontWeight: "600",
-            }}
+          className="pTitle"
+            
           >
             Projects
           </p>
           <p
-            style={{
-              marginTop: "0.5rem",
-            }}
+          className="pPara"
+          
           >
             Projects Created By Me
           </p>
@@ -40,7 +42,7 @@ const MyProject = ({ script }) => {
             className="profileButtons"
             onClick={() => navigate(`/projects/create`)}
           >
-            <img src="./VectorPlus.png" alt="Plus" />
+            <img src="./VectorPlus.svg" alt="Plus" />
             <span style={{}}>Create New Projects</span>
           </button>
         </div>

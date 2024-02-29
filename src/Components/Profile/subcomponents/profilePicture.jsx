@@ -5,40 +5,24 @@ const ProfilePicture = ({ script }) => {
       <div className="profileSubContainer">
         <div className="coverPicContainer">
           <div className="profilePicContainer">
+            <div style={{zIndex:"-1"}}>
             <img
               src={script.account?.picture}
               alt="profile pic"
-              style={{
-                borderRadius: "50%",
-                width: "100%",
-                height: "100%",
-                objectFit: "cover",
-                boxShadow: "0px 0px 10px 0px rgba(0,0,0,0.75)",
-              }}
-            />
-            <p
-              style={{
-                marginTop: "10px",
-                fontSize: "22px",
-                textAlign: "center",
-                fontWeight: "bold",
-              }}
+              />
+              </div>
+            <p className="PName"
             >
               {script?.user?.first_name} {script?.user?.last_name}
             </p>
             <p
-              style={{
-                fontSize: "17px",
-                textAlign: "center",
-              }}
+            className="PDesignation"
             >
               {script?.account?.designation}
             </p>
             <p
-              style={{
-                fontSize: "13px",
-                textAlign: "center",
-              }}
+            className="PEmail"
+            
             >
               {script?.user?.email}
             </p>

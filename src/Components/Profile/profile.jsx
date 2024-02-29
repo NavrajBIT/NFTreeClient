@@ -28,8 +28,9 @@ const Profile = () => {
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        backgroundColor: "#D4E5DC",
-      }}
+        // backgroundColor: "#D4E5DC",
+        background: "linear - gradient(5.22deg, #FFFFFF 58.58 %, #EEFFE9 79.08 %, #265914 91.64 %)",
+}}
     >
       <div
         style={{
@@ -42,7 +43,7 @@ const Profile = () => {
       <MyProject script={script} />
       <MyContribution script={script} />
       <MyNFTs script={script} />
-    </div>
+    </div >
   );
 };
 
