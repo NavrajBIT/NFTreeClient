@@ -31,7 +31,7 @@ const OpenMultiline = ({
         rows={rows}
       />
       {isLabel && <Label label={labelDisplay} />}
-      <TextLength value={value} maxLength={maxLength} />
+      {/* <TextLength value={value} maxLength={maxLength} /> */}
     </div>
   );
 };
@@ -39,7 +39,11 @@ const OpenMultiline = ({
 export default OpenMultiline;
 
 const Label = ({ label }) => {
-  return <div className="label">{label}</div>;
+  return (
+    <div className="label" style={{ left: "0px" }}>
+      {label}
+    </div>
+  );
 };
 
 const TextLength = ({ value, maxLength }) => {

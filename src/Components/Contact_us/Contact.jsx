@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import useAPI from "../../api/useAPI";
 import LocalLoading from "../Subcomponents/loading/localloading";
 import OpenInput from "../Subcomponents/form/inputs/openInput";
@@ -18,7 +18,6 @@ const Contact = ({ page }) => {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -94,18 +93,21 @@ const Contact = ({ page }) => {
               onChange={(e) => setEmail(e.target.value)}
               maxLength="50"
             />
-            <OpenMultiline
+            <OpenInput
               label="Message"
               type="email"
               required
               value={message}
               onChange={(e) => setMessage(e.target.value)}
               maxLength="500"
-              rows={4}
             />
           </div>
 
-          <Button title={"Submit"} variant={"green"} />
+          <Button
+            title={"Submit"}
+            variant={"green"}
+            style={{ background: "var(--green-110)", cursor: "pointer" }}
+          />
         </form>
         <ContactDetails />
       </div>
@@ -118,20 +120,25 @@ export default Contact;
 const ContactDetails = () => {
   return (
     <div className="contactdetails">
-      <div>
+      <div className="contactInfoContainer">
         <div style={{ fontSize: "1.5rem", fontWeight: "600" }}>
-          Email us at:
+          Our Contacts:
         </div>
-        <a href="mailto:support@beimagine.tech">support@beimagine.tech</a>
+        <a
+          href="mailto:support@beimagine.tech"
+          style={{ fontWeight: "normal", fontSize: "14px" }}
+        >
+          support@beimagine.tech
+        </a>
       </div>
-      <div>
-        <div style={{ fontSize: "1.5rem", fontWeight: "600" }}>
-          Visit us at:
+      <div className="contactInfoContainer">
+        <div style={{ fontSize: "1.5rem", fontWeight: "600" }}>Visit Us:</div>
+        <div className="addressContainer">
+          <div>Beyond imagination tech LLC</div>
+          <div>M03 Laffa restaurant building,</div>
+          <div>Sheikh Khalifa Bin Zayed St - Opp. Burjuman Mall,</div>
+          <div>Dubai, United Arab Emirates</div>
         </div>
-        <div>Beyond imagination tech LLC</div>
-        <div>M03 Laffa restaurant building,</div>
-        <div>Sheikh Khalifa Bin Zayed St - Opp. Burjuman Mall,</div>
-        <div>Dubai, United Arab Emirates</div>
       </div>
       <div className="socialcontainer">
         <img
@@ -148,6 +155,7 @@ const ContactDetails = () => {
         />
         <img
           src={twitter}
+          className="twitter"
           alt="Twitter"
           onClick={() =>
             window.open(
