@@ -7,6 +7,8 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   box-shadow: 0 0 20px 2px var(--shadow-1);
+  margin: 2rem 4rem 6rem 4rem;
+  text-align: center;
 }
 
 .illustration {
@@ -45,13 +47,15 @@
   }
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 700px) {
   .illustration {
     display: none;
   }
   .formcontainer {
     display: flex;
+    text-align: center;
     align-items: center;
     justify-content: center;
+    margin: 0rem 0rem 4rem 0rem;
   }
 }

@@ -28,7 +28,7 @@ const MyProject = ({ script }) => {
           className="pTitle"
             
           >
-            Projects
+           My Projects
           </p>
           <p
           className="pPara"

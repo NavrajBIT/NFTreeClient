@@ -34,6 +34,7 @@ const Forgotpassword = () => {
             display: "flex",
             flexDirection: "column",
             justifyContent: "center",
+            alignItems: "center",
             padding: "var(--padding-large)",
             gap: "var(--padding-large)",
           }}

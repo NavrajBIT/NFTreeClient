@@ -5,24 +5,24 @@ const ProfilePicture = ({ script }) => {
       <div className="profileSubContainer">
         <div className="coverPicContainer">
           <div className="profilePicContainer">
-            <div style={{zIndex:"-1"}}>
-            <img
-              src={script.account?.picture}
-              alt="profile pic"
+            <div style={{ zIndex: "-1" }}>
+              <img
+                src={script.account?.picture}
+                alt="profile pic"
               />
-              </div>
+            </div>
             <p className="PName"
             >
               {script?.user?.first_name} {script?.user?.last_name}
             </p>
             <p
-            className="PDesignation"
+              className="PDesignation"
             >
               {script?.account?.designation}
             </p>
             <p
-            className="PEmail"
-            
+              className="PEmail"
+
             >
               {script?.user?.email}
             </p>
@@ -208,6 +208,8 @@ const ProfilePicture = ({ script }) => {
               <p
                 style={{
                   marginTop: "0.5rem",
+                  display:'flex',
+                  gap:'5px'
                 }}
               >
                 <span
@@ -219,13 +221,15 @@ const ProfilePicture = ({ script }) => {
                   {" "}
                   Proof of NIN:
                 </span>{" "}
-                <span onClick={() => window.open(script?.account?.nin_proof)}>
-                  uploaded File
+                <span style={{gap:"5px", display:'flex',alignItems:'center'}} onClick={() => window.open(script?.account?.nin_proof)}>
+                  upload File<img src="/upload.png" />
                 </span>
               </p>
               <p
                 style={{
                   marginTop: "0.5rem",
+                  display:'flex',
+                  gap:'5px'
                 }}
               >
                 <span
@@ -236,8 +240,8 @@ const ProfilePicture = ({ script }) => {
                 >
                   Signed Note from Organization:
                 </span>{" "}
-                <span onClick={() => window.open(script?.account?.signed_note)}>
-                  upload File
+                <span  style={{gap:"5px", display:'flex',alignItems:'center'}} onClick={() => window.open(script?.account?.signed_note)}>
+                  upload File<img src="/upload.png" />
                 </span>
               </p>
             </div>

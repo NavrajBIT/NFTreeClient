@@ -21,12 +21,12 @@ const LoginOptions = ({ script, isSignup }) => {
           color: "var(--text-green)",
         }}
       >
-        {isSignup ? "Sign Up for BitBhoomi" : "Log in to BitBhoomi"}
+        {isSignup ? "Sign Up for BitBhoomi" : "Login to BitBhoomi"}
       </div>
       <GoogleLogin script={script} isSignUp={isSignup} />
       <div>Or</div>
       <Button
-        title="Continue with email"
+        title="Continue with Email"
         variant="white"
         onClick={() =>
           script.setCurrentPage((prev) => {
