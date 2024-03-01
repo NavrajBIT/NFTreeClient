@@ -10,7 +10,7 @@ const ProjectCard = ({ project, isMyProject, Nftproject, nftId }) => {
   const navLink = isMyProject
     ? `/myprojects/${project.id}`
     : Nftproject
-    ? `/nft/${nftId}`
+    ? `/profile`
     : `/projects/${project.id}`;
 
   return (

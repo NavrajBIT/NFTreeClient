@@ -1,9 +1,12 @@
 import ProjectCard from "../../Subcomponents/projectCard/projectCard";
+import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import useAPI from "../../../api/useAPI";
 import "./profile.css"
 
-const MyNFTs = ({ script }) => {
+const MyNftDetails = ({ script }) => {
+  const navigate = useNavigate();
+
   return (
     <div
       style={{
@@ -21,17 +24,20 @@ const MyNFTs = ({ script }) => {
         <div>
           <p
             className="pTitle"
+            style={{ cursor: "pointer" }}
+            onClick={() => navigate("mynft")}
           >
+            {" "}
             My NFTs
           </p>
         </div>
-        <div></div>
       </div>
 
       <div
         style={{
           marginTop: "2rem",
-          padding: "1rem",
+          display: 'flex',
+          gap: '2rem',
         }}
       >
         {script?.nftData?.map((nft, index) => (
@@ -42,7 +48,7 @@ const MyNFTs = ({ script }) => {
   );
 };
 
-export default MyNFTs;
+export default MyNftDetails;
 
 const NFTDataFunction = ({ nft }) => {
   const api = useAPI();
@@ -64,6 +70,7 @@ const NFTDataFunction = ({ nft }) => {
       })
       .catch((err) => console.log(err));
   };
+
   const poppulateProject = async (projectId) => {
     await api
       .crud("GET", `project/${projectId}`)
@@ -77,10 +84,6 @@ const NFTDataFunction = ({ nft }) => {
 
   if (!project) return null;
   return (
-    <div>
-      <ProjectCard project={project} Nftproject={true} nftId={nft.id} />
-      <div>Contribution: {transaction?.amount} $</div>
-      <div>Trees: {transaction?.trees_count}</div>
-    </div>
+    <ProjectCard project={project} Nftproject={true} nftId={nft.id} />
   );
 };
