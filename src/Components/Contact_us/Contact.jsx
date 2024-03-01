@@ -6,8 +6,7 @@ import OpenMultiline from "../Subcomponents/form/inputs/openMultiline";
 import Herocontainer from "../Subcomponents/containers/herocontainer";
 import Button from "../Subcomponents/buttons/button";
 import "./Contact.css";
-import insta from "./assets/insta.png";
-import linkedin from "./assets/linkedin.png";
+import telegram from "./assets/telegram.png";
 import twitter from "./assets/twitter.png";
 import { useNavigate } from "react-router-dom";
 
@@ -66,13 +65,7 @@ const Contact = ({ page }) => {
           type="submit"
           onSubmit={handleSubmit}
         >
-          <div
-            style={{
-              fontSize: "2rem",
-              fontWeight: "700",
-              color: "var(--text-black)",
-            }}
-          >
+          <div className="contactHeading">
             Contact Us
           </div>
 
@@ -139,28 +132,12 @@ const ContactDetails = () => {
         </div>
       </div>
       <div className="socialcontainer">
-        <img
-          src={insta}
-          alt="Instagram"
-          onClick={() => window.open("https://www.instagram.com/bitmemoir/")}
-        />
-        <img
-          src={linkedin}
-          alt="Linkedin"
-          onClick={() =>
-            window.open("https://www.linkedin.com/company/bitmemoir/")
-          }
-        />
-        <img
-          src={twitter}
-          className="twitter"
-          alt="Twitter"
-          onClick={() =>
-            window.open(
-              "https://twitter.com/Bit_memoir?t=dPPpNawrSKg3mn3BLyYxWA"
-            )
-          }
-        />
+        <a href="https://t.co/4LJmYD56rc" target="_blank">
+          <img src={telegram} alt="Telegram" className="telegramIcon" />
+        </a>
+        <a href="https://twitter.com/BITBhoomi" target="_blank">
+          <img src={twitter} className="twitter" alt="Twitter" />
+        </a>
       </div>
     </div>
   );

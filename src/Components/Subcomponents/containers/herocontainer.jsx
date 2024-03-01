@@ -13,6 +13,7 @@ const Herocontainer = ({ children, innerStyle, style }) => {
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
+        paddingBottom: "10rem",
         ...style,
       }}
     >
