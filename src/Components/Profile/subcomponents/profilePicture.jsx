@@ -3,7 +3,7 @@ const ProfilePicture = ({ script }) => {
   return (
     <div className="profileMainDiv">
       <div className="profileSubContainer">
-        <div className="coverPicContainer">
+        <div className="coverPicContainer" >
           <div className="profilePicContainer">
             <div style={{zIndex:"-1"}}>
             <img
@@ -45,7 +45,7 @@ const ProfilePicture = ({ script }) => {
                 Organization
               </p>
               <img
-                src="Edit2.png"
+                src="/Edit2.png"
                 alt="Edit"
                 style={{
                   width: "60px",
@@ -163,7 +163,7 @@ const ProfilePicture = ({ script }) => {
                 Profile Info
               </p>
               <img
-                src="Edit2.png"
+                src="/Edit2.png"
                 alt="Edit"
                 style={{
                   width: "60px",
