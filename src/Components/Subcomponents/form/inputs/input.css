@@ -131,7 +131,9 @@ textarea {
   width: 100%;
   padding: var(--padding-light);
   font-size: 1.2rem;
-  border: 2px solid #e6e6e6;
+  border: 1px solid #A0A0A0;
+  color: #494A4B;
+  background: #E9F6D2;
   position: relative;
   resize: none;
   border-radius: 5px;
