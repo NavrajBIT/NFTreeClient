@@ -9,11 +9,7 @@ const MyNftDetails = ({ script }) => {
 
   return (
     <div
-      style={{
-        backgroundColor: "#D2E0D6",
-        width: "100%",
-        padding: "2rem",
-      }}
+      className="myNFTDiv"
     >
       <div
         style={{
@@ -34,11 +30,12 @@ const MyNftDetails = ({ script }) => {
       </div>
 
       <div
-        style={{
-          marginTop: "2rem",
-          display: 'flex',
-          gap: '2rem',
-        }}
+        // style={{
+        //   marginTop: "2rem",
+        //   display: 'flex',
+        //   gap: '2rem',
+        // }}
+        className="projectCardDiv"
       >
         {script?.nftData?.map((nft, index) => (
           <NFTDataFunction nft={nft} key={"my-contribution-" + index} />
@@ -83,7 +80,12 @@ const NFTDataFunction = ({ nft }) => {
   };
 
   if (!project) return null;
+  let project2 = project
+  project2.type = 2
   return (
-    <ProjectCard project={project} Nftproject={true} nftId={nft.id} />
+    // <div className="projectCardDiv">
+      <ProjectCard project={project2} transaction={transaction}
+        Nftproject={true} nftId={nft.id} />
+    // </div>
   );
 };

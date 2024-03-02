@@ -5,16 +5,7 @@ const MyProject = ({ script }) => {
   const navigate = useNavigate();
   return (
     <div
-      style={{
-        backgroundColor: "#D2E0D6",
-        width: "100%",
-        padding: "18rem 2rem 2rem 2rem",
-        // marginTop: "5rem",
-        height: "auto",
-        // '@media (max-width: 800px)': {
-        //   display:"flex" 
-        // }
-      }}
+    className="myProjectsDiv"
     >
       <div
         style={{

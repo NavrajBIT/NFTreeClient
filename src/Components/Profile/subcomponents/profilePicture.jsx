@@ -38,7 +38,7 @@ const ProfilePicture = ({ script }) => {
             >
               <p
                 style={{
-                  fontSize: "1.2rem",
+                  fontSize: "26px",
                   fontWeight: "700",
                 }}
               >
@@ -74,6 +74,7 @@ const ProfilePicture = ({ script }) => {
                 {script?.user?.organization?.description}
               </p>
               <p
+              className="personalP"
                 style={{
                   marginTop: "0.5rem",
                 }}
@@ -88,6 +89,7 @@ const ProfilePicture = ({ script }) => {
                 {script?.user?.website}
               </p>
               <p
+              className="personalP"
                 style={{
                   marginTop: "0.5rem",
                 }}
@@ -103,6 +105,7 @@ const ProfilePicture = ({ script }) => {
                 <span>{script?.organization?.address}</span>
               </p>
               <p
+              className="personalP"
                 style={{
                   marginTop: "0.5rem",
                 }}
@@ -118,6 +121,7 @@ const ProfilePicture = ({ script }) => {
                 <span>{script?.organization?.country}</span>
               </p>
               <p
+              className="personalP"
                 style={{
                   marginTop: "0.5rem",
                 }}
@@ -132,6 +136,7 @@ const ProfilePicture = ({ script }) => {
                 <span>{script?.organization?.pin_code}</span>
               </p>
               <p
+              className="personalP"
                 style={{
                   marginTop: "0.5rem",
                 }}
@@ -156,7 +161,7 @@ const ProfilePicture = ({ script }) => {
             >
               <p
                 style={{
-                  fontSize: "1.2rem",
+                  fontSize: "26px",
                   fontWeight: "700",
                 }}
               >
@@ -177,6 +182,7 @@ const ProfilePicture = ({ script }) => {
               }}
             >
               <p
+              className="personalP"
                 style={{
                   marginTop: "0.5rem",
                 }}
@@ -192,6 +198,7 @@ const ProfilePicture = ({ script }) => {
                 <span>{script?.account?.phone}</span>
               </p>
               <p
+              className="personalP"
                 style={{
                   marginTop: "0.5rem",
                 }}
@@ -206,6 +213,7 @@ const ProfilePicture = ({ script }) => {
                 <span>{script?.account?.nin}</span>
               </p>
               <p
+              className="personalP"
                 style={{
                   marginTop: "0.5rem",
                   display:'flex',
@@ -222,10 +230,11 @@ const ProfilePicture = ({ script }) => {
                   Proof of NIN:
                 </span>{" "}
                 <span style={{gap:"5px", display:'flex',alignItems:'center'}} onClick={() => window.open(script?.account?.nin_proof)}>
-                  upload File<img src="/upload.png" />
+                  uploaded File<img src="/upload.png" />
                 </span>
               </p>
               <p
+              className="personalP"
                 style={{
                   marginTop: "0.5rem",
                   display:'flex',
