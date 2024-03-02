@@ -14,7 +14,6 @@ import NavContent from "./subcomponents/navcontent";
 import Projectdetails from "../../Projects/projectDetails/projectdetails";
 import KYCPage from "../../kyc/kycPage";
 import BitWallet from "../../BitWallet/body";
-import Nft from "../../NFT/nft";
 import Forgotpassword from "../../ForgotPassword/forgotpassword";
 import UserView from "../../Projects/projectDetails/userView";
 import ProjectReport from "../../Projects/projectReport/subcomponents/ProjectReport/ProjectReport";
@@ -53,7 +52,6 @@ export default function Navbar() {
         <Route path="/profile/mynft" element={<Profile myNft={true} />} />
         <Route path="/kyc" element={<KYCPage />} />
         <Route path="/wallet" element={<BitWallet />} />
-        <Route path="/nft/:nftid" element={<Nft />} />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
     </>

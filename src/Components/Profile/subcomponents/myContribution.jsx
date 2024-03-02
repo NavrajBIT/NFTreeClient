@@ -45,7 +45,7 @@ const MyContribution = ({ script }) => {
           padding: "1rem",
         }}
       >
-        {script?.transactions?.map((transaction, index) => (
+        {script?.myprojects?.map((transaction, index) => (
           <Transaction
             transaction={transaction}
             key={"my-contribution-" + index}
