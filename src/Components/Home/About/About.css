@@ -1,13 +1,15 @@
 .aboutsectioncontainer {
   min-height: var(--min-height-section);
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  padding: var(--padding-main);
+  /* display: grid;
+  grid-template-columns: 1fr 1fr; */
+  display: flex;
+  justify-content: space-between;
   gap: var(--padding-light);
   width: 100%;
-  max-width: var(--max-width);
+  /* max-width: var(--max-width); */
   margin: auto;
   position: relative;
+  padding: 1rem 2rem;
 }
 
 .aboutsectionfilter {
@@ -31,6 +33,7 @@
 
 .aboutlogocontainer img {
   max-width: 100%;
+  margin-left: 2rem;
 }
 .aboutlogocontainermobile img {
   max-width: 50%;
@@ -71,7 +74,29 @@
   text-decoration: underline;
   text-decoration-style: double;
 }
+@media screen and (max-width: 1300px) {
+  .aboutcontentcontainer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--padding-large);
+  /* justify-content: space-around; */
+  color: var(--text-bright);
+  width: 100%;
+  max-width: 500px;
+  text-align: justify;
+}
+.aboutdescription {
+  max-width: 500px;
+  line-height: 35px;
+  font-size: 1rem;
+}
+.aboutlogocontainer{
+  width: 300px;
+  height: 300px;
+  margin-top: 8rem;
+}
 
+}
 @media screen and (max-width: 600px) {
   .aboutsectioncontainer {
     display: flex;

@@ -19,7 +19,6 @@ const Herocontainer = ({ children, innerStyle, style }) => {
       <div
         style={{
           width: "100%",
-          maxWidth: "var(--max-width)",
           height: "100%",
           padding: "var(--padding-main)",
           ...innerStyle,

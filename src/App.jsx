@@ -8,8 +8,7 @@ import { AuthProvider, useAuth } from "./Contexts/AuthContext";
 import ScrollToTop from "./Components/Subcomponents/Navbar/subcomponents/scrollToTop";
 
 function App() {
-  var client_id =
-    "28129239044-8k33sm43ff8qilml9tej6f3jorm9gnmh.apps.googleusercontent.com";
+  var client_id = "28129239044-8k33sm43ff8qilml9tej6f3jorm9gnmh.apps.googleusercontent.com";
   return (
     <AuthProvider>
       <GoogleOAuthProvider clientId={client_id}>

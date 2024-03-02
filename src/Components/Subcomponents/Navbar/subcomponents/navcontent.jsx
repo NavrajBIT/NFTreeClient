@@ -41,17 +41,23 @@ const NavContent = () => {
     >
       <div className="navcontentcontainer">
         <img
+          className="bitBhoomiLogo"
           src="/logo_white.png"
           alt="BitBhoomi"
-          style={{ height: "4rem" }}
-          onClick={() => navigate("/")}
+          style={{ height: "4rem",cursor:"pointer" }}
+          onClick={() => {
+          window.scrollTo({ top: 0, behavior: 'smooth' }); // Scrolls to the top of the page
+          navigate("/"); // Redirects to the home page
+          }}
         />
         <div className="navlinkscontainer">
           {Object.keys(navlinks).map((link, index) => (
             <div
               key={"nav-link-" + index}
               className="navlink"
-              onClick={() => navigate(navlinks[link])}
+              onClick={() => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                navigate(navlinks[link])}}
             >
               {link}
             </div>

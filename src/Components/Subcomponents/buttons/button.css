@@ -61,6 +61,7 @@
   color: var(--text-black);
   box-shadow: inset var(--shadow-2) 0 -6px 7px 0px;
   font-family: "Fira Sans", sans-serif;
+  cursor: pointer;
 }
 
 .primary:hover {
@@ -83,8 +84,20 @@
   background-color: var(--bg-green-100);
   border: 2px solid var(--text-green);
   font-family: "Fira Sans", sans-serif;
+  cursor: pointer;
 }
 
 .secondary:hover {
   box-shadow: 0 0 10px 1px var(--bg-bright);
+}
+
+@media screen and (max-width: 1300px) {
+ .secondary {
+   width:100%;
+   font-size: 0.9rem;
+
+  }
+  .primary{
+    font-size: 0.9rem;
+  }
 }

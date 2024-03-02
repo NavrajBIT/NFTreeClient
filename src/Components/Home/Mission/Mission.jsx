@@ -16,8 +16,8 @@ const Mission = () => {
         </div>
         <div className="missiondescription">
           At BitBhoomi, we're on a mission to redefine sustainability through
-          blockchain transparency and inclusivity. By tokenizing ownership, we
-          aim to democratize the ecosystem and foster positive change, thus
+          blockchain <br /> transparency and inclusivity. By tokenizing ownership, we
+          aim to <br /> democratize the ecosystem and foster positive change, thus
           promoting a healthier planet.
         </div>
       </div>
@@ -32,12 +32,21 @@ const WhyBit = () => {
   return (
     <div className="whybitcontainer">
       <div className="whybitheading">Why BitBhoomi?</div>
-      <CrouselContainer />
+      <div className="crouselMainContainer">
+          <CrouselContainer />
+          <div>
+            <img src="./GlobeImage.png" alt="global" className="globalimage"/>
+          </div>
+      </div>
       <WhyBitCards />
       <GetStarted />
     </div>
   );
 };
+
+
+
+
 
 const CrouselContainer = () => {
   const [selectedcarousel, setSelectedCarousel] = useState(null);

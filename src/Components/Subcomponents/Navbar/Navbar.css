@@ -10,14 +10,14 @@
   left: 0;
   font-family: "Fira Sans", sans-serif;
   z-index: 10;
+  padding:2rem;
 }
 .navcontentcontainer {
   width: 100%;
-  max-width: var(--max-width);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 var(--padding-main);
+  margin-top: 1rem;
 }
 
 .navlinkscontainer {
@@ -31,7 +31,8 @@
 
 .navlink:hover {
   color: var(--text-green);
-  cursor: context-menu;
+  cursor: pointer;
+
 }
 
 .logincontainer {
@@ -81,8 +82,15 @@
 .menusidebarcontainer {
   display: none;
 }
-
+@media screen and (max-width: 1300px) {
+.navcontentcontainer {
+  margin-top: 0rem;
+}
+}
 @media screen and (max-width: 700px) {
+  .navbarcontainer{
+    padding: 1rem;
+  }
   .logincontainer {
     display: none;
   }
