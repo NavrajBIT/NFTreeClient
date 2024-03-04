@@ -225,7 +225,7 @@ const ProfilePicture = ({ script }) => {
                     fontWeight: "600",
                   }}
                 >
-                  Ph no:
+                  Phone no:
                 </span>{" "}
                 <span>{script?.account?.phone}</span>
               </p>
@@ -240,7 +240,7 @@ const ProfilePicture = ({ script }) => {
                     fontWeight: "600",
                   }}
                 >
-                  National Identification Number(NIN):
+                  NIN:
                 </span>{" "}
                 <span>{script?.account?.nin}</span>
               </p>
