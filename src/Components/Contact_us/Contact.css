@@ -47,21 +47,15 @@
 }
 
 .socialcontainer {
-  height: 1.6rem;
-  width: 27%;
   display: flex;
   gap: var(--padding-large);
-  background: linear-gradient(270deg, rgba(255, 255, 255, 0.5) 10%, rgba(255, 255, 255, 0) 55.19%);
+  /* background: linear-gradient(270deg, rgba(255, 255, 255, 0.5) 10%, rgba(255, 255, 255, 0) 55.19%); */
 }
 
-.telegramIcon {
-  height: 1.8rem;
+.socialIcon {
+  height: 2.2rem;
 }
 
-.twitter {
-  background-color: var(--bg-bright);
-  border-radius: 50%;
-}
 
 @media screen and (max-width: 900px) {
   .contactformcontainer {
@@ -118,6 +112,7 @@
     min-height: auto;
   }
 }
+
 @media screen and (max-width: 400px) {
   .contactdetails {
     padding: 2rem 1.5rem;

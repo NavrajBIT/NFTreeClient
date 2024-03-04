@@ -6,8 +6,8 @@ import OpenMultiline from "../Subcomponents/form/inputs/openMultiline";
 import Herocontainer from "../Subcomponents/containers/herocontainer";
 import Button from "../Subcomponents/buttons/button";
 import "./Contact.css";
-import telegram from "./assets/telegram.png";
-import twitter from "./assets/twitter.png";
+import telegram from "./assets/Telegram.svg";
+import twitter from "./assets/TwitterX.svg";
 import { useNavigate } from "react-router-dom";
 
 const Contact = ({ page }) => {
@@ -133,10 +133,10 @@ const ContactDetails = () => {
       </div>
       <div className="socialcontainer">
         <a href="https://t.co/4LJmYD56rc" target="_blank">
-          <img src={telegram} alt="Telegram" className="telegramIcon" />
+          <img src={telegram} alt="Telegram" className="socialIcon" />
         </a>
         <a href="https://twitter.com/BITBhoomi" target="_blank">
-          <img src={twitter} className="twitter" alt="Twitter" />
+          <img src={twitter} className="socialIcon" alt="Twitter" />
         </a>
       </div>
     </div>
