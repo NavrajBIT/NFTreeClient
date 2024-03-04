@@ -38,7 +38,10 @@ const ProjectDetails = ({ isOwnerView, details }) => {
             label="Total Plantation Area"
             value={details?.project?.area}
           />
-          <LabelValueBox label="Project Age" value={details?.project?.age} />
+          <LabelValueBox
+            label="Project Age"
+            value={details?.project?.age + " years"}
+          />
           {details?.project?.type === 2 && (
             <LabelValueBox
               label="Donation CostPer Plant ($)"

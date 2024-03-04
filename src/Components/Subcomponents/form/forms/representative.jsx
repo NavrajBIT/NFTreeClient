@@ -4,6 +4,9 @@ import AuthPopup from "../../../Auth/authPopup";
 import Loading from "../../loading/loading";
 import ProjectFormInput from "../inputs/projectFormInput";
 import userprofile from "./image/userprofile.png";
+import { GrLinkNext } from "react-icons/gr";
+import { GrFormNextLink } from "react-icons/gr";
+import "./forms.css";
 
 const Representative = ({ submit }) => {
   const api = useAPI();
@@ -114,11 +117,11 @@ const Representative = ({ submit }) => {
     <>
       <div
         style={{
-          fontSize: "1.5rem",
-          fontWeight: "bold",
-          color: "var(--green-80)",
+          fontWeight: "600",
+          color: "var(--heading-color)",
           width: "86%",
           margin: "auto",
+          marginBottom: "var(--padding-light)",
         }}
       >
         Representative Details
@@ -126,6 +129,7 @@ const Representative = ({ submit }) => {
           style={{
             border: "1px solid #E6E6E6",
             margin: "var(--padding-light) 0 0",
+            width: "58%",
           }}
         />
       </div>
@@ -135,44 +139,64 @@ const Representative = ({ submit }) => {
           minHeight: "var(--min-height-form)",
           width: "90%",
           margin: "auto",
-          flexWrap: "wrap-reverse",
+          flexDirection: "column",
         }}
       >
         <div
           style={{
-            flex: "60%",
-            padding: "0 var(--padding-main)",
             display: "flex",
-            flexDirection: "column",
-            gap: "20px",
+            width: "100%",
+            margin: "auto",
+            flexWrap: "wrap-reverse",
           }}
         >
-          <ProjectFormInput
-            label="Designation"
-            type="text"
-            required
-            value={userData?.designation}
-            onChange={(e) => updateData("designation", e.target.value)}
-            maxLength="50"
-          />
-          <ProjectFormInput
-            label="Phone"
-            type="text"
-            required
-            value={userData?.phone}
-            onChange={(e) => updateData("phone", e.target.value)}
-            maxLength="50"
-          />
-          <ProjectFormInput
-            label="National Identification Number (NIN)"
-            type="text"
-            required
-            value={userData?.nin}
-            onChange={(e) => updateData("nin", e.target.value)}
-            maxLength="50"
-          />
+          <div
+            style={{
+              flex: "60%",
+              padding: "0 var(--padding-main)",
+              display: "flex",
+              flexDirection: "column",
+              gap: "20px",
+            }}
+          >
+            <ProjectFormInput
+              label="Designation"
+              type="text"
+              required
+              value={userData?.designation}
+              onChange={(e) => updateData("designation", e.target.value)}
+              maxLength="50"
+            />
+            <ProjectFormInput
+              label="Phone"
+              type="text"
+              required
+              value={userData?.phone}
+              onChange={(e) => updateData("phone", e.target.value)}
+              maxLength="50"
+            />
+            <ProjectFormInput
+              label="National Identification Number (NIN)"
+              type="text"
+              required
+              value={userData?.nin}
+              onChange={(e) => updateData("nin", e.target.value)}
+              maxLength="50"
+            />
 
-          <div style={{ display: "flex", gap: "var(--padding-large)" }}>
+            <ProjectFormInput
+              label="NIN Proof"
+              type="file"
+              required
+              value={ninproof}
+              onChange={(e) => uploadFile(e.target.files[0], "nin_proof")}
+              maxLength="50"
+            />
+
+            {/* <div
+            style={{ display: "flex", gap: "var(--padding-large)" }}
+            className="responsiveFlex"
+          >
             <ProjectFormInput
               label="NIN Proof"
               type="file"
@@ -189,57 +213,83 @@ const Representative = ({ submit }) => {
               onChange={(e) => uploadFile(e.target.files[0], "signed_note")}
               maxLength="50"
             />
+          </div> */}
+            <div style={{ color: "red", height: "30px" }}>{error}</div>
           </div>
-          <div style={{ color: "red", height: "30px" }}>{error}</div>
-          <button
-            style={{
-              padding: "var(--padding-light)",
-              background: "#354A12",
-              width: "var(--project-button-small)",
-              borderRadius: "5px",
-              marginTop: "var(--padding-large)",
-              marginBottom: "100px",
-              color: "white",
-              borderColor: "transparent",
-            }}
-            onClick={submitForm}
-          >
-            {isComplete() ? "Next " : "Save"}
-          </button>
-        </div>
-        <div
-          style={{
-            flex: "40%",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            marginTop: "10%",
-          }}
-        >
           <div
             style={{
-              height: "var(--profile-pic-diameter)",
-              width: "var(--profile-pic-diameter)",
-              background: "#C4D1AC",
-              borderRadius: "var(--profile-pic-diameter)",
-              backgroundImage: `url("${
-                userData ? userData.picture : userprofile
-              }")`,
-              backgroundSize: `${userData ? "cover" : "60%"}`,
-              backgroundRepeat: "no-repeat",
-              backgroundPosition: "center",
+              flex: "40%",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
             }}
-            onClick={() => profilepicrref.current.click()}
           >
-            <input
-              type="file"
-              style={{ display: "none" }}
-              ref={profilepicrref}
-              onChange={(e) => uploadFile(e.target.files[0], "picture")}
-            />
+            <div
+              style={{
+                height: "170px",
+                width: "170px",
+                background: "#C4D1AC",
+                borderRadius: "var(--profile-pic-diameter)",
+                backgroundImage: `url(${
+                  userData?.picture != undefined
+                    ? userData.picture
+                    : userprofile
+                })`,
+                backgroundSize: `${
+                  userData?.picture != undefined ? "cover" : "60%"
+                }`,
+                backgroundRepeat: "no-repeat",
+                backgroundPosition: "center",
+              }}
+              onClick={() => profilepicrref.current.click()}
+            >
+              <input
+                type="file"
+                style={{ display: "none" }}
+                ref={profilepicrref}
+                onChange={(e) => uploadFile(e.target.files[0], "picture")}
+              />
+            </div>
+            <br />
+            <p
+              style={{
+                fontWeight: "500",
+                marginBottom: "var(--padding-large)",
+              }}
+            >
+              Upload Profile Picture
+            </p>
           </div>
-          <div>Upload Profile Picture</div>
         </div>
+        <button
+          style={{
+            padding: "var(--padding-light)",
+            background: "#354A12",
+            width: "var(--project-button-small)",
+            borderRadius: "5px",
+            marginBottom: "100px",
+            color: "white",
+            borderColor: "transparent",
+            marginLeft: "var(--padding-main)",
+            marginBottom: "3rem",
+          }}
+          onClick={submitForm}
+        >
+          {isComplete() ? (
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-evenly",
+              }}
+            >
+              <p>Next</p>
+              <GrFormNextLink size={30} />
+            </div>
+          ) : (
+            "Save"
+          )}
+        </button>
       </form>
     </>
   );

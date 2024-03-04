@@ -15,7 +15,7 @@ const ProfilePicture = ({ script }) => {
             >
               {script?.user?.first_name} {script?.user?.last_name}
             </p>
-            <p
+            {/* <p
               className="PDesignation"
             >
               {script?.account?.designation}
@@ -25,7 +25,7 @@ const ProfilePicture = ({ script }) => {
 
             >
               {script?.user?.email}
-            </p>
+            </p> */}
           </div>
         </div>
         <div className="personalDetailsMainBox">
@@ -181,6 +181,22 @@ const ProfilePicture = ({ script }) => {
                 marginTop: "1rem",
               }}
             >
+               <p
+              className="personalP"
+                style={{
+                  marginTop: "0.5rem",
+                }}
+              >
+                {" "}
+                <span
+                  style={{
+                    fontWeight: "600",
+                  }}
+                >
+                  Email:
+                </span>{" "}
+                <span>{script?.user?.email}</span>
+              </p>
               <p
               className="personalP"
                 style={{
@@ -193,7 +209,23 @@ const ProfilePicture = ({ script }) => {
                     fontWeight: "600",
                   }}
                 >
-                  Ph no:
+                  Designation:
+                </span>{" "}
+                <span>{script?.account?.designation}</span>
+              </p>
+              <p
+              className="personalP"
+                style={{
+                  marginTop: "0.5rem",
+                }}
+              >
+                {" "}
+                <span
+                  style={{
+                    fontWeight: "600",
+                  }}
+                >
+                  Phone no:
                 </span>{" "}
                 <span>{script?.account?.phone}</span>
               </p>
@@ -208,11 +240,11 @@ const ProfilePicture = ({ script }) => {
                     fontWeight: "600",
                   }}
                 >
-                  National Identification Number(NIN):
+                  NIN:
                 </span>{" "}
                 <span>{script?.account?.nin}</span>
               </p>
-              <p
+              {/* <p
               className="personalP"
                 style={{
                   marginTop: "0.5rem",
@@ -252,7 +284,7 @@ const ProfilePicture = ({ script }) => {
                 <span  style={{gap:"5px", display:'flex',alignItems:'center'}} onClick={() => window.open(script?.account?.signed_note)}>
                   upload File<img src="/upload.png" />
                 </span>
-              </p>
+              </p> */}
             </div>
           </div>
         </div>

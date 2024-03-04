@@ -21,12 +21,12 @@ const MyProject = ({ script }) => {
           >
            My Projects
           </p>
-          <p
+          {/* <p
           className="pPara"
           
           >
             Projects Created By Me
-          </p>
+          </p> */}
         </div>
         <div>
           <button

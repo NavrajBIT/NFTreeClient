@@ -1,11 +1,24 @@
+import { useEffect, useState } from "react";
 import LabelValueBox from "./labelValueBox";
 import ProjectPageButton from "./projectButton";
 import { useNavigate } from "react-router-dom";
 
 const ProjectOwnerDetails = ({ isOwnerView, details }) => {
   const navigate = useNavigate();
-  const socials =
-    details?.project?.owner?.organization?.social_links?.split(",");
+  const [socialMedia, setSocialMedia] = useState([]);
+
+  useEffect(() => {
+    setSocialMedia((prev) => {
+      try {
+        return JSON.parse(details?.project?.owner?.organization?.social_links);
+      } catch {
+        return null;
+      }
+    });
+  }, [details]);
+
+  console.log(socialMedia);
+
   return (
     <div className="projectOwnerDetailsContainer">
       <div>
@@ -20,7 +33,7 @@ const ProjectOwnerDetails = ({ isOwnerView, details }) => {
         }}
         className="Responsiveflex1150 projectOwnerSectionPadding"
       >
-        <div style={{ width: "45%" }}>
+        <div style={{ width: "45%", display: "flex", flexDirection: "column" }}>
           <div>
             <p className="projectOwnerSubHeading">Organization details</p>
           </div>
@@ -29,6 +42,7 @@ const ProjectOwnerDetails = ({ isOwnerView, details }) => {
             style={{
               backgroundImage:
                 "linear-gradient(243.83deg, #D4F6D6 0%, #FFFFFF 97.91%)",
+              flexGrow: "1",
             }}
           >
             <LabelValueBox
@@ -70,10 +84,24 @@ const ProjectOwnerDetails = ({ isOwnerView, details }) => {
                   Social Media
                 </p>
               </div>
+
               <div className="socialMediaIcons">
-                <img src="/Component 6.png" alt="Instagram" />
-                <img src="/Component 7.png" alt="LinkedIn" />
-                <img src="/Component 8.png" alt="Twitter" />
+                <a href={"https://" + socialMedia?.instagram} target="_blank">
+                  {" "}
+                  <img src="/Component 6.png" alt="Instagram" />
+                </a>
+                <a
+                  href={"https://" + socialMedia?.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {" "}
+                  <img src="/Component 7.png" alt="LinkedIn" />
+                </a>
+                <a href={"https://" + socialMedia?.twitter} target="_blank">
+                  {" "}
+                  <img src="/Component 8.png" alt="Twitter" />
+                </a>
               </div>
             </div>
           </div>
@@ -148,10 +176,10 @@ const ProjectOwnerDetails = ({ isOwnerView, details }) => {
               label="NIN"
               value={details?.project?.owner?.representative?.nin}
             />
-            <LabelValueBox
+            {/* <LabelValueBox
               label="Wallet"
               value={details?.project?.owner?.representative?.wallet}
-            />
+            /> */}
           </div>
         </div>
       </div>

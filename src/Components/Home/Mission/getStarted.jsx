@@ -10,7 +10,7 @@ const GetStarted = () => {
         if (prev === 1) return 2;
         return 1;
       });
-    }, 5000);
+    }, 10000);
     return () => clearInterval(myinterval);
   }, []);
 

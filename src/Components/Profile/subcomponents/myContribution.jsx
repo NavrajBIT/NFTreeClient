@@ -22,11 +22,11 @@ const MyContribution = ({ script }) => {
           >
             My Contributions
           </p>
-          <p
+          {/* <p
             className="pPara"
           >
             Contributions made by you
-          </p>
+          </p> */}
         </div>
         <div>
           <button className="profileButtons">

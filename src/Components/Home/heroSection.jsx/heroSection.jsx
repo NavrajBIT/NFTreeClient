@@ -29,11 +29,11 @@ const HeroSection = () => {
           />
         </div>
         <div className="landingdescription">
-          Step into the world of digital innovation meets environmental
-          stewardship with Bitbhoomi. Uncover a vibrant ecosystem that enables
-          secure and transparent participation in creating a greener planet
-          through tokenized ownership. From tree counting to carbon
-          sequestration, get a comprehensive, real-time view of your
+          Step into the world of digital innovation where technology meets
+          environmental stewardship with Bitbhoomi. Uncover a vibrant ecosystem
+          that enables secure and transparent participation in creating a
+          greener planet through tokenized ownership. From tree counting to
+          carbon sequestration, get a comprehensive, real-time view of your
           reforestation initiatives.
         </div>
         <div className="herobuttoncontainer">

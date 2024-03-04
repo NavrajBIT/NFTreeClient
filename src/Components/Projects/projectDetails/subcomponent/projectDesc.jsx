@@ -28,10 +28,11 @@ const ProjectDesc = ({ isOwnerView, details }) => {
             borderWidth: "1px 2px 0px 2px",
             borderStyle: "solid",
             borderColor: "#4C9A46",
-            minWidth: "20%",
+
             textAlign: "center",
             width: "fit-content",
             padding: "10px",
+            minWidth: "150px",
           }}
         >
           <h1 className="projectHeading">{details?.project?.name}</h1>
