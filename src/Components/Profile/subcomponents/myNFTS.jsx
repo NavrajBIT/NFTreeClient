@@ -1,15 +1,15 @@
 import ProjectCard from "../../Subcomponents/projectCard/projectCard";
+import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import useAPI from "../../../api/useAPI";
+import "./profile.css"
 
-const MyNFTs = ({ script }) => {
+const MyNftDetails = ({ script }) => {
+  const navigate = useNavigate();
+
   return (
     <div
-      style={{
-        backgroundColor: "#D2E0D6",
-        width: "100%",
-        padding: "2rem",
-      }}
+      className="myNFTDiv"
     >
       <div
         style={{
@@ -19,22 +19,23 @@ const MyNFTs = ({ script }) => {
       >
         <div>
           <p
-            style={{
-              fontSize: "1.6rem",
-              fontWeight: "600",
-            }}
+            className="pTitle"
+            style={{ cursor: "pointer" }}
+            onClick={() => navigate("mynft")}
           >
+            {" "}
             My NFTs
           </p>
         </div>
-        <div></div>
       </div>
 
       <div
-        style={{
-          marginTop: "2rem",
-          padding: "1rem",
-        }}
+        // style={{
+        //   marginTop: "2rem",
+        //   display: 'flex',
+        //   gap: '2rem',
+        // }}
+        className="projectCardDiv"
       >
         {script?.nftData?.map((nft, index) => (
           <NFTDataFunction nft={nft} key={"my-contribution-" + index} />
@@ -44,7 +45,7 @@ const MyNFTs = ({ script }) => {
   );
 };
 
-export default MyNFTs;
+export default MyNftDetails;
 
 const NFTDataFunction = ({ nft }) => {
   const api = useAPI();
@@ -66,6 +67,7 @@ const NFTDataFunction = ({ nft }) => {
       })
       .catch((err) => console.log(err));
   };
+
   const poppulateProject = async (projectId) => {
     await api
       .crud("GET", `project/${projectId}`)
@@ -78,11 +80,12 @@ const NFTDataFunction = ({ nft }) => {
   };
 
   if (!project) return null;
+  let project2 = project
+  project2.type = 2
   return (
-    <div>
-      <ProjectCard project={project} Nftproject={true} nftId={nft.id} />
-      <div>Contribution: {transaction?.amount} $</div>
-      <div>Trees: {transaction?.trees_count}</div>
-    </div>
+    // <div className="projectCardDiv">
+      <ProjectCard project={project2} transaction={transaction}
+        Nftproject={true} nftId={nft.id} />
+    // </div>
   );
 };

@@ -3,42 +3,26 @@ const ProfilePicture = ({ script }) => {
   return (
     <div className="profileMainDiv">
       <div className="profileSubContainer">
-        <div className="coverPicContainer">
+        <div className="coverPicContainer" >
           <div className="profilePicContainer">
-            <img
-              src={script.account?.picture}
-              alt="profile pic"
-              style={{
-                borderRadius: "50%",
-                width: "100%",
-                height: "100%",
-                objectFit: "cover",
-                boxShadow: "0px 0px 10px 0px rgba(0,0,0,0.75)",
-              }}
-            />
-            <p
-              style={{
-                marginTop: "10px",
-                fontSize: "22px",
-                textAlign: "center",
-                fontWeight: "bold",
-              }}
+            <div style={{ zIndex: "-1" }}>
+              <img
+                src={script.account?.picture}
+                alt="profile pic"
+              />
+            </div>
+            <p className="PName"
             >
               {script?.user?.first_name} {script?.user?.last_name}
             </p>
             <p
-              style={{
-                fontSize: "17px",
-                textAlign: "center",
-              }}
+              className="PDesignation"
             >
               {script?.account?.designation}
             </p>
             <p
-              style={{
-                fontSize: "13px",
-                textAlign: "center",
-              }}
+              className="PEmail"
+
             >
               {script?.user?.email}
             </p>
@@ -54,14 +38,14 @@ const ProfilePicture = ({ script }) => {
             >
               <p
                 style={{
-                  fontSize: "1.2rem",
+                  fontSize: "26px",
                   fontWeight: "700",
                 }}
               >
                 Organization
               </p>
               <img
-                src="Edit2.png"
+                src="/Edit2.png"
                 alt="Edit"
                 style={{
                   width: "60px",
@@ -90,6 +74,7 @@ const ProfilePicture = ({ script }) => {
                 {script?.user?.organization?.description}
               </p>
               <p
+              className="personalP"
                 style={{
                   marginTop: "0.5rem",
                 }}
@@ -104,6 +89,7 @@ const ProfilePicture = ({ script }) => {
                 {script?.user?.website}
               </p>
               <p
+              className="personalP"
                 style={{
                   marginTop: "0.5rem",
                 }}
@@ -119,6 +105,7 @@ const ProfilePicture = ({ script }) => {
                 <span>{script?.organization?.address}</span>
               </p>
               <p
+              className="personalP"
                 style={{
                   marginTop: "0.5rem",
                 }}
@@ -134,6 +121,7 @@ const ProfilePicture = ({ script }) => {
                 <span>{script?.organization?.country}</span>
               </p>
               <p
+              className="personalP"
                 style={{
                   marginTop: "0.5rem",
                 }}
@@ -148,6 +136,7 @@ const ProfilePicture = ({ script }) => {
                 <span>{script?.organization?.pin_code}</span>
               </p>
               <p
+              className="personalP"
                 style={{
                   marginTop: "0.5rem",
                 }}
@@ -172,14 +161,14 @@ const ProfilePicture = ({ script }) => {
             >
               <p
                 style={{
-                  fontSize: "1.2rem",
+                  fontSize: "26px",
                   fontWeight: "700",
                 }}
               >
                 Profile Info
               </p>
               <img
-                src="Edit2.png"
+                src="/Edit2.png"
                 alt="Edit"
                 style={{
                   width: "60px",
@@ -193,6 +182,7 @@ const ProfilePicture = ({ script }) => {
               }}
             >
               <p
+              className="personalP"
                 style={{
                   marginTop: "0.5rem",
                 }}
@@ -208,6 +198,7 @@ const ProfilePicture = ({ script }) => {
                 <span>{script?.account?.phone}</span>
               </p>
               <p
+              className="personalP"
                 style={{
                   marginTop: "0.5rem",
                 }}
@@ -222,8 +213,11 @@ const ProfilePicture = ({ script }) => {
                 <span>{script?.account?.nin}</span>
               </p>
               <p
+              className="personalP"
                 style={{
                   marginTop: "0.5rem",
+                  display:'flex',
+                  gap:'5px'
                 }}
               >
                 <span
@@ -235,13 +229,16 @@ const ProfilePicture = ({ script }) => {
                   {" "}
                   Proof of NIN:
                 </span>{" "}
-                <span onClick={() => window.open(script?.account?.nin_proof)}>
-                  uploaded File
+                <span style={{gap:"5px", display:'flex',alignItems:'center'}} onClick={() => window.open(script?.account?.nin_proof)}>
+                  uploaded File<img src="/upload.png" />
                 </span>
               </p>
               <p
+              className="personalP"
                 style={{
                   marginTop: "0.5rem",
+                  display:'flex',
+                  gap:'5px'
                 }}
               >
                 <span
@@ -252,8 +249,8 @@ const ProfilePicture = ({ script }) => {
                 >
                   Signed Note from Organization:
                 </span>{" "}
-                <span onClick={() => window.open(script?.account?.signed_note)}>
-                  upload File
+                <span  style={{gap:"5px", display:'flex',alignItems:'center'}} onClick={() => window.open(script?.account?.signed_note)}>
+                  upload File<img src="/upload.png" />
                 </span>
               </p>
             </div>

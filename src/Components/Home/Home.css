@@ -12,7 +12,7 @@
 }
 
 .landingText {
-  font-size: 60px;
+  font-size: 4rem;
   color: var(--text-bright);
   font-family: "Ethnocentric";
   /* width: 100%; */
@@ -24,11 +24,12 @@
   text-align: justify;
   width: 100%;
   max-width: 680px;
-  font-size: 20px;
+  font-size: 1.3rem;
   font-family: "Fira Sans", sans-serif;
   line-height: 35px;
   font-weight: 300;
 }
+
 
 .heroillustration img {
   width: 100%;
@@ -40,6 +41,15 @@
 
 .heroillustrationmobile {
   display: none;
+}
+
+@media screen and (max-width: 1300px) {
+  .landingText {
+    font-size: 2.5rem;
+  }
+  .landingdescription {
+    font-size: 1rem;
+  }
 }
 
 @media screen and (max-width: 1000px) {

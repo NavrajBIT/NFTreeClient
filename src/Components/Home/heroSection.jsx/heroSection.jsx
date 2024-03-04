@@ -1,12 +1,12 @@
 import { useNavigate } from "react-router-dom";
-import Herocontainer from "../../Subcomponents/containers/herocontainer";
+import { Herocontainer2 } from "../../Subcomponents/containers/herocontainer";
 import Button from "../../Subcomponents/buttons/button";
 import heroimage from "../assets/hero.png";
 
 const HeroSection = () => {
   const navigate = useNavigate();
   return (
-    <Herocontainer
+    <Herocontainer2
       style={{
         alignItems: "center",
       }}
@@ -55,7 +55,7 @@ const HeroSection = () => {
           }}
         />
       </div>
-    </Herocontainer>
+    </Herocontainer2>
   );
 };
 

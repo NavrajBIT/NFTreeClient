@@ -1,384 +1,284 @@
-.userViewContainer {
-  padding: 3rem;
+p {
+  font-size: 19px;
 }
-.projectDescContainer {
-  width: 100%;
-  min-height: 450px;
-  background-image: url("./unsplash_bYZn_C-RswQ.png");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-  border-radius: 20px 20px 0px 20px;
-}
-.projectTitleContainer {
-  width: 400px;
-  height: 60px;
+
+.descriptionBlock {
   background-color: #bfcca6;
   border-radius: 20px;
-  box-shadow: 3px 4px 30px 0px;
-  padding: 1rem;
+  padding: 30px;
+  text-align: justify;
+  box-shadow: 3px 4px 10px 0px rgba(0, 0, 0, 0.25);
+  width: 85%;
+  margin: 1.5rem auto;
+  margin-bottom: 2rem;
 }
 
-.projectDetailsContainer {
-  width: 100%;
-  min-height: 500px;
-  padding: 2rem;
+.projectHeading {
+  font-family: "DM Serif Display";
+  font-weight: 400;
+  text-transform: capitalize;
+  text-align: center;
 }
-.projectDetailsMainBox {
-  display: flex;
-  width: 100%;
-  min-height: 300px;
-  margin-top: 3rem;
+
+.projectText {
+  font-family: "DM Serif Display";
+  font-weight: 400;
+  text-transform: capitalize;
+  text-align: center;
 }
-.projectDetailsSubBoxFirst {
+
+.projectsDetailAttribute {
   width: 50%;
-  border-right: 1px solid rgba(54, 142, 0, 0.3);
-  padding: 2rem;
-  display: flex;
+  font-size: 1.1rem;
+  font-weight: 500;
+  padding: 0 5%;
 }
 
-.projectDetailsSubBoxSecond {
-  width: 50%;
-  padding: 2rem;
-  display: flex;
-}
-
-.fundingProcessContainer {
-  width: 100%;
-  min-height: 100px;
-  padding: 2rem;
-}
 .btnsAndPlantImageContainer {
   position: relative;
-  width: 100%;
-  height: 1100px;
-  display: flex;
   flex-direction: column;
   align-items: center;
-  background-image: url("./Vector 6.png");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-  z-index: 3;
-  /* padding: 2rem; */
+  background-image: url("/Vector 6.png");
+  background-size: 100% 127%;
+  padding: 1rem 0;
+  margin-bottom: 3%;
 }
 .buttonContainer {
-  margin-top: 3rem;
-  width: 80%;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-evenly;
+  margin: 2% auto;
 }
 
 .progressBtn {
-  width: 300px;
-  height: 50px;
   background-color: #185a00;
   border-radius: 5px;
   font-size: 1.1rem;
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 1% 5%;
+  gap: 10px;
 }
 
-.projectDocumentContainer {
-  /* position: absolute; */
-  top: -10%;
+.imagesContainer {
+  margin-top: clamp(2rem, 10%, 3rem);
   width: 100%;
-  min-height: 500px;
-  padding: 2rem;
-  background-image: linear-gradient(to top, #0e1213, #08370d);
-  border-radius: 0 200px 0px 200px; /* left bottom */
+  min-height: clamp(150px, 20vw, 400px);
 }
 
-.projectGalleryContainer {
-  width: 100%;
-  background-image: url("./Vector 7.png");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-  min-height: 1000px;
-  padding: 2rem;
+.ImageGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin-top: 3%;
+  justify-items: center;
+  justify-content: center;
+  gap: 30px 20px;
+  padding: 0 20px;
+  min-height: clamp(84px, 20vw, 283px);
 }
 
-.projectOwnerDetailsContainer {
-  width: 100%;
-  min-height: 700px;
-  background-image: linear-gradient(to bottom right, #c4f5c9, #fcfffd);
-  border-radius: 200px 0px 200px 0px; /* right top */
-  padding: 3rem;
-}
-
-.projectOwnerDetails {
-  margin-top: 3rem;
-  width: 100%;
-  display: flex;
-  min-height: 600px;
-}
-
-.orgDetailsContainer {
-  width: 50%;
-  border-right: 1px solid rgba(54, 142, 0, 0.3);
-  padding: 3rem;
-}
-
-.repDetailsContainer {
-  width: 50%;
-  padding: 3rem;
-}
-
-.orgDetailsBox {
-  margin-top: 3rem;
-  width: 100%;
-  border-radius: 20px;
-  box-shadow: 0px 0px 10px 0px #beddc1;
-  min-height: 465px;
-  display: flex;
-}
-
-.orgLabelBox {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  min-height: 465px;
-  padding: 2rem;
-}
-.repLabelBox {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  min-height: 300px;
-  padding: 2rem;
-}
-
-.repDetailsBox {
-  margin-top: 3rem;
-  width: 100%;
-  border-radius: 20px;
-  box-shadow: 0px 0px 10px 0px #beddc1;
-  min-height: 465px;
-  display: flex;
-  flex-direction: column;
-}
-
-.repProfile {
-  width: 100%;
-  height: 160px;
-  padding: 2rem;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-}
 .plantImageBox {
-  width: 350px;
+  max-width: 250px;
+  min-width: 70px;
+  width: 98%;
+  aspect-ratio: 1;
   background-color: #8c9e6b;
-  height: 400px;
-  border-radius: 20px;
+  border-radius: 5px;
   padding: 1rem;
   border: 2px solid #59810f;
+  display: flex;
+  flex-direction: column;
 }
 .plantImage {
-  width: 100%;
-  height: 300px;
-  border-radius: 20px;
+  aspect-ratio: 17/16;
+  max-width: 100%;
+  border-radius: 5px;
 }
 .plantImageText {
   margin-top: 1rem;
   font-size: 1.5rem;
   color: white;
-  font-weight: 500;
+  font-weight: 700;
   text-align: center;
 }
-.documentBox {
-  width: 180px;
-  height: 300px;
-  padding: 1rem;
+
+.projectDocumentContainer {
+  min-height: 500px;
+  padding: 4rem;
+  background-image: linear-gradient(to top, #0e1213, #08370d);
+  border-radius: 0 200px 0px 200px; /* left bottom */
+  margin-bottom: 2rem;
 }
 
 .docImage {
   width: 100%;
-  height: 200px;
 }
-.docsText {
-  margin-top: 1rem;
-  font-size: 1rem;
-  color: white;
+
+.projectGalleryContainer {
+  width: 100%;
+  background-image: url("/Vector 7.png");
+  background-repeat: no-repeat;
+  background-position: top;
+  background-size: 100% 100%;
+  min-height: clamp(200px, 20vw, 400px);
+  padding: 4% 2%;
+}
+
+.projectOwnerDetailsContainer {
+  background-image: linear-gradient(
+    257.46deg,
+    #ffffff 6.03%,
+    #fcfffd 6.04%,
+    #c4f5c9 86.33%
+  );
+  border-radius: 200px 0px 200px 0px; /* right top */
+  padding: 3rem 1rem;
+}
+
+.projectOwnerSubHeading {
+  font-family: Inter;
+  font-size: 1.3rem;
+  text-align: center;
   font-weight: 500;
-  text-align: center;
+  margin-bottom: 3rem;
 }
 
-.imagesContainer {
-  margin-top: 18rem;
-  position: absolute;
-  width: 100%;
-  min-height: 500px;
-}
-
-.projectGalleryTitle {
-  margin-top: 5rem;
-  font-family: DM Serif Display;
-  font-size: 2rem;
-  text-align: center;
-  font-weight: 700;
-}
-
-.projectDetailsSubBoxSecondSub {
-  width: 100%;
-  height: 100%;
+.projectOwnerSection {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-}
-
-.projectDetailsSubBoxFirstSub {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-}
-.projectDetails2ndMainBox {
-  /* width:"100%",
-                display:"flex",
-                minHeight:"400px",
-                padding:"2rem" */
-  width: 100%;
-  display: flex;
-  min-height: 400px;
   padding: 2rem;
+  border-radius: 20px;
+  gap: 12px;
+  box-shadow: 2px 4px 10px 0px rgba(190, 221, 193, 1);
 }
 
-@media screen and (max-width: 500px) {
-  .userViewContainer {
-    padding: 0rem;
+.socialMediaIcons img {
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+@media screen and (max-width: 1150px) {
+  .Responsiveflex1150 {
+    flex-direction: column !important;
+    gap: 50px;
   }
-  .projectDetailsMainBox {
+  .Responsiveflex1150 div {
+    width: 100% !important;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .Responsiveflex900 {
     flex-direction: column;
   }
-  .projectDetailsSubBoxFirst {
-    width: 100%;
-    padding: 1rem;
-    border: none;
-    gap: "1rem";
+  .Responsiveflex900 hr {
+    display: none;
   }
-  .projectDetailsSubBoxSecond {
-    width: 100%;
-    padding: 1rem;
+  .Responsiveflex900 div {
+    width: 100% !important;
   }
-  .progressBtn {
-    width: 119px;
-    height: 35px;
-    background-color: #185a00;
-    border-radius: 5px;
-    font-size: 1rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .buttonContainer {
-    width: 100%;
-    margin-top: 2rem;
-  }
+
   .plantImageBox {
-    width: 101px;
-    height: 150px;
-    padding: 0.5rem;
-    border-radius: 10px;
+    padding: 5px;
+  }
+
+  .projectDocumentContainer {
+    border-radius: 0px 70px 0px 70px; /* right top */
   }
 
   .plantImageText {
-    margin-top: 0px;
-    font-size: 0.8rem;
-    color: white;
-    font-weight: 500;
-    text-align: center;
-  }
-  .plantImage {
-    border-radius: 10px;
-    height: 120px;
-  }
-  .documentBox {
-    width: 80px;
-    height: 102px;
-    padding: 1rem;
+    font-size: 10px !important;
+    margin-top: 10%;
   }
 
-  .docImage {
-    width: 100%;
-    height: 91px;
+  .SeeMoreText {
+    font-size: 8px !important;
   }
-  .docsText {
-    font-size: 0.8rem;
-    color: white;
-    font-weight: 500;
-    text-align: center;
-  }
+
   .projectDocumentContainer {
     min-height: 300px;
-    border-radius: 0 100px 0px 100px; /* left bottom */
   }
-  .projectOwnerDetails {
+}
+
+@media screen and (max-width: 600px) {
+  .Responsiveflex900 {
     flex-direction: column;
   }
-  .orgDetailsContainer {
-    width: 100%;
-    padding: 0.5rem;
-    border: none;
+
+  .fundingBar {
+    width: 100% !important;
+    gap: 15px !important;
   }
-  .projectOwnerDetailsContainer {
-    padding: 0.5rem;
-    border-radius: 100px 0px 100px 0px;
-  }
-  .repDetailsContainer {
-    width: 100%;
-    padding: 0.3rem;
-  }
-  .btnsAndPlantImageContainer {
-    height: 500px;
-  }
-  .imagesContainer {
-    margin-top: 8rem;
-    height: 300px;
-    box-shadow: none;
-  }
-  .projectGalleryContainer {
-    min-height: 417px;
-  }
-  /* .projectGalleryTitle{
-    margin-top: 2rem;
-} */
-  .projectTitleContainer {
-    width: 250px;
-    height: 50px;
-    background-color: #bfcca6;
-    border-radius: 20px;
-    box-shadow: 3px 4px 30px 0px;
-    padding: 2rem;
+  .fundingBar p {
+    min-width: 202px !important;
   }
 
-  .projectGalleryTitle {
-    font-family: DM Serif Display;
-    font-size: 1.7rem;
-    text-align: center;
-    font-weight: 600;
-    margin-top: 1rem;
-  }
-  .projectDescContainer {
-    border-radius: 0px 0px 0px 0px;
+  .projectDocumentContainer {
+    min-height: 300px;
+    padding: 2rem 0;
   }
 
-  .projectDetailsSubBoxSecondSub {
-    width: 100%;
-    gap: 1rem;
+  .updateDocButton span {
+    font-size: 12px !important;
   }
-  .projectDetails2ndMainBox {
+}
+
+@media screen and (max-width: 500px) {
+  .projectHeading {
+    font-size: 24px !important;
+  }
+  .descriptionBlock span {
+    display: none !important;
+  }
+  .descriptionBlock {
+    margin-top: 0.5rem !important;
+    padding: 15px;
+  }
+  p {
+    font-size: 14px !important;
+  }
+  .projectContainer {
+    padding: 0 !important;
+  }
+
+  .projectContainerBox {
+    width: 100% !important;
+  }
+
+  .Responsiveflex500 {
+    flex-direction: column;
+  }
+
+  .Responsiveflex500 div {
+    width: 100% !important;
+    padding: 0 5%;
+  }
+
+  .fundingProcessContainer {
     padding: 1rem;
+  }
+
+  .progressBtn {
+    padding: 8px 16px;
+    font-size: 10px !important;
+  }
+
+  .projectOwnerSubHeading {
+    text-align: start;
+    margin-bottom: 1rem;
+    margin-left: 1rem;
+  }
+
+  .projectOwnerSectionPadding {
+    margin: 3rem 0 !important;
+  }
+
+  .projectOwnerDetailsContainer hr {
+    display: none;
+  }
+
+  .projectOwnerDetailsContainer h1 {
+    font-size: 24px;
   }
 }

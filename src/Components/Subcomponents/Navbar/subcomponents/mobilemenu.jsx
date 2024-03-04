@@ -51,6 +51,14 @@ const MenuOptions = ({ setIsmenu }) => {
             {link}
           </div>
         ))}
+        <div
+          className="sidebarlink"
+          onClick={() => {
+            window.open("https://bitbhoomiido.onrender.com/");
+          }}
+        >
+          IDO
+        </div>
         {auth.isLoggedIn ? (
           <div>
             <div

@@ -12,6 +12,12 @@ export default function ProjectPage() {
   const [search, setSearch] = useState("");
 
   useEffect(() => {
+    let footer = document.getElementById("footer");
+    footer.style.display = "none";
+    return () => (footer.style.display = "block");
+  }, []);
+
+  useEffect(() => {
     const projectListData = async () => {
       await api
         .crud("GET", "project/projectlist")

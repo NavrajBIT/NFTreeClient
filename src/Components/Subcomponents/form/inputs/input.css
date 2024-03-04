@@ -140,6 +140,9 @@ textarea {
   position: relative;
   resize: none;
   border-radius: 5px;
+  border: 1px solid #a0a0a0;
+  background: #e9f6d2;
+  /* color: #e9f6d2; */
 }
 
 .projectFormFileupload {

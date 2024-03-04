@@ -6,8 +6,7 @@ import OpenMultiline from "../Subcomponents/form/inputs/openMultiline";
 import Herocontainer from "../Subcomponents/containers/herocontainer";
 import Button from "../Subcomponents/buttons/button";
 import "./Contact.css";
-import insta from "./assets/insta.png";
-import linkedin from "./assets/linkedin.png";
+import telegram from "./assets/telegram.png";
 import twitter from "./assets/twitter.png";
 import { useNavigate } from "react-router-dom";
 
@@ -66,13 +65,7 @@ const Contact = ({ page }) => {
           type="submit"
           onSubmit={handleSubmit}
         >
-          <div
-            style={{
-              fontSize: "2rem",
-              fontWeight: "700",
-              color: "var(--text-black)",
-            }}
-          >
+          <div className="contactHeading">
             Contact Us
           </div>
 
@@ -93,7 +86,7 @@ const Contact = ({ page }) => {
               onChange={(e) => setEmail(e.target.value)}
               maxLength="50"
             />
-            <OpenInput
+            <OpenMultiline
               label="Message"
               type="email"
               required
@@ -103,11 +96,7 @@ const Contact = ({ page }) => {
             />
           </div>
 
-          <Button
-            title={"Submit"}
-            variant={"green"}
-            style={{ background: "var(--green-110)", cursor: "pointer" }}
-          />
+          <Button title={"Submit"} variant={"green"} />
         </form>
         <ContactDetails />
       </div>
@@ -126,13 +115,15 @@ const ContactDetails = () => {
         </div>
         <a
           href="mailto:support@beimagine.tech"
-          style={{ fontWeight: "normal", fontSize: "14px" }}
+          style={{ fontWeight: 'normal', fontSize: '14px' }}
         >
           support@beimagine.tech
         </a>
       </div>
       <div className="contactInfoContainer">
-        <div style={{ fontSize: "1.5rem", fontWeight: "600" }}>Visit Us:</div>
+        <div style={{ fontSize: "1.5rem", fontWeight: "600" }}>
+          Visit Us:
+        </div>
         <div className="addressContainer">
           <div>Beyond imagination tech LLC</div>
           <div>M03 Laffa restaurant building,</div>
@@ -141,28 +132,12 @@ const ContactDetails = () => {
         </div>
       </div>
       <div className="socialcontainer">
-        <img
-          src={insta}
-          alt="Instagram"
-          onClick={() => window.open("https://www.instagram.com/bitmemoir/")}
-        />
-        <img
-          src={linkedin}
-          alt="Linkedin"
-          onClick={() =>
-            window.open("https://www.linkedin.com/company/bitmemoir/")
-          }
-        />
-        <img
-          src={twitter}
-          className="twitter"
-          alt="Twitter"
-          onClick={() =>
-            window.open(
-              "https://twitter.com/Bit_memoir?t=dPPpNawrSKg3mn3BLyYxWA"
-            )
-          }
-        />
+        <a href="https://t.co/4LJmYD56rc" target="_blank">
+          <img src={telegram} alt="Telegram" className="telegramIcon" />
+        </a>
+        <a href="https://twitter.com/BITBhoomi" target="_blank">
+          <img src={twitter} className="twitter" alt="Twitter" />
+        </a>
       </div>
     </div>
   );

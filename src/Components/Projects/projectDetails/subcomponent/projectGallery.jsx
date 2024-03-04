@@ -1,24 +1,51 @@
 import "./userView.css";
 import PlantImageBox from "./plantImageBox";
-const ProjectGallery = ({ details }) => {
+import { useState } from "react";
+
+const ProjectGallery = ({ isOwnerView, details }) => {
+  const [seeMore, setSeeMore] = useState(false);
   return (
     <div className="projectGalleryContainer">
       <div>
-        <p className="projectGalleryTitle">Project Gallery</p>
+        <h1 className="projectHeading">Project Gallery</h1>
       </div>
 
-      <div
-        style={{
-          width: "100%",
-          display: "flex",
-          justifyContent: "space-around",
-          marginTop: "5rem",
-        }}
-      >
-        {details?.projectImages?.map((img, index) => (
-          <PlantImageBox src={img} key={`project-image-${index}`} />
-        ))}
+      <div className="ImageGrid">
+        {details?.project?.gallery?.map(
+          (img, index) =>
+            (index < (isOwnerView ? 3 : 4) || seeMore) && (
+              <PlantImageBox img={img} key={`project-image-${index}`} />
+            )
+        )}
+        {isOwnerView && (
+          <div
+            className="plantImageBox"
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <p className="plantImageText"> + Add Image</p>
+          </div>
+        )}
       </div>
+      {details?.project?.gallery?.length > (isOwnerView ? 3 : 4) && (
+        <span
+          style={{
+            fontWeight: "500",
+            position: "absolute",
+            marginTop: "20px",
+            right: "10%",
+            fontSize: "18px",
+            cursor: "pointer",
+          }}
+          className="SeeMoreText"
+          onClick={() => setSeeMore(!seeMore)}
+        >
+          {seeMore ? "See Less..." : "See more..."}
+        </span>
+      )}
     </div>
   );
 };

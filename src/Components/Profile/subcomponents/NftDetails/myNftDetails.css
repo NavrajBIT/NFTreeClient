@@ -1,0 +1,99 @@
+.myNftSection {
+    margin-top: 32rem;
+    padding: 4rem;
+}
+
+.myNftSection h1 {
+    font-size: 28px;
+    font-weight: 600;
+}
+
+.myNftDetailsSection {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    margin-top: 2rem;
+}
+
+.myNftInfoMainContainer {
+    border: 1px solid rgb(229, 229, 229);
+    display: flex;
+    padding: var(--padding-large);
+    background: rgb(246, 246, 246);
+    box-shadow: rgba(0, 0, 0, 0.25) 5px 4px 30.8px -6px;
+    border-radius: var(--border-radius-light);
+    gap: 30px;
+}
+
+.myNftInfoMainContainer .projectImg {
+    width: 350px;
+    aspect-ratio: var(--image-aspect-ratio);
+    border-radius: 10px;
+    box-shadow: 2px 2px 10px -4px #000000;
+}
+
+.myNftInfoContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.projectDescription {
+    font-weight: 600;
+    cursor: pointer;
+    text-align: justify;
+}
+
+.projectDescription:hover {
+    text-decoration: underline;
+}
+
+.myNftInfoSubContainer {
+    display: flex;
+    gap: 1rem;
+    color: #056060;
+    font-weight: 600;
+}
+
+.myNftInfoSubContainer span {
+    flex-basis: 150px;
+}
+
+@media only screen and (max-width: 900px) {
+    .myNftInfoMainContainer {
+        flex-direction: column;
+        align-items: center;
+        padding: var(--padding-main);
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .myNftInfoMainContainer .projectImg {
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width: 450px) {
+    .myNftSection {
+        margin-top: 23rem;
+        padding: 1rem;
+    }
+
+    .myNftInfoContainer {
+        padding: 0 12px;
+    }
+
+    .myNftInfoSubContainer span {
+        flex-basis: 40%;
+    }
+}
+
+@media only screen and (max-width: 300px) {
+    .myNftSection {
+        padding: 0;
+    }
+
+    .myNftSection h1 {
+        margin-left:12px;
+    }
+}
