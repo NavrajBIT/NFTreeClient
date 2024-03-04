@@ -1,4 +1,4 @@
-import { Routes, Route, useNavigate, Link } from "react-router-dom";
+import {Routes, Route, useNavigate, Link} from "react-router-dom";
 import Home from "../../Home/Home";
 import CreateProject from "../../Projects/CreateProject/CreateProject";
 import Auth from "../../Auth/Auth";
@@ -22,38 +22,77 @@ export default function Navbar() {
     <>
       <NavContent />
       <Routes>
-        <Route index element={<Home />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/login" element={<Auth />} />
-        <Route path="/projects" element={<ProjectPage />} />
-        <Route path="/projects/create" element={<CreateProject />} />
         <Route
-          path="/projects/:projectId"
+          index
+          element={<Home />}
+        />
+        <Route
+          path='/home'
+          element={<Home />}
+        />
+        <Route
+          path='/contact'
+          element={<Contact />}
+        />
+        <Route
+          path='/login'
+          element={<Auth />}
+        />
+        <Route
+          path='/projects'
+          element={<ProjectPage />}
+        />
+        <Route
+          path='/projects/create'
+          element={<CreateProject />}
+        />
+        <Route
+          path='/projects/:projectId'
           element={<Projectdetails notMyProject={true} />}
         />
         <Route
-          path="/projects/:projectId/report"
+          path='/projects/:projectId/report'
           element={<Generatereport />}
         />
-        <Route path="/projects/:projectId/donate" element={<Donate />} />
-
-        <Route path="/myprojects/:projectId" element={<Projectdetails />} />
         <Route
-          path="/myprojects/:projectId/update"
+          path='/projects/:projectId/donate'
+          element={<Donate />}
+        />
+
+        <Route
+          path='/myprojects/:projectId'
+          element={<Projectdetails />}
+        />
+        <Route
+          path='/myprojects/:projectId/update'
           element={<Updatereport />}
         />
         <Route
-          path="/myprojects/:projectId/report"
+          path='/myprojects/:projectId/report'
           element={<Generatereport isMyProject />}
         />
 
         {/* <Route path="/forget-password" element={<ForgetPassword />} /> */}
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/kyc" element={<KYCPage />} />
-        <Route path="/wallet" element={<BitWallet />} />
-        <Route path="/nft/:nftid" element={<Nft />} />
-        <Route path="*" element={<ErrorPage />} />
+        <Route
+          path='/profile'
+          element={<Profile />}
+        />
+        <Route
+          path='/kyc'
+          element={<KYCPage />}
+        />
+        <Route
+          path='/wallet'
+          element={<BitWallet />}
+        />
+        <Route
+          path='/nft/:nftid'
+          element={<Nft />}
+        />
+        <Route
+          path='*'
+          element={<ErrorPage />}
+        />
       </Routes>
     </>
   );

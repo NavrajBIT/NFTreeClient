@@ -77,7 +77,8 @@ export function WalletProvider(props) {
     provider,
     setProvider,
     trxnStatus,
-    sendSol
+    sendSol,
+    isWalletConnected
   };
 
   return <WalletContext.Provider value={value}>{props.children}</WalletContext.Provider>;

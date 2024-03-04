@@ -1,39 +1,40 @@
-import React from "react";
+import React, {useState} from "react";
 import image from "../Assets/main.png";
 import image2 from "../Assets/wallet-illo.svg";
 import image3 from "../Assets/Explore-illo.png";
 import image4 from "../Assets/Browse-illo.png";
 
-export default function WalletMainContent({ scrollFunc }) {
+export default function WalletMainContent({scrollFunc}) {
   const contentdata = [
     {
       heading: "Gateway to the world of blockchain",
       text: "Improve your user experience with BitWallet, the key to the blockchain world",
       image: image,
       buttonFunction: scrollFunc,
-      align: "right",
+      align: "right"
     },
     {
       heading: "Use as a browser extension or mobile app",
       text: "Available as a browser extension and as a mobile app, Bitwallet equips you with a key vault, secure login, easy NFT storage and transfer, and cryptography.",
       image: image2,
-      align: "left",
+      align: "left"
     },
     {
       heading: "Security for your digital assets",
       text: "BitWallet generates passwords and keys on your device, so only you have access to your accounts and data. Support navigating through various decentralized websites and blockchain applications.",
       image: image3,
-      align: "right",
+      align: "right"
     },
     {
       heading: "Zero downtime",
       text: "Protecting your keys through encryption",
       image: image4,
-      align: "left",
-    },
+      align: "left"
+    }
   ];
+
   return (
-    <div className="walletMainContainer">
+    <div className='walletMainContainer'>
       {contentdata.map((content, index) => (
         <SectionDisplay
           buttonFunction={content.buttonFunction}
@@ -48,24 +49,28 @@ export default function WalletMainContent({ scrollFunc }) {
   );
 }
 
-const SectionDisplay = ({ heading, text, image, buttonFunction, align }) => {
+const SectionDisplay = ({heading, text, image, buttonFunction, align}) => {
   return (
-    <div className="walletMainContainer-row">
-      <div className="row-content">
+    <div className='walletMainContainer-row'>
+      <div className='row-content'>
         <h3>{heading}</h3>
-        <p style={{ fontSize: "1.5rem", textAlign: "justify" }}>{text}</p>
+        <p style={{fontSize: "1.5rem", textAlign: "justify"}}>{text}</p>
         {buttonFunction && (
-          <div className="primarybutton" style={{ width: "fit-content" }}>
+          <div
+            className='primarybutton'
+            style={{width: "fit-content"}}>
             <button onClick={buttonFunction}>Download Now</button>
           </div>
         )}
       </div>
 
       <div
-        className="row-content-img first-div"
-        style={{ order: align === "left" ? -1 : 1 }}
-      >
-        <img src={image} alt="Bit Wallet" />
+        className='row-content-img first-div'
+        style={{order: align === "left" ? -1 : 1}}>
+        <img
+          src={image}
+          alt='Bit Wallet'
+        />
       </div>
     </div>
   );
