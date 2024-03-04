@@ -19,7 +19,7 @@ const Home = () => {
 
       <Mission />
       <HowItWorks />
-      <Contact page="home" />
+      <Contact page='home' />
     </>
   );
 };
