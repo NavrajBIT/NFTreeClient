@@ -41,9 +41,11 @@
 }
 
 .marketplaceprojectscontainer {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 50px;
+  display: flex;
+  flex-wrap: wrap;
+  /* grid-template-columns: 1fr 1fr 1fr; */
+  gap: 35px;
+  justify-content: center;
   width: 100%;
   max-width: 100%;
 }
@@ -66,9 +68,9 @@
   .projectsviewcontainerheading {
     font-size: 1.5rem;
   }
-  .marketplaceprojectscontainer {
+  /* .marketplaceprojectscontainer {
     grid-template-columns: 1fr 1fr;
-  }
+  } */
 }
 @media screen and (max-width: 1000px) {
   .projectsviewcontainer {
@@ -83,9 +85,9 @@
   }
 }
 @media screen and (max-width: 700px) {
-  .marketplaceprojectscontainer {
+  /* .marketplaceprojectscontainer {
     grid-template-columns: 1fr;
-  }
+  } */
   .createButton p {
     display: none;
   }
