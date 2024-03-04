@@ -15,31 +15,106 @@
   gap: var(--padding-main);
 }
 
+.contactHeading {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-black);
+}
+
 .contactdetails {
   background-color: var(--green-110);
   border-radius: 0 var(--border-radius) var(--border-radius) 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: var(--padding-large);
+  gap: 2.5rem;
   color: var(--text-bright);
   padding: var(--padding-large);
+}
+
+.contactInfoContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1.3rem;
+}
+
+.addressContainer {
+  line-height: 1rem;
+}
+
+.addressContainer div {
+  font-size: 14px;
 }
 
 .socialcontainer {
   display: flex;
   gap: var(--padding-large);
+  /* background: linear-gradient(270deg, rgba(255, 255, 255, 0.5) 10%, rgba(255, 255, 255, 0) 55.19%); */
 }
 
-@media screen and (max-width: 600px) {
+.socialIcon {
+  height: 2.2rem;
+}
+
+
+@media screen and (max-width: 900px) {
+  .contactformcontainer {
+    box-shadow: none;
+    background-color: transparent;
+    gap: 2rem;
+    /* background: linear-gradient(170.35deg, #375500 0%, #DAE5C5 100%); */
+  }
+
+  .contactHeading {
+    text-align: center;
+    color: white;
+  }
+
+  .contactformcontainer .form {
+    width: 100%;
+    align-items: center;
+  }
+
+  .contactformcontainer input,
+  .contactformcontainer textarea {
+    background-color: transparent;
+    border-bottom: 2px solid white;
+  }
+
+  .contactformcontainer input::placeholder,
+  .contactformcontainer textarea::placeholder {
+    color: white;
+  }
+
+  .contactformcontainer form button {
+    margin: auto;
+    background-color: white;
+    color: var(--green-110);
+    box-shadow: none;
+  }
+
+  .contactdetails {
+    width: 100%;
+    height: 100%;
+    border-radius: var(--border-radius);
+    padding: 3rem;
+  }
+
+  .socialcontainer {
+    background: none;
+  }
+}
+
+@media screen and (max-width: 768px) {
   .contactformcontainer {
     display: flex;
     flex-direction: column;
     min-height: auto;
   }
+}
+
+@media screen and (max-width: 400px) {
   .contactdetails {
-    width: 100%;
-    height: 100%;
-    border-radius: 0 0 var(--border-radius) var(--border-radius);
+    padding: 2rem 1.5rem;
   }
 }

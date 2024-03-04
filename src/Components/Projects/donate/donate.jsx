@@ -236,7 +236,10 @@ const Donate = () => {
             </div>
           )}
 
+<<<<<<< HEAD
           {/* <div style={{ color: "var(--error)" }}>{error}</div> */}
+=======
+>>>>>>> 0bf9333728cf8ef7c6a66aaf11cf535cb419fafe
           <div
             style={{
               display: "flex",
@@ -280,6 +283,7 @@ const Donate = () => {
             </p>
           </div>
         )}
+<<<<<<< HEAD
         {/* {wallet.walletInstalled && !wallet.walletConnected && (
           <div style={{ padding: "var(--padding-main)", color: "red" }}>
             Please connect BitWallet to make the investment.
@@ -288,6 +292,8 @@ const Donate = () => {
             </div>
           </div>
         )} */}
+=======
+>>>>>>> 0bf9333728cf8ef7c6a66aaf11cf535cb419fafe
       </div>
     </div>
   );

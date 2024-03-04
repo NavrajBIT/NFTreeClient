@@ -1,5 +1,4 @@
 import "./stepper.css";
-import { Fragment } from "react";
 
 const Stepper = ({ data, step }) => {
   const steps = data.length;

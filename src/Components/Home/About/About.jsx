@@ -1,29 +1,43 @@
-import React from "react";
-import AboutCard from "./AboutCard.jsx";
-import { aboutCardData } from "./AboutCardData.js";
-import Grid from "@mui/material/Grid";
+import logo from "../assets/aboutlogo.png";
+import abg from "../assets/Abg.png";
+import bg from "../assets/aboutbg.png";
+
 import "./About.css";
 
 const About = () => {
   return (
     <div
       style={{
-        minHeight: "var(--min-height-section)",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        background: "var(--green-100)",
+        backgroundColor: "var(--green-100)",
+        // backgroundImage: "var(--bg-green-gradient-vertical)",
+        backgroundImage: `url(${bg})`,
+        backgroundSize: "cover",
+        backgroundPosition: "top",
+        position: "relative",
       }}
     >
-      <div className="aboutDiv">
-        <div className="aboutcardcontainer">
-          {aboutCardData.map((data, id) => {
-            return (
-              <Grid item xs={10} sm={4} key={id} className="cardsDiv">
-                <AboutCard key={id} title={data.title} desc={data.desc} />
-              </Grid>
-            );
-          })}
+      <div className="aboutsectionfilter" />
+      <div className="aboutsectioncontainer">
+        <div className="aboutlogocontainer">
+          <img src={logo} alt="BitBhoomi" />
+        </div>
+        <div className="aboutcontentcontainer">
+          <div className="aboutheading">
+            A<span className="bout">BOUT</span>
+            <img src={abg} alt="" />
+          </div>
+          <div className="aboutlogocontainermobile">
+            <img src={logo} alt="BitBhoomi" />
+          </div>
+          <div className="aboutdescription">
+            BitBhoomi draws its inspiration from the Sanskrit term "Bhoomi,"
+            meaning "Earth" or "Land." This name reflects our commitment to a
+            digital landscape dedicated to the betterment of our planet. Powered
+            by blockchain, the platform creates a transparent ecosystem for
+            sustainability initiatives, connecting data bits to the Earth. It
+            signifies a commitment to nurture our "Bit of the Earth" for a
+            greener tomorrow.
+          </div>
         </div>
       </div>
     </div>

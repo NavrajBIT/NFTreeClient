@@ -17,6 +17,19 @@ html {
     #243900,
     rgba(234, 255, 198, 0.55)
   );
+  --bg-green-gradient-vertical: linear-gradient(
+    180deg,
+    rgba(6, 36, 3, 1) 0%,
+    rgba(6, 57, 11, 1) 80%,
+    rgba(9, 50, 17, 1) 120%,
+    rgba(2, 27, 27, 1) 150%
+  );
+  --bg-green-gradient-inclined: linear-gradient(
+    90deg,
+    rgba(211, 255, 183, 1),
+    rgba(226, 255, 206, 1),
+    white
+  );
 
   --shadow-1: #293f00;
   --shadow-2: rgba(0, 0, 0, 0.25);
@@ -50,9 +63,9 @@ html {
   --filter-dark: rgba(0, 0, 0, 0.4);
 
   --min-height-page: 100vh;
-  --min-height-section: 700px;
+  --min-height-section: 600px;
 
-  --max-width: 1400px;
+  --max-width: 1100px;
   --max-width-form: 900px;
   --min-height-form: 500px;
   --max-width-card: 400px;
@@ -79,13 +92,18 @@ html {
 
   --image-aspect-ratio: 4/3;
 
-  --nav-height: 150px;
+  --nav-height: 80px;
   --nav-height-small: 80px;
 }
 
 body {
-  background: var(--green-10);
   font-family: Inter;
+  background-image: linear-gradient(
+    90deg,
+    rgba(211, 255, 183, 1),
+    rgba(226, 255, 206, 1),
+    white
+  );
 }
 
 * {

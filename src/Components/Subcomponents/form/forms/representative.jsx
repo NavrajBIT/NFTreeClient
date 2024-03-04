@@ -1,12 +1,22 @@
+<<<<<<< HEAD
 import Myform from "../myformnew";
+=======
+>>>>>>> 0bf9333728cf8ef7c6a66aaf11cf535cb419fafe
 import useAPI from "../../../../api/useAPI";
 import { useState, useEffect, useRef } from "react";
-import Auth from "../../../Auth/Auth";
+import AuthPopup from "../../../Auth/authPopup";
 import Loading from "../../loading/loading";
 import ProjectFormInput from "../inputs/projectFormInput";
+<<<<<<< HEAD
 import { BiSolidUser } from "react-icons/bi";
 
 import userprofile from "./image/userprofile.png";
+=======
+import userprofile from "./image/userprofile.png";
+import { GrLinkNext } from "react-icons/gr";
+import { GrFormNextLink } from "react-icons/gr";
+import "./forms.css";
+>>>>>>> 0bf9333728cf8ef7c6a66aaf11cf535cb419fafe
 
 const Representative = ({ submit }) => {
   const api = useAPI();
@@ -24,9 +34,13 @@ const Representative = ({ submit }) => {
     let status = true;
     if (userData) {
       delete userData.wallet;
+<<<<<<< HEAD
       // let newUserData = userData.map((data) => {
       //   console.log(data);
       // });
+=======
+
+>>>>>>> 0bf9333728cf8ef7c6a66aaf11cf535cb419fafe
       Object.keys(userData).map((key) => {
         if (!userData[key] || userData[key] === "") {
           status = false;
@@ -102,6 +116,7 @@ const Representative = ({ submit }) => {
     setIsLoading(false);
   };
 
+<<<<<<< HEAD
   // const accountFormData = [
   //   [
   //     {
@@ -154,12 +169,20 @@ const Representative = ({ submit }) => {
   // ];
 
   if (!isLoggedIn) return <Auth close={() => setIsLoggedIn(true)} />;
+=======
+  if (!isLoggedIn) return <AuthPopup close={() => setIsLoggedIn(true)} />;
+>>>>>>> 0bf9333728cf8ef7c6a66aaf11cf535cb419fafe
 
   if (isLoading) return <Loading />;
 
-  const src = userData?.picture
-    ? userData?.picture
-    : "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png";
+  const submitForm = async () => {
+    await handleSubmit();
+    if (isComplete()) {
+      submit();
+    } else {
+      setError("Please complete the form.");
+    }
+  };
 
   const submitForm = async () => {
     await handleSubmit();
@@ -174,11 +197,17 @@ const Representative = ({ submit }) => {
     <>
       <div
         style={{
+<<<<<<< HEAD
           fontSize: "1.5rem",
           fontWeight: "bold",
           color: "var(--green-80)",
+=======
+          fontWeight: "600",
+          color: "var(--heading-color)",
+>>>>>>> 0bf9333728cf8ef7c6a66aaf11cf535cb419fafe
           width: "86%",
           margin: "auto",
+          marginBottom: "var(--padding-light)",
         }}
       >
         Representative Details
@@ -186,6 +215,10 @@ const Representative = ({ submit }) => {
           style={{
             border: "1px solid #E6E6E6",
             margin: "var(--padding-light) 0 0",
+<<<<<<< HEAD
+=======
+            width: "58%",
+>>>>>>> 0bf9333728cf8ef7c6a66aaf11cf535cb419fafe
           }}
         />
       </div>
@@ -195,11 +228,16 @@ const Representative = ({ submit }) => {
           minHeight: "var(--min-height-form)",
           width: "90%",
           margin: "auto",
+<<<<<<< HEAD
           flexWrap: "wrap-reverse",
+=======
+          flexDirection: "column",
+>>>>>>> 0bf9333728cf8ef7c6a66aaf11cf535cb419fafe
         }}
       >
         <div
           style={{
+<<<<<<< HEAD
             flex: "60%",
             padding: "0 var(--padding-main)",
             display: "flex",
@@ -233,6 +271,61 @@ const Representative = ({ submit }) => {
           />
 
           <div style={{ display: "flex", gap: "var(--padding-large)" }}>
+=======
+            display: "flex",
+            width: "100%",
+            margin: "auto",
+            flexWrap: "wrap-reverse",
+          }}
+        >
+          <div
+            style={{
+              flex: "60%",
+              padding: "0 var(--padding-main)",
+              display: "flex",
+              flexDirection: "column",
+              gap: "20px",
+            }}
+          >
+            <ProjectFormInput
+              label="Designation"
+              type="text"
+              required
+              value={userData?.designation}
+              onChange={(e) => updateData("designation", e.target.value)}
+              maxLength="50"
+            />
+            <ProjectFormInput
+              label="Phone"
+              type="text"
+              required
+              value={userData?.phone}
+              onChange={(e) => updateData("phone", e.target.value)}
+              maxLength="50"
+            />
+            <ProjectFormInput
+              label="National Identification Number (NIN)"
+              type="text"
+              required
+              value={userData?.nin}
+              onChange={(e) => updateData("nin", e.target.value)}
+              maxLength="50"
+            />
+
+            <ProjectFormInput
+              label="NIN Proof"
+              type="file"
+              required
+              value={ninproof}
+              onChange={(e) => uploadFile(e.target.files[0], "nin_proof")}
+              maxLength="50"
+            />
+
+            {/* <div
+            style={{ display: "flex", gap: "var(--padding-large)" }}
+            className="responsiveFlex"
+          >
+>>>>>>> 0bf9333728cf8ef7c6a66aaf11cf535cb419fafe
             <ProjectFormInput
               label="NIN Proof"
               type="file"
@@ -249,6 +342,7 @@ const Representative = ({ submit }) => {
               onChange={(e) => uploadFile(e.target.files[0], "signed_note")}
               maxLength="50"
             />
+<<<<<<< HEAD
           </div>
           <div style={{ color: "red", height: "30px" }}>{error}</div>
           <button
@@ -345,6 +439,86 @@ const Representative = ({ submit }) => {
           />
         </div>
       </Myform> */}
+=======
+          </div> */}
+            <div style={{ color: "red", height: "30px" }}>{error}</div>
+          </div>
+          <div
+            style={{
+              flex: "40%",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
+          >
+            <div
+              style={{
+                height: "170px",
+                width: "170px",
+                background: "#C4D1AC",
+                borderRadius: "var(--profile-pic-diameter)",
+                backgroundImage: `url(${
+                  userData?.picture != undefined
+                    ? userData.picture
+                    : userprofile
+                })`,
+                backgroundSize: `${
+                  userData?.picture != undefined ? "cover" : "60%"
+                }`,
+                backgroundRepeat: "no-repeat",
+                backgroundPosition: "center",
+              }}
+              onClick={() => profilepicrref.current.click()}
+            >
+              <input
+                type="file"
+                style={{ display: "none" }}
+                ref={profilepicrref}
+                onChange={(e) => uploadFile(e.target.files[0], "picture")}
+              />
+            </div>
+            <br />
+            <p
+              style={{
+                fontWeight: "500",
+                marginBottom: "var(--padding-large)",
+              }}
+            >
+              Upload Profile Picture
+            </p>
+          </div>
+        </div>
+        <button
+          style={{
+            padding: "var(--padding-light)",
+            background: "#354A12",
+            width: "var(--project-button-small)",
+            borderRadius: "5px",
+            marginBottom: "100px",
+            color: "white",
+            borderColor: "transparent",
+            marginLeft: "var(--padding-main)",
+            marginBottom: "3rem",
+          }}
+          onClick={submitForm}
+        >
+          {isComplete() ? (
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-evenly",
+              }}
+            >
+              <p>Next</p>
+              <GrFormNextLink size={30} />
+            </div>
+          ) : (
+            "Save"
+          )}
+        </button>
+      </form>
+>>>>>>> 0bf9333728cf8ef7c6a66aaf11cf535cb419fafe
     </>
   );
 };

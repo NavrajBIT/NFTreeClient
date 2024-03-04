@@ -36,4 +36,10 @@
   .steppercontainer {
     width: 100%;
   }
+<<<<<<< HEAD
+=======
+  .stepperText {
+    display: none;
+  }
+>>>>>>> 0bf9333728cf8ef7c6a66aaf11cf535cb419fafe
 }

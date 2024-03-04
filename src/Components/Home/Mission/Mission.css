@@ -1,0 +1,378 @@
+.missiontotalcontainer {
+  background-image: var(--bg-green-gradient-inclined);
+  min-height: var(--min-height-section);
+}
+
+.missioncontainer {
+  /* min-height: var(--min-height-page); */
+  background-image: url("../assets/MissionBgImage.png");
+  background-size: cover;
+  background-position: center;
+  color: var(--text-bright);
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  align-items: center;
+  gap: var(--padding-large);
+  padding: 4rem;
+}
+
+.missionheadingcontainer {
+  
+  width: fit-content;
+  border-bottom: 10px solid var(--text-bright);
+  padding: var(--padding-light) 0;
+}
+
+.missionheading {
+  width: fit-content;
+  font-family: "DM Serif Display", serif;
+  font-size: 3.8rem;
+  border-bottom: 10px solid var(--text-bright);
+  padding: var(--padding-main) 0;
+  text-shadow: 0 0 10px var(--text-black);
+}
+
+.missiondescription {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  line-height: 38px;
+  max-width: 100%;
+  text-shadow: 0 0 10px var(--text-black);
+}
+
+.missioncarouselcontainer {
+  /* position: absolute;
+  top: -250px;
+  right: var(--padding-large); */
+  display: flex;
+  flex-direction: column;
+  gap: var(--padding-light);
+  transform-origin: bottom right;
+}
+.missioncarousel {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 500px;
+  max-width: 100%;
+  height: 85px;
+  padding: var(--padding-light);
+  border-radius: var(--border-radius);
+  font-size: 30px;
+  /* font-weight: bold; */
+}
+
+.missioncarousel:hover {
+  box-shadow: 0 0 10px 1px var(--shadow-1);
+  cursor: context-menu;
+}
+
+.missioncarouselicon {
+  height: 50px;
+  width: 50px;
+  font-size: 60px;
+  font-weight: 200;
+  border-radius: 50px;
+  background-color: var(--text-bright);
+  color: var(--green-100);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.carouseldescription {
+  width: 500px;
+  padding: var(--padding-main);
+  font-size: 0.95rem;
+  background-color: white;
+  box-shadow: 0 10px 10px 1px var(--shadow-1);
+  cursor: context-menu;
+  border-radius: 0 0 var(--border-radius-light) var(--border-radius-light);
+  transform-origin: top;
+  margin-top: -1rem;
+}
+
+.globalimage{
+  width: 623px;
+  height: 508px;
+  margin-bottom: 20px;
+}
+
+@keyframes scale-up-top {
+  from {
+    transform: scaleY(0);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+@keyframes scale-down-top {
+  from {
+    transform: scaleY(1);
+  }
+  to {
+    transform: scaleY(0);
+  }
+}
+
+.whybitcontainer {
+  padding: 3rem;
+  position: relative;
+  color: var(--text-bright);
+  display: flex;
+  flex-direction: column;
+  gap:50px;
+  width: 100%;
+  /* max-width: 1300px; */
+  margin: auto;
+  margin-top: -90px;
+}
+
+.whybitheading {
+  width: fit-content;
+  font-family: "DM Serif Display", serif;
+  font-size: 48px;
+  /* padding: var(--padding-main) 0; */
+  color: var(--text-black);
+  /* margin-left: 80px; */
+  margin-top: 5rem;
+}
+
+.whybitcardrow1 {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: var(--padding-light);
+  min-height: 250px;
+}
+
+.whybitcardimage {
+  border-radius: 30px;
+  background-position: center;
+  background-size: cover;
+  min-height: 250px;
+}
+
+.whybitcardrow2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: var(--padding-light);
+  min-height: 250px;
+}
+.whybitcardrow3 {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: var(--padding-light);
+  min-height: 250px;
+}
+
+.getstartedcontainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  color: var(--text-black);
+}
+.getstartedcontentcontainer {
+  transform-origin: left top;
+  transform: scale(1.5);
+  display: flex;
+  flex-direction: column;
+}
+.getstartedimagecontainer,
+.getstartedimagecontainermobile {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.getstartedimagecontainer img,
+.getstartedimagecontainermobile img {
+  max-width: 100%;
+}
+.getstartedimagecontainermobile {
+  display: none;
+}
+.getstartedheading {
+  font-family: "DM Serif Display", serif;
+  font-size: 2rem;
+}
+
+.crouselMainContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+
+@media screen and (max-width: 1300px) {
+  .carouseldescription{
+    width: 450px;
+  }
+  .missioncarouselicon {
+    height: 40px;
+    width: 40px;
+    font-size: 40px;
+  }
+ .missiondescription {
+    max-width: 100%;
+    font-size: 1rem;
+    /* line-height: 10px; */
+    font-weight: 600;
+  }
+  .bitBhoomiLogo{
+    width: 200px;
+  }
+  .missioncarousel {
+  width: 450px;
+  max-width: 100%;
+  height: 55px;
+  font-size: 1.5rem;
+  }
+  .missioncarouselcontainer {
+    top: -410px;
+    transform: scale(0.75);
+  }
+  .globalimage{
+  width: 535px;
+  height: 441px;
+  margin-bottom: 20px;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .missioncarouselcontainer {
+    top: -410px;
+    transform: scale(0.75);
+  }
+  .crouselMainContainer{
+    flex-direction: column;
+    }
+}
+
+@media screen and (max-width: 850px) {
+  .getstartedcontentcontainer {
+    transform: scale(1);
+  }
+  .missiondescription {
+    max-width: 80%;
+  }
+  .missioncarouselcontainer {
+    top: -410px;
+    transform: scale(0.5);
+  }
+  .crouselMainContainer{
+    flex-direction: column;
+    }
+}
+@media screen and (max-width: 600px) {
+  .missioncontainer {
+    min-height: 500px;
+    background-position: left top;
+    padding: 0rem;
+    padding-top: 5rem;
+  }
+  .missionheadingcontainer {
+    border-bottom: 6px solid var(--text-bright);
+    padding: 5px 0px;
+  }
+
+  .missionheading {
+    font-size: 30px;
+    border-bottom: 6px solid var(--text-bright);
+  }
+  .missiondescription {
+    /* max-width: 100%; */
+    font-size: 16px;
+    line-height: 23px;
+  }
+
+  .missioncarouselcontainer {
+    transform: scale(1);
+    position: relative;
+    top: 0px;
+    left: 0px;
+  }
+  .whybitcontainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--padding-main);
+    margin-top: -100px;
+  }
+  .whybitheading {
+    font-size: 30px;
+    text-align: center;
+    width: 200px;
+    /* margin-left: 150px; */
+  }
+  .whybitcardrow1 {
+    display: flex;
+    flex-direction: column;
+  }
+  .whybitcardrow2 {
+    display: flex;
+    flex-direction: column;
+  }
+  .whybitcardrow3 {
+    display: flex;
+    flex-direction: column;
+  }
+  .getstartedcontainer {
+    display: flex;
+    flex-direction: column;
+    gap: var(--padding-main);
+  }
+  .getstartedheading {
+    text-align: center;
+  }
+  .getstartedimagecontainer {
+    display: none;
+  }
+  .getstartedimagecontainermobile {
+    display: flex;
+  }
+  .missioncarouselcontainer {
+    width: 100%;
+  }
+  .missioncarousel {
+    max-width: 100%;
+    width: 100%;
+    height: 50px;
+    font-size: 1rem;
+    border-radius: 10px;
+  }
+  .missioncarouselicon {
+    height: 30px;
+    width: 30px;
+    font-size: 40px;
+  }
+  .carouseldescription {
+    width: 100%;
+  }
+  .globalimage{
+  width: 375px;
+  height: 341px;
+  margin-bottom: 20px;
+  }
+  .crouselMainContainer{
+    flex-direction: column;
+    }
+  
+}
+
+@keyframes slide-left {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes scale-up {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

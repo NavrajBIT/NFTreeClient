@@ -1,10 +1,15 @@
 import useAPI from "../../../../api/useAPI";
 import { useState } from "react";
-import Auth from "../../../Auth/Auth";
+import AuthPopup from "../../../Auth/authPopup";
 import Loading from "../../loading/loading";
 import Input from "../inputnew";
+<<<<<<< HEAD
+=======
+import { GrLinkNext } from "react-icons/gr";
+import { GrLinkPrevious } from "react-icons/gr";
+>>>>>>> 0bf9333728cf8ef7c6a66aaf11cf535cb419fafe
 
-const Project = ({ submit }) => {
+const Project = ({ submit, backStep }) => {
   const api = useAPI();
   const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
@@ -84,7 +89,7 @@ const Project = ({ submit }) => {
     },
   ];
 
-  if (!isLoggedIn) return <Auth close={() => setIsLoggedIn(true)} />;
+  if (!isLoggedIn) return <AuthPopup close={() => setIsLoggedIn(true)} />;
   if (isLoading) return <Loading />;
 
   const handleSubmit = async (e) => {
@@ -101,6 +106,7 @@ const Project = ({ submit }) => {
     api
       .crud("POST", "project/myproject", formdata, true)
       .then((res) => {
+        console.log(res);
         if (res.status === 201) {
           submit(res.id);
         }
@@ -138,8 +144,13 @@ const Project = ({ submit }) => {
         <div
           style={{
             fontSize: "1.5rem",
+<<<<<<< HEAD
             fontWeight: "bold",
             color: "var(--green-80)",
+=======
+            fontWeight: "600",
+            color: "var(--heading-color)",
+>>>>>>> 0bf9333728cf8ef7c6a66aaf11cf535cb419fafe
           }}
         >
           Project Details
@@ -191,7 +202,7 @@ const Project = ({ submit }) => {
               options: investOptions,
               select: true,
               onChange: (e) => {
-                changeValue("investment_type", e.value);
+                changeValue("investment_type", e.target.value);
               },
               maxLength: 50,
             }}
@@ -199,11 +210,13 @@ const Project = ({ submit }) => {
         )}
         <Input
           inputData={{
-            label: "Project Name",
+            label: "Project Name (20 char max)",
             type: "text",
             required: true,
             value: project["name"],
-            onChange: (e) => changeValue("name", e.target.value),
+            onChange: (e) =>
+              e.target.value.length <= 20 &&
+              changeValue("name", e.target.value),
             maxLength: 50,
           }}
         />
@@ -213,7 +226,9 @@ const Project = ({ submit }) => {
             type: "text",
             required: true,
             value: project["description"],
-            onChange: (e) => changeValue("description", e.target.value),
+            onChange: (e) =>
+              e.target.value.length <= 500 &&
+              changeValue("description", e.target.value),
             maxLength: 500,
             multiline: true,
             rows: 4,
@@ -269,19 +284,15 @@ const Project = ({ submit }) => {
               label: "Have you Produced Carbon/Green Credits Earlier?",
               type: "select",
               required: true,
-              value: (function () {
-                let label = "";
-                creditsProducedOptions.map((type) => {
-                  if (type.value === project.credits_produced) {
-                    label = type.label;
-                  }
-                });
-                return label;
-              })(),
+              value: project.credits_produced ? "Yes" : "No",
               options: creditsProducedOptions,
               select: true,
               onChange: (e) => {
-                changeValue("credits_produced", e.value);
+                setproject((prev) => {
+                  let newvalues = { ...prev };
+                  newvalues["credits_produced"] = e.target.value === "true";
+                  return newvalues;
+                });
               },
               maxLength: 50,
             }}
@@ -303,7 +314,7 @@ const Project = ({ submit }) => {
               label:
                 project.type === 2
                   ? "Donation per plant($)"
-                  : "Investment per plant(NEAR)",
+                  : "Investment per plant($SOL)",
               type: "number",
               required: true,
               value: project["donation"],
@@ -322,7 +333,7 @@ const Project = ({ submit }) => {
               if (!total) total = 0;
               return total;
             })()}
-            {project.type === 2 ? "$" : "NEAR"}
+            {project.type === 2 ? "$" : "SOL"}
           </div>
         )}
         {project.type == 3 && (
@@ -441,10 +452,16 @@ const Project = ({ submit }) => {
         <div style={{ color: "var(--error)" }}>{error}</div>
         <div style={{ display: "flex", gap: "var(--padding-large)" }}>
           <button
+<<<<<<< HEAD
             onClick={handleSubmit}
             style={{
               padding: "var(--padding-light)",
 
+=======
+            onClick={backStep}
+            style={{
+              padding: "var(--padding-light)",
+>>>>>>> 0bf9333728cf8ef7c6a66aaf11cf535cb419fafe
               width: "var(--project-button-small)",
               borderRadius: "5px",
               marginTop: "var(--padding-large)",
@@ -453,12 +470,28 @@ const Project = ({ submit }) => {
               color: "#525252",
             }}
           >
+<<<<<<< HEAD
             Back
+=======
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-evenly",
+              }}
+            >
+              <GrLinkPrevious />
+              <p>Back</p>
+            </div>
+>>>>>>> 0bf9333728cf8ef7c6a66aaf11cf535cb419fafe
           </button>
 
           <button
             type="submit"
+<<<<<<< HEAD
             onClick={handleSubmit}
+=======
+>>>>>>> 0bf9333728cf8ef7c6a66aaf11cf535cb419fafe
             style={{
               padding: "var(--padding-light)",
               background: "#354A12",
@@ -468,7 +501,20 @@ const Project = ({ submit }) => {
               marginBottom: "100px",
             }}
           >
+<<<<<<< HEAD
             Next
+=======
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-evenly",
+              }}
+            >
+              <p>Next</p>
+              <GrLinkNext />
+            </div>
+>>>>>>> 0bf9333728cf8ef7c6a66aaf11cf535cb419fafe
           </button>
         </div>
       </form>

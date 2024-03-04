@@ -1,0 +1,281 @@
+.primarycontainer {
+  width: 100%;
+  max-width: var(--max-width);
+  background: white;
+  border-radius: var(--border-radius);
+  padding: var(--padding-main);
+  display: flex;
+  gap: var(--padding-light);
+  position: relative;
+  margin: var(--padding-main);
+}
+
+.profilepicedit {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--filter);
+  border-radius: var(--profile-pic-diameter);
+}
+
+.profilepicedit:hover {
+  display: flex;
+  justify-content: space-around;
+}
+
+.profileMainDiv {
+  width: 100%;
+  /* background-color: #D2E0D6; */
+  /* background: linear-gradient(270deg, rgba(4, 4, 4, 0.2) 0%, rgba(0, 0, 0, 0) 49.81%, rgba(11, 11, 11, 0.2) 100.62%); */
+}
+
+.profileSubContainer {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(190.04deg, rgba(0, 0, 0, 0.2) 0.84%, rgba(20, 102, 54, 0.165) 40.79%, rgba(24, 124, 66, 0.2) 90.74%),
+    linear-gradient(5.22deg, #FFFFFF 58.58%, #EEFFE9 65.08%, #265914 94.64%);
+  padding-bottom: 6rem;
+  /* background-position: center top 16rem; */
+}
+
+.coverPicContainer {
+  width: 100%;
+  height: 290px;
+  background-image: url("/Rectangle 43.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+}
+
+.profilePicContainer {
+  width: 300px;
+  height: 300px;
+  position: absolute;
+  transform: translateY(50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.profilePicContainer img {
+  border-radius: 50%;
+  width: 250px;
+  height: 250px;
+  object-fit: cover;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+  display: flex;
+}
+
+.personalDetailsMainBox {
+  margin-top: 17rem;
+  width: 100%;
+  /* background-color: #D2E0D6; */
+  /* background: linear-gradient(270deg, rgba(4, 4, 4, 0.2) 0%, rgba(0, 0, 0, 0) 49.81%, rgba(11, 11, 11, 0.2) 100.62%); */
+  display: flex;
+  justify-content: space-around;
+  position: relative;
+  transform: translateY(100%);
+
+}
+
+.organizationDetails {
+  width: 62%;
+  min-height: 300px;
+  background-color: white;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+  border-radius: 10px;
+  padding: 2rem 1rem;
+
+}
+
+.personalDetails {
+  width: 32%;
+  min-height: 300px;
+  background-color: white;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+  border-radius: 10px;
+  padding: 2rem 1rem;
+}
+
+.profileButtons {
+  width: 285px;
+  height: 50px;
+  background-color: #282828;
+  padding: 1px;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  padding: 0.5rem;
+  border-radius: 5px;
+  align-items: center;
+  color: #D9D9D9;
+  font-size: 20px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.profileButtons img {
+  width: 9%;
+}
+
+.projectCardDiv {
+  margin-top: 2rem;
+  padding: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+}
+
+.projectCard {
+  width: 320px;
+  background-color: white;
+  border-radius: 10px;
+  padding: 0.5rem;
+  cursor: pointer;
+}
+
+.pTitle {
+  font-size: 28px;
+  font-weight: 600;
+}
+
+.pPara {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.PName {
+  margin-top: 10px;
+  font-size: 26px;
+  text-align: center;
+  font-weight: 600;
+}
+
+.PDesignation {
+  font-size: 24px;
+  text-align: center;
+  font-weight: 400;
+}
+
+.PEmail {
+  font-size: 20px;
+  text-align: center;
+  font-weight: 400;
+}
+
+.myProjectsDiv {
+  background-color: #D2E0D6;
+  width: 100%;
+  padding: 18rem 2rem 2rem 2rem;
+  height: auto,
+}
+
+.myContributionDiv, .myNFTDiv {
+  background-color: #D2E0D6;
+  width: 100%;
+  padding: 2rem;
+}
+
+@media only screen and (max-width: 800px) {
+  .profileSubContainer {
+    height: auto;
+    background: #D2E0D6;
+  }
+
+  .coverPicContainer {
+    height: 200px;
+  }
+
+  .profilePicContainer {
+    width: 200px;
+    height: 200px;
+    transform: translateY(60%);
+  }
+
+  .profilePicContainer img {
+    width: 129px;
+    height: 129px;
+  }
+
+  .personalDetailsMainBox {
+    flex-direction: column;
+    padding: 1rem;
+    gap: 1rem;
+    transform: translateY(15%)
+  }
+
+  .organizationDetails {
+    width: 100%;
+    padding: 2rem 1rem;
+  }
+
+  .personalDetails {
+    width: 100%;
+    padding: 2rem 1rem;
+  }
+
+  .profileButtons {
+    width: 160px;
+    height: 50px;
+    background-color: #282828;
+    padding: 1px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    padding: 0.5rem;
+    border-radius: 5px;
+    font-size: 12px;
+  }
+
+  .projectCardDiv {
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 0rem;
+  }
+
+  .projectCard {
+    width: 190px;
+    height: 263px;
+    background-color: white;
+    border-radius: 10px;
+    padding: 0.5rem;
+  }
+
+  .pTitle {
+    font-size: 20px;
+  }
+
+  .pPara {
+    font-size: 12px;
+  }
+
+  .PName {
+    font-size: 16px;
+  }
+
+  .PDesignation {
+    font-size: 14px;
+  }
+
+  .PEmail {
+    font-size: 12px;
+  }
+
+  .myProjectsDiv {
+    padding: 4rem 1rem 1rem 1rem;
+  }
+  .myContributionDiv, .myNFTDiv{
+    padding: 2rem 1rem;
+  }
+  .personalP{
+    font-size: 14px;
+  }
+}

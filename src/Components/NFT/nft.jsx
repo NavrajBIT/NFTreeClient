@@ -100,12 +100,16 @@ const Nft = () => {
         minHeight: "var(--min-height-page)",
         alignItems: "center",
 
-        // justifyContent: "center",
-        marginTop: "var(--nav-height)",
-        padding: "var(--padding-main)",
         flexDirection: "column",
       }}
     >
+      <div
+        style={{
+          width: "100%",
+          height: "var(--nav-height)",
+          backgroundImage: "linear-gradient(170deg, #1B2F2F, #224629)",
+        }}
+      />
       <div
         style={{
           width: "100%",

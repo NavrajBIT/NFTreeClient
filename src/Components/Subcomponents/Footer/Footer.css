@@ -1,59 +1,103 @@
-.footerDiv {
-  padding: 2rem 1rem 1rem 1.1rem;
-  background: var(--green-100);
-  height: 120px;
-  border-radius: var(--border-radius-big) var(--border-radius-big) 0 0;
+.footercontainerouter {
+  font-family: "DM Serif Display", serif;
+  background-image: linear-gradient(
+    45deg,
+    rgba(1, 2, 1, 1),
+    rgba(10, 25, 14, 1),
+    rgba(22, 53, 29, 1)
+  );
+  color: var(--text-bright);
+  position: relative;
+  border-radius: 30px 30px 0px 0px;
+}
+.footerconatiner {
+  margin: auto;
+  width: 100%;
+  /* max-width: var(--max-width); */
+  padding: 3rem;
+  text-align: center;
+  font-size: 1.25rem;
+  display: flex;
+  justify-content: space-between;
+
+}
+.footercontentcontainer {
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  font-size: 14px;
+}
+.footerconatiner img {
+  margin: 10px;
+  width: 100%;
+  /* max-width: 500px; */
 }
 
-#footerImg {
-  height: 3.5rem;
-  margin-top: 0.5rem;
+.footersocialcontainer {
+  font-size: 1.2rem;
+  font-weight: 700;
+  display: flex;
+  /* gap: var(--padding-light); */
+  align-items: center;
+  /* justify-content: center; */
 }
 
-#footerImg:hover {
-  animation: scaleup(0.2s);
-  transform: scale(1.1);
-  transition: ease 0.4s all;
+.footersocialcontainer img {
+  width: 20px;
 }
 
-.footerIcons {
-  border-radius: 50%;
-  margin: 0 0 0 2.5rem;
-  transform: scale(1.4);
+.paraText{
+  font-size: 18px;
+  font-weight: 400;
+  font-family: Inter;
+
+}
+
+.socialIcon{
   cursor: pointer;
-  color: white;
-  /* transition: color 0.3s; */
 }
 
-@media only screen and (max-width: 600px) {
-  .footerDiv {
-    padding: 0 !important;
-  }
+.socialIcon:hover{
+  transform: scale(1.1);
+  box-shadow: 0 0 10px 1px var(--bg-bright);
+}
 
-  #footerLogo {
-    margin-bottom: 1rem;
-  }
+@media screen and (max-width: 1300px) {
+ .footerconatiner{
+  padding: 2rem;
+ } 
+}
 
-  .footerText {
-    color: white;
+@media screen and (max-width: 600px) {
+  
+  .footerconatiner img {
+    margin: 10px;
+    width: 80%;
+    max-width: 150px;
+  }
+  .footersocialcontainer img {
+    width: 14px;
+  }
+  .footersocialcontainer {
     font-size: 14px;
-    text-align: center;
-    padding-bottom: 1rem;
-    background: var(--green-30);
   }
-}
-
-@media only screen and (max-width: 600px) {
-  .footerDiv {
-    padding: 0 !important;
+  .footercontainerouter {
+    font-size: 8px;
   }
-
-  #footerLogo {
-    text-align: center !important;
+  .footercontentcontainer {
+    font-size: 8px;
   }
-
-  #footerIcons {
-    text-align: center !important;
-    display: block !important;
-  }
+  .footerconatiner{
+  padding: 5px;
+ } 
+ .footercontentcontainer{
+  margin-top: 20px;
+ }
+ .paraText{
+  font-size: 12px;
+ }
+ #address{
+  margin-top: 42px;
+ }
 }

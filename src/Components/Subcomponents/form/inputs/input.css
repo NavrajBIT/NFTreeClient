@@ -1,3 +1,7 @@
+textarea {
+  font-family: Inter;
+}
+
 .inputcontainer {
   position: relative;
   width: 100%;
@@ -103,6 +107,11 @@
   margin: 0;
 }
 
+<<<<<<< HEAD
+=======
+/* ---------------------------------------- */
+
+>>>>>>> 0bf9333728cf8ef7c6a66aaf11cf535cb419fafe
 .projectFormContainer {
   position: relative;
   width: 100%;
@@ -119,7 +128,10 @@
   outline: none;
 }
 
+<<<<<<< HEAD
 /* ------------------------------ */
+=======
+>>>>>>> 0bf9333728cf8ef7c6a66aaf11cf535cb419fafe
 .projectFormInput {
   width: 100%;
   padding: var(--padding-light);

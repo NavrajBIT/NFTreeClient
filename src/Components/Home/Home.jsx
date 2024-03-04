@@ -1,11 +1,9 @@
 import About from "./About/About";
-import Mission from "./Mission/Mission";
+
 import HeroSection from "./heroSection.jsx/heroSection";
 import "./Home.css";
-import Dashboard from "./Dashboard/Dashboard";
-import Contact from "../Contact_us/Contact";
-import HowItWorks from "./howitworks/howItWorks";
-import WhatisNFTree from "./WhatisNFTree/WhatisNFTree";
+import Mission from "./Mission/Mission";
+
 
 // import $ from "jquery";
 
@@ -23,15 +21,23 @@ import WhatisNFTree from "./WhatisNFTree/WhatisNFTree";
 
 const Home = () => {
   return (
+<<<<<<< HEAD
     <div className="homeContainer">
+=======
+    <div
+      style={{
+        fontFamily: `"Fira Sans", sans-serif`,
+      }}
+    >
+>>>>>>> 0bf9333728cf8ef7c6a66aaf11cf535cb419fafe
       <HeroSection />
-      {/* <Dashboard /> */}
-      {/* <WhatisNFTree />
       <About />
-
       <Mission />
+<<<<<<< HEAD
       <HowItWorks />
       <Contact page="home" /> */}
+=======
+>>>>>>> 0bf9333728cf8ef7c6a66aaf11cf535cb419fafe
     </div>
   );
 };

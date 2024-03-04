@@ -1,107 +1,83 @@
-import React from "react";
-import { Box, Grid } from "@mui/material";
-import { Instagram, Twitter, LinkedIn, Telegram } from "@mui/icons-material";
-import logo from "/logo_white.png";
 import "./Footer.css";
+import logo from "/logo_white.png";
+import twitter from "./assets/TwitterX.svg";
+import telegram from "./assets/TelegramApp.svg";
 
 const Footer = () => {
   return (
-    <>
-      <Grid container className="footerDiv">
-        <Grid item xs={1}></Grid>
-        <Grid item xs={12} sm={5} md={6} lg={6} id="footerLogo">
-          <img src={logo} alt="" id="footerImg" />
-        </Grid>
-      </Grid>
-      <Grid
-        container
-        sx={{
-          color: "white",
-          background: "var(--green-100)",
-          height: "fit-content",
-          padding: "var(--padding-light) 0",
-          gap: "var(--padding-light)",
-        }}
-      >
-        <Grid item xs={1}></Grid>
-        <Grid
-          item
-          xs={12}
-          sm={5}
-          md={6}
-          lg={6}
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            borderLeft: "2px solid",
-            color: "white",
-            paddingLeft: "var(--padding-main)",
+    <div className="footercontainerouter" id="footer">
+      <div className="footerconatiner">
+        <div className="footercontentcontainer">
+          <img src={logo} alt="BitBhoomi" />
+          <div className="paraText" style={{ marginLeft: "30px" }}>
+            Join us in making a lasting impact.
+          </div>
+          <div className="paraText" style={{ marginLeft: "30px" }}>
+            Embrace Sustainability.
+          </div>
+          <div className="paraText" style={{ marginLeft: "30px" }}>
+            Embrace Transparency.
+          </div>
+        </div>
+        <div
+          id="address"
+          className="footercontentcontainer"
+          style={{
+            fontFamily: "'Fira Sans'",
           }}
         >
-          <p>
-            BITbhoomi: Transforming Eco-Consciousness with Blockchain <br />
-            Transparency for Sustainable Reforestation.
-          </p>
-        </Grid>
-        <Grid
-          item
-          xs={12}
-          sm={5}
-          md={4}
-          lg={3}
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "flex-end",
-          }}
-          id="footerIcons"
-        >
-          <Box>
-            <Instagram
-              sx={{
-                color: "white",
-                transform: "scale(1.4)",
-                cursor: "pointer",
+          <div style={{ fontWeight: 700, fontSize: "1.2rem" }}>Address:</div>
+          <div>
+            <div className="paraText">Beyond Imagination Tech LLC</div>
+            <div className="paraText">M03 Laffa restaurant building</div>
+            <div className="paraText">
+              Sheikh Khalifa Bin Zayed St - Opp. Burjuman Mall,
+            </div>
+            <div className="paraText">Dubai, United Arab Emirates</div>
+          </div>
+          <div className="paraText">support@beimagine.tech</div>
+          <div></div>
+          <div className="footersocialcontainer">
+            Follow us on:
+            <img
+              className="socialIcon"
+              src={twitter}
+              alt="BitBhoomi"
+              style={{ marginLeft: "20px", height: "40px", width: "40px" }}
+              onClick={() => {
+                console.log("here");
+                window.open("https://twitter.com/BITBhoomi");
               }}
-              onClick={() =>
-                window.open("https://www.instagram.com/bitmemoir/")
-              }
             />
-            <Twitter
-              className="footerIcons"
-              onClick={() =>
-                window.open(
-                  "https://twitter.com/Bit_memoir?t=dPPpNawrSKg3mn3BLyYxWA&s=08"
-                )
-              }
+            <img
+              className="socialIcon"
+              src={telegram}
+              style={{
+                height: "40px",
+                width: "40px",
+              }}
+              alt="BitBhoomi"
+              onClick={() => {
+                console.log("here");
+                window.open("https://t.me/BITBhoomiCommunity");
+              }}
             />
-            <LinkedIn
-              className="footerIcons"
-              onClick={() =>
-                window.open("https://www.linkedin.com/company/bitmemoir/")
-              }
-            />
-            <Telegram
-              className="footerIcons"
-              onClick={() => window.open("https://t.me/bitmemoirofficial")}
-            />
-          </Box>
-        </Grid>
-        <Grid item xs={1}></Grid>
-      </Grid>
-      <p
+          </div>
+        </div>
+      </div>
+      <div
         style={{
-          color: "grey",
-          fontSize: "14px",
+          fontFamily: "Inter",
           textAlign: "center",
-          padding: "1rem 0",
-          background: "var(--green-100)",
+          paddingBottom: "16px",
+          fontSize: "1rem",
+          color: "rgb(255,255,255,0.5)",
         }}
       >
-        © Copyright 2022, All Rights Reserved by <br /> Beyond Imagination
-        Technologies Pvt
-      </p>
-    </>
+        Copyright © 2024 Beyond Imagination Technologies Pvt. Ltd. All rights
+        reserved.
+      </div>
+    </div>
   );
 };
 

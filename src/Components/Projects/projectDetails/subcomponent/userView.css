@@ -1,0 +1,284 @@
+p {
+  font-size: 19px;
+}
+
+.descriptionBlock {
+  background-color: #bfcca6;
+  border-radius: 20px;
+  padding: 30px;
+  text-align: justify;
+  box-shadow: 3px 4px 10px 0px rgba(0, 0, 0, 0.25);
+  width: 85%;
+  margin: 1.5rem auto;
+  margin-bottom: 2rem;
+}
+
+.projectHeading {
+  font-family: "DM Serif Display";
+  font-weight: 400;
+  text-transform: capitalize;
+  text-align: center;
+}
+
+.projectText {
+  font-family: "DM Serif Display";
+  font-weight: 400;
+  text-transform: capitalize;
+  text-align: center;
+}
+
+.projectsDetailAttribute {
+  width: 50%;
+  font-size: 1.1rem;
+  font-weight: 500;
+  padding: 0 5%;
+}
+
+.btnsAndPlantImageContainer {
+  position: relative;
+  flex-direction: column;
+  align-items: center;
+  background-image: url("/Vector 6.png");
+  background-size: 100% 127%;
+  padding: 1rem 0;
+  margin-bottom: 3%;
+}
+.buttonContainer {
+  display: flex;
+  justify-content: space-evenly;
+  margin: 2% auto;
+}
+
+.progressBtn {
+  background-color: #185a00;
+  border-radius: 5px;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1% 5%;
+  gap: 10px;
+}
+
+.imagesContainer {
+  margin-top: clamp(2rem, 10%, 3rem);
+  width: 100%;
+  min-height: clamp(150px, 20vw, 400px);
+}
+
+.ImageGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin-top: 3%;
+  justify-items: center;
+  justify-content: center;
+  gap: 30px 20px;
+  padding: 0 20px;
+  min-height: clamp(84px, 20vw, 283px);
+}
+
+.plantImageBox {
+  max-width: 250px;
+  min-width: 70px;
+  width: 98%;
+  aspect-ratio: 1;
+  background-color: #8c9e6b;
+  border-radius: 5px;
+  padding: 1rem;
+  border: 2px solid #59810f;
+  display: flex;
+  flex-direction: column;
+}
+.plantImage {
+  aspect-ratio: 17/16;
+  max-width: 100%;
+  border-radius: 5px;
+}
+.plantImageText {
+  margin-top: 1rem;
+  font-size: 1.5rem;
+  color: white;
+  font-weight: 700;
+  text-align: center;
+}
+
+.projectDocumentContainer {
+  min-height: 500px;
+  padding: 4rem;
+  background-image: linear-gradient(to top, #0e1213, #08370d);
+  border-radius: 0 200px 0px 200px; /* left bottom */
+  margin-bottom: 2rem;
+}
+
+.docImage {
+  width: 100%;
+}
+
+.projectGalleryContainer {
+  width: 100%;
+  background-image: url("/Vector 7.png");
+  background-repeat: no-repeat;
+  background-position: top;
+  background-size: 100% 100%;
+  min-height: clamp(200px, 20vw, 400px);
+  padding: 4% 2%;
+}
+
+.projectOwnerDetailsContainer {
+  background-image: linear-gradient(
+    257.46deg,
+    #ffffff 6.03%,
+    #fcfffd 6.04%,
+    #c4f5c9 86.33%
+  );
+  border-radius: 200px 0px 200px 0px; /* right top */
+  padding: 3rem 1rem;
+}
+
+.projectOwnerSubHeading {
+  font-family: Inter;
+  font-size: 1.3rem;
+  text-align: center;
+  font-weight: 500;
+  margin-bottom: 3rem;
+}
+
+.projectOwnerSection {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 2rem;
+  border-radius: 20px;
+  gap: 12px;
+  box-shadow: 2px 4px 10px 0px rgba(190, 221, 193, 1);
+}
+
+.socialMediaIcons img {
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+@media screen and (max-width: 1150px) {
+  .Responsiveflex1150 {
+    flex-direction: column !important;
+    gap: 50px;
+  }
+  .Responsiveflex1150 div {
+    width: 100% !important;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .Responsiveflex900 {
+    flex-direction: column;
+  }
+  .Responsiveflex900 hr {
+    display: none;
+  }
+  .Responsiveflex900 div {
+    width: 100% !important;
+  }
+
+  .plantImageBox {
+    padding: 5px;
+  }
+
+  .projectDocumentContainer {
+    border-radius: 0px 70px 0px 70px; /* right top */
+  }
+
+  .plantImageText {
+    font-size: 10px !important;
+    margin-top: 10%;
+  }
+
+  .SeeMoreText {
+    font-size: 8px !important;
+  }
+
+  .projectDocumentContainer {
+    min-height: 300px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .Responsiveflex900 {
+    flex-direction: column;
+  }
+
+  .fundingBar {
+    width: 100% !important;
+    gap: 15px !important;
+  }
+  .fundingBar p {
+    min-width: 202px !important;
+  }
+
+  .projectDocumentContainer {
+    min-height: 300px;
+    padding: 2rem 0;
+  }
+
+  .updateDocButton span {
+    font-size: 12px !important;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .projectHeading {
+    font-size: 24px !important;
+  }
+  .descriptionBlock span {
+    display: none !important;
+  }
+  .descriptionBlock {
+    margin-top: 0.5rem !important;
+    padding: 15px;
+  }
+  p {
+    font-size: 14px !important;
+  }
+  .projectContainer {
+    padding: 0 !important;
+  }
+
+  .projectContainerBox {
+    width: 100% !important;
+  }
+
+  .Responsiveflex500 {
+    flex-direction: column;
+  }
+
+  .Responsiveflex500 div {
+    width: 100% !important;
+    padding: 0 5%;
+  }
+
+  .fundingProcessContainer {
+    padding: 1rem;
+  }
+
+  .progressBtn {
+    padding: 8px 16px;
+    font-size: 10px !important;
+  }
+
+  .projectOwnerSubHeading {
+    text-align: start;
+    margin-bottom: 1rem;
+    margin-left: 1rem;
+  }
+
+  .projectOwnerSectionPadding {
+    margin: 3rem 0 !important;
+  }
+
+  .projectOwnerDetailsContainer hr {
+    display: none;
+  }
+
+  .projectOwnerDetailsContainer h1 {
+    font-size: 24px;
+  }
+}

@@ -1,7 +1,30 @@
+<<<<<<< HEAD
+=======
+.updateReportFormContainer {
+  width: 60%;
+  min-height: var(--min-height-form);
+  background: white;
+  padding: var(--padding-main);
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--border-radius);
+  box-shadow: 3px 4px 30px 0px #3D511B;
+  padding: 6rem 4rem;
+}
+
+.updateReportFormContainer h3 {
+  margin-bottom: 2rem;
+  color: #40561A;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+>>>>>>> 0bf9333728cf8ef7c6a66aaf11cf535cb419fafe
 .reportField {
   display: grid;
   grid-template-columns: 1fr 1fr;
   align-items: center;
+<<<<<<< HEAD
   padding: var(--padding-light);
 }
 
@@ -10,3 +33,57 @@
     padding: var(--padding-light) !important;
   }
 }
+=======
+  padding: 2px 0;
+}
+
+.reportField p {
+  font-weight: 500;
+}
+
+.updateReportFormContainer .submitBtn {
+  padding: var(--padding-light);
+  font-size: 18px;
+  background: rgb(53, 74, 18);
+  border-radius: 5px;
+  margin-top: var(--padding-large);
+  margin-top: 4rem;
+  width: 8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.updateReportFormContainer .submitBtn img {
+  height: 18px;
+}
+
+@media screen and (max-width: 1200px) {
+  .updateReportFormContainer {
+    width: 75%;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .reportField {
+    grid-template-columns: 1fr;
+  }
+
+  .reportField p {
+    margin-bottom: 5px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .updateReportFormContainer {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .updateReportFormContainer {
+    padding: 4rem 2rem;
+  }
+}
+>>>>>>> 0bf9333728cf8ef7c6a66aaf11cf535cb419fafe

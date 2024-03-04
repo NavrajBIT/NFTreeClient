@@ -28,7 +28,11 @@
     "npm": "^10.2.3",
     "react": "^18.2.0",
     "react-apexcharts": "^1.4.1",
+<<<<<<< HEAD
     "react-chartjs-2": "^5.2.0",
+=======
+    "react-copy-to-clipboard": "^5.1.0",
+>>>>>>> 0bf9333728cf8ef7c6a66aaf11cf535cb419fafe
     "react-dom": "^18.2.0",
     "react-google-charts": "^4.0.1",
     "react-icons": "^4.12.0",

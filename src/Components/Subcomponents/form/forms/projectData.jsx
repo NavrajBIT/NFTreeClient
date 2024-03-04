@@ -1,8 +1,16 @@
 import { useState, useEffect } from "react";
 import useAPI from "../../../../api/useAPI";
 import Input from "../inputnew";
+<<<<<<< HEAD
 import Auth from "../../../Auth/Auth";
+=======
+import AuthPopup from "../../../Auth/authPopup";
+>>>>>>> 0bf9333728cf8ef7c6a66aaf11cf535cb419fafe
 import Loading from "../../loading/loading";
+import { Delete } from "@mui/icons-material";
+import { GrLinkNext } from "react-icons/gr";
+import { GrLinkPrevious } from "react-icons/gr";
+import "./forms.css";
 
 const ProjectData = ({ submit, projectId, backStep }) => {
   const [species, setSpecies] = useState([{ plant: "", percentage: "" }]);
@@ -69,7 +77,7 @@ const ProjectData = ({ submit, projectId, backStep }) => {
     submit();
   };
 
-  if (!isLoggedIn) return <Auth close={() => setIsLoggedIn(true)} />;
+  if (!isLoggedIn) return <AuthPopup close={() => setIsLoggedIn(true)} />;
   if (isLoading) return <Loading />;
 
   return (
@@ -99,7 +107,12 @@ const ProjectData = ({ submit, projectId, backStep }) => {
           style={{
             fontSize: "1.5rem",
             fontWeight: "bold",
+<<<<<<< HEAD
             color: "var(--green-80)",
+=======
+            fontWeight: "600",
+            color: "var(--heading-color)",
+>>>>>>> 0bf9333728cf8ef7c6a66aaf11cf535cb419fafe
           }}
         >
           Project Species
@@ -122,7 +135,11 @@ const ProjectData = ({ submit, projectId, backStep }) => {
               gap: "var(--padding-light)",
             }}
           >
+<<<<<<< HEAD
             <div style={{ display: "flex", width: "80%", gap: "20px" }}>
+=======
+            <div style={{ display: "flex", width: "90%", gap: "20px" }}>
+>>>>>>> 0bf9333728cf8ef7c6a66aaf11cf535cb419fafe
               <Input
                 inputData={{
                   placeholder: "Species",
@@ -145,7 +162,11 @@ const ProjectData = ({ submit, projectId, backStep }) => {
                 }}
               />
             </div>
+<<<<<<< HEAD
             <div style={{ display: "flex", width: "20%" }}>
+=======
+            <div style={{ display: "flex", width: "10%" }}>
+>>>>>>> 0bf9333728cf8ef7c6a66aaf11cf535cb419fafe
               {index != 0 && (
                 <button
                   onClick={() => {
@@ -156,6 +177,7 @@ const ProjectData = ({ submit, projectId, backStep }) => {
                     );
                   }}
                   style={{
+<<<<<<< HEAD
                     width: "var(--project-button-small)",
                     borderRadius: "5px",
                     border: "2px solid red",
@@ -165,6 +187,41 @@ const ProjectData = ({ submit, projectId, backStep }) => {
                   }}
                 >
                   Delete
+=======
+                    color: "#D11A2A",
+                    background: "white",
+                    height: "40px",
+                    display: "flex",
+                    alignItems: "center",
+                    border: "2px solid #D11A2A",
+                    borderRadius: "5px",
+                    padding: "5px",
+                    justifyContent: "space-around",
+                    marginTop: "4px",
+                  }}
+                >
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "space-evenly",
+                    }}
+                    className="responsiveDeleteButton"
+                  >
+                    <p>Delete</p>
+                    <GrLinkNext />
+                  </div>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "space-evenly",
+                    }}
+                    className="responsiveDeleteIcon"
+                  >
+                    <Delete />
+                  </div>
+>>>>>>> 0bf9333728cf8ef7c6a66aaf11cf535cb419fafe
                 </button>
               )}
             </div>
@@ -206,7 +263,12 @@ const ProjectData = ({ submit, projectId, backStep }) => {
           style={{
             fontSize: "1.5rem",
             fontWeight: "bold",
+<<<<<<< HEAD
             color: "var(--green-80)",
+=======
+            fontWeight: "600",
+            color: "var(--heading-color)",
+>>>>>>> 0bf9333728cf8ef7c6a66aaf11cf535cb419fafe
           }}
         >
           Project Documents (if any)
@@ -226,10 +288,17 @@ const ProjectData = ({ submit, projectId, backStep }) => {
               margin: "auto",
               display: "flex",
               gap: "var(--padding-light)",
+<<<<<<< HEAD
               alignItems: "flex-end",
             }}
           >
             <div style={{ display: "flex", width: "80%", gap: "20px" }}>
+=======
+              alignItems: "center",
+            }}
+          >
+            <div style={{ display: "flex", width: "90%", gap: "20px" }}>
+>>>>>>> 0bf9333728cf8ef7c6a66aaf11cf535cb419fafe
               <Input
                 inputData={{
                   label: "Project Document",
@@ -244,7 +313,11 @@ const ProjectData = ({ submit, projectId, backStep }) => {
             <div
               style={{
                 display: "flex",
+<<<<<<< HEAD
                 width: "20%",
+=======
+                width: "10%",
+>>>>>>> 0bf9333728cf8ef7c6a66aaf11cf535cb419fafe
                 gap: "20px",
               }}
             >
@@ -255,6 +328,10 @@ const ProjectData = ({ submit, projectId, backStep }) => {
                   margin: "auto",
                   display: "flex",
 
+<<<<<<< HEAD
+=======
+                  width: "80%",
+>>>>>>> 0bf9333728cf8ef7c6a66aaf11cf535cb419fafe
                   gap: "var(--padding-light)",
                 }}
               >
@@ -268,6 +345,7 @@ const ProjectData = ({ submit, projectId, backStep }) => {
                       );
                     }}
                     style={{
+<<<<<<< HEAD
                       width: "var(--project-button-small)",
                       borderRadius: "5px",
                       border: "2px solid red",
@@ -277,6 +355,40 @@ const ProjectData = ({ submit, projectId, backStep }) => {
                     }}
                   >
                     Delete
+=======
+                      color: "#D11A2A",
+                      background: "white",
+                      height: "40px",
+                      display: "flex",
+                      alignItems: "center",
+                      border: "2px solid #D11A2A",
+                      padding: "5px",
+                      borderRadius: "5px",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "space-evenly",
+                      }}
+                      className="responsiveDeleteButton"
+                    >
+                      <p>Delete</p>
+                      <GrLinkNext />
+                    </div>
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "space-evenly",
+                      }}
+                      className="responsiveDeleteIcon"
+                    >
+                      <Delete />
+                    </div>
+>>>>>>> 0bf9333728cf8ef7c6a66aaf11cf535cb419fafe
                   </button>
                 )}
               </div>
@@ -328,7 +440,20 @@ const ProjectData = ({ submit, projectId, backStep }) => {
               color: "#525252",
             }}
           >
+<<<<<<< HEAD
             Back
+=======
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-evenly",
+              }}
+            >
+              <GrLinkPrevious />
+              <p>Back</p>
+            </div>
+>>>>>>> 0bf9333728cf8ef7c6a66aaf11cf535cb419fafe
           </button>
 
           <button
@@ -342,7 +467,20 @@ const ProjectData = ({ submit, projectId, backStep }) => {
               marginBottom: "100px",
             }}
           >
+<<<<<<< HEAD
             Next
+=======
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-evenly",
+              }}
+            >
+              <p>Next</p>
+              <GrLinkNext />
+            </div>
+>>>>>>> 0bf9333728cf8ef7c6a66aaf11cf535cb419fafe
           </button>
         </div>
       </form>

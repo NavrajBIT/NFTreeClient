@@ -1,7 +1,12 @@
 import { useState } from "react";
 import "./input.css";
 
+<<<<<<< HEAD
 import { IoIosAttach } from "react-icons/io";
+=======
+import { IoMdAttach } from "react-icons/io";
+import { IoAttachSharp } from "react-icons/io5";
+>>>>>>> 0bf9333728cf8ef7c6a66aaf11cf535cb419fafe
 
 const ProjectFormInput = ({
   label,
@@ -13,6 +18,10 @@ const ProjectFormInput = ({
   rows,
   options,
   placeholder,
+<<<<<<< HEAD
+=======
+  onTextChange,
+>>>>>>> 0bf9333728cf8ef7c6a66aaf11cf535cb419fafe
 }) => {
   const labelDisplay = required && label ? `${label}*` : label;
   const requiredPlaceholder =
@@ -28,7 +37,11 @@ const ProjectFormInput = ({
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
       >
+<<<<<<< HEAD
         <p style={{ marginBottom: "2px" }}>
+=======
+        <p style={{ marginBottom: "2px", fontWeight: "500", color: "#404040" }}>
+>>>>>>> 0bf9333728cf8ef7c6a66aaf11cf535cb419fafe
           {labelDisplay ? labelDisplay : ""}
         </p>
         <textarea
@@ -51,7 +64,11 @@ const ProjectFormInput = ({
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
       >
+<<<<<<< HEAD
         <p style={{ marginBottom: "2px" }}>
+=======
+        <p style={{ marginBottom: "2px", fontWeight: "500", color: "#404040" }}>
+>>>>>>> 0bf9333728cf8ef7c6a66aaf11cf535cb419fafe
           {labelDisplay == undefined ? "" : labelDisplay}
         </p>
         <input
@@ -74,7 +91,13 @@ const ProjectFormInput = ({
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
       >
+<<<<<<< HEAD
         <p style={{ marginBottom: "2px" }}>{labelDisplay}</p>
+=======
+        <p style={{ marginBottom: "2px", fontWeight: "500", color: "#404040" }}>
+          {labelDisplay}
+        </p>
+>>>>>>> 0bf9333728cf8ef7c6a66aaf11cf535cb419fafe
         <input
           type={type}
           className="projectFormInput"
@@ -88,14 +111,23 @@ const ProjectFormInput = ({
   }
 
   if (type == "select") {
+<<<<<<< HEAD
     console.log(value);
+=======
+>>>>>>> 0bf9333728cf8ef7c6a66aaf11cf535cb419fafe
     return (
       <div
         className="projectFormContainer"
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
       >
+<<<<<<< HEAD
         <p style={{ marginBottom: "2px" }}>{labelDisplay}</p>
+=======
+        <p style={{ marginBottom: "2px", fontWeight: "500", color: "#404040" }}>
+          {labelDisplay}
+        </p>
+>>>>>>> 0bf9333728cf8ef7c6a66aaf11cf535cb419fafe
         <select
           type={type}
           className="projectFormInput"
@@ -111,10 +143,62 @@ const ProjectFormInput = ({
     );
   }
 
+<<<<<<< HEAD
   if (type == "file") {
     return (
       <div className="projectFormContainer">
         <div>{label}:</div>
+=======
+  if (type == "walletAddress") {
+    return (
+      <div
+        className="projectFormContainer"
+        onFocus={() => setIsFocused(true)}
+        onBlur={() => setIsFocused(false)}
+      >
+        <p style={{ marginBottom: "2px", fontWeight: "500", color: "#404040" }}>
+          {labelDisplay}
+        </p>
+        <div style={{ display: "flex", gap: "30px" }}>
+          <select
+            type={type}
+            className="projectFormInput"
+            required={required}
+            onChange={onChange}
+            style={{ background: "white", width: "35%" }}
+          >
+            {options.map((option) => {
+              return (
+                <option
+                  value={option.value}
+                  disabled={option.disabled}
+                  selected={option.selected}
+                >
+                  {option.label}
+                </option>
+              );
+            })}
+          </select>
+          <input
+            type="text"
+            className="projectFormInput"
+            required={required}
+            value={value}
+            onChange={onTextChange}
+          />
+        </div>
+      </div>
+    );
+  }
+
+  if (type == "file") {
+    return (
+      <div className="projectFormContainer">
+        <p style={{ marginBottom: "2px", fontWeight: "500", color: "#404040" }}>
+          {label}
+          {required && "*"}
+        </p>
+>>>>>>> 0bf9333728cf8ef7c6a66aaf11cf535cb419fafe
         <div className="projectFormFileupload">
           <div>
             <p>
@@ -123,7 +207,11 @@ const ProjectFormInput = ({
                 ? value.split("/")[value.split("/").length - 1]
                 : "Click to Upload"}
             </p>
+<<<<<<< HEAD
             <IoIosAttach />
+=======
+            <IoAttachSharp style={{ color: "black" }} size={24} />
+>>>>>>> 0bf9333728cf8ef7c6a66aaf11cf535cb419fafe
           </div>
 
           <input type="file" onChange={onChange} />

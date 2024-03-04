@@ -25,6 +25,7 @@ const usedetails = (projectId, notMyProject) => {
     await api
       .crud("GET", `project/${projectId}`)
       .then((res) => {
+        console.log(res);
         if (res.status === 200) {
           setProject(res);
         }
@@ -39,6 +40,7 @@ const usedetails = (projectId, notMyProject) => {
     await api
       .crud("GET", `project/${projectId}/plant_images`)
       .then((res) => {
+        console.log(res);
         if (res.status === 200) {
           setProjectImages(res);
         }
@@ -53,6 +55,7 @@ const usedetails = (projectId, notMyProject) => {
     await api
       .crud("GET", `project/${projectId}/docs`)
       .then((res) => {
+        console.log(res);
         if (res.status === 200) {
           setProjectDocs(res);
         }
@@ -93,8 +96,11 @@ const usedetails = (projectId, notMyProject) => {
       setIsLoading(true);
       await api
         .crud("PATCH", endpoint, formdata, true)
-        .then((res) => {})
+        .then((res) => {
+          console.log(res);
+        })
         .catch((err) => {
+          console.log(err);
           if (err === 401) setIsLoggedIn(false);
         });
       await poppulateProject();
@@ -236,7 +242,6 @@ const usedetails = (projectId, notMyProject) => {
     projectDocs,
     setProjectDocs,
     recipients,
-
     uploadProjectImage,
     uploadGalleryImage,
     uploadProjectDoc,
