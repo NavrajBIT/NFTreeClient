@@ -52,39 +52,11 @@ const Updatereport = () => {
         alignItems: "center",
         justifyContent: "center",
         paddingTop: "var(--nav-height)",
+        padding:'10rem 0',
       }}
     >
-      <div
-        style={{
-          width: "100%",
-          maxWidth: "700px",
-          minHeight: "var(--min-height-form)",
-          background: "white",
-          padding: "var(--padding-main)",
-          flexDirection: "column",
-          gap: "var(--padding-light)",
-          borderRadius: "var(--border-radius)",
-          boxShadow: "3px 4px 30px 0px",
-        }}
-        className="containerPadding"
-      >
-        <div
-          style={{
-            fontSize: "1.5rem",
-            fontWeight: "bold",
-            color: "var(--green-80)",
-            width: "86%",
-            marginBottom: "var(--padding-large)",
-          }}
-        >
-          Update report form
-          <p
-            style={{
-              border: "1px solid #E6E6E6",
-              margin: "var(--padding-light) 0 0",
-            }}
-          />
-        </div>
+      <div className="updateReportFormContainer">
+        <h3>Update Report Form</h3>
 
         <form type="submit" onSubmit={handleSubmit}>
           <div className="reportField">
@@ -247,18 +219,9 @@ const Updatereport = () => {
             </div>
           </div>
 
-          <button
-            type="submit"
-            style={{
-              padding: "var(--padding-light)",
-              background: "#354A12",
-              width: "var(--project-button)",
-              borderRadius: "5px",
-              marginTop: "var(--padding-large)",
-              marginBottom: "100px",
-            }}
-          >
+          <button type="submit" className="submitBtn">
             Submit
+            <img src="/arrow_forward.png" alt="" />
           </button>
         </form>
 

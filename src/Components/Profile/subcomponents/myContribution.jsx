@@ -1,52 +1,42 @@
 import ProjectCard from "../../Subcomponents/projectCard/projectCard";
 import useAPI from "../../../api/useAPI";
 import { useState, useEffect } from "react";
+import "./profile.css"
 const MyContribution = ({ script }) => {
+  console.log(script)
   return (
     <div
-      style={{
-        backgroundColor: "#D2E0D6",
-        width: "100%",
-        padding: "2rem",
-      }}
+      className="myContributionDiv"
     >
       <div
         style={{
           display: "flex",
           justifyContent: "space-between",
+          alignItems: "center"
         }}
       >
         <div>
           <p
-            style={{
-              fontSize: "1.6rem",
-              fontWeight: "600",
-            }}
+            className="pTitle"
+
           >
             My Contributions
           </p>
-          <p
-            style={{
-              marginTop: "0.5rem",
-            }}
+          {/* <p
+            className="pPara"
           >
             Contributions made by you
-          </p>
+          </p> */}
         </div>
         <div>
           <button className="profileButtons">
-            <img src="./VectorPlus.png" alt="Plus" />
+            <img src="./VectorPlus.svg" alt="Plus" />
             <span style={{}}>Make Contribution</span>
           </button>
         </div>
       </div>
 
-      <div
-        style={{
-          marginTop: "2rem",
-          padding: "1rem",
-        }}
-      >
+      <div className="projectCardDiv">
         {script?.transactions?.map((transaction, index) => (
           <Transaction
             transaction={transaction}
@@ -79,12 +69,11 @@ const Transaction = ({ transaction }) => {
   };
 
   if (!project) return null;
+  let project2 = project
+  project2.type = 2
   return (
-    <div>
-      <ProjectCard project={project} />
-      <div style={{ fontSize: "1.25rem", fontWeight: "bold" }}>
-        Contribution: {transaction.amount}$
-      </div>
-    </div>
+    // <div className="projectCardDiv">
+      <ProjectCard project={project2} transaction={transaction} />
+    // </div>
   );
 };

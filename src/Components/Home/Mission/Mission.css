@@ -4,18 +4,21 @@
 }
 
 .missioncontainer {
-  min-height: var(--min-height-page);
-  background-image: url("../assets/missionbg.png");
+  /* min-height: var(--min-height-page); */
+  background-image: url("../assets/MissionBgImage.png");
   background-size: cover;
   background-position: center;
   color: var(--text-bright);
   display: flex;
   flex-direction: column;
+  /* justify-content: center; */
+  align-items: center;
   gap: var(--padding-large);
-  padding: var(--padding-large);
+  padding: 4rem;
 }
 
 .missionheadingcontainer {
+  
   width: fit-content;
   border-bottom: 10px solid var(--text-bright);
   padding: var(--padding-light) 0;
@@ -24,27 +27,29 @@
 .missionheading {
   width: fit-content;
   font-family: "DM Serif Display", serif;
-  font-size: 4rem;
+  font-size: 3.8rem;
   border-bottom: 10px solid var(--text-bright);
   padding: var(--padding-main) 0;
   text-shadow: 0 0 10px var(--text-black);
 }
 
 .missiondescription {
+  text-align: center;
   font-size: 1.5rem;
   font-weight: bold;
-  max-width: 50%;
-  text-align: justify;
+  line-height: 38px;
+  max-width: 100%;
   text-shadow: 0 0 10px var(--text-black);
 }
 
 .missioncarouselcontainer {
-  position: absolute;
-  top: -330px;
-  right: var(--padding-large);
+  /* position: absolute;
+  top: -250px;
+  right: var(--padding-large); */
   display: flex;
   flex-direction: column;
   gap: var(--padding-light);
+  transform-origin: bottom right;
 }
 .missioncarousel {
   display: flex;
@@ -52,11 +57,11 @@
   justify-content: space-between;
   width: 500px;
   max-width: 100%;
-  height: 80px;
+  height: 85px;
   padding: var(--padding-light);
-  border-radius: var(--border-radius-light);
-  font-size: 1.5rem;
-  font-weight: bold;
+  border-radius: var(--border-radius);
+  font-size: 30px;
+  /* font-weight: bold; */
 }
 
 .missioncarousel:hover {
@@ -65,11 +70,11 @@
 }
 
 .missioncarouselicon {
-  height: 2rem;
-  width: 2rem;
-  font-size: 1.2rem;
-  font-weight: bold;
-  border-radius: 1rem;
+  height: 50px;
+  width: 50px;
+  font-size: 60px;
+  font-weight: 200;
+  border-radius: 50px;
   background-color: var(--text-bright);
   color: var(--green-100);
   display: flex;
@@ -87,6 +92,12 @@
   border-radius: 0 0 var(--border-radius-light) var(--border-radius-light);
   transform-origin: top;
   margin-top: -1rem;
+}
+
+.globalimage{
+  width: 623px;
+  height: 508px;
+  margin-bottom: 20px;
 }
 
 @keyframes scale-up-top {
@@ -107,52 +118,53 @@
 }
 
 .whybitcontainer {
-  margin-top: -70px;
-  padding: var(--padding-large);
+  padding: 3rem;
   position: relative;
   color: var(--text-bright);
   display: flex;
   flex-direction: column;
-  gap: 200px;
+  gap:50px;
   width: 100%;
-  max-width: 1300px;
+  /* max-width: 1300px; */
   margin: auto;
+  margin-top: -90px;
 }
 
 .whybitheading {
   width: fit-content;
   font-family: "DM Serif Display", serif;
-  font-size: 4rem;
-  padding: var(--padding-main) 0;
+  font-size: 48px;
+  /* padding: var(--padding-main) 0; */
   color: var(--text-black);
-  margin-left: 80px;
+  /* margin-left: 80px; */
+  margin-top: 5rem;
 }
 
 .whybitcardrow1 {
   display: grid;
   grid-template-columns: 2fr 1fr;
   gap: var(--padding-light);
-  min-height: 300px;
+  min-height: 250px;
 }
 
 .whybitcardimage {
   border-radius: 30px;
   background-position: center;
   background-size: cover;
-  min-height: 300px;
+  min-height: 250px;
 }
 
 .whybitcardrow2 {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: var(--padding-light);
-  min-height: 300px;
+  min-height: 250px;
 }
 .whybitcardrow3 {
   display: grid;
   grid-template-columns: 1fr 2fr;
   gap: var(--padding-light);
-  min-height: 300px;
+  min-height: 250px;
 }
 
 .getstartedcontainer {
@@ -184,10 +196,56 @@
   font-size: 2rem;
 }
 
-@media screen and (max-width: 1120px) {
-  .missioncarouselcontainer {
-    top: -390px;
+.crouselMainContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
   }
+
+
+@media screen and (max-width: 1300px) {
+  .carouseldescription{
+    width: 450px;
+  }
+  .missioncarouselicon {
+    height: 40px;
+    width: 40px;
+    font-size: 40px;
+  }
+ .missiondescription {
+    max-width: 100%;
+    font-size: 1rem;
+    /* line-height: 10px; */
+    font-weight: 600;
+  }
+  .bitBhoomiLogo{
+    width: 200px;
+  }
+  .missioncarousel {
+  width: 450px;
+  max-width: 100%;
+  height: 55px;
+  font-size: 1.5rem;
+  }
+  .missioncarouselcontainer {
+    top: -410px;
+    transform: scale(0.75);
+  }
+  .globalimage{
+  width: 535px;
+  height: 441px;
+  margin-bottom: 20px;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .missioncarouselcontainer {
+    top: -410px;
+    transform: scale(0.75);
+  }
+  .crouselMainContainer{
+    flex-direction: column;
+    }
 }
 
 @media screen and (max-width: 850px) {
@@ -197,21 +255,38 @@
   .missiondescription {
     max-width: 80%;
   }
+  .missioncarouselcontainer {
+    top: -410px;
+    transform: scale(0.5);
+  }
+  .crouselMainContainer{
+    flex-direction: column;
+    }
 }
 @media screen and (max-width: 600px) {
   .missioncontainer {
     min-height: 500px;
     background-position: left top;
+    padding: 0rem;
+    padding-top: 5rem;
   }
+  .missionheadingcontainer {
+    border-bottom: 6px solid var(--text-bright);
+    padding: 5px 0px;
+  }
+
   .missionheading {
-    font-size: 2rem;
+    font-size: 30px;
+    border-bottom: 6px solid var(--text-bright);
   }
   .missiondescription {
-    max-width: 100%;
-    font-size: 1.25rem;
+    /* max-width: 100%; */
+    font-size: 16px;
+    line-height: 23px;
   }
 
   .missioncarouselcontainer {
+    transform: scale(1);
     position: relative;
     top: 0px;
     left: 0px;
@@ -221,10 +296,13 @@
     flex-direction: column;
     align-items: center;
     gap: var(--padding-main);
+    margin-top: -100px;
   }
   .whybitheading {
-    font-size: 2.5rem;
+    font-size: 30px;
     text-align: center;
+    width: 200px;
+    /* margin-left: 150px; */
   }
   .whybitcardrow1 {
     display: flex;
@@ -260,10 +338,25 @@
     width: 100%;
     height: 50px;
     font-size: 1rem;
+    border-radius: 10px;
+  }
+  .missioncarouselicon {
+    height: 30px;
+    width: 30px;
+    font-size: 40px;
   }
   .carouseldescription {
     width: 100%;
   }
+  .globalimage{
+  width: 375px;
+  height: 341px;
+  margin-bottom: 20px;
+  }
+  .crouselMainContainer{
+    flex-direction: column;
+    }
+  
 }
 
 @keyframes slide-left {
@@ -272,5 +365,14 @@
   }
   to {
     transform: scaleX(1);
+  }
+}
+
+@keyframes scale-up {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }

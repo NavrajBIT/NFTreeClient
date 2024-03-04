@@ -7,7 +7,7 @@ import Checkbox from "@mui/material/Checkbox";
 import "./input.css";
 import AttachFileIcon from "@mui/icons-material/AttachFile";
 import ProjectFormInput from "./inputs/projectFormInput";
-import { IoIosAttach } from "react-icons/io";
+import { IoMdAttach } from "react-icons/io";
 
 const Input = ({ inputData, error }) => {
   const [isSelected, setIsSelected] = useState(false);
@@ -27,12 +27,19 @@ const Input = ({ inputData, error }) => {
     }
 
     return (
-      <div className="projectFormContainer">
-        <div>{inputData.label}:</div>
+      <div className="projectFormContainer" style={{ marginBottom: "15px" }}>
+        <div>
+          <p
+            style={{ marginBottom: "2px", fontWeight: "500", color: "#404040" }}
+          >
+            {inputData.label}
+            {inputData.required ? "*" : ""}
+          </p>
+        </div>
         <div className="projectFormFileupload">
           <div>
             <p>{value}</p>
-            <IoIosAttach />
+            <IoMdAttach style={{ color: "black" }} size={20} />
           </div>
 
           <input type="file" onChange={inputData.onChange} />
@@ -55,7 +62,7 @@ const Input = ({ inputData, error }) => {
 
   if (inputData.type === "select") {
     return (
-      <div style={{ position: "relative" }}>
+      <div style={{ position: "relative", marginBottom: "15px" }}>
         <ProjectFormInput
           label={inputData.label}
           type={inputData.type}
@@ -64,6 +71,58 @@ const Input = ({ inputData, error }) => {
           onChange={inputData.onChange}
           options={inputData.options}
         />
+      </div>
+    );
+  }
+
+  if (inputData.type === "walletAddress") {
+    return (
+      <div style={{ position: "relative", marginBottom: "15px" }}>
+        <ProjectFormInput
+          label={inputData.label}
+          type={inputData.type}
+          required={inputData.required}
+          value={inputData.value}
+          onChange={inputData.onChange}
+          options={inputData.options.blockchainOptions}
+          onTextChange={inputData.onTextChange}
+        />
+      </div>
+    );
+  }
+
+  if (inputData.type === "socialMediaData") {
+    return (
+      <div style={{ position: "relative", marginBottom: "15px" }}>
+        <p style={{ marginBottom: "2px", fontWeight: "500", color: "#404040" }}>
+          {inputData.label}
+        </p>
+        {inputData.options.socialMediaOptions.map((data) => {
+          return (
+            <div
+              style={{
+                display: "flex",
+                margin: "6px 0",
+                alignItems: "center",
+              }}
+            >
+              <p
+                style={{
+                  width: "25%",
+                  fontSize: "medium",
+                  color: "#404040",
+                }}
+              >
+                {data.label}
+              </p>
+              <input
+                type="text"
+                className="projectFormInput"
+                onChange={(e) => inputData.onChange(e, data.label)}
+              />
+            </div>
+          );
+        })}
       </div>
     );
   }

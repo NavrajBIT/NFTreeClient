@@ -1,12 +1,12 @@
 import { useNavigate } from "react-router-dom";
-import Herocontainer from "../../Subcomponents/containers/herocontainer";
+import { Herocontainer2 } from "../../Subcomponents/containers/herocontainer";
 import Button from "../../Subcomponents/buttons/button";
 import heroimage from "../assets/hero.png";
 
 const HeroSection = () => {
   const navigate = useNavigate();
   return (
-    <Herocontainer
+    <Herocontainer2
       style={{
         alignItems: "center",
       }}
@@ -17,13 +17,7 @@ const HeroSection = () => {
         justifyContent: "space-between",
       }}
     >
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          gap: "var(--padding-large)",
-        }}
-      >
+      <div className="landingdatacontainer">
         <div className="landingText">TECHNOLOGY MEETS SUSTAINABLITY</div>
         <div className="heroillustrationmobile">
           <img
@@ -35,19 +29,21 @@ const HeroSection = () => {
           />
         </div>
         <div className="landingdescription">
-          Step into the world of digital innovation meets environmental
-          stewardship with Bitbhoomi. Uncover a vibrant ecosystem that enables
-          secure and transparent participation in creating a greener planet
-          through tokenized ownership. From tree counting to carbon
-          sequestration, get a comprehensive, real-time view of your
+          Step into the world of digital innovation where technology meets
+          environmental stewardship with Bitbhoomi. Uncover a vibrant ecosystem
+          that enables secure and transparent participation in creating a
+          greener planet through tokenized ownership. From tree counting to
+          carbon sequestration, get a comprehensive, real-time view of your
           reforestation initiatives.
         </div>
         <div className="herobuttoncontainer">
-          <Button
-            title="Get Started"
-            variant="primary"
-            onClick={() => navigate("/projects")}
-          />
+          <div style={{ width: "fit-content" }}>
+            <Button
+              title="Get Started"
+              variant="primary"
+              onClick={() => navigate("/projects")}
+            />
+          </div>
         </div>
       </div>
       <div className="heroillustration">
@@ -59,7 +55,7 @@ const HeroSection = () => {
           }}
         />
       </div>
-    </Herocontainer>
+    </Herocontainer2>
   );
 };
 

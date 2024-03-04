@@ -4,13 +4,19 @@ import monitoringtag from "./assets/Monitoring.png";
 import donationtag from "./assets/Crowdfunding.png";
 import investmenttag from "./assets/Investment.png";
 
-const ProjectCard = ({ project, isMyProject, Nftproject, nftId }) => {
+const ProjectCard = ({
+  project,
+  isMyProject,
+  Nftproject,
+  nftId,
+  transaction,
+}) => {
   const navigate = useNavigate();
 
   const navLink = isMyProject
     ? `/myprojects/${project.id}`
     : Nftproject
-    ? `/nft/${nftId}`
+    ? `/profile`
     : `/projects/${project.id}`;
 
   return (
@@ -26,7 +32,10 @@ const ProjectCard = ({ project, isMyProject, Nftproject, nftId }) => {
       </div>
       <div className="projecttags">
         {project.type == 1 && "Monitoring"}
-        {project.type == 2 && "Donation & Monitoring"}
+        {project.type == 2 && "Donation"}
+        {transaction &&
+          project.type == 2 &&
+          `Contibution : ${transaction?.amount}$`}
         {project.type == 3 && "Investment"}
         {project.type === 1 && <img src={monitoringtag} alt="" />}
         {project.type === 2 && <img src={donationtag} alt="" />}

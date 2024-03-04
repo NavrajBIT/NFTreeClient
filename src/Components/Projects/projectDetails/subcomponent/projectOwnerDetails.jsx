@@ -1,342 +1,185 @@
+import { useEffect, useState } from "react";
+import LabelValueBox from "./labelValueBox";
 import ProjectPageButton from "./projectButton";
 import { useNavigate } from "react-router-dom";
 
 const ProjectOwnerDetails = ({ isOwnerView, details }) => {
   const navigate = useNavigate();
-  const socials =
-    details?.project?.owner?.organization?.social_links?.split(",");
+  const [socialMedia, setSocialMedia] = useState([]);
+
+  useEffect(() => {
+    setSocialMedia((prev) => {
+      try {
+        return JSON.parse(details?.project?.owner?.organization?.social_links);
+      } catch {
+        return null;
+      }
+    });
+  }, [details]);
+
+  console.log(socialMedia);
+
   return (
     <div className="projectOwnerDetailsContainer">
       <div>
-        <p
-          style={{
-            fontFamily: "DM Serif Display",
-            fontSize: "2rem",
-            textAlign: "center",
-            fontWeight: "700",
-          }}
-        >
-          Project Owner Details
-        </p>
+        <h1 className="projectHeading">Owner Details</h1>
       </div>
-      <div className="projectOwnerDetails">
-        <div className="orgDetailsContainer">
-          <p
+
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          margin: "3rem 2rem",
+        }}
+        className="Responsiveflex1150 projectOwnerSectionPadding"
+      >
+        <div style={{ width: "45%", display: "flex", flexDirection: "column" }}>
+          <div>
+            <p className="projectOwnerSubHeading">Organization details</p>
+          </div>
+          <div
+            className="projectOwnerSection"
             style={{
-              fontFamily: "Inter",
-              fontSize: "1.3rem",
-              textAlign: "center",
-              fontWeight: "500",
+              backgroundImage:
+                "linear-gradient(243.83deg, #D4F6D6 0%, #FFFFFF 97.91%)",
+              flexGrow: "1",
             }}
           >
-            Organization details
-          </p>
-          <div className="orgDetailsBox">
-            <div className="orgLabelBox">
-              <div style={{ display: "flex" }}>
+            <LabelValueBox
+              label="Name"
+              value={details?.project?.owner?.organization?.name}
+            />
+            <LabelValueBox
+              label="Description"
+              value={details?.project?.owner?.organization?.description}
+            />{" "}
+            <LabelValueBox
+              label="Address"
+              value={details?.project?.owner?.organization?.address}
+            />{" "}
+            <LabelValueBox
+              label="Country"
+              value={details?.project?.owner?.organization?.country}
+            />{" "}
+            <LabelValueBox
+              label="Area Code"
+              value={details?.project?.owner?.organization?.pin_code}
+            />{" "}
+            <LabelValueBox
+              label="Website"
+              value={details?.project?.owner?.organization?.website}
+            />{" "}
+            <LabelValueBox
+              label="Reg. Id"
+              value={details?.project?.owner?.organization?.reg_id}
+            />
+            <div style={{ display: "flex" }}>
+              <div style={{ width: "50%" }}>
                 <p
                   style={{
-                    width: "50%",
-                    fontSize: "1rem",
+                    fontSize: "1.1rem",
+                    fontWeight: "500",
                   }}
                 >
-                  Name
-                </p>
-                <p
-                  style={{
-                    width: "50%",
-                    fontSize: "1rem",
-                    color: "rgba(0, 0, 0, 0.7)",
-                  }}
-                >
-                  {details?.project?.owner?.organization?.name}
-                </p>
-              </div>
-              <div style={{ display: "flex" }}>
-                <p
-                  style={{
-                    width: "50%",
-                    fontSize: "1rem",
-                  }}
-                >
-                  Description
-                </p>
-                <p
-                  style={{
-                    width: "50%",
-                    fontSize: "1rem",
-                    color: "rgba(0, 0, 0, 0.7)",
-                  }}
-                >
-                  {details?.project?.owner?.organization?.description}
-                </p>
-              </div>
-              <div style={{ display: "flex" }}>
-                <p
-                  style={{
-                    width: "50%",
-                    fontSize: "1rem",
-                  }}
-                >
-                  Address
-                </p>
-                <p
-                  style={{
-                    width: "50%",
-                    fontSize: "1rem",
-                    color: "rgba(0, 0, 0, 0.7)",
-                  }}
-                >
-                  {details?.project?.owner?.organization?.address}
-                </p>
-              </div>
-              <div style={{ display: "flex" }}>
-                <p
-                  style={{
-                    width: "50%",
-                    fontSize: "1rem",
-                  }}
-                >
-                  Country
-                </p>
-                <p
-                  style={{
-                    width: "50%",
-                    fontSize: "1rem",
-                    color: "rgba(0, 0, 0, 0.7)",
-                  }}
-                >
-                  {details?.project?.owner?.organization?.country}
-                </p>
-              </div>
-              <div style={{ display: "flex" }}>
-                <p
-                  style={{
-                    width: "50%",
-                    fontSize: "1rem",
-                  }}
-                >
-                  Area Code
-                </p>
-                <p
-                  style={{
-                    width: "50%",
-                    fontSize: "1rem",
-                    color: "rgba(0, 0, 0, 0.7)",
-                  }}
-                >
-                  {details?.project?.owner?.organization?.pin_code}
-                </p>
-              </div>
-              <div style={{ display: "flex" }}>
-                <p
-                  style={{
-                    width: "50%",
-                    fontSize: "1rem",
-                  }}
-                >
-                  Website
-                </p>
-                <p
-                  style={{
-                    width: "50%",
-                    fontSize: "1rem",
-                    color: "rgba(0, 0, 0, 0.7)",
-                  }}
-                >
-                  {details?.project?.owner?.organization?.website}
-                </p>
-              </div>
-              <div style={{ display: "flex" }}>
-                <p
-                  style={{
-                    width: "50%",
-                    fontSize: "1rem",
-                  }}
-                >
-                  Reg ID
-                </p>
-                <p
-                  style={{
-                    width: "50%",
-                    fontSize: "1rem",
-                    color: "rgba(0, 0, 0, 0.7)",
-                  }}
-                >
-                  {details?.project?.owner?.organization?.reg_id}
+                  Social Media
                 </p>
               </div>
 
-              <div className="socialMediaIconsBox">
-                <div style={{ display: "flex" }}>
-                  <p
-                    style={{
-                      width: "50%",
-                      fontSize: "1rem",
-                    }}
-                  >
-                    Socials
-                  </p>
-                  <div style={{ display: "flex", gap: "1rem" }}>
-                    {socials?.map((link, index) => (
-                      <img
-                        src="/Component 6.png"
-                        alt="insta"
-                        key={`project-social-${index}`}
-                        onClick={() => window.open(link)}
-                      />
-                    ))}
-                  </div>
-                </div>
+              <div className="socialMediaIcons">
+                <a href={"https://" + socialMedia?.instagram} target="_blank">
+                  {" "}
+                  <img src="/Component 6.png" alt="Instagram" />
+                </a>
+                <a
+                  href={"https://" + socialMedia?.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {" "}
+                  <img src="/Component 7.png" alt="LinkedIn" />
+                </a>
+                <a href={"https://" + socialMedia?.twitter} target="_blank">
+                  {" "}
+                  <img src="/Component 8.png" alt="Twitter" />
+                </a>
               </div>
             </div>
           </div>
         </div>
-        <div className="repDetailsContainer">
-          <p
+
+        <hr
+          style={{
+            background: "rgba(54, 142, 0, 0.4)",
+            width: "2px",
+            border: "none",
+          }}
+        />
+
+        <div style={{ width: "45%", display: "flex", flexDirection: "column" }}>
+          <div>
+            <p className="projectOwnerSubHeading">Representative details</p>
+          </div>
+          <div
+            className="projectOwnerSection"
             style={{
-              fontFamily: "Inter",
-              fontSize: "1.3rem",
-              textAlign: "center",
-              fontWeight: "500",
+              backgroundImage:
+                "background: linear-gradient(62.13deg, #D1F6D4 24.4%, #FFFFFF 98.67%)",
+              padding: "20px",
+              flexGrow: "1",
+              justifyContent: "center",
+              padding: "5% 15%",
             }}
           >
-            Representative details
-          </p>
-          <div className="repDetailsBox">
-            <div className="repProfile">
-              <div
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-evenly",
+                margin: "5% 0",
+                gap: "10px",
+              }}
+              className="Responsiveflex900"
+            >
+              <img
+                src={`http://localhost:8000${details?.project?.owner?.representative?.picture}`}
+                alt="profile"
                 style={{
-                  width: "50%",
+                  width: "100px",
+                  height: "100px",
+                  borderRadius: "50%",
+                  border: "1px solid green",
                 }}
-              >
-                <img
-                  src={
-                    details?.project?.owner?.representative?.picture
-                      ? `http://localhost:8000${details?.project?.owner?.representative?.picture}`
-                      : "/profilePics.png"
-                  }
-                  alt="profile"
-                  style={{
-                    width: "100%",
-                    height: "100%",
-                    borderRadius: "50%",
-                  }}
-                />
-              </div>
-              <div
-                style={{
-                  width: "50%",
+                onError={(e) => {
+                  console.log(e);
+                  e.target.src = "/userprofile.png";
                 }}
-              >
-                <p
-                  style={{
-                    fontFamily: "Inter",
-                    fontSize: "1.3rem",
-                  }}
-                >
-                  {details?.project?.owner?.representative?.first_name}{" "}
-                  {details?.project?.owner?.representative?.last_name}
-                </p>
-              </div>
+              />
+
+              <h1 style={{ fontWeight: "400" }}>
+                {details?.project?.owner?.representative?.first_name}{" "}
+                {details?.project?.owner?.representative?.last_name}
+              </h1>
             </div>
-            <div className="repLabelBox">
-              <div style={{ display: "flex" }}>
-                <p
-                  style={{
-                    width: "50%",
-                    fontSize: "1rem",
-                  }}
-                >
-                  Email
-                </p>
-                <p
-                  style={{
-                    width: "50%",
-                    fontSize: "1rem",
-                    color: "rgba(0, 0, 0, 0.7)",
-                  }}
-                >
-                  {details?.project?.owner?.representative?.email}
-                </p>
-              </div>
-              <div style={{ display: "flex" }}>
-                <p
-                  style={{
-                    width: "50%",
-                    fontSize: "1rem",
-                  }}
-                >
-                  Phone
-                </p>
-                <p
-                  style={{
-                    width: "50%",
-                    fontSize: "1rem",
-                    color: "rgba(0, 0, 0, 0.7)",
-                  }}
-                >
-                  {details?.project?.owner?.representative?.phone}
-                </p>
-              </div>
-              <div style={{ display: "flex" }}>
-                <p
-                  style={{
-                    width: "50%",
-                    fontSize: "1rem",
-                  }}
-                >
-                  Designation
-                </p>
-                <p
-                  style={{
-                    width: "50%",
-                    fontSize: "1rem",
-                    color: "rgba(0, 0, 0, 0.7)",
-                  }}
-                >
-                  {details?.project?.owner?.representative?.designation}
-                </p>
-              </div>
-              <div style={{ display: "flex" }}>
-                <p
-                  style={{
-                    width: "50%",
-                    fontSize: "1rem",
-                  }}
-                >
-                  NIN
-                </p>
-                <p
-                  style={{
-                    width: "50%",
-                    fontSize: "1rem",
-                    color: "rgba(0, 0, 0, 0.7)",
-                  }}
-                >
-                  {details?.project?.owner?.representative?.nin}
-                </p>
-              </div>
-              <div style={{ display: "flex" }}>
-                <p
-                  style={{
-                    width: "50%",
-                    fontSize: "1rem",
-                  }}
-                >
-                  Wallet
-                </p>
-                <p
-                  style={{
-                    width: "50%",
-                    fontSize: "1rem",
-                    color: "rgba(0, 0, 0, 0.7)",
-                  }}
-                >
-                  {details?.project?.owner?.representative?.wallet}
-                </p>
-              </div>
-            </div>
+            <LabelValueBox
+              label="E-mail"
+              value={details?.project?.owner?.representative?.email}
+            />{" "}
+            <LabelValueBox
+              label="Phone"
+              value={details?.project?.owner?.representative?.phone}
+            />{" "}
+            <LabelValueBox
+              label="Designation"
+              value={details?.project?.owner?.representative?.designation}
+            />
+            <LabelValueBox
+              label="NIN"
+              value={details?.project?.owner?.representative?.nin}
+            />
+            {/* <LabelValueBox
+              label="Wallet"
+              value={details?.project?.owner?.representative?.wallet}
+            /> */}
           </div>
         </div>
       </div>

@@ -3,6 +3,8 @@ import { useState } from "react";
 import AuthPopup from "../../../Auth/authPopup";
 import Loading from "../../loading/loading";
 import Input from "../inputnew";
+import { GrLinkNext } from "react-icons/gr";
+import { GrLinkPrevious } from "react-icons/gr";
 
 const Project = ({ submit, backStep }) => {
   const api = useAPI();
@@ -139,8 +141,8 @@ const Project = ({ submit, backStep }) => {
         <div
           style={{
             fontSize: "1.5rem",
-            fontWeight: "bold",
-            color: "var(--green-80)",
+            fontWeight: "600",
+            color: "var(--heading-color)",
           }}
         >
           Project Details
@@ -200,11 +202,13 @@ const Project = ({ submit, backStep }) => {
         )}
         <Input
           inputData={{
-            label: "Project Name",
+            label: "Project Name (20 char max)",
             type: "text",
             required: true,
             value: project["name"],
-            onChange: (e) => changeValue("name", e.target.value),
+            onChange: (e) =>
+              e.target.value.length <= 20 &&
+              changeValue("name", e.target.value),
             maxLength: 50,
           }}
         />
@@ -214,7 +218,9 @@ const Project = ({ submit, backStep }) => {
             type: "text",
             required: true,
             value: project["description"],
-            onChange: (e) => changeValue("description", e.target.value),
+            onChange: (e) =>
+              e.target.value.length <= 500 &&
+              changeValue("description", e.target.value),
             maxLength: 500,
             multiline: true,
             rows: 4,
@@ -449,7 +455,16 @@ const Project = ({ submit, backStep }) => {
               color: "#525252",
             }}
           >
-            Back
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-evenly",
+              }}
+            >
+              <GrLinkPrevious />
+              <p>Back</p>
+            </div>
           </button>
 
           <button
@@ -463,7 +478,16 @@ const Project = ({ submit, backStep }) => {
               marginBottom: "100px",
             }}
           >
-            Next
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-evenly",
+              }}
+            >
+              <p>Next</p>
+              <GrLinkNext />
+            </div>
           </button>
         </div>
       </form>

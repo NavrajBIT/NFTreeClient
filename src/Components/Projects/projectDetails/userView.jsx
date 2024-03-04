@@ -13,7 +13,6 @@ const UserView = ({ isOwnerView }) => {
   const details = usedetails(projectId, true);
   return (
     <div
-      className="userViewContainer"
       style={{
         backgroundImage: "linear-gradient(to bottom right, #243900, #eaffc6)",
         width: "100%",
@@ -22,16 +21,20 @@ const UserView = ({ isOwnerView }) => {
         alignItems: "center",
         justifyContent: "center",
         zIndex: "1",
+        padding: "3%",
       }}
+      className="projectContainer"
     >
       <div
         style={{
-          width: " 100%",
+          width: " 95%",
           background: "linear-gradient(to right, #FFFFFF, #EBFFC8)",
           borderRadius: "20px",
           marginTop: "5rem",
           zIndex: "1",
+          boxShadow: "3px 4px 30px 0px #3D511B",
         }}
+        className="projectContainerBox"
       >
         <ProjectDesc isOwnerView={isOwnerView} details={details} />
         <ProjectDetails isOwnerView={isOwnerView} details={details} />
@@ -41,7 +44,15 @@ const UserView = ({ isOwnerView }) => {
         <PlantImages isOwnerView={isOwnerView} details={details} />
         <ProjectDocument isOwnerView={isOwnerView} details={details} />
         <ProjectGallery isOwnerView={isOwnerView} details={details} />
-        <ProjectOwnerDetails isOwnerView={isOwnerView} details={details} />
+        <div
+          style={{
+            backgroundImage: "linear-gradient(137deg, #ebffdd, #ebffc8)",
+            marginBottom: "10rem",
+          }}
+        >
+          {" "}
+          <ProjectOwnerDetails isOwnerView={isOwnerView} details={details} />
+        </div>
       </div>
     </div>
   );

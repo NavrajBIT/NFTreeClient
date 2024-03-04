@@ -11,7 +11,7 @@ const FundingProcess = ({ details }) => {
     return percentage;
   })();
   return (
-    <div className="fundingProcessContainer">
+    <div style={{ padding: "1rem" }}>
       <div>
         <p
           style={{
@@ -28,13 +28,18 @@ const FundingProcess = ({ details }) => {
           marginTop: "2rem",
           display: "flex",
           justifyContent: "space-around",
+          alignItems: "center",
+          flexWrap: "wrap-reverse",
+          width: "80%",
         }}
+        className="fundingBar"
       >
         <p
           style={{
             fontSize: "1rem",
             fontWeight: "500",
             textAlign: "center",
+            flex: "40%",
           }}
         >
           {" "}
@@ -43,7 +48,7 @@ const FundingProcess = ({ details }) => {
         </p>
         <div
           style={{
-            width: "50%",
+            flex: "60%",
             height: "22px",
             borderRadius: "20px",
             border: "1px solid black",

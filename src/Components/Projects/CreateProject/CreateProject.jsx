@@ -23,7 +23,10 @@ function CreateProject() {
   return (
     <div
       style={{
-        backgroundImage: "linear-gradient(to bottom right, #243900, #eaffc6)",
+        backgroundImage:
+          step == 1 || step == 3
+            ? "linear-gradient(to bottom right, #243900, #EAFFC6)"
+            : "linear-gradient(to top left, #243900, #EAFFC6)",
         width: "100%",
         minHeight: "var(--min-height-page)",
         display: "flex",

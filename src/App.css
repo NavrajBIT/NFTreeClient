@@ -62,7 +62,7 @@ html {
   --min-height-page: 100vh;
   --min-height-section: 600px;
 
-  --max-width: 1400px;
+  --max-width: 1100px;
   --max-width-form: 900px;
   --min-height-form: 500px;
   --max-width-card: 400px;
@@ -87,13 +87,18 @@ html {
 
   --image-aspect-ratio: 4/3;
 
-  --nav-height: 150px;
+  --nav-height: 80px;
   --nav-height-small: 80px;
 }
 
 body {
-  background: var(--green-10);
   font-family: Inter;
+  background-image: linear-gradient(
+    90deg,
+    rgba(211, 255, 183, 1),
+    rgba(226, 255, 206, 1),
+    white
+  );
 }
 
 * {

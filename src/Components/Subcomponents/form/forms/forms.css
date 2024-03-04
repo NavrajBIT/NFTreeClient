@@ -1,0 +1,18 @@
+.responsiveDeleteIcon {
+  display: none !important;
+}
+
+@media screen and (max-width: 550px) {
+  .responsiveFlex {
+    flex-direction: column;
+    gap: 20px !important;
+  }
+
+  .responsiveDeleteButton {
+    display: none !important;
+  }
+
+  .responsiveDeleteIcon {
+    display: flex !important;
+  }
+}

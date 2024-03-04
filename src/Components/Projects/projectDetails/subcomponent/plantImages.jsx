@@ -7,21 +7,19 @@ const PlantImages = ({ isOwnerView, details }) => {
   const navigate = useNavigate();
   const imageref = useRef(null);
   const [images, setImages] = useState([]);
+  const [seeMore, setSeeMore] = useState(false);
+
   useEffect(() => {
-    try {
-      poppulateImages();
-    } catch (err) {
-      console.log(err);
-    }
-  }, []);
+    setImages([]);
+
+    details?.project?.species && poppulateImages();
+  }, [details.project]);
+
   const poppulateImages = async () => {
-    const plantTypesArray = [];
-    try {
-      details?.project?.species?.species?.map((specie) => {
-        plantTypesArray.push(specie.plant);
-      });
-    } catch {}
-    console.log(plantTypesArray);
+    const plantTypesArray = details.project.species.map((specie) => {
+      return specie.plant;
+    });
+
     plantTypesArray.map((plant) => {
       fetchImages(plant);
     });
@@ -40,10 +38,17 @@ const PlantImages = ({ isOwnerView, details }) => {
             newArray.push({ image: data.urls.full, name: treeType });
             return newArray;
           });
+        } else {
+          setImages((prev) => {
+            let newArray = [...prev];
+            newArray.push({ image: treeType, name: treeType });
+            return newArray;
+          });
         }
       })
       .catch((err) => console.log(err));
   };
+
   return (
     <div className="btnsAndPlantImageContainer">
       <div className="buttonContainer">
@@ -70,13 +75,7 @@ const PlantImages = ({ isOwnerView, details }) => {
         />
       </div>
       {isOwnerView && (
-        <div
-          style={{
-            marginTop: "1rem",
-            gap: "2rem",
-            display: "flex",
-          }}
-        >
+        <div div className="buttonContainer">
           <input
             type="file"
             style={{ display: "none" }}
@@ -94,33 +93,47 @@ const PlantImages = ({ isOwnerView, details }) => {
 
       <div className="imagesContainer">
         <div>
-          <p
-            style={{
-              fontSize: "1.8rem",
-              fontWeight: "700",
-              textAlign: "center",
-              fontFamily: "DM Serif Display",
-            }}
-          >
-            Plant Images
-          </p>
+          <h1 className="projectHeading">Plant Images</h1>
         </div>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-around",
-            marginTop: "5rem",
-          }}
-        >
+        <div className="ImageGrid">
           {images &&
             images.length > 0 &&
-            images.map((image, index) => (
-              <PlantImageBox src={image.image} key={`plant-image-${index}`} />
-            ))}
+            images.map(
+              (image, index) =>
+                (index < (isOwnerView ? 3 : 4) || seeMore) && (
+                  <PlantImageBox img={image} key={`plant-image-${index}`} />
+                )
+            )}
+          {isOwnerView && (
+            <div
+              className="plantImageBox"
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <p className="plantImageText"> + Add Image</p>
+            </div>
+          )}
         </div>
+        {images.length > (isOwnerView ? 3 : 4) && (
+          <span
+            style={{
+              fontWeight: "500",
+              position: "absolute",
+              marginTop: "10px",
+              right: "5%",
+              fontSize: "18px",
+              cursor: "pointer",
+            }}
+            className="SeeMoreText"
+            onClick={() => setSeeMore(!seeMore)}
+          >
+            {seeMore ? "See Less..." : "See more..."}
+          </span>
+        )}
       </div>
-
-      {/* <ProjectDocument /> */}
     </div>
   );
 };

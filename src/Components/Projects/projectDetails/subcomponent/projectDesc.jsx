@@ -1,49 +1,54 @@
 import "./userView.css";
 import ProjectPageButton from "./projectButton";
 const ProjectDesc = ({ isOwnerView, details }) => {
+  console.log(details);
   return (
-    <div className="projectDescContainer" style={{}}>
-      <div
-        style={{
-          width: "400px",
-          height: "60px",
-          backgroundColor: "#BFCCA6",
-          borderRadius: "20px",
-          boxShadow: "3px 4px 30px 0px",
-          padding: "1rem",
-        }}
-      >
-        <p
+    <div
+      style={{
+        backgroundImage: `url(${
+          details?.project?.image
+            ? details.project.image
+            : "/unsplash_bYZn_C-RswQ.png"
+        })`,
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: "center",
+        backgroundSize: "cover",
+        borderRadius: "20px 20px 0px 0px",
+        minHeight: "450px",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
+      <div style={{ display: "flex", flexDirection: "column" }}>
+        <div
+          className="descriptionBlock"
           style={{
-            fontSize: "1.7rem",
-            color: "black",
-            textAlign: "center",
-            fontFamily: "DM Serif Display",
-          }}
-        >
-          {details?.project?.name}
-        </p>
-      </div>
+            marginTop: "95px",
+            borderWidth: "1px 2px 0px 2px",
+            borderStyle: "solid",
+            borderColor: "#4C9A46",
 
-      <div
-        style={{
-          width: "92%",
-          minHeight: "200px",
-          backgroundColor: "#BFCCA6",
-          borderRadius: "20px",
-          boxShadow: "3px 4px 30px 0px",
-          padding: "1rem",
-        }}
-      >
-        <p
-          style={{
-            fontSize: "1.2rem",
-            fontFamily: "Inter",
+            textAlign: "center",
+            width: "fit-content",
+            padding: "10px",
+            minWidth: "150px",
           }}
         >
-          <b>Description:</b>
-          {details?.project?.description}
-        </p>
+          <h1 className="projectHeading">{details?.project?.name}</h1>
+        </div>
+        <div className="descriptionBlock">
+          <p
+            style={{
+              fontFamily: "Inter",
+              fontWeight: "400",
+            }}
+          >
+            {" "}
+            <span className="projectHeading">Description:</span>{" "}
+            {details?.project?.description}
+          </p>
+        </div>
       </div>
     </div>
   );

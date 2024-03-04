@@ -30,5 +30,9 @@ const OpenInput = ({ label, type, required, value, onChange, maxLength }) => {
 export default OpenInput;
 
 const Label = ({ label }) => {
-  return <div className="label">{label}</div>;
+  return (
+    <div className="label" style={{ left: "0px" }}>
+      {label}
+    </div>
+  );
 };

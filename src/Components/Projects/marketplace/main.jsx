@@ -12,6 +12,12 @@ export default function ProjectPage() {
   const [search, setSearch] = useState("");
 
   useEffect(() => {
+    let footer = document.getElementById("footer");
+    footer.style.display = "none";
+    return () => (footer.style.display = "block");
+  }, []);
+
+  useEffect(() => {
     const projectListData = async () => {
       await api
         .crud("GET", "project/projectlist")
@@ -66,8 +72,7 @@ export default function ProjectPage() {
       />
       <div style={{ display: "flex" }}>
         <Sidebar filters={filters} setFilters={setFilters} data={data} />
-        {data.length === 0 &&
-          "No Projects yet... Start by creating a new project."}
+
         <Projectsview
           filteredData={filterData}
           filters={filters}

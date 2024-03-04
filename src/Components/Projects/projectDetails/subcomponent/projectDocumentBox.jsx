@@ -2,7 +2,7 @@ import "./userView.css";
 const ProjectDocumentBox = ({ doc }) => {
   return (
     <div className="documentBox" onClick={() => window.open(doc)}>
-      <img src="./docsImage.png" alt="plant Image" className="docImage" />
+      <img src="/docsImage.png" alt="plant Image" className="docImage" />
       <p
         style={{
           marginTop: "1rem",
