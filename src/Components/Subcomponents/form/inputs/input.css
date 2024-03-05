@@ -30,19 +30,12 @@ textarea {
 /* ------------------------------ */
 .openinput {
   width: 100%;
-  /* padding: var(--padding-light); */
+  padding: var(--padding-light);
   font-size: 1.2rem;
   border: none;
   border-bottom: 1px solid var(--text-grey);
   position: relative;
   resize: none;
-  border-bottom: 2px solid var(--green-100);
-  margin: 10px 0;
-  padding: 4px 0;
-  font-size: 14px;
-}
-.openinput {
-  padding: var(--padding-light) 0px;
 }
 
 .openinput:focus {
@@ -140,9 +133,6 @@ textarea {
   position: relative;
   resize: none;
   border-radius: 5px;
-  border: 1px solid #a0a0a0;
-  background: #e9f6d2;
-  /* color: #e9f6d2; */
 }
 
 .projectFormFileupload {

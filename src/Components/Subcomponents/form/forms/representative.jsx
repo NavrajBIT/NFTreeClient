@@ -24,7 +24,7 @@ const Representative = ({ submit }) => {
     let status = true;
     if (userData) {
       delete userData.wallet;
-
+      delete userData.signed_note;
       Object.keys(userData).map((key) => {
         if (!userData[key] || userData[key] === "") {
           status = false;

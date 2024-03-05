@@ -32,7 +32,7 @@
 
 .navlink:hover {
   color: var(--text-green);
-  cursor: context-menu;
+  cursor: pointer;
 }
 
 .logincontainer {
@@ -43,6 +43,7 @@
 
 .profilepiccontainer {
   position: relative;
+  cursor: pointer;
 }
 
 .profilepiccontainer img {
@@ -103,6 +104,7 @@
 }
 .walletButton:hover {
   box-shadow: 0 0 10px 1px var(--bg-bright);
+  cursor: pointer;
 }
 
 .dropdown {

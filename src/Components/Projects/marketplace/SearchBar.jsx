@@ -1,15 +1,10 @@
-
-
 import React, { useState } from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import { useNavigate } from "react-router-dom";
 import buttonimage from "./assets/Plus.png";
 import buttonimage2 from "./assets/Plus2.png";
-
 const SearchBar = ({ searchValue, setSearchValue }) => {
   const [isHighlighted, setIsHighlighted] = useState(false);
-
-
   return (
     <div
       style={{
@@ -31,7 +26,7 @@ const SearchBar = ({ searchValue, setSearchValue }) => {
           textIndent: "30px",
           height: "50px",
           // border: "none",
-          boxShadow: "-3px 3px 5px 4px #aaaaaa inset",
+          boxShadow: "-3px 3px 5px 4px #AAAAAA inset",
           fontSize: "20px",
         }}
         onFocus={() => setIsHighlighted(true)}
@@ -53,9 +48,7 @@ const SearchBar = ({ searchValue, setSearchValue }) => {
     </div>
   );
 };
-
 export default SearchBar;
-
 export const CreateButton = () => {
   const navigate = useNavigate();
   return (
@@ -65,11 +58,9 @@ export const CreateButton = () => {
         onClick={() => navigate("/projects/create")}
       >
         <p>Create new project</p>
-
         <img src={buttonimage} alt="" className="desktop" />
         <img src={buttonimage2} alt="" className="mobile" />
       </button>
     </div>
   );
 };
-

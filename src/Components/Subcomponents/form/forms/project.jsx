@@ -100,7 +100,7 @@ const Project = ({ submit, backStep }) => {
       formdata.append(key, project[key]);
     });
     setIsLoading(true);
-    api
+    await api
       .crud("POST", "project/myproject", formdata, true)
       .then((res) => {
         console.log(res);
@@ -229,7 +229,7 @@ const Project = ({ submit, backStep }) => {
         <Input
           inputData={{
             label: "Plantation Area (hect)",
-            type: "number",
+            type: "text",
             required: true,
             value: project["area"],
             onChange: (e) => changeValue("area", e.target.value),
@@ -261,8 +261,8 @@ const Project = ({ submit, backStep }) => {
         {project.phase == 2 && (
           <Input
             inputData={{
-              label: "Project Age (Months)",
-              type: "number",
+              label: "Project Age (Years)",
+              type: "text",
               required: true,
               value: project["age"],
               onChange: (e) => changeValue("age", e.target.value),
@@ -293,7 +293,7 @@ const Project = ({ submit, backStep }) => {
         <Input
           inputData={{
             label: "Number of Trees",
-            type: "number",
+            type: "text",
             required: true,
             value: project["plant_planned"],
             onChange: (e) => changeValue("plant_planned", e.target.value),
@@ -305,9 +305,9 @@ const Project = ({ submit, backStep }) => {
             inputData={{
               label:
                 project.type === 2
-                  ? "Donation per plant($)"
-                  : "Investment per plant($SOL)",
-              type: "number",
+                  ? "Donation per plant($USD)"
+                  : "Investment per plant($USD)",
+              type: "text",
               required: true,
               value: project["donation"],
               onChange: (e) => changeValue("donation", e.target.value),
@@ -317,7 +317,7 @@ const Project = ({ submit, backStep }) => {
         )}
         {project.type != 1 && (
           <div style={{ padding: "var(--padding-main) 0" }}>
-            Total amount to be raised ={" "}
+            Total amount to be raised = {project.type === 2 ? " $" : " $"}
             {(function () {
               let total =
                 parseFloat(project.plant_planned) *
@@ -325,7 +325,6 @@ const Project = ({ submit, backStep }) => {
               if (!total) total = 0;
               return total;
             })()}
-            {project.type === 2 ? "$" : "SOL"}
           </div>
         )}
         {project.type == 3 && (
@@ -359,7 +358,7 @@ const Project = ({ submit, backStep }) => {
           <Input
             inputData={{
               label: "Expected Approximate ROI(%)",
-              type: "number",
+              type: "text",
               required: true,
               value: project["roi"],
               onChange: (e) => changeValue("roi", e.target.value),

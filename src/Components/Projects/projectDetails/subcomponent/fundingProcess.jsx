@@ -43,8 +43,8 @@ const FundingProcess = ({ details }) => {
           }}
         >
           {" "}
-          ({details?.project?.funding?.raised}$ 0f{" "}
-          {details?.project?.funding?.total}$)
+          (${details?.project?.funding?.raised} 0f $
+          {details?.project?.funding?.total})
         </p>
         <div
           style={{
