@@ -9,7 +9,7 @@ import ScrollToTop from "./Components/Subcomponents/Navbar/subcomponents/scrollT
 
 function App() {
   var client_id =
-    "28129239044-8k33sm43ff8qilml9tej6f3jorm9gnmh.apps.googleusercontent.com";
+    "729677619048-do4fcs1pdclosvtlf1sm2vloncq2ios5.apps.googleusercontent.com";
   return (
     <AuthProvider>
       <GoogleOAuthProvider clientId={client_id}>

@@ -6,48 +6,10 @@ import { useRef, useState, useEffect } from "react";
 const PlantImages = ({ isOwnerView, details }) => {
   const navigate = useNavigate();
   const imageref = useRef(null);
-  const [images, setImages] = useState([]);
+  const addimageref = useRef(null);
   const [seeMore, setSeeMore] = useState(false);
 
-  useEffect(() => {
-    setImages([]);
-
-    details?.project?.species && poppulateImages();
-  }, [details.project]);
-
-  const poppulateImages = async () => {
-    const plantTypesArray = details.project.species.map((specie) => {
-      return specie.plant;
-    });
-
-    plantTypesArray.map((plant) => {
-      fetchImages(plant);
-    });
-  };
-
-  const fetchImages = async (treeType) => {
-    let ACCESS_KEY = import.meta.env.VITE_UNSPLASH_KEY;
-    const apiUrl = `https://api.unsplash.com/photos/random?query=${treeType}_plant&client_id=${ACCESS_KEY}`;
-    fetch(apiUrl)
-      .then(async (res) => {
-        if (res.status === 200) {
-          let data = await res.json();
-          console.log(data);
-          setImages((prev) => {
-            let newArray = [...prev];
-            newArray.push({ image: data.urls.full, name: treeType });
-            return newArray;
-          });
-        } else {
-          setImages((prev) => {
-            let newArray = [...prev];
-            newArray.push({ image: treeType, name: treeType });
-            return newArray;
-          });
-        }
-      })
-      .catch((err) => console.log(err));
-  };
+  const images = details?.plantImages ? details.plantImages : [];
 
   return (
     <div className="btnsAndPlantImageContainer">
@@ -112,8 +74,15 @@ const PlantImages = ({ isOwnerView, details }) => {
                 justifyContent: "center",
                 alignItems: "center",
               }}
+              onClick={() => addimageref.current.click()}
             >
               <p className="plantImageText"> + Add Image</p>
+              <input
+                type="file"
+                ref={addimageref}
+                style={{ display: "none" }}
+                onChange={(e) => details.uploadPlantImage(e.target.files[0])}
+              />
             </div>
           )}
         </div>

@@ -7,6 +7,7 @@ const usedetails = (projectId, notMyProject) => {
   const [isLoaggedIn, setIsLoggedIn] = useState(true);
   const [project, setProject] = useState(null);
   const [projectImages, setProjectImages] = useState(null);
+  const [plantImages, setPlantImages] = useState(null);
   const [projectDocs, setProjectDocs] = useState(null);
   const [recipients, setRecipients] = useState(null);
   const [updateProjectPopup, setUpdateProjectPopup] = useState(false);
@@ -15,6 +16,7 @@ const usedetails = (projectId, notMyProject) => {
     poppulateProject();
     poppulateProjectImages();
     poppulateProjectDocs();
+    poppulatePlantImages();
     if (!notMyProject) {
       poppulateRecipients();
     }
@@ -43,6 +45,21 @@ const usedetails = (projectId, notMyProject) => {
         console.log(res);
         if (res.status === 200) {
           setProjectImages(res);
+        }
+      })
+      .catch((err) => {
+        if (err === 401) setIsLoggedIn(false);
+      });
+    setIsLoading(false);
+  };
+  const poppulatePlantImages = async () => {
+    setIsLoading(true);
+    await api
+      .crud("GET", `project/${projectId}/specie_images`)
+      .then((res) => {
+        console.log(res);
+        if (res.status === 200) {
+          setPlantImages(res);
         }
       })
       .catch((err) => {
@@ -110,6 +127,7 @@ const usedetails = (projectId, notMyProject) => {
     }
   };
   const uploadGalleryImage = async (file) => {
+    console.log("uploading file...");
     const fileName = file.name.replace(/\s+/g, "_");
     if (
       fileName.endsWith(".png") ||
@@ -125,12 +143,44 @@ const usedetails = (projectId, notMyProject) => {
       setIsLoading(true);
       await api
         .crud("POST", endpoint, formdata, true)
-        .then((res) => {})
+        .then((res) => {
+          console.log(res);
+        })
         .catch((err) => {
           alert("Could not upload image.");
           if (err === 401) setIsLoggedIn(false);
         });
       await poppulateProjectImages();
+      setIsLoading(false);
+    } else {
+      alert("Please select a valid image file.");
+    }
+  };
+  const uploadPlantImage = async (file) => {
+    console.log("uploading file...");
+    const fileName = file.name.replace(/\s+/g, "_");
+    if (
+      fileName.endsWith(".png") ||
+      fileName.endsWith(".jpg") ||
+      fileName.endsWith(".jpeg")
+    ) {
+      const newFile = new File([file], fileName, { type: file.type });
+
+      const formdata = new FormData();
+      formdata.append("image", newFile);
+      formdata.append("project", projectId);
+      const endpoint = "project/specie_images/create";
+      setIsLoading(true);
+      await api
+        .crud("POST", endpoint, formdata, true)
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          alert("Could not upload image.");
+          if (err === 401) setIsLoggedIn(false);
+        });
+      await poppulatePlantImages();
       setIsLoading(false);
     } else {
       alert("Please select a valid image file.");
@@ -147,7 +197,9 @@ const usedetails = (projectId, notMyProject) => {
     setIsLoading(true);
     await api
       .crud("POST", endpoint, formdata, true)
-      .then((res) => {})
+      .then((res) => {
+        console.log(res);
+      })
       .catch((err) => {
         alert("Could not upload document.");
         if (err === 401) setIsLoggedIn(false);
@@ -238,12 +290,14 @@ const usedetails = (projectId, notMyProject) => {
     project,
     setProject,
     projectImages,
+    plantImages,
     setProjectImages,
     projectDocs,
     setProjectDocs,
     recipients,
     uploadProjectImage,
     uploadGalleryImage,
+    uploadPlantImage,
     uploadProjectDoc,
     addRecipient,
     deleteRecipient,
