@@ -104,7 +104,11 @@ const NavContent = () => {
               onMouseEnter={() => setIsprofile(true)}
               onMouseLeave={() => setIsprofile(false)}
             >
-              <img src={auth.avatar} alt="Avatar" />
+              {auth.avatar ? (
+                <img src={auth.avatar} alt="Avatar" />
+              ) : (
+                <img src="/user.png" alt="Default Avatar" />
+              )}
               {profile && <Profiledropdown />}
             </div>
           ) : (

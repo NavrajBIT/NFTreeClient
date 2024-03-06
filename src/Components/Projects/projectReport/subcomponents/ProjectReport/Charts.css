@@ -1,0 +1,14 @@
+.labels{
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    color: #000;
+}
+
+.apexcharts-legend.apx-legend-position-right{
+    display: none;
+}
+
+.biochart{
+    display: flex;
+}

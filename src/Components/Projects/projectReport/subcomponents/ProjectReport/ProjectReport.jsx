@@ -1,4 +1,6 @@
-import BioChart from "./BioChart";
+// import BioChart from "./BioChart";
+import BioChart1 from "./BioChart1";
+import CO2 from "./CO2";
 import CarbonChart from "./CarbonChart";
 import "./ProjectReport.css";
 import { HiMiniShare } from "react-icons/hi2";
@@ -30,11 +32,7 @@ const ProjectReport = () => {
           }}
         >
           <p
-            style={{
-              fontSize: "xxx-large",
-              fontWeight: "600",
-              color: "var(--green-100)",
-            }}
+            className="projectRT"
           >
             Project report
           </p>
@@ -61,8 +59,8 @@ const ProjectReport = () => {
           }}
           className="gridContainer"
         >
-          <div className="GridBox">
-            <div className="gridBoxHeading">
+          <div className="GridBox1">
+            <div className="gridBoxHeading1">
               <h2>Enhancement in Bio diversity</h2>
             </div>
 
@@ -115,7 +113,7 @@ const ProjectReport = () => {
                     <tr>
                       <td>Biomass weight</td>
                       <td>
-                        <img src="/ProjectReport/Biomass (1).png" />
+                        <img src="/ProjectReport/Biomass.png" />
                       </td>
                       <td>3-5 Tonnes</td>
                     </tr>
@@ -123,8 +121,9 @@ const ProjectReport = () => {
                 </table>
               </div>
 
-              <div>
-                <BioChart />
+              <div className="bio">
+                {/* <BioChart /> */}
+                <BioChart1 />
               </div>
             </div>
           </div>
@@ -148,7 +147,7 @@ const ProjectReport = () => {
 
             <div className="gridBoxContent">
               <div style={{ width: "90%" }}>
-                <CarbonChart />
+                <CO2 />
               </div>
             </div>
           </div>

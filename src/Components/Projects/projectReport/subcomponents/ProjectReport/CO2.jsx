@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Chart from "react-apexcharts";
 
-const CarbonChart = () => {
+const CO2 = () => {
   const [data, setData] = useState({
     options: {
       labels: ["mango", "orange", "banana","melon"],
@@ -13,14 +13,11 @@ const CarbonChart = () => {
             labels: {
               show: true,
               total: {
-                show: true,
-                label: "64 Kg/ha",
-                value:"",
+                  show: true,
+                  label: "C02 removel",
+                  value:false,
               },
             },
-          },
-          labels: {
-              show: false,
           },
         },
       },
@@ -30,7 +27,6 @@ const CarbonChart = () => {
     chartOptions: ["Apple", "Mango", "Orange", "Watermelon"],
   });
 
- 
   return (
     <div style={{ height: "100%", minHeight: "300px" }}>
       <Chart
@@ -44,4 +40,4 @@ const CarbonChart = () => {
   );
 };
 
-export default CarbonChart;
+export default CO2;

@@ -1,18 +1,18 @@
 import "./profile.css";
 const ProfilePicture = ({ script }) => {
+  const defaultProfilePicture = "/user.svg";
   return (
     <div className="profileMainDiv">
       <div className="profileSubContainer">
-        <div className="coverPicContainer" >
+        <div className="coverPicContainer">
           <div className="profilePicContainer">
-            <div style={{ zIndex: "-1" }}>
+            <div className="profilePic">
               <img
-                src={script.account?.picture}
+                src={script.account?.picture || defaultProfilePicture}
                 alt="profile pic"
               />
             </div>
-            <p className="PName"
-            >
+            <p className="PName">
               {script?.user?.first_name} {script?.user?.last_name}
             </p>
             {/* <p
@@ -74,7 +74,7 @@ const ProfilePicture = ({ script }) => {
                 {script?.user?.organization?.description}
               </p>
               <p
-              className="personalP"
+                className="personalP"
                 style={{
                   marginTop: "0.5rem",
                 }}
@@ -89,7 +89,7 @@ const ProfilePicture = ({ script }) => {
                 {script?.user?.website}
               </p>
               <p
-              className="personalP"
+                className="personalP"
                 style={{
                   marginTop: "0.5rem",
                 }}
@@ -105,7 +105,7 @@ const ProfilePicture = ({ script }) => {
                 <span>{script?.organization?.address}</span>
               </p>
               <p
-              className="personalP"
+                className="personalP"
                 style={{
                   marginTop: "0.5rem",
                 }}
@@ -121,7 +121,7 @@ const ProfilePicture = ({ script }) => {
                 <span>{script?.organization?.country}</span>
               </p>
               <p
-              className="personalP"
+                className="personalP"
                 style={{
                   marginTop: "0.5rem",
                 }}
@@ -136,7 +136,7 @@ const ProfilePicture = ({ script }) => {
                 <span>{script?.organization?.pin_code}</span>
               </p>
               <p
-              className="personalP"
+                className="personalP"
                 style={{
                   marginTop: "0.5rem",
                 }}
@@ -181,8 +181,8 @@ const ProfilePicture = ({ script }) => {
                 marginTop: "1rem",
               }}
             >
-               <p
-              className="personalP"
+              <p
+                className="personalP"
                 style={{
                   marginTop: "0.5rem",
                 }}
@@ -198,7 +198,7 @@ const ProfilePicture = ({ script }) => {
                 <span>{script?.user?.email}</span>
               </p>
               <p
-              className="personalP"
+                className="personalP"
                 style={{
                   marginTop: "0.5rem",
                 }}
@@ -214,7 +214,7 @@ const ProfilePicture = ({ script }) => {
                 <span>{script?.account?.designation}</span>
               </p>
               <p
-              className="personalP"
+                className="personalP"
                 style={{
                   marginTop: "0.5rem",
                 }}
@@ -230,7 +230,7 @@ const ProfilePicture = ({ script }) => {
                 <span>{script?.account?.phone}</span>
               </p>
               <p
-              className="personalP"
+                className="personalP"
                 style={{
                   marginTop: "0.5rem",
                 }}

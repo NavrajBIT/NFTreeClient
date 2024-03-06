@@ -100,7 +100,11 @@ const MenuOptions = ({ setIsmenu }) => {
               className="profilepiccontainer"
               style={{ width: "100%", padding: "var(--padding-main)" }}
             >
-              <img src={auth.avatar} alt="Profile" />
+              {auth.avatar ? (
+                <img src={auth.avatar} alt="Avatar" />
+              ) : (
+                <img src="/user.png" alt="Default Avatar" />
+              )}
             </div>
             <div
               className="sidebarlink"
@@ -129,7 +133,7 @@ const MenuOptions = ({ setIsmenu }) => {
               navigate("/login");
             }}
           >
-            Log In
+            Login
           </div>
         )}
       </div>
