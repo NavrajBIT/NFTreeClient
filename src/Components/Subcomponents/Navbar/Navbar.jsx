@@ -18,6 +18,7 @@ import Nft from "../../NFT/nft";
 import Forgotpassword from "../../ForgotPassword/forgotpassword";
 import UserView from "../../Projects/projectDetails/userView";
 import ProjectReport from "../../Projects/projectReport/subcomponents/ProjectReport/ProjectReport";
+import Dashboard from "../../Dashboard/Dashboard";
 
 export default function Navbar() {
   return (
@@ -28,6 +29,7 @@ export default function Navbar() {
         <Route path="/home" element={<Home />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/login" element={<Auth />} />
+        <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/forgotpassword" element={<Forgotpassword />} />
         <Route path="/projects" element={<ProjectPage />} />
         <Route path="/projects/create" element={<CreateProject />} />

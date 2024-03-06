@@ -141,7 +141,7 @@ const ProjectOwnerDetails = ({ isOwnerView, details }) => {
               className="Responsiveflex900"
             >
               <img
-                src={`http://localhost:8000${details?.project?.owner?.representative?.picture}`}
+                src={`https://bitbhoomi.com${details?.project?.owner?.representative?.picture}`}
                 alt="profile"
                 style={{
                   width: "100px",

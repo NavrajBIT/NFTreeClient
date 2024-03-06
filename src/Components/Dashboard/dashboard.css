@@ -1,0 +1,46 @@
+.DashboardContainer h1 {
+  font-size: clamp(24px, 8vw, 48px);
+  font-family: DM Serif Display;
+  font-weight: 300;
+  line-height: 66px;
+  color: rgba(255, 255, 255, 1);
+  text-align: center;
+}
+
+.DashboardContainer h2 {
+  font-size: clamp(32px, 10vw, 44px);
+  font-weight: 700;
+  background: linear-gradient(90deg, #ff7a00 0%, #8f00ff 100%);
+  text-align: center;
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+}
+
+.DashboardContainer p {
+  font-size: clamp(14px, 10vw, 20px);
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.6);
+  text-align: center;
+  text-transform: capitalize;
+}
+
+.dashboardBox {
+  background: white;
+  border-radius: var(--border-radius);
+  margin: var(--padding-large) 5px;
+  padding: var(--padding-light);
+  width: 250px;
+  height: clamp(120px, 20vh, 180px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+@media screen and (max-width: 800px) {
+  .dashboardFlexBox {
+    flex-direction: column;
+  }
+  .dashboardBox {
+    width: unset !important;
+  }
+}

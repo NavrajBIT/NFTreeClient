@@ -24,6 +24,7 @@ const MenuOptions = ({ setIsmenu }) => {
   const navlinks = {
     Home: "/",
     Projects: "/projects",
+    Dashboard: "/dashboard",
     // "Contact Us": auth.isLoggedIn ? null : "/contact",
     // "Connect Wallet": auth.isLoggedIn ? "/connect-wallet" : null,
   };

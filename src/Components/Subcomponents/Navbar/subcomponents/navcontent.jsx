@@ -16,6 +16,7 @@ const NavContent = () => {
   const navlinks = {
     Home: "/",
     Projects: "/projects",
+    Dashboard: "/dashboard",
   };
 
   const handleScroll = () => {
