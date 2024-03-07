@@ -14,7 +14,6 @@ const NavContent = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const navlinks = {
-    Home: "/",
     Projects: "/projects",
     Dashboard: "/dashboard",
   };
@@ -47,9 +46,21 @@ const NavContent = () => {
           src="/logo_white.png"
           alt="BitBhoomi"
           style={{ height: "4rem", cursor: "pointer" }}
-          onClick={() => navigate("/")}
+          onClick={() => {
+          window.scrollTo({ top: 0, behavior: 'smooth' }); // Scrolls to the top of the page
+          navigate("/"); // Redirects to the home page
+          }}
         />
         <div className="navlinkscontainer">
+           <div
+            className="navlink"
+            onClick={() => {
+            window.scrollTo({ top: 0, behavior: 'smooth' }); // Scrolls to the top of the page
+            navigate("/"); // Redirects to the home page
+            }}
+          >
+            Home
+          </div>
           {Object.keys(navlinks).map((link, index) => (
             <div
               key={"nav-link-" + index}

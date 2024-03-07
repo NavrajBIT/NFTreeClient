@@ -1,7 +1,7 @@
 .projectCard {
   width: 100%;
   max-width: 320px;
-  background-color: #F6F6F6;
+  background-color: #E5E5E5;
   padding: var(--padding-light);
   border-radius: var(--border-radius-light);
   border: 2px solid var(--green-30);
