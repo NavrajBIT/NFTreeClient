@@ -89,6 +89,9 @@
   position: relative;
   transform: translateY(100%);
 }
+.noProjectsMessage{
+  margin-bottom: 8rem;
+}
 
 .organizationDetails {
   width: 62%;
@@ -178,7 +181,7 @@
 .myProjectsDiv {
   background-color: #d2e0d6;
   width: 100%;
-  padding: 18rem 2rem 2rem 2rem;
+  padding: 30rem 2rem 2rem 2rem;
   height: auto;
 }
 
@@ -188,6 +191,7 @@
   width: 100%;
   padding: 2rem;
 }
+
 
 @media only screen and (max-width: 800px) {
   .profileSubContainer {
@@ -215,6 +219,9 @@
     padding: 1rem;
     gap: 1rem;
     transform: translateY(15%);
+  }
+  .noProjectsMessage{
+    margin-bottom: 12rem;
   }
 
   .organizationDetails {
@@ -275,7 +282,7 @@
   }
 
   .myProjectsDiv {
-    padding: 4rem 1rem 1rem 1rem;
+    padding: 16rem 1rem 1rem 1rem;
   }
   .myContributionDiv,
   .myNFTDiv {

@@ -183,7 +183,7 @@ const ProjectOwnerDetails = ({ isOwnerView, details }) => {
           </div>
         </div>
       </div>
-      {isOwnerView && (
+      {/* {isOwnerView && (
         <div
           style={{
             display: "flex",
@@ -197,7 +197,7 @@ const ProjectOwnerDetails = ({ isOwnerView, details }) => {
             onClick={() => navigate("/profile")}
           />
         </div>
-      )}
+      )} */}
     </div>
   );
 };
