@@ -1,12 +1,12 @@
 import useAPI from "../../../../api/useAPI";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import AuthPopup from "../../../Auth/authPopup";
 import Loading from "../../loading/loading";
 import Input from "../inputnew";
 import { GrLinkNext } from "react-icons/gr";
 import { GrLinkPrevious } from "react-icons/gr";
 
-const Project = ({ submit, backStep }) => {
+const Project = ({ submit, backStep, data }) => {
   const api = useAPI();
   const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
@@ -33,6 +33,11 @@ const Project = ({ submit, backStep }) => {
     roi: "",
     phase: 1,
   });
+
+  useEffect(() => {
+    data.projectDetail != {} && setproject(data.projectDetail);
+  }, [data.projectDetail]);
+
   const changeValue = (key, value) => {
     setproject((prev) => {
       let newValues = { ...prev };
@@ -95,23 +100,26 @@ const Project = ({ submit, backStep }) => {
       setError("Please upload registration proof and project image.");
       return;
     }
+
     let formdata = new FormData();
     Object.keys(project).map((key) => {
       formdata.append(key, project[key]);
     });
     setIsLoading(true);
-    await api
-      .crud("POST", "project/myproject", formdata, true)
-      .then((res) => {
-        console.log(res);
-        if (res.status === 201) {
-          submit(res.id);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-        if (err === 401) setIsLoggedIn(false);
-      });
+    submit(project);
+
+    // await api
+    //   .crud("POST", "project/myproject", formdata, true)
+    //   .then((res) => {
+    //     console.log(res);
+    //     if (res.status === 201) {
+    //       submit(res.id, project);
+    //     }
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //     if (err === 401) setIsLoggedIn(false);
+    //   });
     setIsLoading(false);
   };
 
@@ -230,6 +238,7 @@ const Project = ({ submit, backStep }) => {
           inputData={{
             label: "Plantation Area (hect)",
             type: "text",
+            onlyNumber: true,
             required: true,
             value: project["area"],
             onChange: (e) => changeValue("area", e.target.value),
@@ -263,6 +272,7 @@ const Project = ({ submit, backStep }) => {
             inputData={{
               label: "Project Age (Years)",
               type: "text",
+              onlyNumber: true,
               required: true,
               value: project["age"],
               onChange: (e) => changeValue("age", e.target.value),
@@ -294,6 +304,7 @@ const Project = ({ submit, backStep }) => {
           inputData={{
             label: "Number of Trees",
             type: "text",
+            onlyNumber: true,
             required: true,
             value: project["plant_planned"],
             onChange: (e) => changeValue("plant_planned", e.target.value),
@@ -308,6 +319,8 @@ const Project = ({ submit, backStep }) => {
                   ? "Donation per plant($USD)"
                   : "Investment per plant($USD)",
               type: "text",
+              onlyNumber: true,
+              acceptFloat: true,
               required: true,
               value: project["donation"],
               onChange: (e) => changeValue("donation", e.target.value),
@@ -315,7 +328,7 @@ const Project = ({ submit, backStep }) => {
             }}
           />
         )}
-        {project.type != 1 && (
+        {/* {project.type != 1 && (
           <div style={{ padding: "var(--padding-main) 0" }}>
             Total amount to be raised = {project.type === 2 ? " $" : " $"}
             {(function () {
@@ -326,7 +339,7 @@ const Project = ({ submit, backStep }) => {
               return total;
             })()}
           </div>
-        )}
+        )} */}
         {project.type == 3 && (
           <Input
             inputData={{
@@ -360,6 +373,7 @@ const Project = ({ submit, backStep }) => {
               label: "Expected Approximate ROI(%)",
               type: "text",
               required: true,
+              onlyNumber: true,
               value: project["roi"],
               onChange: (e) => changeValue("roi", e.target.value),
               maxLength: 10,
@@ -371,11 +385,11 @@ const Project = ({ submit, backStep }) => {
             label: "Project Coordinates(comma separated)",
             type: "text",
             required: true,
+            onlyNumber: true,
+            acceptFloat: true,
             value: project["coordinates"],
             onChange: (e) => changeValue("coordinates", e.target.value),
             maxLength: 500,
-            multiline: true,
-            rows: 4,
           }}
         />
         <Input

@@ -86,7 +86,17 @@ const Input = ({ inputData, error }) => {
           onChange={inputData.onChange}
           options={inputData.options.blockchainOptions}
           onTextChange={inputData.onTextChange}
+          walletError={inputData.walletError}
         />
+        <div
+          style={{
+            color: "var(--error)",
+            fontSize: "0.8rem",
+            height: "15px",
+          }}
+        >
+          {error ? "wallet and address are required." : ""}
+        </div>
       </div>
     );
   }
@@ -98,6 +108,10 @@ const Input = ({ inputData, error }) => {
           {inputData.label}
         </p>
         {inputData.options.socialMediaOptions.map((data) => {
+          const newLabel = data.label.toLowerCase();
+          // const savedValue =
+          //   inputData?.value != null && JSON.parse(inputData.value);
+
           return (
             <div
               style={{
@@ -119,10 +133,22 @@ const Input = ({ inputData, error }) => {
                 type="text"
                 className="projectFormInput"
                 onChange={(e) => inputData.onChange(e, data.label)}
+                value={inputData?.value && inputData.value[newLabel]}
+                required={inputData.required}
               />
             </div>
           );
         })}
+        <div
+          style={{
+            color: "var(--error)",
+            fontSize: "0.8rem",
+            height: "15px",
+          }}
+        >
+          {error ? "This field is required" : ""}
+          {inputData.socialMediaError != "" && inputData.socialMediaError}
+        </div>
       </div>
     );
   }
@@ -138,6 +164,8 @@ const Input = ({ inputData, error }) => {
         rows={inputData.rows}
         options={inputData.options}
         placeholder={inputData.placeholder}
+        onlyNumber={inputData.onlyNumber}
+        acceptFloat={inputData.acceptFloat}
       />
       {inputData.multiline && (
         <CharCount maxCount={inputData.maxLength} value={inputData.value} />

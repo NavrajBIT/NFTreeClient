@@ -15,6 +15,9 @@ const ProjectFormInput = ({
   options,
   placeholder,
   onTextChange,
+  onlyNumber,
+  acceptFloat,
+  walletError,
 }) => {
   const labelDisplay = required && label ? `${label}*` : label;
   const requiredPlaceholder =
@@ -61,7 +64,15 @@ const ProjectFormInput = ({
           className="projectFormInput"
           required={required}
           value={value}
-          onChange={onChange}
+          onChange={(e) => {
+            const filteredValue = acceptFloat
+              ? e.target.value.replace(/[^0-9,.]/g, "")
+              : onlyNumber
+              ? e.target.value.replace(/[^0-9,]/g, "")
+              : e.target.value;
+
+            onChange({ target: { value: filteredValue } });
+          }}
           maxLength={maxLength}
           placeholder={requiredPlaceholder}
         />
@@ -108,12 +119,8 @@ const ProjectFormInput = ({
           onChange={onChange}
           style={{ background: "white" }}
         >
-          {options.map((option, index) => {
-            return (
-              <option value={option.value} key={"value-" + index}>
-                {option.label}
-              </option>
-            );
+          {options.map((option) => {
+            return <option value={option.value}>{option.label}</option>;
           })}
         </select>
       </div>
@@ -121,6 +128,8 @@ const ProjectFormInput = ({
   }
 
   if (type == "walletAddress") {
+    const key = value && Object.keys(value)[0];
+    console.log(walletError);
     return (
       <div
         className="projectFormContainer"
@@ -138,13 +147,12 @@ const ProjectFormInput = ({
             onChange={onChange}
             style={{ background: "white", width: "35%" }}
           >
-            {options.map((option, index) => {
+            {options.map((option) => {
               return (
                 <option
-                  key={index}
                   value={option.value}
                   disabled={option.disabled}
-                  selected={option.selected}
+                  selected={value ? true : option.selected}
                 >
                   {option.label}
                 </option>
@@ -154,10 +162,19 @@ const ProjectFormInput = ({
           <input
             type="text"
             className="projectFormInput"
-            required={required}
-            value={value}
+            required={true}
+            value={value && value[key]}
             onChange={onTextChange}
           />
+        </div>
+        <div
+          style={{
+            color: "var(--error)",
+            fontSize: "0.8rem",
+            height: "15px",
+          }}
+        >
+          {walletError ? walletError : ""}
         </div>
       </div>
     );
@@ -173,9 +190,10 @@ const ProjectFormInput = ({
         <div className="projectFormFileupload">
           <div>
             <p>
-              {" "}
               {value
-                ? value.split("/")[value.split("/").length - 1]
+                ? typeof value == "string"
+                  ? value.split("/")[value.split("/").length - 1]
+                  : value.name
                 : "Click to Upload"}
             </p>
             <IoAttachSharp style={{ color: "black" }} size={24} />

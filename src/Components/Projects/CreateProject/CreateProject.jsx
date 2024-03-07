@@ -12,6 +12,12 @@ function CreateProject() {
   const navigate = useNavigate();
   const [projectId, setProjectId] = useState(null);
   const [step, setStep] = useState(1);
+  const [createFormData, setCreateFormData] = useState({
+    representative: {},
+    organization: {},
+    projectDetail: {},
+    projectData: {},
+  });
 
   const stepperData = [
     "Representative Details",
@@ -51,35 +57,46 @@ function CreateProject() {
       >
         <Stepper data={stepperData} step={step} />
 
-        {step === 1 && <Representative submit={() => setStep(2)} />}
+        {step === 1 && (
+          <Representative
+            submit={(data) => {
+              setStep(2);
+              setCreateFormData({ ...createFormData, representative: data });
+            }}
+            data={createFormData}
+          />
+        )}
         {step === 2 && (
           <Organization
-            submit={() => setStep(3)}
+            submit={(data) => {
+              setStep(3);
+              setCreateFormData({ ...createFormData, organization: data });
+            }}
             backStep={() => {
               setStep(1);
             }}
+            data={createFormData}
           />
         )}
         {step === 3 && (
           <Project
-            submit={(e) => {
-              setProjectId(e);
+            submit={(data) => {
+              setCreateFormData({ ...createFormData, projectDetail: data });
               setStep(4);
             }}
             backStep={() => {
               setStep(2);
             }}
+            data={createFormData}
           />
         )}
         {step === 4 && (
           <ProjectData
-            submit={() => {
-              navigate(`/myprojects/${projectId}`);
-            }}
+            submit={() => {}}
             backStep={() => {
               setStep(3);
             }}
-            projectId={projectId}
+            data={createFormData}
           />
         )}
       </div>
