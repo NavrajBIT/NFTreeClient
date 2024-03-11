@@ -35,7 +35,7 @@ const ProjectDetails = ({ isOwnerView, details }) => {
             }
           />
           <LabelValueBox
-            label="Total Plantation Area"
+            label="Total Plantation Area (hect.)"
             value={details?.project?.area}
           />
           <LabelValueBox
@@ -50,7 +50,7 @@ const ProjectDetails = ({ isOwnerView, details }) => {
           )}
           {details?.project?.type === 3 && (
             <LabelValueBox
-              label="Investment Per Plant ($SOL)"
+              label="Investment Per Plant ($)"
               value={details?.project?.donation}
             />
           )}
@@ -105,7 +105,7 @@ const ProjectDetails = ({ isOwnerView, details }) => {
             gap: "10px",
           }}
         >
-          {details?.project?.species?.map((specie, index) => (
+          {details?.project?.species?.species?.map((specie, index) => (
             <div style={{ display: "flex" }}>
               <p
                 style={{
@@ -171,7 +171,7 @@ const ProjectDetails = ({ isOwnerView, details }) => {
         </div>
       </div>
 
-      {isOwnerView && (
+      {/* {isOwnerView && (
         <div
           style={{
             display: "flex",
@@ -184,7 +184,7 @@ const ProjectDetails = ({ isOwnerView, details }) => {
             onClick={() => navigate(`/myprojects/${details?.projectId}/update`)}
           />
         </div>
-      )}
+      )} */}
     </div>
   );
 };

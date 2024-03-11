@@ -7,23 +7,20 @@ import Auth from "../../Auth/Auth";
 import Loading from "../../Subcomponents/loading/loading";
 import { useEffect } from "react";
 import { useAuth } from "../../../Contexts/AuthContext";
-import usewallet from "./usewallet";
 import Input from "../../Subcomponents/form/inputnew";
+import { useWallet } from "../../../Contexts/walletContext";
 
 const Donate = () => {
   const params = useParams();
   const id = params.projectId;
   const api = useAPI();
-
-  const authContext = useAuth();
-  const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(true);
 
   const [project, setProject] = useState(null);
   const [trees, setTrees] = useState("");
-
-  const wallet = usewallet(setIsLoading, id, trees);
+  const [token, setToken] = useState({ label: "$BHOOMI", value: "$BHOOMI" });
+  const wallet = useWallet();
 
   useEffect(() => {
     poppulateProject();
@@ -33,7 +30,7 @@ const Donate = () => {
   const checkLogIn = async () => {
     setIsLoading(true);
     await api
-      .crud("GET", "user/kyc")
+      .crud("GET", "user/account")
       .then((res) => console.log(res))
       .catch((err) => {
         if (err === 401) setIsLoggedIn(false);
@@ -62,7 +59,16 @@ const Donate = () => {
     totalValue = project.donation * trees;
   } catch {}
 
-  const donationText = project.carbonCredit_enabled ? "Invest" : "Donate";
+  const donationText = project?.type === 3 ? "Invest" : "Donate";
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!wallet.isWalletConnected) {
+      wallet.connect();
+    } else {
+      console.log(wallet.provider.publicKey.toString());
+    }
+  };
 
   const projectDonateFormData = [
     [
@@ -153,7 +159,7 @@ const Donate = () => {
             gap: "var(--padding-light)",
           }}
           id={"formId"}
-          onSubmit={""}
+          onSubmit={handleSubmit}
         >
           <div
             style={{
@@ -175,8 +181,9 @@ const Donate = () => {
               label: "Invest In",
               type: "text",
               required: true,
-              value: project.name,
-              maxLength: 50,
+              value: project?.name,
+              onChange: () => {},
+              maxLength: 5000,
             }}
           />
 
@@ -195,46 +202,59 @@ const Donate = () => {
               label: "Investment Token",
               type: "select",
               required: true,
-              value: {},
-              options: [],
+              value: token.value,
+              options: [
+                { label: "$BHOOMI", value: "$BHOOMI" },
+                { label: "$SOL", value: "$SOL" },
+              ],
               select: true,
               onChange: (e) => {
-                changeValue("type", e.target.value);
+                setToken({ label: e.target.value, value: e.target.value });
               },
               maxLength: 50,
             }}
           />
           <Input
             inputData={{
-              label: "Total amount in selected token",
+              label: "Total amount in $USD",
               type: "number",
-
+              value: project?.donation ? project?.donation * trees : 0,
+              onChange: (e) => changeValue("description", e.target.value),
+              maxLength: 500,
+            }}
+          />
+          <Input
+            inputData={{
+              label: `Total amount in ${token.value} token`,
+              type: "number",
               value: project["description"],
               onChange: (e) => changeValue("description", e.target.value),
               maxLength: 500,
             }}
           />
 
-          {wallet.walletConnected && (
-            <div>
-              <Input
-                inputData={{
-                  label: "Connected Wallet Address",
-                  type: "text",
-                  value: wallet.walletAddress,
-                  maxLength: 500,
-                }}
-              />
-              <Input
-                inputData={{
-                  label: "Connected Wallet Balance",
-                  type: "text",
-                  value: wallet.walletAddress,
-                  maxLength: 500,
-                }}
-              />
-            </div>
-          )}
+          <div>
+            <Input
+              inputData={{
+                label: "Connected Wallet Address",
+                type: "text",
+                value: wallet?.isWalletConnected
+                  ? wallet?.publicKey?.toString()
+                  : "",
+                onChange: () => {},
+                maxLength: 500,
+              }}
+            />
+            <Input
+              inputData={{
+                label: "Connected Wallet Balance",
+                type: "text",
+                value: `$${wallet?.solbalance}SOL`,
+                onChange: () => {},
+                maxLength: 500,
+              }}
+            />
+          </div>
 
 <<<<<<< HEAD
           {/* <div style={{ color: "var(--error)" }}>{error}</div> */}
@@ -249,11 +269,6 @@ const Donate = () => {
           >
             <button
               type="submit"
-              onClick={() =>
-                wallet.walletConnected
-                  ? wallet.transact(totalValue)
-                  : wallet.connectWallet()
-              }
               style={{
                 padding: "var(--padding-light)",
                 background: "#354A12",
@@ -263,10 +278,11 @@ const Donate = () => {
                 marginBottom: "100px",
               }}
             >
-              {wallet.walletConnected ? "Invest" : "Connect"}
+              {wallet?.isWalletConnected ? donationText : "Connect Wallet"}
             </button>
           </div>
         </form>
+<<<<<<< HEAD
         {!wallet.walletInstalled && (
           <div style={{ padding: "var(--padding-main)", color: "red" }}>
             <p>
@@ -294,6 +310,8 @@ const Donate = () => {
         )} */}
 =======
 >>>>>>> 0bf9333728cf8ef7c6a66aaf11cf535cb419fafe
+=======
+>>>>>>> 90afaeffda289e03a467a116030ffa34676e2974
       </div>
     </div>
   );

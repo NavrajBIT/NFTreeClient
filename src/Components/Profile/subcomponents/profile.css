@@ -36,8 +36,13 @@
   height: auto;
   display: flex;
   flex-direction: column;
-  background: linear-gradient(190.04deg, rgba(0, 0, 0, 0.2) 0.84%, rgba(20, 102, 54, 0.165) 40.79%, rgba(24, 124, 66, 0.2) 90.74%),
-    linear-gradient(5.22deg, #FFFFFF 58.58%, #EEFFE9 65.08%, #265914 94.64%);
+  background: linear-gradient(
+      190.04deg,
+      rgba(0, 0, 0, 0.2) 0.84%,
+      rgba(20, 102, 54, 0.165) 40.79%,
+      rgba(24, 124, 66, 0.2) 90.74%
+    ),
+    linear-gradient(5.22deg, #ffffff 58.58%, #eeffe9 65.08%, #265914 94.64%);
   padding-bottom: 6rem;
   /* background-position: center top 16rem; */
 }
@@ -71,6 +76,7 @@
   object-fit: cover;
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
   display: flex;
+  background-color: #000;
 }
 
 .personalDetailsMainBox {
@@ -82,7 +88,6 @@
   justify-content: space-around;
   position: relative;
   transform: translateY(100%);
-
 }
 
 .organizationDetails {
@@ -92,7 +97,6 @@
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
   border-radius: 10px;
   padding: 2rem 1rem;
-
 }
 
 .personalDetails {
@@ -115,7 +119,7 @@
   padding: 0.5rem;
   border-radius: 5px;
   align-items: center;
-  color: #D9D9D9;
+  color: #d9d9d9;
   font-size: 20px;
   font-weight: 600;
   cursor: pointer;
@@ -172,14 +176,15 @@
 }
 
 .myProjectsDiv {
-  background-color: #D2E0D6;
+  background-color: #d2e0d6;
   width: 100%;
-  padding: 18rem 2rem 2rem 2rem;
-  height: auto,
+  padding: 30rem 2rem 2rem 2rem;
+  height: auto;
 }
 
-.myContributionDiv, .myNFTDiv {
-  background-color: #D2E0D6;
+.myContributionDiv,
+.myNFTDiv {
+  background-color: #d2e0d6;
   width: 100%;
   padding: 2rem;
 }
@@ -187,7 +192,7 @@
 @media only screen and (max-width: 800px) {
   .profileSubContainer {
     height: auto;
-    background: #D2E0D6;
+    background: #d2e0d6;
   }
 
   .coverPicContainer {
@@ -209,7 +214,7 @@
     flex-direction: column;
     padding: 1rem;
     gap: 1rem;
-    transform: translateY(15%)
+    transform: translateY(15%);
   }
 
   .organizationDetails {
@@ -270,12 +275,13 @@
   }
 
   .myProjectsDiv {
-    padding: 4rem 1rem 1rem 1rem;
+    padding: 16rem 1rem 1rem 1rem;
   }
-  .myContributionDiv, .myNFTDiv{
+  .myContributionDiv,
+  .myNFTDiv {
     padding: 2rem 1rem;
   }
-  .personalP{
+  .personalP {
     font-size: 14px;
   }
 }

@@ -2,11 +2,11 @@ import { useState } from "react";
 import menuicon from "./menu.png";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../../../Contexts/AuthContext";
-import "../Navbar.css"
+import "../Navbar.css";
 
 const Mobilemenu = () => {
   const [ismenu, setIsmenu] = useState(false);
-  
+
   return (
     <div className="mobilemenucontainer">
       <img src={menuicon} alt="menu" onClick={() => setIsmenu(true)} />
@@ -24,12 +24,13 @@ const MenuOptions = ({ setIsmenu }) => {
   const navlinks = {
     Home: "/",
     Projects: "/projects",
-    // "Contact Us": auth.isLoggedIn ? null : "/contact", 
-    // "Connect Wallet": auth.isLoggedIn ? "/connect-wallet" : null, 
+    Dashboard: "/dashboard",
+    // "Contact Us": auth.isLoggedIn ? null : "/contact",
+    // "Connect Wallet": auth.isLoggedIn ? "/connect-wallet" : null,
   };
   const handleDropdownOpen = () => {
     setIsDropdownOpen((prevState) => !prevState);
-  }
+  };
   return (
     <div className="menusidebarcontainer">
       <div className="menusidebarfilter" onClick={() => setIsmenu(false)} />
@@ -58,19 +59,33 @@ const MenuOptions = ({ setIsmenu }) => {
             <p> {link}</p>
           </div>
         ))}
+        <div
+          className="sidebarlink"
+          onClick={() => {
+            window.open("https://bitbhoomiido.onrender.com/");
+          }}
+        >
+          IDO
+        </div>
         {auth.isLoggedIn ? (
           <div>
             <div className="sidebarlink">
-              <div >
-                <button className="walletButtonMobile" onClick={handleDropdownOpen}
+              <div>
+                <button
+                  className="walletButtonMobile"
+                  onClick={handleDropdownOpen}
                 >
                   Connect wallet
                 </button>
 
-                {isDropdownOpen &&
+                {isDropdownOpen && (
                   <div className="dropdown">
                     <span>
-                      <img src="/phantom.png" className="phantom" alt="phantom_logo" />
+                      <img
+                        src="/phantom.png"
+                        className="phantom"
+                        alt="phantom_logo"
+                      />
                       <button>Phantom</button>
                     </span>
                     <hr />
@@ -78,14 +93,19 @@ const MenuOptions = ({ setIsmenu }) => {
                       <img src="/solfare.png" alt="solfare_logo" />
                       <button>Solfare</button>
                     </span>
-                  </div>}
+                  </div>
+                )}
               </div>
-            </div >
+            </div>
             <div
               className="profilepiccontainer"
               style={{ width: "100%", padding: "var(--padding-main)" }}
             >
-              <img src={auth.avatar} alt="Profile" />
+              {auth.avatar ? (
+                <img src={auth.avatar} alt="Avatar" />
+              ) : (
+                <img src="/user.png" alt="Default Avatar" />
+              )}
             </div>
             <div
               className="sidebarlink"
@@ -114,7 +134,7 @@ const MenuOptions = ({ setIsmenu }) => {
               navigate("/login");
             }}
           >
-            Log In
+            Login
           </div>
         )}
       </div>

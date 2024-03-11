@@ -1,9 +1,10 @@
 import "./userView.css";
 import PlantImageBox from "./plantImageBox";
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 const ProjectGallery = ({ isOwnerView, details }) => {
   const [seeMore, setSeeMore] = useState(false);
+  const imagebuttonref = useRef(null);
   return (
     <div className="projectGalleryContainer">
       <div>
@@ -11,7 +12,7 @@ const ProjectGallery = ({ isOwnerView, details }) => {
       </div>
 
       <div className="ImageGrid">
-        {details?.project?.gallery?.map(
+        {details?.projectImages?.map(
           (img, index) =>
             (index < (isOwnerView ? 3 : 4) || seeMore) && (
               <PlantImageBox img={img} key={`project-image-${index}`} />
@@ -25,12 +26,19 @@ const ProjectGallery = ({ isOwnerView, details }) => {
               justifyContent: "center",
               alignItems: "center",
             }}
+            onClick={() => imagebuttonref.current.click()}
           >
             <p className="plantImageText"> + Add Image</p>
+            <input
+              type="file"
+              style={{ display: "none" }}
+              ref={imagebuttonref}
+              onChange={(e) => details.uploadGalleryImage(e.target.files[0])}
+            />
           </div>
         )}
       </div>
-      {details?.project?.gallery?.length > (isOwnerView ? 3 : 4) && (
+      {details?.projectImages?.length > (isOwnerView ? 3 : 4) && (
         <span
           style={{
             fontWeight: "500",

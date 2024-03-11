@@ -18,13 +18,14 @@ import { GrFormNextLink } from "react-icons/gr";
 import "./forms.css";
 >>>>>>> 0bf9333728cf8ef7c6a66aaf11cf535cb419fafe
 
-const Representative = ({ submit }) => {
+const Representative = ({ submit, data }) => {
   const api = useAPI();
   const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const [userData, setUserdata] = useState(null);
   const profilepicrref = useRef(null);
+  const [NINError, setNINError] = useState("");
 
   useEffect(() => {
     poppulateUser();
@@ -32,6 +33,7 @@ const Representative = ({ submit }) => {
 
   const isComplete = () => {
     let status = true;
+<<<<<<< HEAD
     if (userData) {
       delete userData.wallet;
 <<<<<<< HEAD
@@ -43,6 +45,18 @@ const Representative = ({ submit }) => {
 >>>>>>> 0bf9333728cf8ef7c6a66aaf11cf535cb419fafe
       Object.keys(userData).map((key) => {
         if (!userData[key] || userData[key] === "") {
+=======
+
+    let newData = { ...userData };
+
+    if (newData) {
+      delete newData.wallet;
+      delete newData.signed_note;
+      delete newData.picture;
+
+      Object.keys(newData).map((key) => {
+        if (!newData[key] || newData[key] === "") {
+>>>>>>> 90afaeffda289e03a467a116030ffa34676e2974
           status = false;
         }
       });
@@ -55,12 +69,24 @@ const Representative = ({ submit }) => {
     await api
       .crud("GET", "user/account")
       .then((res) => {
-        if (res.status === 200) setUserdata(res[0]);
+        if (res.status === 200) showUserData(res[0]);
       })
       .catch((err) => {
         if (err === 401) setIsLoggedIn(false);
       });
     setIsLoading(false);
+  };
+
+  const showUserData = (savedData) => {
+    if (Object.keys(data.representative).length === 0) {
+      for (let i in savedData) {
+        if (!(i === "id" || i === "user")) {
+          savedData[i] = null;
+        }
+      }
+    }
+
+    setUserdata(savedData);
   };
 
   const ninproof = userData?.nin_proof;
@@ -82,14 +108,15 @@ const Representative = ({ submit }) => {
       .crud("PATCH", `user/account/${userData.id}`, formdata, true)
       .then((res) => {
         if (res.status >= 200 && res.status <= 299) {
-          poppulateUser();
+          setUserdata((prevdata) => ({ ...prevdata, [key]: file }));
         }
       })
       .catch((err) => {
         if (err === 401) setIsLoggedIn(false);
       });
+
     setIsLoading(false);
-    handleSubmit();
+    // handleSubmit();
   };
 
   const handleSubmit = async (e) => {
@@ -103,7 +130,6 @@ const Representative = ({ submit }) => {
     await api
       .crud("PATCH", `user/account/${userData.id}`, apiData)
       .then((res) => {
-        console.log(res);
         if (res.status >= 200 && res.status <= 299) {
           poppulateUser();
         }
@@ -175,12 +201,18 @@ const Representative = ({ submit }) => {
 
   if (isLoading) return <Loading />;
 
-  const submitForm = async () => {
-    await handleSubmit();
-    if (isComplete()) {
-      submit();
+  const submitForm = async (e) => {
+    e.preventDefault();
+
+    if (userData.nin_proof == null) {
+      setNINError("Upload NIN proof");
     } else {
-      setError("Please complete the form.");
+      await handleSubmit();
+      if (isComplete()) {
+        submit(userData);
+      } else {
+        setError("Please complete the form.");
+      }
     }
   };
 
@@ -234,6 +266,7 @@ const Representative = ({ submit }) => {
           flexDirection: "column",
 >>>>>>> 0bf9333728cf8ef7c6a66aaf11cf535cb419fafe
         }}
+        onSubmit={submitForm}
       >
         <div
           style={{
@@ -291,36 +324,40 @@ const Representative = ({ submit }) => {
               label="Designation"
               type="text"
               required
-              value={userData?.designation}
+              value={userData?.designation == null ? "" : userData.designation}
               onChange={(e) => updateData("designation", e.target.value)}
               maxLength="50"
             />
             <ProjectFormInput
               label="Phone"
               type="text"
+              onlyNumber={true}
               required
-              value={userData?.phone}
+              value={userData?.phone == null ? "" : userData.phone}
               onChange={(e) => updateData("phone", e.target.value)}
               maxLength="50"
             />
             <ProjectFormInput
               label="National Identification Number (NIN)"
+              onlyNumber={true}
               type="text"
               required
-              value={userData?.nin}
+              value={userData?.nin == null ? "" : userData.nin}
               onChange={(e) => updateData("nin", e.target.value)}
               maxLength="50"
             />
-
             <ProjectFormInput
               label="NIN Proof"
               type="file"
               required
               value={ninproof}
-              onChange={(e) => uploadFile(e.target.files[0], "nin_proof")}
+              onChange={(e) => {
+                setNINError("");
+                uploadFile(e.target.files[0], "nin_proof");
+              }}
               maxLength="50"
             />
-
+            <div style={{ color: "var(--error)" }}>{NINError}</div>
             {/* <div
             style={{ display: "flex", gap: "var(--padding-large)" }}
             className="responsiveFlex"
@@ -459,7 +496,9 @@ const Representative = ({ submit }) => {
                 borderRadius: "var(--profile-pic-diameter)",
                 backgroundImage: `url(${
                   userData?.picture != undefined
-                    ? userData.picture
+                    ? typeof userData.picture == "string"
+                      ? userData.picture
+                      : URL.createObjectURL(userData.picture)
                     : userprofile
                 })`,
                 backgroundSize: `${
@@ -484,7 +523,7 @@ const Representative = ({ submit }) => {
                 marginBottom: "var(--padding-large)",
               }}
             >
-              Upload Profile Picture
+              Upload Profile Pic
             </p>
           </div>
         </div>
@@ -500,22 +539,18 @@ const Representative = ({ submit }) => {
             marginLeft: "var(--padding-main)",
             marginBottom: "3rem",
           }}
-          onClick={submitForm}
+          type="submit"
         >
-          {isComplete() ? (
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "space-evenly",
-              }}
-            >
-              <p>Next</p>
-              <GrFormNextLink size={30} />
-            </div>
-          ) : (
-            "Save"
-          )}
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-evenly",
+            }}
+          >
+            <p>Next</p>
+            <GrFormNextLink size={30} />
+          </div>
         </button>
       </form>
 >>>>>>> 0bf9333728cf8ef7c6a66aaf11cf535cb419fafe

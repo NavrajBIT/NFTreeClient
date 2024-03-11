@@ -68,7 +68,7 @@ const GoogleLogin = ({ script, isSignUp }) => {
 
   return (
     <Button
-      title={isSignUp ? "Sign up with Google" : "Log in with Google"}
+      title={isSignUp ? "Sign up with Google" : "Login with Google"}
       variant="green"
       onClick={login}
       startIcon={googleIcon}

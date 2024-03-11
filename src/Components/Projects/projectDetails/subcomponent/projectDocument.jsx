@@ -1,9 +1,10 @@
 import ProjectDocumentBox from "./projectDocumentBox";
 import { RiLoopLeftFill } from "react-icons/ri";
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 const ProjectDocument = ({ isOwnerView, details }) => {
   const [seeMore, setSeeMore] = useState(false);
+  const updatebuttonref = useRef(null);
   return (
     <div className="projectDocumentContainer">
       <div>
@@ -29,14 +30,15 @@ const ProjectDocument = ({ isOwnerView, details }) => {
           minHeight: "clamp(100px,20vw,282px)",
         }}
       >
-        {details?.project?.projectDocs?.map(
+        <ProjectDocumentBox doc={details?.project?.land_reg_proof} />
+        {details?.projectDocs?.map(
           (doc, index) =>
             (index < 4 || seeMore) && (
-              <ProjectDocumentBox doc={doc} key={`project-doc-${index}`} />
+              <ProjectDocumentBox doc={doc.file} key={`project-doc-${index}`} />
             )
         )}
       </div>
-      {details?.project?.projectDocs?.length >= 5 && (
+      {details?.projectDocs?.length >= 5 && (
         <span
           style={{
             fontWeight: "500",
@@ -64,6 +66,9 @@ const ProjectDocument = ({ isOwnerView, details }) => {
               alignItems: "center",
             }}
             className="updateDocButton"
+            onClick={() => {
+              updatebuttonref.current.click();
+            }}
           >
             <span
               style={{
@@ -77,6 +82,12 @@ const ProjectDocument = ({ isOwnerView, details }) => {
             </span>
             <RiLoopLeftFill size={20} color={"black"} />
           </button>
+          <input
+            type="file"
+            ref={updatebuttonref}
+            style={{ display: "none" }}
+            onChange={(e) => details.uploadProjectDoc(e.target.files[0])}
+          />
         </div>
       )}
     </div>

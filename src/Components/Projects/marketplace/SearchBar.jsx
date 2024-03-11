@@ -1,7 +1,17 @@
+<<<<<<< HEAD
 import SearchIcon from "@mui/icons-material/Search";
 import { useNavigate } from "react-router-dom";
 
 const SearchBar = ({ searchValue, setSearchValue }) => {
+=======
+import React, { useState } from "react";
+import SearchIcon from "@mui/icons-material/Search";
+import { useNavigate } from "react-router-dom";
+import buttonimage from "./assets/Plus.png";
+import buttonimage2 from "./assets/Plus2.png";
+const SearchBar = ({ searchValue, setSearchValue }) => {
+  const [isHighlighted, setIsHighlighted] = useState(false);
+>>>>>>> 90afaeffda289e03a467a116030ffa34676e2974
   return (
     <div
       style={{
@@ -21,6 +31,12 @@ const SearchBar = ({ searchValue, setSearchValue }) => {
           position: "relative",
           textIndent: "30px",
           height: "50px",
+<<<<<<< HEAD
+=======
+          // border: "none",
+          boxShadow: "-3px 3px 5px 4px #AAAAAA inset",
+          fontSize: "20px",
+>>>>>>> 90afaeffda289e03a467a116030ffa34676e2974
         }}
         onFocus={(e) => {
           e.target.style.borderColor = "var(--green-110)";
@@ -45,9 +61,7 @@ const SearchBar = ({ searchValue, setSearchValue }) => {
     </div>
   );
 };
-
 export default SearchBar;
-
 export const CreateButton = () => {
   const navigate = useNavigate();
   return (
@@ -68,6 +82,7 @@ export const CreateButton = () => {
           height: "50px",
         }}
       >
+<<<<<<< HEAD
         <p>Create New Project</p>
 
         <span
@@ -81,6 +96,11 @@ export const CreateButton = () => {
         >
           +
         </span>
+=======
+        <p>Create new project</p>
+        <img src={buttonimage} alt="" className="desktop" />
+        <img src={buttonimage2} alt="" className="mobile" />
+>>>>>>> 90afaeffda289e03a467a116030ffa34676e2974
       </button>
     </div>
   );

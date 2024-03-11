@@ -6,6 +6,7 @@ import ProjectDocument from "./subcomponent/projectDocument";
 import ProjectGallery from "./subcomponent/projectGallery";
 import ProjectOwnerDetails from "./subcomponent/projectOwnerDetails";
 import usedetails from "./usedetails";
+import LocalLoading from "../../Subcomponents/loading/localloading";
 import { useParams } from "react-router-dom";
 const UserView = ({ isOwnerView }) => {
   const params = useParams();
@@ -54,6 +55,7 @@ const UserView = ({ isOwnerView }) => {
           <ProjectOwnerDetails isOwnerView={isOwnerView} details={details} />
         </div>
       </div>
+      {details?.isLoading && <LocalLoading />}
     </div>
   );
 };

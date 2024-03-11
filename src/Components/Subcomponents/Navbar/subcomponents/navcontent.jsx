@@ -4,7 +4,7 @@ import { useAuth } from "../../../../Contexts/AuthContext";
 import Profiledropdown from "./profiledropdown";
 import { useEffect, useState, useRef } from "react";
 import Mobilemenu from "./mobilemenu";
-import "../Navbar.css"
+import "../Navbar.css";
 
 const NavContent = () => {
   const auth = useAuth();
@@ -13,11 +13,10 @@ const NavContent = () => {
   const [scroll, setScroll] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
-
-
   const navlinks = {
     Home: "/",
     Projects: "/projects",
+    Dashboard: "/dashboard",
   };
 
   const handleScroll = () => {
@@ -60,29 +59,44 @@ const NavContent = () => {
         <img
           src="/logo_white.png"
           alt="BitBhoomi"
-          style={{ height: "4rem" }}
-          onClick={() => navigate("/")}
+          style={{ height: "4rem", cursor: "pointer" }}
+          onClick={() => {
+            window.scroll({ top: 0, behavior: "smooth" });
+            navigate("/");
+          }}
         />
         <div className="navlinkscontainer">
           {Object.keys(navlinks).map((link, index) => (
             <div
               key={"nav-link-" + index}
               className="navlink"
-              onClick={() => navigate(navlinks[link])}
+              onClick={() => {
+                window.scroll({ top: 0, behavior: "smooth" });
+                navigate(navlinks[link]);
+              }}
             >
               {link}
             </div>
           ))}
+          <div
+            className="navlink"
+            onClick={() => window.open("https://bitbhoomiido.onrender.com/")}
+          >
+            IDO
+          </div>
         </div>
+
         <div className="logincontainer">
           {auth.isLoggedIn ? (
             <div onMouseLeave={() => setIsDropdownOpen(false)}>
-              <button className="walletButton" onMouseEnter={() => setIsDropdownOpen(true)}
+              <button
+                className="walletButton"
+                onMouseEnter={() => setIsDropdownOpen(true)}
               >
                 Connect wallet
               </button>
 
-              {isDropdownOpen &&
+              {isDropdownOpen && (
                 <div className="dropdown">
                   <span>
                     <img src="/phantom.png" alt="phantom_logo" />
@@ -93,14 +107,16 @@ const NavContent = () => {
                     <img src="/solfare.png" alt="solfare_logo" />
                     <button>Solfare</button>
                   </span>
-                </div>}
+                </div>
+              )}
             </div>
           ) : (
             <Button
               variant={"secondary"}
               title="Contact Us"
               onClick={() => navigate("/contact")}
-            />)}
+            />
+          )}
 
           {auth.isLoggedIn ? (
             <div
@@ -108,7 +124,11 @@ const NavContent = () => {
               onMouseEnter={() => setIsprofile(true)}
               onMouseLeave={() => setIsprofile(false)}
             >
-              <img src={auth.avatar} alt="Avatar" />
+              {auth.avatar ? (
+                <img src={auth.avatar} alt="Avatar" />
+              ) : (
+                <img src="/user.png" alt="Default Avatar" />
+              )}
               {profile && <Profiledropdown />}
             </div>
           ) : (

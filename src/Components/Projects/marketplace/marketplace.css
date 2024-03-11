@@ -1,5 +1,5 @@
 .sidebarcontainer {
-  width: 300px;
+  width: 180px;
   background-color: #335d51;
   color: white;
   display: flex;
@@ -11,66 +11,83 @@
   overflow: scroll;
   z-index: 0;
 }
-
 .singlefiltercontainer {
-  padding: var(--padding-main);
+  padding: 10px;
   display: flex;
   flex-direction: column;
   gap: var(--padding-light);
   border-bottom: 2px solid white;
 }
-
 .filterrow {
   display: flex;
   gap: var(--padding-light);
 }
-
 .projectsviewcontainer {
   display: flex;
   flex-direction: column;
-  gap: var(--padding-main);
+  gap: 50px;
   padding: var(--padding-main);
-  margin-left: 300px;
+  margin-left: 180px;
   width: 100%;
 }
-
 .projectsviewcontainerheading {
-  font-size: 2.5rem;
-  font-weight: bold;
+  font-size: 34px;
+  font-weight: 800;
   text-align: center;
 }
-
 .marketplaceprojectscontainer {
-  display: flex;
-  flex-wrap: wrap;
-  /* grid-template-columns: 1fr 1fr 1fr; */
-  gap: 35px;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 10px;
   width: 100%;
   max-width: 100%;
 }
-
 .searchbarcontainer {
   display: flex;
-  gap: 40px;
+  gap: 10px;
 }
-
 .filterIcon {
   width: fit-content;
   display: none;
 }
-
-.createButton {
-  width: 200px;
+.marketplacecreateButton {
+  width: 277px;
+  border-radius: var(--border-radius-light);
+  background: var(--green-110);
+  border: none;
+  font-weight: 500;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  font-size: 22px;
+  height: 50px;
+  font-family: "Fira sans";
 }
-
-@media screen and (max-width: 1350px) {
+.marketplacesearchbar {
+  border-radius: var(--border-radius-light);
+}
+.marketplacecreateButton .mobile {
+  display: none;
+}
+@media screen and (max-width: 1300px) {
+  .marketplaceprojectscontainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+}
+@media screen and (max-width: 1000px) {
+  .marketplaceprojectscontainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
   .projectsviewcontainerheading {
     font-size: 1.5rem;
   }
-  /* .marketplaceprojectscontainer {
+  .marketplaceprojectscontainer {
     grid-template-columns: 1fr 1fr;
-  } */
+  }
 }
 @media screen and (max-width: 1000px) {
   .projectsviewcontainer {
@@ -79,22 +96,34 @@
   .sidebarcontainer {
     display: none;
   }
-
   .filterIcon {
     display: inline;
   }
 }
 @media screen and (max-width: 700px) {
-  /* .marketplaceprojectscontainer {
+  .marketplaceprojectscontainer {
     grid-template-columns: 1fr;
-  } */
-  .createButton p {
+  }
+  .marketplacecreateButton p {
     display: none;
   }
-  .createButton {
+  .marketplacecreateButton {
     width: 50px;
+    border-radius: var(--border-radius-big);
+    background-color: transparent;
+  }
+  .marketplacecreateButton .mobile {
+    display: block;
+    width: 50px;
+    height: 50px;
+  }
+  .marketplacecreateButton .desktop {
+    display: none;
   }
   .searchbarcontainer {
     gap: 10px;
+  }
+  .marketplacesearchbar {
+    border-radius: var(--border-radius-big);
   }
 }

@@ -14,6 +14,7 @@ const Myform = ({
   error,
   children,
   back,
+  socialMediaError,
 }) => {
   const [isSubmitted, setIsSubmitted] = useState(false);
 
@@ -131,6 +132,7 @@ const Myform = ({
                     <Input
                       inputData={inputData}
                       error={isSubmitted && !checkEmptyValue(inputData)}
+                      socialMediaError={socialMediaError}
                     />
                   </div>
                 );

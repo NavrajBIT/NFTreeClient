@@ -11,13 +11,16 @@ import { Delete } from "@mui/icons-material";
 import { GrLinkNext } from "react-icons/gr";
 import { GrLinkPrevious } from "react-icons/gr";
 import "./forms.css";
+import { useNavigate } from "react-router-dom";
 
-const ProjectData = ({ submit, projectId, backStep }) => {
+const ProjectData = ({ submit, backStep, data }) => {
   const [species, setSpecies] = useState([{ plant: "", percentage: "" }]);
   const [docs, setdocs] = useState([{ file: null }]);
   const api = useAPI();
   const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
+  const [projectId, setProjectId] = useState();
+  const navigate = useNavigate();
 
   const changeValue = (key, value, index) => {
     setSpecies((prev) => {
@@ -31,48 +34,92 @@ const ProjectData = ({ submit, projectId, backStep }) => {
     const fileName = file.name.replace(/\s+/g, "_");
     const newFile = new File([file], fileName, { type: file.type });
 
-    const formdata = new FormData();
-    formdata.append("file", newFile);
-    formdata.append("project", projectId);
-    const endpoint = "project/docs/create";
+    // const formdata = new FormData();
+    // formdata.append("file", newFile);
+    // formdata.append("project", projectId);
+    // const endpoint = "project/docs/create";
     setIsLoading(true);
-    await api
-      .crud("POST", endpoint, formdata, true)
-      .then((res) => {
-        if (res.status === 201) {
-          setdocs((prev) => {
-            let newvalues = [...prev];
-            newvalues[index]["file"] = fileName;
-            return newvalues;
-          });
-        }
-      })
-      .catch((err) => {
-        if (err === 401) setIsLoggedIn(false);
-      });
+    // await api
+    //   .crud("POST", endpoint, formdata, true)
+    //   .then((res) => {
+    //     if (res.status === 201) {
+    //       setdocs((prev) => {
+    //         let newvalues = [...prev];
+    //         newvalues[index]["file"] = fileName;
+    //         return newvalues;
+    //       });
+    //     }
+    //   })
+    //   .catch((err) => {
+    //     if (err === 401) setIsLoggedIn(false);
+    //   });
+    setdocs((prev) => {
+      let newValues = [...prev];
+      if (newValues.length > 0) {
+        newValues[index].file = newFile;
+      }
+      return newValues;
+    });
     setIsLoading(false);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
-    await Promise.all(
-      species.map(async (type) => {
-        console.log({
-          project: projectId,
-          plant: type.plant,
-          percentage: type.percentage,
-        });
-        await api
-          .crud("POST", "project/species", {
+    console.log(data.projectDetail, species, docs);
+
+    let projectFormdata = new FormData();
+    Object.keys(data.projectDetail).map((key) => {
+      projectFormdata.append(key, data.projectDetail[key]);
+    });
+
+    try {
+      const projectResponse = await api.crud(
+        "POST",
+        "project/myproject",
+        projectFormdata,
+        true
+      );
+      if (projectResponse.status === 201) {
+        const projectId = projectResponse.id;
+        setProjectId(projectId);
+
+        const speciesRequests = species.map((type) =>
+          api.crud("POST", "project/species", {
             project: projectId,
             plant: type.plant,
             percentage: type.percentage,
           })
-          .then((res) => console.log(res))
-          .catch((err) => console.log(err));
-      })
-    );
+        );
+
+        await Promise.all(speciesRequests);
+
+        const docFormData = new FormData();
+
+        docFormData.append("project", projectId);
+
+        docs.forEach((doc, index) => {
+          docFormData.append(`file`, doc.file);
+        });
+
+        console.log(...docFormData.entries());
+
+        const docResponse = await api.crud(
+          "POST",
+          "project/docs/create",
+          docFormData,
+          true
+        );
+
+        if (docResponse.status === 201) {
+          console.log("done");
+        }
+      }
+    } catch (err) {
+      if (err === 401) setIsLoggedIn(false);
+      console.log(err);
+    }
+    navigate(`/myprojects/${projectId}`);
     setIsLoading(false);
     submit();
   };
@@ -103,6 +150,7 @@ const ProjectData = ({ submit, projectId, backStep }) => {
         id={"formId"}
         onSubmit={handleSubmit}
       >
+<<<<<<< HEAD
         <div
           style={{
             fontSize: "1.5rem",
@@ -125,16 +173,18 @@ const ProjectData = ({ submit, projectId, backStep }) => {
         </div>
 
         {species.map((type, index) => (
+=======
+        <div>
+>>>>>>> 90afaeffda289e03a467a116030ffa34676e2974
           <div
-            key={"species-" + index}
             style={{
-              width: "100%",
-              maxWidth: "var(--max-width-form)",
-              margin: "auto",
-              display: "flex",
-              gap: "var(--padding-light)",
+              fontSize: "1.5rem",
+              fontWeight: "bold",
+              fontWeight: "600",
+              color: "var(--heading-color)",
             }}
           >
+<<<<<<< HEAD
 <<<<<<< HEAD
             <div style={{ display: "flex", width: "80%", gap: "20px" }}>
 =======
@@ -311,8 +361,26 @@ const ProjectData = ({ submit, projectId, backStep }) => {
               />
             </div>
             <div
+=======
+            Project Species
+            <p
+>>>>>>> 90afaeffda289e03a467a116030ffa34676e2974
               style={{
+                border: "1px solid #E6E6E6",
+                margin: "var(--padding-light) 0 var(--padding-large)",
+              }}
+            />
+          </div>
+
+          {species.map((type, index) => (
+            <div
+              key={"species-" + index}
+              style={{
+                width: "100%",
+                maxWidth: "var(--max-width-form)",
+                margin: "auto",
                 display: "flex",
+<<<<<<< HEAD
 <<<<<<< HEAD
                 width: "20%",
 =======
@@ -335,11 +403,41 @@ const ProjectData = ({ submit, projectId, backStep }) => {
                   gap: "var(--padding-light)",
                 }}
               >
+=======
+                gap: "var(--padding-light)",
+              }}
+            >
+              <div style={{ display: "flex", width: "90%", gap: "20px" }}>
+                <Input
+                  inputData={{
+                    placeholder: "Species",
+                    type: "text",
+                    required: true,
+                    value: type["plant"],
+                    onChange: (e) =>
+                      changeValue("plant", e.target.value, index),
+                    maxLength: 50,
+                  }}
+                />
+                <Input
+                  inputData={{
+                    placeholder: "Percentage",
+                    type: "number",
+                    required: true,
+                    value: type["percentage"],
+                    onChange: (e) =>
+                      changeValue("percentage", e.target.value, index),
+                    maxLength: 50,
+                  }}
+                />
+              </div>
+              <div style={{ display: "flex", width: "10%" }}>
+>>>>>>> 90afaeffda289e03a467a116030ffa34676e2974
                 {index != 0 && (
                   <button
                     onClick={() => {
-                      setdocs(
-                        docs.filter((item, itemIndex) => {
+                      setSpecies(
+                        species.filter((item, itemIndex) => {
                           return itemIndex != index;
                         })
                       );
@@ -362,9 +460,10 @@ const ProjectData = ({ submit, projectId, backStep }) => {
                       display: "flex",
                       alignItems: "center",
                       border: "2px solid #D11A2A",
-                      padding: "5px",
                       borderRadius: "5px",
-                      justifyContent: "center",
+                      padding: "5px",
+                      justifyContent: "space-around",
+                      marginTop: "4px",
                     }}
                   >
                     <div
@@ -393,39 +492,183 @@ const ProjectData = ({ submit, projectId, backStep }) => {
                 )}
               </div>
             </div>
-          </div>
-        ))}
+          ))}
 
-        <div
-          className="secondarybutton"
-          style={{
-            width: "fit-content",
-            margin: "auto",
-            display: "flex",
-            gap: "var(--padding-light)",
-          }}
-        >
-          <button
-            onClick={() => {
-              setdocs((prev) => {
-                let newvalues = [...prev];
-                newvalues.push({ file: null });
-                return newvalues;
-              });
-            }}
+          <div
+            className="secondarybutton"
             style={{
-              padding: "var(--padding-light)",
-              width: "var(--project-button)",
-              borderRadius: "5px",
-
-              border: "2px solid #4BB543",
-              color: "#4BB543",
-              background: "white",
+              width: "fit-content",
+              margin: "auto",
+              display: "flex",
+              gap: "var(--padding-light)",
             }}
           >
-            Add a Document
-          </button>
+            <button
+              onClick={() => {
+                setSpecies((prev) => {
+                  let newvalues = [...prev];
+                  newvalues.push({ plant: "", percentage: "" });
+                  return newvalues;
+                });
+              }}
+              style={{
+                padding: "var(--padding-light)",
+                width: "var(--project-button)",
+                borderRadius: "5px",
+                marginBottom: "var(--padding-large)",
+
+                border: "2px solid #4BB543",
+                color: "#4BB543",
+                background: "white",
+              }}
+            >
+              Add a Species
+            </button>
+          </div>
         </div>
+
+        <div>
+          <div
+            style={{
+              fontSize: "1.5rem",
+              fontWeight: "bold",
+              fontWeight: "600",
+              color: "var(--heading-color)",
+            }}
+          >
+            Project Documents (if any)
+            <p
+              style={{
+                border: "1px solid #E6E6E6",
+                margin: "var(--padding-light) 0 var(--padding-large)",
+              }}
+            />
+          </div>
+          {docs.map((type, index) => (
+            <div
+              key={"docs-" + index}
+              style={{
+                width: "100%",
+                maxWidth: "var(--max-width-form)",
+                margin: "auto",
+                display: "flex",
+                gap: "var(--padding-light)",
+                alignItems: "center",
+              }}
+            >
+              <div style={{ display: "flex", width: "90%", gap: "20px" }}>
+                <Input
+                  inputData={{
+                    label: "Project Document",
+                    type: "file",
+                    required: true,
+                    value: type["file"],
+                    onChange: (e) => uploadDoc(index, e.target.files[0]),
+                    maxLength: 100,
+                  }}
+                />
+              </div>
+              <div
+                style={{
+                  display: "flex",
+                  width: "10%",
+                  gap: "20px",
+                }}
+              >
+                <div
+                  className="secondarybutton"
+                  style={{
+                    width: "fit-content",
+                    margin: "auto",
+                    display: "flex",
+
+                    width: "80%",
+                    gap: "var(--padding-light)",
+                  }}
+                >
+                  {index != 0 && (
+                    <button
+                      onClick={() => {
+                        setdocs(
+                          docs.filter((item, itemIndex) => {
+                            return itemIndex != index;
+                          })
+                        );
+                      }}
+                      style={{
+                        color: "#D11A2A",
+                        background: "white",
+                        height: "40px",
+                        display: "flex",
+                        alignItems: "center",
+                        border: "2px solid #D11A2A",
+                        padding: "5px",
+                        borderRadius: "5px",
+                        justifyContent: "center",
+                        marginTop: "6px",
+                      }}
+                    >
+                      <div
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "space-evenly",
+                        }}
+                        className="responsiveDeleteButton"
+                      >
+                        <p>Delete</p>
+                        <GrLinkNext />
+                      </div>
+                      <div
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "space-evenly",
+                        }}
+                        className="responsiveDeleteIcon"
+                      >
+                        <Delete />
+                      </div>
+                    </button>
+                  )}
+                </div>
+              </div>
+            </div>
+          ))}
+
+          <div
+            className="secondarybutton"
+            style={{
+              width: "fit-content",
+              margin: "auto",
+              display: "flex",
+              gap: "var(--padding-light)",
+            }}
+          >
+            <button
+              type="button"
+              onClick={() => {
+                setdocs((prev) => {
+                  let newvalues = [...prev];
+                  newvalues.push({ file: null });
+                  return newvalues;
+                });
+              }}
+              style={{
+                padding: "var(--padding-light)",
+                width: "var(--project-button)",
+                borderRadius: "5px",
+
+                border: "2px solid #4BB543",
+                color: "#4BB543",
+                background: "white",
+              }}
+            >
+              Add a Document
+            </button>
+          </div>
+        </div>
+
         <div style={{ display: "flex", gap: "var(--padding-large)" }}>
           <button
             onClick={backStep}

@@ -27,7 +27,7 @@ const Login = ({ script }) => {
           color: "var(--text-green)",
         }}
       >
-        Log in to BitBhoomi
+        Login to BitBhoomi
       </div>
       <Input
         label="Email"
