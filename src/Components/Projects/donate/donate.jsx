@@ -1,12 +1,11 @@
 import { useParams } from "react-router-dom";
 import useAPI from "../../../api/useAPI";
 import { useNavigate } from "react-router-dom";
-import Myform from "../../Subcomponents/form/myformnew";
 import { useState } from "react";
 import Auth from "../../Auth/Auth";
 import Loading from "../../Subcomponents/loading/loading";
+import LocalLoading from "../../Subcomponents/loading/localloading";
 import { useEffect } from "react";
-import { useAuth } from "../../../Contexts/AuthContext";
 import Input from "../../Subcomponents/form/inputnew";
 import { useWallet } from "../../../Contexts/walletContext";
 
@@ -16,15 +15,17 @@ const Donate = () => {
   const api = useAPI();
   const [isLoading, setIsLoading] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(true);
-
   const [project, setProject] = useState(null);
   const [trees, setTrees] = useState("");
   const [token, setToken] = useState({ label: "$BHOOMI", value: "$BHOOMI" });
+  const [exchangeRate, setExchangerate] = useState(0);
   const wallet = useWallet();
+  const navigate = useNavigate();
 
   useEffect(() => {
     poppulateProject();
     checkLogIn();
+    getExchangeRate();
   }, []);
 
   const checkLogIn = async () => {
@@ -50,9 +51,24 @@ const Donate = () => {
     setIsLoading(false);
   };
 
-  if (!isLoggedIn) return <Auth close={() => setIsLoggedIn(true)} />;
+  const getExchangeRate = async () => {
+    // setExchangerate(149);
+    // return;
+    setIsLoading(true);
+    await fetch(
+      "https://min-api.cryptocompare.com/data/pricemulti?fsyms=SOL&tsyms=SOL,USD&api_key=a0d74da5182505e471796936416d849166115c9f413ddad7f7e2caff213b0ae5"
+    )
+      .then((res) => res.json())
+      .then((res) => {
+        console.log(res);
+        console.log(`SOL exchange rate = ${res["SOL"]["USD"]}`);
+        setExchangerate(parseFloat(res["SOL"]["USD"]));
+      })
+      .catch((err) => console.log(err));
+    setIsLoading(false);
+  };
 
-  if (isLoading || !project) return <Loading />;
+  if (!isLoggedIn) return <Auth close={() => setIsLoggedIn(true)} />;
 
   let totalValue = 0;
   try {
@@ -66,9 +82,37 @@ const Donate = () => {
     if (!wallet.isWalletConnected) {
       wallet.connect();
     } else {
-      console.log(wallet.provider.publicKey.toString());
+      if (totalSol > parseFloat(wallet.solbalance)) {
+        alert("Not enough balance!!");
+        return;
+      }
+      setIsLoading(true);
+      let tx = await wallet
+        .sendSol(totalSol)
+        .then(async (res) => {
+          console.log(res);
+        })
+        .catch((err) => alert("Transaction Unsuccessful."));
+      await api
+        .crud("POST", "project/invest", {
+          projectId: project.id,
+          amount: totalUSD,
+          trees: trees,
+        })
+        .then((res) => {
+          console.log(res);
+          navigate("/profile/mynft");
+        })
+        .catch((err) => console.log(err));
+      setIsLoading(false);
     }
   };
+
+  const totalUSD = project?.donation ? project?.donation * trees : 0;
+  const totalSol =
+    exchangeRate && exchangeRate > 0 && project?.donation
+      ? parseFloat(totalUSD) / parseFloat(exchangeRate)
+      : 0;
 
   return (
     <div
@@ -81,6 +125,7 @@ const Donate = () => {
         justifyContent: "center",
       }}
     >
+      {isLoading && <LocalLoading />}
       <div
         style={{
           width: "100%",
@@ -164,18 +209,22 @@ const Donate = () => {
           <Input
             inputData={{
               label: "Total amount in $USD",
-              type: "number",
-              value: project?.donation ? project?.donation * trees : 0,
-              onChange: (e) => changeValue("description", e.target.value),
+              type: "text",
+              value: `$${totalUSD}`,
+              onChange: (e) => {},
               maxLength: 500,
             }}
           />
           <Input
             inputData={{
               label: `Total amount in ${token.value} token`,
-              type: "number",
-              value: project["description"],
-              onChange: (e) => changeValue("description", e.target.value),
+              type: "text",
+              // value:
+              //   exchangeRate && exchangeRate > 0
+              //     ? (project?.donation * trees) / exchangeRate
+              //     : 0,
+              value: `${totalSol}SOL`,
+              onChange: (e) => {},
               maxLength: 500,
             }}
           />
@@ -196,7 +245,7 @@ const Donate = () => {
               inputData={{
                 label: "Connected Wallet Balance",
                 type: "text",
-                value: `$${wallet?.solbalance}SOL`,
+                value: `${wallet?.solbalance}${token.value}`,
                 onChange: () => {},
                 maxLength: 500,
               }}

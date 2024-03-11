@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import * as web3 from "@solana/web3.js";
+import * as buffer from "buffer";
+window.Buffer = buffer.Buffer;
 
 const WalletContext = React.createContext();
 
@@ -10,7 +12,6 @@ export function useWallet() {
 export function WalletProvider(props) {
   const [provider, setProvider] = useState(null);
   const [publicKey, setPublicKey] = useState(null);
-  const [trxnStatus, setTrxnStatus] = useState(null);
   const [isWalletConnected, setIsWalletConnected] = useState(false);
   const [solbalance, setSolBalance] = useState(0);
 
@@ -61,39 +62,16 @@ export function WalletProvider(props) {
     }
   };
 
-  const transactionStatus = async (txnSig) => {
-    const result = await connection.getSignatureStatus(txnSig, {
-      searchTransactionHistory: true,
-    });
-
-    if (!result.value) {
-      setTrxnStatus("Processing...");
-      setTimeout(() => {
-        transactionStatus(txnSig);
-      }, 1000);
-    } else {
-      const {
-        value: { confirmationStatus },
-      } = result;
-      // console.log(result.value);
-      if (confirmationStatus === "processed") {
-        setTrxnStatus("Confirming...");
-      } else if (confirmationStatus === "confirmed") {
-        setTrxnStatus("Finalizing...");
-      } else if (confirmationStatus === "finalized") {
-        setTrxnStatus("Finalized");
-        console.log(txnSig);
-        return txnSig;
-      }
-      setTimeout(() => {
-        transactionStatus(txnSig);
-      }, 3000);
+  const sendSol = async (sol) => {
+    if (!provider) {
+      getProvider();
+      return;
     }
-  };
-
-  const sendSol = async (recipientAddress, sol) => {
+    const recipientAddress = "9G4RTia1n5uThQ42tfmci2k9w1nauXjAKQPGQV9FKRuD";
     let transaction = new web3.Transaction();
-
+    console.log("creating transaction...");
+    console.log(provider);
+    console.log(provider.publicKey);
     transaction.add(
       web3.SystemProgram.transfer({
         fromPubkey: provider.publicKey,
@@ -101,20 +79,27 @@ export function WalletProvider(props) {
         lamports: parseInt(sol * web3.LAMPORTS_PER_SOL),
       })
     );
+    console.log(provider);
     transaction.feePayer = provider.publicKey;
     const { blockhash } = await connection.getLatestBlockhash();
     transaction.recentBlockhash = blockhash;
-    // transaction.lastValidBlockHeight = lastValidBlockHeight;
-    const tx = await provider.signAndSendTransaction(transaction);
-    // console.log(signature);
-    let sig = tx.signature || tx;
-    transactionStatus(sig);
+    const tx = await provider
+      .signAndSendTransaction(transaction)
+      .then((res) => {
+        console.log(res);
+        return res.sig;
+      })
+      .catch((err) => null);
+    if (tx === null) {
+      throw "Transaction Unsuccessfull.";
+    } else {
+      return tx;
+    }
   };
 
   const value = {
     publicKey,
     provider,
-    trxnStatus,
     sendSol,
     isWalletConnected,
     solbalance,
@@ -127,3 +112,33 @@ export function WalletProvider(props) {
     </WalletContext.Provider>
   );
 }
+
+// const transactionStatus = async (txnSig) => {
+//   const result = await connection.getSignatureStatus(txnSig, {
+//     searchTransactionHistory: true,
+//   });
+
+//   if (!result.value) {
+//     setTrxnStatus("Processing...");
+//     setTimeout(() => {
+//       transactionStatus(txnSig);
+//     }, 1000);
+//   } else {
+//     const {
+//       value: { confirmationStatus },
+//     } = result;
+//     // console.log(result.value);
+//     if (confirmationStatus === "processed") {
+//       setTrxnStatus("Confirming...");
+//     } else if (confirmationStatus === "confirmed") {
+//       setTrxnStatus("Finalizing...");
+//     } else if (confirmationStatus === "finalized") {
+//       setTrxnStatus("Finalized");
+//       console.log(txnSig);
+//       return txnSig;
+//     }
+//     setTimeout(() => {
+//       transactionStatus(txnSig);
+//     }, 3000);
+//   }
+// };

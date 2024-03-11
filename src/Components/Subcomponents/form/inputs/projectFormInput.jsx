@@ -119,8 +119,12 @@ const ProjectFormInput = ({
           onChange={onChange}
           style={{ background: "white" }}
         >
-          {options.map((option) => {
-            return <option value={option.value}>{option.label}</option>;
+          {options.map((option, index) => {
+            return (
+              <option value={option.value} key={"asdfwe-" + index}>
+                {option.label}
+              </option>
+            );
           })}
         </select>
       </div>
@@ -147,9 +151,10 @@ const ProjectFormInput = ({
             onChange={onChange}
             style={{ background: "white", width: "35%" }}
           >
-            {options.map((option) => {
+            {options.map((option, index) => {
               return (
                 <option
+                  key={"SDfgsdfgsdfg" + index}
                   value={option.value}
                   disabled={option.disabled}
                   selected={value ? true : option.selected}

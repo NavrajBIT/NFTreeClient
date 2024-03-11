@@ -92,7 +92,9 @@ function CreateProject() {
         )}
         {step === 4 && (
           <ProjectData
-            submit={() => {}}
+            submit={(projectId) => {
+              navigate(`/myprojects/${projectId}`);
+            }}
             backStep={() => {
               setStep(3);
             }}

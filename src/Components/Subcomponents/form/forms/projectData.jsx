@@ -7,7 +7,6 @@ import { Delete } from "@mui/icons-material";
 import { GrLinkNext } from "react-icons/gr";
 import { GrLinkPrevious } from "react-icons/gr";
 import "./forms.css";
-import { useNavigate } from "react-router-dom";
 
 const ProjectData = ({ submit, backStep, data }) => {
   const [species, setSpecies] = useState([{ plant: "", percentage: "" }]);
@@ -16,7 +15,6 @@ const ProjectData = ({ submit, backStep, data }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const [projectId, setProjectId] = useState();
-  const navigate = useNavigate();
 
   const changeValue = (key, value, index) => {
     setSpecies((prev) => {
@@ -62,7 +60,6 @@ const ProjectData = ({ submit, backStep, data }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
-    console.log(data.projectDetail, species, docs);
 
     let projectFormdata = new FormData();
     Object.keys(data.projectDetail).map((key) => {
@@ -77,12 +74,13 @@ const ProjectData = ({ submit, backStep, data }) => {
         true
       );
       if (projectResponse.status === 201) {
-        const projectId = projectResponse.id;
-        setProjectId(projectId);
+        const project_Id = projectResponse.id;
+
+        setProjectId(project_Id);
 
         const speciesRequests = species.map((type) =>
           api.crud("POST", "project/species", {
-            project: projectId,
+            project: project_Id,
             plant: type.plant,
             percentage: type.percentage,
           })
@@ -90,35 +88,26 @@ const ProjectData = ({ submit, backStep, data }) => {
 
         await Promise.all(speciesRequests);
 
-        const docFormData = new FormData();
-
-        docFormData.append("project", projectId);
+        const sendDoc = async (docFormData) => {
+          await api.crud("POST", "project/docs/create", docFormData, true);
+        };
 
         docs.forEach((doc, index) => {
+          const docFormData = new FormData();
           docFormData.append(`file`, doc.file);
+          docFormData.append("project", project_Id);
+          sendDoc(docFormData);
         });
-
-        console.log(...docFormData.entries());
-
-        const docResponse = await api.crud(
-          "POST",
-          "project/docs/create",
-          docFormData,
-          true
-        );
-
-        if (docResponse.status === 201) {
-          console.log("done");
-        }
       }
     } catch (err) {
       if (err === 401) setIsLoggedIn(false);
       console.log(err);
     }
-    navigate(`/myprojects/${projectId}`);
+
     setIsLoading(false);
-    submit();
   };
+
+  projectId && submit(projectId);
 
   if (!isLoggedIn) return <AuthPopup close={() => setIsLoggedIn(true)} />;
   if (isLoading) return <Loading />;

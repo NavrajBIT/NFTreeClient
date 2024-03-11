@@ -13,7 +13,7 @@
 .reportButton button {
   padding: 5px 10px;
   border-radius: 20px;
-  width: 100px;
+  width: 150px;
   margin-left: 18px;
   background-image: linear-gradient(to top, black, var(--green-100));
   font-size: 20px;
@@ -22,25 +22,27 @@
   align-items: center;
 }
 
-.projectRT{
+.projectRT {
   font-size: xxx-large;
   font-weight: 600 !important;
   color: var(--green-100) !important;
 }
 
-.GridBox, .GridBox1 {
+.GridBox,
+.GridBox1 {
   border-radius: 40px;
   background: linear-gradient(253.85deg, #d6ffc9 1.63%, #ffffff 99.06%);
   padding: 2rem 1rem;
   max-height: 700px;
   width: 99.5%;
 }
-.GridBox1{
+.GridBox1 {
   display: flex;
   flex-direction: column;
 }
 
-.gridBoxHeading, .gridBoxHeading1{
+.gridBoxHeading,
+.gridBoxHeading1 {
   color: var(--green-80);
   padding-bottom: 20px;
 }
@@ -83,7 +85,7 @@ th {
   border-color: var(--green-85);
 }
 
-td{
+td {
   font-size: 14px;
   font-weight: 400;
 }
@@ -113,31 +115,32 @@ tbody tr:nth-child(6) {
 }
 
 @media screen and (max-width: 768px) {
-  .gridBoxContent{
+  .gridBoxContent {
     flex-direction: column;
   }
-.projectRT{
-font-size: 24px !important;
-color: #FFF !important;
-}
-.GridBox, .GridBox1{
-  border-radius: 10px;
-}
-.gridBoxHeading1 h2{
-font-size: 16px;
-margin-bottom: 20px;
-}
-  .gridBoxHeading h2{
+  .projectRT {
+    font-size: 24px !important;
+    color: #fff !important;
+  }
+  .GridBox,
+  .GridBox1 {
+    border-radius: 10px;
+  }
+  .gridBoxHeading1 h2 {
+    font-size: 16px;
+    margin-bottom: 20px;
+  }
+  .gridBoxHeading h2 {
     font-size: 16px;
   }
 
-  th{
+  th {
     width: 100vw;
-    padding: 0;  
+    padding: 0;
     font-size: 13px;
     font-weight: 600;
   }
-  td{
+  td {
     font-size: 12px;
     height: 45px;
     width: 100vw;
@@ -151,7 +154,6 @@ margin-bottom: 20px;
     grid-auto-rows: unset !important;
   }
 }
-
 
 @media screen and (max-width: 500px) {
   /* th,

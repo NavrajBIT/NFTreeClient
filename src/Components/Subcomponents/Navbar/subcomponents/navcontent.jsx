@@ -5,9 +5,11 @@ import Profiledropdown from "./profiledropdown";
 import { useEffect, useState, useRef } from "react";
 import Mobilemenu from "./mobilemenu";
 import "../Navbar.css";
+import { useWallet } from "../../../../Contexts/walletContext";
 
 const NavContent = () => {
   const auth = useAuth();
+  const wallet = useWallet();
   const navigate = useNavigate();
   const [profile, setIsprofile] = useState(false);
   const [scroll, setScroll] = useState(false);
@@ -79,20 +81,27 @@ const NavContent = () => {
               <button
                 className="walletButton"
                 onMouseEnter={() => setIsDropdownOpen(true)}
+                onClick={() => wallet.connect()}
               >
-                Connect wallet
+                {wallet.isWalletConnected
+                  ? `${wallet?.provider?.publicKey
+                      .toString()
+                      .slice(0, 4)}...${wallet?.provider?.publicKey
+                      .toString()
+                      .slice(39)}`
+                  : "Connect wallet"}
               </button>
 
-              {isDropdownOpen && (
+              {isDropdownOpen && !wallet.isWalletConnected && (
                 <div className="dropdown">
                   <span>
                     <img src="/phantom.png" alt="phantom_logo" />
-                    <button>Phantom</button>
+                    <button onClick={() => wallet.connect()}>Phantom</button>
                   </span>
                   <hr />
                   <span>
                     <img src="/solfare.png" alt="solfare_logo" />
-                    <button>Solfare</button>
+                    <button onClick={() => wallet.connect()}>Solfare</button>
                   </span>
                 </div>
               )}

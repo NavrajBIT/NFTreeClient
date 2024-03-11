@@ -86,22 +86,28 @@ const ProjectOwnerDetails = ({ isOwnerView, details }) => {
               </div>
 
               <div className="socialMediaIcons">
-                <a href={"https://" + socialMedia?.instagram} target="_blank">
-                  {" "}
-                  <img src="/Component 6.png" alt="Instagram" />
-                </a>
-                <a
-                  href={"https://" + socialMedia?.linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {" "}
-                  <img src="/Component 7.png" alt="LinkedIn" />
-                </a>
-                <a href={"https://" + socialMedia?.twitter} target="_blank">
-                  {" "}
-                  <img src="/Component 8.png" alt="Twitter" />
-                </a>
+                {socialMedia?.instagram && (
+                  <a href={socialMedia?.instagram} target="_blank">
+                    {" "}
+                    <img src="/Component 6.png" alt="Instagram" />
+                  </a>
+                )}
+                {socialMedia?.linkedin && (
+                  <a
+                    href={socialMedia?.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {" "}
+                    <img src="/Component 7.png" alt="LinkedIn" />
+                  </a>
+                )}
+                {socialMedia?.twitter && (
+                  <a href={socialMedia?.twitter} target="_blank">
+                    {" "}
+                    <img src="/Component 8.png" alt="Twitter" />
+                  </a>
+                )}
               </div>
             </div>
           </div>

@@ -203,7 +203,6 @@ const Representative = ({ submit, data }) => {
             />
             <ProjectFormInput
               label="National Identification Number (NIN)"
-              onlyNumber={true}
               type="text"
               required
               value={userData?.nin == null ? "" : userData.nin}
@@ -288,7 +287,7 @@ const Representative = ({ submit, data }) => {
                 marginBottom: "var(--padding-large)",
               }}
             >
-              Upload Profile Pic
+              {NINError}
             </p>
           </div>
         </div>

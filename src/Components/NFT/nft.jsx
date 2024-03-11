@@ -17,23 +17,23 @@ const Nft = () => {
 
   useEffect(() => {
     poppulateNft();
-    poppulateRewardData();
+    // poppulateRewardData();
   }, []);
 
   if (!isLoggedIn) return <Auth close={() => setIsLoggedIn(true)} />;
 
-  const poppulateRewardData = async () => {
-    await api
-      .crud("GET", `project/rewardTnx`)
-      .then((res) => {
-        if (res.status === 200) {
-          setRewardData(res);
-        }
-      })
-      .catch((err) => {
-        if (err === 401) setIsLoggedIn(false);
-      });
-  };
+  // const poppulateRewardData = async () => {
+  //   await api
+  //     .crud("GET", `project/rewardTnx`)
+  //     .then((res) => {
+  //       if (res.status === 200) {
+  //         setRewardData(res);
+  //       }
+  //     })
+  //     .catch((err) => {
+  //       if (err === 401) setIsLoggedIn(false);
+  //     });
+  // };
 
   const poppulateNft = async () => {
     await api
@@ -150,14 +150,14 @@ const Nft = () => {
               <th style={{ width: "33%" }}>Date</th>
               <th style={{ width: "33%" }}>Amount</th>
             </tr>
-
+            {/* 
             {rewardData.map((trx) => (
               <tr key={trx.id}>
                 <td>{trx.id}</td>
                 <td>{trx.date.split("T")[0]}</td>
                 <td>{trx.reward}</td>
               </tr>
-            ))}
+            ))} */}
           </table>
         </div>
       </div>

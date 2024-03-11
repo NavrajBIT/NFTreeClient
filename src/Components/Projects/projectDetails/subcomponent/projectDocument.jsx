@@ -33,12 +33,12 @@ const ProjectDocument = ({ isOwnerView, details }) => {
         <ProjectDocumentBox doc={details?.project?.land_reg_proof} />
         {details?.projectDocs?.map(
           (doc, index) =>
-            (index < 4 || seeMore) && (
+            (index < 3 || seeMore) && (
               <ProjectDocumentBox doc={doc.file} key={`project-doc-${index}`} />
             )
         )}
       </div>
-      {details?.projectDocs?.length >= 5 && (
+      {details?.projectDocs?.length >= 4 && (
         <span
           style={{
             fontWeight: "500",

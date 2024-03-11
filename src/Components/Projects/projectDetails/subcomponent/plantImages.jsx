@@ -30,11 +30,13 @@ const PlantImages = ({ isOwnerView, details }) => {
           icon={"/ViewReportIcon.png"}
           onClick={() => navigate(`/projects/${details?.projectId}/report`)}
         />
-        <ProjectPageButton
-          text={"Invest"}
-          icon={"/Group.png"}
-          onClick={() => navigate(`/projects/${details?.projectId}/donate`)}
-        />
+        {details?.project?.type === 3 && (
+          <ProjectPageButton
+            text={"Invest"}
+            icon={"/Group.png"}
+            onClick={() => navigate(`/projects/${details?.projectId}/donate`)}
+          />
+        )}
       </div>
       {isOwnerView && (
         <div div className="buttonContainer">
@@ -49,7 +51,7 @@ const PlantImages = ({ isOwnerView, details }) => {
             icon={"/EditImage.png"}
             onClick={() => imageref.current.click()}
           />
-          <ProjectPageButton text={"Send Report"} icon={"/SendIcon.png"} />
+          {/* <ProjectPageButton text={"Send Report"} icon={"/SendIcon.png"} /> */}
         </div>
       )}
 

@@ -1,12 +1,85 @@
 // import BioChart from "./BioChart";
+import { useEffect, useRef, useState } from "react";
 import BioChart1 from "./BioChart1";
 import CO2 from "./CO2";
 import CarbonChart from "./CarbonChart";
+// import CarbonCopy from "./CarbonCopy"
 import "./ProjectReport.css";
+import "./charts.css";
 import { HiMiniShare } from "react-icons/hi2";
 import { MdEdit } from "react-icons/md";
+import { elements } from "chart.js";
+import { useLocation } from "react-router-dom";
+import useAPI from "../../../../../api/useAPI";
+import html2canvas from "html2canvas";
+import QRCode from "react-qr-code";
 
 const ProjectReport = () => {
+  const API_URL = import.meta.env.VITE_BACKEND_URL;
+  const [projectReportData, setProjectReportData] = useState({}); // Initialize with an empty object
+  const species = projectReportData.species || []; // Use empty array if species is undefined
+  // const speciesType = species.map(item => item.plant);
+  // const speciesData = species.map(item => item.percentage);
+  const location = useLocation();
+  const path = location.pathname;
+  const paths = path.split("/");
+  const projectId = paths[2];
+  const qDataCo2 = projectReportData.co2_equivalent || [];
+  const qDataCar = projectReportData.co2_sequestration || [];
+  const carStartDate = qDataCar.map((item) => item.start_date);
+  const carEndDate = qDataCar.map((item) => item.end_date);
+  const startDateCo2 = qDataCo2.map((item) => item.start_date);
+  const endDateCo2 = qDataCo2.map((item) => item.end_date);
+  // console.log(speciesType);
+  const contentRef = useRef(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const api = useAPI();
+
+  const fetchReportData = async () => {
+    try {
+      const response = await fetch(
+        `${API_URL}project/project-report/${projectId}/`
+      );
+      const res = await response.json();
+      setProjectReportData(res[0]);
+      console.log(res);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchReportData();
+  }, []);
+
+  const sendReport = async () => {
+    setIsLoading(true);
+    const content = contentRef.current;
+
+    try {
+      const canvas = await html2canvas(content);
+      const imageData = canvas.toDataURL("image/png");
+
+      const blob = await fetch(imageData).then((response) => response.blob());
+
+      const formData = new FormData();
+      formData.append("image", blob, "image.png");
+      formData.append("project_id", projectId);
+      await api
+        .crud("POST", "project/send-report", formData, true)
+        .then((res) => {
+          alert("Report sent successfully!");
+        })
+        .catch((err) => console.log(err));
+
+      console.log("API response:", response);
+    } catch (error) {
+      console.error("Error capturing or sending image:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <div
       style={{
@@ -14,6 +87,7 @@ const ProjectReport = () => {
         width: "100%",
         minHeight: "var(--min-height-page)",
       }}
+      ref={contentRef}
     >
       <div
         style={{
@@ -31,18 +105,15 @@ const ProjectReport = () => {
             justifyContent: "space-between",
           }}
         >
-          <p
-            className="projectRT"
-          >
-            Project report
-          </p>
+          <p className="projectRT">Project report</p>
           {true && (
             <div className="reportButton">
-              <button>
+              {/* <button>
                 <p>Edit</p> <MdEdit />
-              </button>
-              <button>
-                <p>Share</p> <HiMiniShare />
+              </button> */}
+              <button onClick={sendReport} disabled={isLoading}>
+                <p>{isLoading ? "Sending..." : "Send Report"}</p>{" "}
+                <HiMiniShare />
               </button>
             </div>
           )}
@@ -80,42 +151,42 @@ const ProjectReport = () => {
                       <td>
                         <img src="/ProjectReport/Geo.png" />
                       </td>
-                      <td>19.076° N to 72.877° E</td>
+                      <td>{projectReportData.geolocation}</td>
                     </tr>
                     <tr>
                       <td>Project Age</td>
                       <td>
                         <img src="/ProjectReport/PAge.png" />
                       </td>
-                      <td>6 Years</td>
+                      <td>{projectReportData.project_age} Years</td>
                     </tr>
                     <tr>
                       <td>Land Covered</td>
                       <td>
                         <img src="/ProjectReport/Land.png" />
                       </td>
-                      <td>2 Acres</td>
+                      <td>{projectReportData.land_covered} Acres</td>
                     </tr>
                     <tr>
                       <td>Total Trees Planted</td>
                       <td>
                         <img src="/ProjectReport/Trees.png" />
                       </td>
-                      <td>1500</td>
+                      <td>{projectReportData.total_trees}</td>
                     </tr>
-                    <tr>
+                    {/* <tr>
                       <td>Average Age</td>
                       <td>
                         <img src="/ProjectReport/AAge.png" />
                       </td>
                       <td>6-8 Years</td>
-                    </tr>
+                    </tr>  */}
                     <tr>
                       <td>Biomass weight</td>
                       <td>
                         <img src="/ProjectReport/Biomass.png" />
                       </td>
-                      <td>3-5 Tonnes</td>
+                      <td>{projectReportData.biomass_weight}</td>
                     </tr>
                   </tbody>
                 </table>
@@ -131,6 +202,9 @@ const ProjectReport = () => {
           <div className="GridBox">
             <div className="gridBoxHeading">
               <h2>Carbon Sequestration</h2>
+              <p className="dates-carbon">
+                {carStartDate[0]} To {carEndDate[0]}
+              </p>
             </div>
 
             <div className="gridBoxContent">
@@ -143,6 +217,9 @@ const ProjectReport = () => {
           <div className="GridBox">
             <div className="gridBoxHeading">
               <h2>CO2 Equivalent</h2>
+              <p className="dates-co2">
+                {startDateCo2[0]} To {endDateCo2[0]}
+              </p>
             </div>
 
             <div className="gridBoxContent">
@@ -163,45 +240,34 @@ const ProjectReport = () => {
                     <tr>
                       <th>SPECIES</th>
                       <th>AGE</th>
-                      <th>TPES OF VEGETATION</th>
+                      <th>TYPES OF VEGETATION</th>
                       <th>ESTIMATED 20 Tr.GRG REMGAL RATE</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td>Pitch Pine</td>
-                      <td>6</td>
-                      <td>Tropical Evergreen Forest</td>
-                      <td>4.5to 40.7 t CO2/ha/yr</td>
-                    </tr>
-                    <tr>
-                      <td>Coconut</td>
-                      <td>7</td>
-                      <td>Tropical Evergreen Forest</td>
-                      <td>4.5to 40.7 t CO2/ha/yr</td>
-                    </tr>
-                    <tr>
-                      <td>Mango</td>
-                      <td>8</td>
-                      <td>Tropical Evergreen Forest</td>
-                      <td>4.5to 40.7 t CO2/ha/yr</td>
-                    </tr>
-                    <tr>
-                      <td>species</td>
-                      <td>6</td>
-                      <td>Tropical Evergreen Forest</td>
-                      <td>4.5to 40.7 t CO2/ha/yr</td>
-                    </tr>
-                    <tr>
-                      <td>Species</td>
-                      <td>5</td>
-                      <td>Tropical Evergreen Forest</td>
-                      <td>4.5to 40.7 t CO2/ha/yr</td>
-                    </tr>
+                    {species.map((element, index) => (
+                      <tr key={index}>
+                        <td>{element.plant}</td>
+                        <td>{element.age}</td>
+                        <td>{element.species_type}</td>
+                        <td>{element.ghg_removal_rate}</td>
+                      </tr>
+                    ))}
                   </tbody>
                 </table>
               </div>
             </div>
+          </div>
+          <div
+            style={{
+              background: "transparent",
+              padding: "16px",
+              width: "fit-content",
+            }}
+          >
+            <QRCode
+              value={`https://bitbhoomi.com/projects/${projectId}/report`}
+            />
           </div>
         </div>
       </div>
