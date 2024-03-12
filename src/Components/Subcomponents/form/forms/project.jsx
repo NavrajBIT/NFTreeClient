@@ -101,6 +101,21 @@ const Project = ({ submit, backStep, data }) => {
       return;
     }
 
+    if (project["type"] == null) {
+      project["type"] = "1";
+    }
+
+    if (project["phase"] == null) {
+      project["phase"] = "1";
+    }
+
+    if (project["type"] == "3") {
+      if (project["investment_type"] == null)
+        project["investment_type"] = "Carbon Credits";
+    } else {
+      delete project["investment_type"];
+    }
+
     let formdata = new FormData();
     Object.keys(project).map((key) => {
       formdata.append(key, project[key]);

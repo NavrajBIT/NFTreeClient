@@ -82,10 +82,10 @@ const Donate = () => {
     if (!wallet.isWalletConnected) {
       wallet.connect();
     } else {
-      if (totalSol > parseFloat(wallet.solbalance)) {
-        alert("Not enough balance!!");
-        return;
-      }
+      // if (totalSol > parseFloat(wallet.solbalance)) {
+      //   alert("Not enough balance!!");
+      //   return;
+      // }
       setIsLoading(true);
       let tx = await wallet
         .sendSol(totalSol)
@@ -241,7 +241,7 @@ const Donate = () => {
                 maxLength: 500,
               }}
             />
-            <Input
+            {/* <Input
               inputData={{
                 label: "Connected Wallet Balance",
                 type: "text",
@@ -249,7 +249,7 @@ const Donate = () => {
                 onChange: () => {},
                 maxLength: 500,
               }}
-            />
+            /> */}
           </div>
 
           <div
