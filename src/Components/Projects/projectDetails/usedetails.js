@@ -27,7 +27,6 @@ const usedetails = (projectId, notMyProject) => {
     await api
       .crud("GET", `project/${projectId}`)
       .then((res) => {
-        console.log(res);
         if (res.status === 200) {
           setProject(res);
         }
@@ -42,7 +41,6 @@ const usedetails = (projectId, notMyProject) => {
     await api
       .crud("GET", `project/${projectId}/plant_images`)
       .then((res) => {
-        console.log(res);
         if (res.status === 200) {
           setProjectImages(res);
         }
@@ -73,7 +71,6 @@ const usedetails = (projectId, notMyProject) => {
     await api
       .crud("GET", `project/${projectId}/docs`)
       .then((res) => {
-        console.log(res);
         if (res.status === 200) {
           setProjectDocs(res);
         }
@@ -187,13 +184,14 @@ const usedetails = (projectId, notMyProject) => {
       alert("Please select a valid image file.");
     }
   };
-  const uploadProjectDoc = async (file) => {
+  const uploadProjectDoc = async (file, name) => {
     const fileName = file.name.replace(/\s+/g, "_");
     const newFile = new File([file], fileName, { type: file.type });
 
     const formdata = new FormData();
     formdata.append("file", newFile);
     formdata.append("project", projectId);
+    formdata.append("name", name);
     const endpoint = "project/docs/create";
     setIsLoading(true);
     await api
@@ -207,6 +205,7 @@ const usedetails = (projectId, notMyProject) => {
       });
     await poppulateProjectDocs();
     setIsLoading(false);
+    return true;
   };
 
   const addRecipient = async (email, wallet) => {

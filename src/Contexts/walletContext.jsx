@@ -1,3 +1,4 @@
+import SolflareWallet from "@solflare-wallet/sdk";
 import React, { useState, useEffect, useContext } from "react";
 import * as web3 from "@solana/web3.js";
 import * as buffer from "buffer";
@@ -46,6 +47,26 @@ export function WalletProvider(props) {
       .catch((err) => console.log(err));
   };
 
+  const connectSolflare = async () => {
+    if (provider) {
+      try {
+        const solflareWallet = new SolflareWallet();
+        solflareWallet.on("connect", () => {
+          console.log("yes---");
+          setPublicKey(solflareWallet.publicKey.toString());
+          setProvider(solflareWallet);
+          setIsWalletConnected(true);
+        });
+        await solflareWallet.connect();
+      } catch {
+        setIsWalletConnected(false);
+        alert("Wallet connection declined!");
+      }
+    } else {
+      window.open("https://solflare.com/", "_blank");
+    }
+  };
+
   const connect = async () => {
     if (provider) {
       try {
@@ -69,9 +90,7 @@ export function WalletProvider(props) {
     }
     const recipientAddress = "9G4RTia1n5uThQ42tfmci2k9w1nauXjAKQPGQV9FKRuD";
     let transaction = new web3.Transaction();
-    console.log("creating transaction...");
-    console.log(provider);
-    console.log(provider.publicKey);
+    console.log(`Sending ${sol} SOL`);
     transaction.add(
       web3.SystemProgram.transfer({
         fromPubkey: provider.publicKey,
@@ -79,7 +98,7 @@ export function WalletProvider(props) {
         lamports: parseInt(sol * web3.LAMPORTS_PER_SOL),
       })
     );
-    console.log(provider);
+
     transaction.feePayer = provider.publicKey;
     const { blockhash } = await connection.getLatestBlockhash();
     transaction.recentBlockhash = blockhash;
@@ -87,7 +106,11 @@ export function WalletProvider(props) {
       .signAndSendTransaction(transaction)
       .then((res) => {
         console.log(res);
-        return res.sig;
+        if (provider.isPhantom) {
+          return res.signature;
+        } else {
+          return res;
+        }
       })
       .catch((err) => null);
     if (tx === null) {
@@ -104,6 +127,7 @@ export function WalletProvider(props) {
     isWalletConnected,
     solbalance,
     connect,
+    connectSolflare,
   };
 
   return (

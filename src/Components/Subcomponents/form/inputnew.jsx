@@ -36,9 +36,16 @@ const Input = ({ inputData, error }) => {
             {inputData.required ? "*" : ""}
           </p>
         </div>
-        <div className="projectFormFileupload">
+        <div
+          className="projectFormFileupload"
+          style={{ height: "46px", background: "white" }}
+        >
           <div>
-            <p>{value}</p>
+            <p
+              style={{ whiteSpace: "nowrap", width: "85%", overflow: "hidden" }}
+            >
+              {value}
+            </p>
             <IoMdAttach style={{ color: "black" }} size={20} />
           </div>
 

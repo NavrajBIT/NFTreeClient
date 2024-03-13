@@ -1,10 +1,32 @@
 import ProjectDocumentBox from "./projectDocumentBox";
 import { RiLoopLeftFill } from "react-icons/ri";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
+import Input from "../../../Subcomponents/form/inputnew";
 
 const ProjectDocument = ({ isOwnerView, details }) => {
   const [seeMore, setSeeMore] = useState(false);
+  const [docPopUp, setDocPopUp] = useState(false);
+  const [doc, setDoc] = useState({ name: "", file: "" });
+  const [error, setError] = useState("");
   const updatebuttonref = useRef(null);
+
+  useEffect(() => {
+    if (docPopUp) {
+      document.body.style.overflow = "hidden";
+    }
+  }, [docPopUp]);
+
+  const handleUpload = async () => {
+    if (doc.name == "" || doc.file == "") {
+      setError("name and file are required");
+    } else {
+      await details.uploadProjectDoc(doc.file, doc.name);
+      setDoc({ name: "", file: "" });
+      setDocPopUp(false);
+      setError("");
+    }
+  };
+
   return (
     <div className="projectDocumentContainer">
       <div>
@@ -30,11 +52,18 @@ const ProjectDocument = ({ isOwnerView, details }) => {
           minHeight: "clamp(100px,20vw,282px)",
         }}
       >
-        <ProjectDocumentBox doc={details?.project?.land_reg_proof} />
+        <ProjectDocumentBox
+          doc={details?.project?.land_reg_proof}
+          name={"land Reg proof"}
+        />
         {details?.projectDocs?.map(
           (doc, index) =>
             (index < 3 || seeMore) && (
-              <ProjectDocumentBox doc={doc.file} key={`project-doc-${index}`} />
+              <ProjectDocumentBox
+                doc={doc.file}
+                key={`project-doc-${index}`}
+                name={doc.name}
+              />
             )
         )}
       </div>
@@ -67,7 +96,8 @@ const ProjectDocument = ({ isOwnerView, details }) => {
             }}
             className="updateDocButton"
             onClick={() => {
-              updatebuttonref.current.click();
+              // updatebuttonref.current.click();
+              setDocPopUp(!docPopUp);
             }}
           >
             <span
@@ -82,12 +112,107 @@ const ProjectDocument = ({ isOwnerView, details }) => {
             </span>
             <RiLoopLeftFill size={20} color={"black"} />
           </button>
-          <input
-            type="file"
-            ref={updatebuttonref}
-            style={{ display: "none" }}
-            onChange={(e) => details.uploadProjectDoc(e.target.files[0])}
-          />
+        </div>
+      )}
+
+      {docPopUp && (
+        <div
+          style={{
+            width: "100vw",
+            height: "100vh",
+            position: "fixed",
+            background: "#000000d9",
+            top: "0",
+            left: "0",
+          }}
+        >
+          <div
+            style={{
+              background: "#84b071",
+              padding: "5%",
+              borderRadius: "20px",
+              textAlign: "center",
+              position: "fixed",
+              width: "50%",
+              minWidth: "330px",
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+            }}
+          >
+            <h2
+              style={{
+                position: "absolute",
+                right: "2%",
+                top: "4%",
+                cursor: "pointer",
+              }}
+              onClick={() => setDocPopUp(!docPopUp)}
+            >
+              X
+            </h2>
+            <h1
+              style={{
+                paddingBottom: "5%",
+              }}
+            >
+              Upload Document
+            </h1>
+            <div
+              style={{
+                display: "flex",
+                width: "100%",
+                gap: "20px",
+                flexDirection: "column",
+                margin: "auto",
+                textAlign: "start",
+              }}
+            >
+              <Input
+                inputData={{
+                  type: "text",
+                  placeholder: "Document name",
+                  value: doc["name"],
+                  onChange: (e) => setDoc({ ...doc, name: e.target.value }),
+                  maxLength: 100,
+                }}
+              />
+              <Input
+                inputData={{
+                  type: "file",
+                  value: doc["file"],
+                  onChange: (e) => setDoc({ ...doc, file: e.target.files[0] }),
+                  maxLength: 100,
+                }}
+              />
+            </div>
+            <p
+              style={{
+                color: "red",
+                height: "15px",
+                fontSize: "small",
+                textAlign: "start",
+              }}
+            >
+              {error}
+            </p>
+            <button
+              style={{
+                fontSize: "1.1rem",
+                fontWeight: "500",
+                color: "black",
+                marginRight: "10px",
+                background: "#cce5a0",
+                padding: "10px 35px",
+                borderRadius: "10px",
+                fontWeight: "500",
+                cursor: "pointer",
+              }}
+              onClick={handleUpload}
+            >
+              Upload
+            </button>
+          </div>
         </div>
       )}
     </div>

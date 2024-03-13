@@ -41,10 +41,10 @@ const Donate = () => {
 
   const poppulateProject = async () => {
     setIsLoading(true);
-
     await api
       .crud("GET", `project/${id}`)
       .then((res) => {
+        console.log(res);
         if (res.status === 200) setProject(res);
       })
       .catch((err) => {});
@@ -82,29 +82,36 @@ const Donate = () => {
     if (!wallet.isWalletConnected) {
       wallet.connect();
     } else {
-      // if (totalSol > parseFloat(wallet.solbalance)) {
-      //   alert("Not enough balance!!");
-      //   return;
-      // }
       setIsLoading(true);
       let tx = await wallet
         .sendSol(totalSol)
-        .then(async (res) => {
-          console.log(res);
-        })
-        .catch((err) => alert("Transaction Unsuccessful."));
-      await api
+        .then((res) => res)
+        .catch((err) => {
+          alert("Transaction Unsuccessful.");
+          return null;
+        });
+      console.log("------------------");
+      console.log(tx);
+      if (!tx) {
+        setIsLoading(false);
+        return;
+      }
+      api
         .crud("POST", "project/invest", {
           projectId: project.id,
           amount: totalUSD,
           trees: trees,
+          hash: tx,
         })
         .then((res) => {
           console.log(res);
-          navigate("/profile/mynft");
         })
         .catch((err) => console.log(err));
+      alert(
+        "Order has been placed. You NFT will reflect in your wallet shortly."
+      );
       setIsLoading(false);
+      navigate("/");
     }
   };
 
@@ -113,6 +120,7 @@ const Donate = () => {
     exchangeRate && exchangeRate > 0 && project?.donation
       ? parseFloat(totalUSD) / parseFloat(exchangeRate)
       : 0;
+  const availableTrees = project?.funding?.total - project?.funding?.raised;
 
   return (
     <div
@@ -185,7 +193,13 @@ const Donate = () => {
               type: "number",
               required: true,
               value: trees,
-              onChange: (e) => setTrees(e.target.value),
+              onChange: (e) => {
+                if (e.target.value > availableTrees) {
+                  setTrees(availableTrees);
+                } else {
+                  setTrees(e.target.value);
+                }
+              },
               maxLength: 50,
             }}
           />
@@ -259,19 +273,23 @@ const Donate = () => {
               justifyContent: "center",
             }}
           >
-            <button
-              type="submit"
-              style={{
-                padding: "var(--padding-light)",
-                background: "#354A12",
-                width: "var(--project-button)",
-                borderRadius: "5px",
-                marginTop: "var(--padding-large)",
-                marginBottom: "100px",
-              }}
-            >
-              {wallet?.isWalletConnected ? donationText : "Connect Wallet"}
-            </button>
+            {wallet?.isWalletConnected ? (
+              <button
+                type="submit"
+                style={{
+                  padding: "var(--padding-light)",
+                  background: "#354A12",
+                  width: "var(--project-button)",
+                  borderRadius: "5px",
+                  marginTop: "var(--padding-large)",
+                  marginBottom: "100px",
+                }}
+              >
+                {wallet?.isWalletConnected ? donationText : "Connect Wallet"}
+              </button>
+            ) : (
+              <div>Please connect wallet!</div>
+            )}
           </div>
         </form>
       </div>

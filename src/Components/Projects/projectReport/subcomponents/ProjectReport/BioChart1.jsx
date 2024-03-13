@@ -3,6 +3,7 @@ import { Pie } from 'react-chartjs-2';
 import "./Charts.css"
 import { Chart, ArcElement, Tooltip } from 'chart.js'
 import { useLocation } from "react-router-dom";
+import ChartDataLabels from 'chartjs-plugin-datalabels';
 Chart.register(ArcElement, Tooltip);
 
 const BioChart1 = () => {
@@ -32,14 +33,14 @@ const BioChart1 = () => {
   }, []);
 
   const totalPercentage = speciesData.reduce((total, value) => total + value, 0);
-  const remainingPercentage = 100 - totalPercentage;
-  const speciesColors = ['#50623A', '#789461', '#BFD8AF'];
+  // const remainingPercentage = 100 - totalPercentage;
+  const speciesColors = ['#50623A', '#95B984', '#AED39C', '#BCE0AA', '#C7EBB6', '#D0EDC2', '#DDF1D3'];
   const backgroundColors = speciesColors.slice(0, speciesData.length).concat('white');
   const data = {
     labels: speciesType,
     datasets: [
       {
-        data: [...speciesData, remainingPercentage],
+        data: [...speciesData],
         backgroundColor: backgroundColors, // White color for remaining percentage
         borderWidth: 0,
       },
@@ -48,27 +49,20 @@ const BioChart1 = () => {
 
   const options = {
     plugins: {
-      legend: {
-        display: false,
-      },
-      responsive: true,
-      maintainAspectRatio: false,
-      tooltips: {
-        callbacks: {
-          label: function (tooltipItem, data) {
-            const dataset = data.datasets[tooltipItem.datasetIndex];
-            const value = dataset.data[tooltipItem.index];
-            const label = data.labels[tooltipItem.index];
-            return `${label}: ${value}%`;
-          },
-        },
-      },
+      datalabels: {
+        color: '#fff',
+        formatter: (value, context) => {
+          return  value + '%';
+        }
+      }
     }
   };
 
+ 
+
   return (
     <div className="biochart">
-      <Pie data={data} options={options} width={200} height={200} />
+      <Pie data={data} options={options} plugins={[ChartDataLabels]}  width={200} height={200} />
     </div>
   );
 };

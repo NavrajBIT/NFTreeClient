@@ -145,7 +145,8 @@ textarea {
 
   width: 100%;
   position: absolute;
-  top: 50%;
+  /* top: 50%; */
+  transform: translate(0px, 10px);
   align-items: center;
   justify-content: space-between;
   padding: 0 var(--padding-main);

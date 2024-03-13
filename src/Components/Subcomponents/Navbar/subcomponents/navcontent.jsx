@@ -101,7 +101,9 @@ const NavContent = () => {
                   <hr />
                   <span>
                     <img src="/solfare.png" alt="solfare_logo" />
-                    <button onClick={() => wallet.connect()}>Solfare</button>
+                    <button onClick={() => wallet.connectSolflare()}>
+                      Solfare
+                    </button>
                   </span>
                 </div>
               )}

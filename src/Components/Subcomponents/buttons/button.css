@@ -38,6 +38,7 @@
   color: var(--text-black);
   text-decoration: underline;
   cursor: pointer;
+  font-weight: normal;
 }
 
 .green img,
@@ -92,12 +93,11 @@
 }
 
 @media screen and (max-width: 1300px) {
- .secondary {
-   width:100%;
-   font-size: 0.9rem;
-
+  .secondary {
+    width: 100%;
+    font-size: 0.9rem;
   }
-  .primary{
+  .primary {
     font-size: 0.9rem;
   }
 }
