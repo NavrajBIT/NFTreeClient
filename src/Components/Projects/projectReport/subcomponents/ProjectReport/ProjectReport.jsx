@@ -5,7 +5,7 @@ import CO2 from "./CO2";
 import CarbonChart from "./CarbonChart";
 // import CarbonCopy from "./CarbonCopy"
 import "./ProjectReport.css";
-import "./charts.css";
+import "./Charts.css";
 import { HiMiniShare } from "react-icons/hi2";
 import { MdEdit } from "react-icons/md";
 import { elements } from "chart.js";
