@@ -25,7 +25,8 @@ const Sidebar = ({ filters, setFilters, data, isMobile }) => {
     if (!cityList.includes(city)) cityList.push(city);
     if (!countryList.includes(country)) countryList.push(country);
     if (!investmentTypeList.includes(project.investment_type))
-      investmentTypeList.push(project.investment_type);
+      project.investment_type != null &&
+        investmentTypeList.push(project.investment_type);
   });
 
   const Filter = ({ type, value, index }) => {
@@ -136,19 +137,29 @@ const Sidebar = ({ filters, setFilters, data, isMobile }) => {
           width: "100%",
         }}
       >
-        {!isMobile && <img src={filterimage} alt=""  style={{
-          height:"30px",
-          width:"30px"
-        }}/>}
+        {!isMobile && (
+          <img
+            src={filterimage}
+            alt=""
+            style={{
+              height: "30px",
+              width: "30px",
+            }}
+          />
+        )}
         Filter
       </div>
       <div className="singlefiltercontainer">
-        <div style={{ fontSize: "18px",fontWeight:"700" }}>Project Type</div>
+        <div style={{ fontSize: "18px", fontWeight: "700" }}>Project Type</div>
         {typefilterOptions.map((type, index) => (
           <TypeFilter index={index} key={"type-filter-" + index} />
         ))}
         <br />
-        <div style={{ fontSize: "18px",fontWeight:"700" }}>Investment Type</div>
+
+        <div style={{ fontSize: "18px", fontWeight: "700" }}>
+          Investment Type
+        </div>
+
         {investmentTypeList.map((type, index) => (
           <Filter
             type={"investment_type"}
@@ -159,7 +170,7 @@ const Sidebar = ({ filters, setFilters, data, isMobile }) => {
         ))}
       </div>
       <div className="singlefiltercontainer">
-        <div style={{ fontSize: "18px" ,fontWeight:"700"}}>Country</div>
+        <div style={{ fontSize: "18px", fontWeight: "700" }}>Country</div>
         {countryList.map((type, index) => (
           <Filter
             type={"country"}
@@ -169,7 +180,7 @@ const Sidebar = ({ filters, setFilters, data, isMobile }) => {
           />
         ))}
         <br />
-        <div style={{ fontSize: "18px",fontWeight:"700" }}>State</div>
+        <div style={{ fontSize: "18px", fontWeight: "700" }}>State</div>
         {cityList.map((type, index) => (
           <Filter
             type={"city"}

@@ -10,11 +10,12 @@ import "./forms.css";
 
 const ProjectData = ({ submit, backStep, data }) => {
   const [species, setSpecies] = useState([{ plant: "", percentage: "" }]);
-  const [docs, setdocs] = useState([{ file: null }]);
+  const [docs, setdocs] = useState([{ file: null, name: "" }]);
   const api = useAPI();
   const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const [projectId, setProjectId] = useState();
+  const [error, setError] = useState("");
 
   const changeValue = (key, value, index) => {
     setSpecies((prev) => {
@@ -24,14 +25,12 @@ const ProjectData = ({ submit, backStep, data }) => {
     });
   };
 
-  const uploadDoc = async (index, file) => {
-    const fileName = file.name.replace(/\s+/g, "_");
-    const newFile = new File([file], fileName, { type: file.type });
+  const uploadDoc = async (index, name, file) => {
+    if (name == "file") {
+      const fileName = file.name.replace(/\s+/g, "_");
+      file = new File([file], fileName, { type: file.type });
+    }
 
-    // const formdata = new FormData();
-    // formdata.append("file", newFile);
-    // formdata.append("project", projectId);
-    // const endpoint = "project/docs/create";
     setIsLoading(true);
     // await api
     //   .crud("POST", endpoint, formdata, true)
@@ -47,25 +46,23 @@ const ProjectData = ({ submit, backStep, data }) => {
     //   .catch((err) => {
     //     if (err === 401) setIsLoggedIn(false);
     //   });
+
     setdocs((prev) => {
       let newValues = [...prev];
       if (newValues.length > 0) {
-        newValues[index].file = newFile;
+        newValues[index][name] = file;
       }
       return newValues;
     });
     setIsLoading(false);
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async () => {
     setIsLoading(true);
-
     let projectFormdata = new FormData();
     Object.keys(data.projectDetail).map((key) => {
       projectFormdata.append(key, data.projectDetail[key]);
     });
-
     try {
       const projectResponse = await api.crud(
         "POST",
@@ -75,9 +72,7 @@ const ProjectData = ({ submit, backStep, data }) => {
       );
       if (projectResponse.status === 201) {
         const project_Id = projectResponse.id;
-
         setProjectId(project_Id);
-
         const speciesRequests = species.map((type) =>
           api.crud("POST", "project/species", {
             project: project_Id,
@@ -85,16 +80,14 @@ const ProjectData = ({ submit, backStep, data }) => {
             percentage: type.percentage,
           })
         );
-
         await Promise.all(speciesRequests);
-
         const sendDoc = async (docFormData) => {
           await api.crud("POST", "project/docs/create", docFormData, true);
         };
-
         docs.forEach((doc, index) => {
           const docFormData = new FormData();
           docFormData.append(`file`, doc.file);
+          docFormData.append(`name`, doc.name);
           docFormData.append("project", project_Id);
           sendDoc(docFormData);
         });
@@ -103,8 +96,21 @@ const ProjectData = ({ submit, backStep, data }) => {
       if (err === 401) setIsLoggedIn(false);
       console.log(err);
     }
-
     setIsLoading(false);
+  };
+
+  const validateSubmit = (e) => {
+    e.preventDefault();
+    var speciesSum = 0;
+    for (let i in species) {
+      speciesSum += parseInt(species[i].percentage);
+    }
+
+    if (speciesSum == 100) {
+      handleSubmit();
+    } else {
+      setError("Species percentage sum should be 100");
+    }
   };
 
   projectId && submit(projectId);
@@ -133,7 +139,7 @@ const ProjectData = ({ submit, backStep, data }) => {
           gap: "var(--padding-light)",
         }}
         id={"formId"}
-        onSubmit={handleSubmit}
+        onSubmit={validateSubmit}
       >
         <div>
           <div
@@ -152,7 +158,6 @@ const ProjectData = ({ submit, backStep, data }) => {
               }}
             />
           </div>
-
           {species.map((type, index) => (
             <div
               key={"species-" + index}
@@ -237,7 +242,13 @@ const ProjectData = ({ submit, backStep, data }) => {
               </div>
             </div>
           ))}
-
+          {error ? (
+            <p style={{ color: "red", fontSize: "small", marginTop: "-15px" }}>
+              {error}
+            </p>
+          ) : (
+            ""
+          )}
           <div
             className="secondarybutton"
             style={{
@@ -303,11 +314,19 @@ const ProjectData = ({ submit, backStep, data }) => {
               <div style={{ display: "flex", width: "90%", gap: "20px" }}>
                 <Input
                   inputData={{
-                    label: "Project Document",
+                    type: "text",
+                    placeholder: "Document name",
+                    value: type["name"],
+                    onChange: (e) => uploadDoc(index, "name", e.target.value),
+                    maxLength: 100,
+                  }}
+                />
+                <Input
+                  inputData={{
                     type: "file",
-                    required: true,
                     value: type["file"],
-                    onChange: (e) => uploadDoc(index, e.target.files[0]),
+                    onChange: (e) =>
+                      uploadDoc(index, "file", e.target.files[0]),
                     maxLength: 100,
                   }}
                 />
@@ -317,6 +336,7 @@ const ProjectData = ({ submit, backStep, data }) => {
                   display: "flex",
                   width: "10%",
                   gap: "20px",
+                  marginTop: "-20px",
                 }}
               >
                 <div

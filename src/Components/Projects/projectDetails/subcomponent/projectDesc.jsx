@@ -1,6 +1,10 @@
 import "./userView.css";
 import ProjectPageButton from "./projectButton";
+import { useRef } from "react";
+import { FaEdit } from "react-icons/fa";
+
 const ProjectDesc = ({ isOwnerView, details }) => {
+  const imageref = useRef(null);
   console.log(details);
   return (
     <div
@@ -18,8 +22,27 @@ const ProjectDesc = ({ isOwnerView, details }) => {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
+        position: "relative",
       }}
     >
+      {isOwnerView && (
+        <div style={{ position: "absolute", top: "18px", right: "18px" }}>
+          <input
+            type="file"
+            style={{ display: "none" }}
+            ref={imageref}
+            onChange={(e) => details.uploadProjectImage(e.target.files[0])}
+          />
+          <button
+            className="progressBtn"
+            onClick={() => imageref.current.click()}
+            style={{ padding: "10px" }}
+          >
+            <FaEdit size={20} />
+          </button>
+          {/* <ProjectPageButton text={"Send Report"} icon={"/SendIcon.png"} /> */}
+        </div>
+      )}
       <div style={{ display: "flex", flexDirection: "column" }}>
         <div
           className="descriptionBlock"

@@ -38,7 +38,7 @@ const PlantImages = ({ isOwnerView, details }) => {
           />
         )}
       </div>
-      {isOwnerView && (
+      {/* {isOwnerView && (
         <div div className="buttonContainer">
           <input
             type="file"
@@ -51,9 +51,9 @@ const PlantImages = ({ isOwnerView, details }) => {
             icon={"/EditImage.png"}
             onClick={() => imageref.current.click()}
           />
-          {/* <ProjectPageButton text={"Send Report"} icon={"/SendIcon.png"} /> */}
+          {<ProjectPageButton text={"Send Report"} icon={"/SendIcon.png"} />}
         </div>
-      )}
+      )} */}
 
       <div className="imagesContainer">
         <div>
