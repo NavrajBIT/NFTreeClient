@@ -132,6 +132,8 @@ const Organization = ({ submit, backStep, data }) => {
     setIsLoading(false);
   };
 
+  const back = () => {};
+
   const accountFormData = [
     [
       {
@@ -291,6 +293,10 @@ const Organization = ({ submit, backStep, data }) => {
     <Myform
       heading={"Organization Details"}
       formdata={accountFormData}
+<<<<<<< HEAD
+      formButton={isComplete() ? "Next" : "Save"}
+      back={back}
+=======
       formButton={
         <div
           style={{
@@ -304,6 +310,7 @@ const Organization = ({ submit, backStep, data }) => {
         </div>
       }
       back={backStep}
+>>>>>>> 0bf9333728cf8ef7c6a66aaf11cf535cb419fafe
       handleSubmit={async () => {
         if (validateSocialMedia() && validateWallet()) {
           await handleSubmit();

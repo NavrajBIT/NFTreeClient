@@ -7,12 +7,58 @@ import Checkbox from "@mui/material/Checkbox";
 import "./input.css";
 import AttachFileIcon from "@mui/icons-material/AttachFile";
 import ProjectFormInput from "./inputs/projectFormInput";
+<<<<<<< HEAD
+import { IoIosAttach } from "react-icons/io";
+=======
 import { IoMdAttach } from "react-icons/io";
+>>>>>>> 0bf9333728cf8ef7c6a66aaf11cf535cb419fafe
 
 const Input = ({ inputData, error }) => {
   const [isSelected, setIsSelected] = useState(false);
   const inputref = useRef(null);
 
+<<<<<<< HEAD
+  // if (inputData.type === "file") {
+  //   let filename = (function () {
+  //     try {
+  //       return inputData?.value?.split("/")[
+  //         inputData?.value?.split("/").length - 1
+  //       ];
+  //     } catch {
+  //       return "Uploaded Successfully.";
+  //     }
+  //   })();
+
+  //   return (
+  //     <div
+  //       style={{
+  //         width: "100%",
+  //         display: "flex",
+  //         alignItems: "center",
+  //         justifyContent: "space-between",
+  //         border: "1px solid grey",
+  //         cursor: "pointer",
+  //         padding: "var(--padding-light) var(--padding-main)",
+  //         borderRadius: "var(--border-radius)",
+  //       }}
+  //       onClick={() => inputref.current.click()}
+  //     >
+  //       <div>{inputData.label}:</div>
+  //       <div>{inputData.value ? filename : "Click to Upload"}</div>
+
+  //       <input
+  //         type="file"
+  //         ref={inputref}
+  //         style={{ display: "none" }}
+  //         onChange={inputData.onChange}
+  //       />
+  //       <AttachFileIcon />
+  //     </div>
+  //   );
+  // }
+
+=======
+>>>>>>> 0bf9333728cf8ef7c6a66aaf11cf535cb419fafe
   if (inputData.type == "file") {
     var value = "Click to Upload";
 
@@ -27,6 +73,14 @@ const Input = ({ inputData, error }) => {
     }
 
     return (
+<<<<<<< HEAD
+      <div className="projectFormContainer">
+        <div>{inputData.label}:</div>
+        <div className="projectFormFileupload">
+          <div>
+            <p>{value}</p>
+            <IoIosAttach />
+=======
       <div className="projectFormContainer" style={{ marginBottom: "15px" }}>
         <div>
           <p
@@ -47,6 +101,7 @@ const Input = ({ inputData, error }) => {
               {value}
             </p>
             <IoMdAttach style={{ color: "black" }} size={20} />
+>>>>>>> 0bf9333728cf8ef7c6a66aaf11cf535cb419fafe
           </div>
 
           <input type="file" onChange={inputData.onChange} />
@@ -69,7 +124,11 @@ const Input = ({ inputData, error }) => {
 
   if (inputData.type === "select") {
     return (
+<<<<<<< HEAD
+      <div style={{ position: "relative" }}>
+=======
       <div style={{ position: "relative", marginBottom: "15px" }}>
+>>>>>>> 0bf9333728cf8ef7c6a66aaf11cf535cb419fafe
         <ProjectFormInput
           label={inputData.label}
           type={inputData.type}
@@ -82,6 +141,8 @@ const Input = ({ inputData, error }) => {
     );
   }
 
+<<<<<<< HEAD
+=======
   if (inputData.type === "walletAddress") {
     return (
       <div style={{ position: "relative", marginBottom: "15px" }}>
@@ -160,6 +221,7 @@ const Input = ({ inputData, error }) => {
     );
   }
 
+>>>>>>> 0bf9333728cf8ef7c6a66aaf11cf535cb419fafe
   return (
     <div style={{ position: "relative", width: "100%" }}>
       <ProjectFormInput
@@ -186,6 +248,19 @@ const Input = ({ inputData, error }) => {
         />
       )}
 
+<<<<<<< HEAD
+      {inputData.errorField != "None" && (
+        <div
+          style={{
+            color: "var(--error)",
+            fontSize: "0.8rem",
+            height: "15px",
+          }}
+        >
+          {error ? "This field is required." : ""}
+        </div>
+      )}
+=======
       <div
         style={{
           color: "var(--error)",
@@ -195,6 +270,7 @@ const Input = ({ inputData, error }) => {
       >
         {error ? "This field is required." : ""}
       </div>
+>>>>>>> 0bf9333728cf8ef7c6a66aaf11cf535cb419fafe
     </div>
   );
 };

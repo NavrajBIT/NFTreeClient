@@ -37,11 +37,24 @@ const NavContent = () => {
     <div
       className="navbarcontainer"
       style={{
+<<<<<<< HEAD
+        height: "var(--nav-height-small)",
+        backgroundImage:
+          window.location.pathname === "/" && !scroll
+            ? "none"
+            : "linear-gradient(to right, #1B2F2F, #224629)",
+        zIndex: "999",
+=======
         backgroundColor: scroll ? "var(--green-100)" : "transparent",
         backgroundImage: scroll
           ? "linear-gradient(170deg, #1B2F2F, #224629)"
           : "none",
-        height: scroll ? "var(--nav-height-small)" : "var(--nav-height)",
+        height:
+          scroll || window.location.pathname != "/"
+            ? "var(--nav-height-small)"
+            : "var(--nav-height)",
+        zIndex: "99",
+>>>>>>> 0bf9333728cf8ef7c6a66aaf11cf535cb419fafe
       }}
     >
       <div className="navcontentcontainer">

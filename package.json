@@ -17,7 +17,11 @@
     "@mui/x-charts": "^6.18.1",
     "@nivo/pie": "^0.84.0",
     "@react-oauth/google": "^0.11.1",
+<<<<<<< HEAD
+    "apexcharts": "^3.46.0",
+=======
     "@solana/web3.js": "^1.90.1",
+>>>>>>> 90afaeffda289e03a467a116030ffa34676e2974
     "axios": "^1.6.0",
     "canvg": "^4.0.1",
     "chart.js": "^4.4.2",
@@ -26,12 +30,21 @@
     "framer-motion": "^10.16.16",
     "gapi-script": "^1.2.0",
     "html2canvas": "^1.4.1",
+    "jquery": "^3.7.1",
     "npm": "^10.2.3",
     "react": "^18.2.0",
     "react-apexcharts": "^1.4.1",
+<<<<<<< HEAD
+<<<<<<< HEAD
     "react-chartjs-2": "^5.2.0",
+=======
+=======
+    "react-chartjs-2": "^5.2.0",
+>>>>>>> 90afaeffda289e03a467a116030ffa34676e2974
     "react-copy-to-clipboard": "^5.1.0",
+>>>>>>> 0bf9333728cf8ef7c6a66aaf11cf535cb419fafe
     "react-dom": "^18.2.0",
+    "react-google-charts": "^4.0.1",
     "react-icons": "^4.12.0",
     "react-paginate": "^8.2.0",
     "react-qr-code": "^2.0.12",
@@ -41,6 +54,7 @@
     "yup": "^1.3.2"
   },
   "devDependencies": {
+    "@types/jquery": "^3.5.29",
     "@types/react": "^18.2.15",
     "@types/react-dom": "^18.2.7",
     "@vitejs/plugin-react": "^4.0.3",

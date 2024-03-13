@@ -3,8 +3,11 @@ import { useState, useEffect } from "react";
 import AuthPopup from "../../../Auth/authPopup";
 import Loading from "../../loading/loading";
 import Input from "../inputnew";
+<<<<<<< HEAD
+=======
 import { GrLinkNext } from "react-icons/gr";
 import { GrLinkPrevious } from "react-icons/gr";
+>>>>>>> 0bf9333728cf8ef7c6a66aaf11cf535cb419fafe
 
 const Project = ({ submit, backStep, data }) => {
   const api = useAPI();
@@ -164,8 +167,13 @@ const Project = ({ submit, backStep, data }) => {
         <div
           style={{
             fontSize: "1.5rem",
+<<<<<<< HEAD
+            fontWeight: "bold",
+            color: "var(--green-80)",
+=======
             fontWeight: "600",
             color: "var(--heading-color)",
+>>>>>>> 0bf9333728cf8ef7c6a66aaf11cf535cb419fafe
           }}
         >
           Project Details
@@ -472,9 +480,16 @@ const Project = ({ submit, backStep, data }) => {
         <div style={{ color: "var(--error)" }}>{error}</div>
         <div style={{ display: "flex", gap: "var(--padding-large)" }}>
           <button
+<<<<<<< HEAD
+            onClick={handleSubmit}
+            style={{
+              padding: "var(--padding-light)",
+
+=======
             onClick={backStep}
             style={{
               padding: "var(--padding-light)",
+>>>>>>> 0bf9333728cf8ef7c6a66aaf11cf535cb419fafe
               width: "var(--project-button-small)",
               borderRadius: "5px",
               marginTop: "var(--padding-large)",
@@ -483,6 +498,9 @@ const Project = ({ submit, backStep, data }) => {
               color: "#525252",
             }}
           >
+<<<<<<< HEAD
+            Back
+=======
             <div
               style={{
                 display: "flex",
@@ -493,10 +511,15 @@ const Project = ({ submit, backStep, data }) => {
               <GrLinkPrevious />
               <p>Back</p>
             </div>
+>>>>>>> 0bf9333728cf8ef7c6a66aaf11cf535cb419fafe
           </button>
 
           <button
             type="submit"
+<<<<<<< HEAD
+            onClick={handleSubmit}
+=======
+>>>>>>> 0bf9333728cf8ef7c6a66aaf11cf535cb419fafe
             style={{
               padding: "var(--padding-light)",
               background: "#354A12",
@@ -506,6 +529,9 @@ const Project = ({ submit, backStep, data }) => {
               marginBottom: "100px",
             }}
           >
+<<<<<<< HEAD
+            Next
+=======
             <div
               style={{
                 display: "flex",
@@ -516,6 +542,7 @@ const Project = ({ submit, backStep, data }) => {
               <p>Next</p>
               <GrLinkNext />
             </div>
+>>>>>>> 0bf9333728cf8ef7c6a66aaf11cf535cb419fafe
           </button>
         </div>
       </form>

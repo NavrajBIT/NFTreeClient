@@ -1,6 +1,9 @@
 import Input from "./inputnew";
 import { useState } from "react";
+<<<<<<< HEAD
+=======
 import { GrLinkPrevious } from "react-icons/gr";
+>>>>>>> 0bf9333728cf8ef7c6a66aaf11cf535cb419fafe
 
 const Myform = ({
   heading,
@@ -65,8 +68,13 @@ const Myform = ({
         <div
           style={{
             fontSize: "1.5rem",
+<<<<<<< HEAD
+            fontWeight: "bold",
+            color: "var(--green-80)",
+=======
             fontWeight: "600",
             color: "var(--heading-color)",
+>>>>>>> 0bf9333728cf8ef7c6a66aaf11cf535cb419fafe
           }}
         >
           {heading}
@@ -162,6 +170,9 @@ const Myform = ({
                   color: "#525252",
                 }}
               >
+<<<<<<< HEAD
+                Back
+=======
                 <div
                   style={{
                     display: "flex",
@@ -172,6 +183,7 @@ const Myform = ({
                   <GrLinkPrevious />
                   <p>Back</p>
                 </div>
+>>>>>>> 0bf9333728cf8ef7c6a66aaf11cf535cb419fafe
               </button>
             )}
 

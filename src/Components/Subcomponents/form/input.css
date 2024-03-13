@@ -7,3 +7,9 @@
   background-color: var(--filter);
   cursor: context-menu;
 }
+
+/* .ProjectFormInput input {
+  height: 9px;
+  border: 2px solid #e6e6e6;
+  border-radius: 6px;
+} */

@@ -13,23 +13,57 @@ const Myprojects = ({ script }) => {
   } catch {}
 
   return (
-    <div className="primarycontainer" style={{ flexDirection: "column" }}>
+    <div
+      className="primarycontainer"
+      style={{ flexDirection: "column", margin: "var(--padding-large) 0" }}
+    >
       <div
         style={{
-          fontSize: "2rem",
-          fontWeight: "700",
           color: "var(--green-30)",
+          padding: "var(--padding-main) 0",
+          fontWeight: "600",
+          display: "flex",
+          justifyContent: "space-between",
+          width: "100%",
         }}
       >
-        My Projects
-      </div>
-      <div>Projects Created by me</div>
-      <div
-        style={{ width: "100%", display: "flex", justifyContent: "flex-end" }}
-      >
-        <div className="primarybutton" style={{ width: "fit-content" }}>
-          <button onClick={() => navigate("/projects/create")}>
-            Create New Project +
+        <div>
+          <p
+            style={{
+              fontSize: "2rem",
+              fontWeight: "700",
+              color: "var(--green-30)",
+            }}
+          >
+            My Projects
+          </p>
+          <p>Projects Created by me</p>
+        </div>
+
+        <div>
+          <button
+            style={{
+              color: "var(--green-30)",
+              height: "100%",
+              background: "var(--green-110)",
+              padding: "0 var(--padding-light)",
+              borderRadius: "var(--border-radius-light)",
+              color: "white",
+              display: "flex",
+              alignItems: "center",
+              gap: "1rem",
+            }}
+            className="buttonText"
+            onClick={() => navigate("/projects/create")}
+          >
+            <span
+              style={{
+                fontSize: "40px",
+              }}
+            >
+              +
+            </span>
+            <p>Create New Project</p>
           </button>
         </div>
       </div>
@@ -38,11 +72,12 @@ const Myprojects = ({ script }) => {
       {projectsAvailable && (
         <div
           style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-around",
-            gap: "var(--padding-main)",
-            flexWrap: "wrap",
+            display: "grid",
+            gridTemplateColumns:
+              "repeat(auto-fill, minmax(var(--project-card-width), 1fr) )",
+            gap: "var(--padding-large)",
+            justifyItems: "center",
+            padding: script?.myprojects < 4 ? "0 var(--padding-large)" : "0px",
           }}
         >
           {script?.myprojects?.map((project, index) => (

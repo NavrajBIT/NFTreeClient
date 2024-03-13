@@ -72,14 +72,14 @@ const Myform = ({
       >
         <div
           style={{
-            textAlign: "center",
             fontSize: "1.5rem",
             fontWeight: "bold",
-            color: "var(--green-30)",
+            color: "var(--green-80)",
           }}
         >
           {heading}
         </div>
+        <hr />
         {formdata.map((inputGroup, index) => {
           return (
             <div
@@ -158,7 +158,15 @@ const Myform = ({
             </div>
           )}
           <div className="primarybutton">
-            <button type="submit" onClick={handleFormSubmit}>
+            <button
+              type="submit"
+              onClick={handleFormSubmit}
+              style={{
+                background: "var(--green-110)",
+                padding: "var(--padding-light) var(--padding-large)",
+                borderRadius: "10px",
+              }}
+            >
               {formButton}
             </button>
           </div>

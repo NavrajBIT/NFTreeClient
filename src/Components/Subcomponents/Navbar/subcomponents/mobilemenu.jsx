@@ -56,7 +56,7 @@ const MenuOptions = ({ setIsmenu }) => {
               navigate(navlinks[link]);
             }}
           >
-            {link}
+            <p> {link}</p>
           </div>
         ))}
         <div

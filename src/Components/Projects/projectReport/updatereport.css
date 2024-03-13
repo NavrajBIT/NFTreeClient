@@ -1,3 +1,5 @@
+<<<<<<< HEAD
+=======
 .updateReportFormContainer {
   width: 60%;
   min-height: var(--min-height-form);
@@ -17,10 +19,21 @@
   text-transform: uppercase;
 }
 
+>>>>>>> 0bf9333728cf8ef7c6a66aaf11cf535cb419fafe
 .reportField {
   display: grid;
   grid-template-columns: 1fr 1fr;
   align-items: center;
+<<<<<<< HEAD
+  padding: var(--padding-light);
+}
+
+@media screen and (max-width: 600px) {
+  .containerPadding {
+    padding: var(--padding-light) !important;
+  }
+}
+=======
   padding: 2px 0;
 }
 
@@ -73,3 +86,4 @@
     padding: 4rem 2rem;
   }
 }
+>>>>>>> 0bf9333728cf8ef7c6a66aaf11cf535cb419fafe

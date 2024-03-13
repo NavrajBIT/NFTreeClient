@@ -108,11 +108,58 @@ const Donate = () => {
     }
   };
 
-  const totalUSD = project?.donation ? project?.donation * trees : 0;
-  const totalSol =
-    exchangeRate && exchangeRate > 0 && project?.donation
-      ? parseFloat(totalUSD) / parseFloat(exchangeRate)
-      : 0;
+  const projectDonateFormData = [
+    [
+      {
+        type: "select",
+        label: "Invest in",
+        value: trees,
+        required: true,
+        onChange: (e) => setTrees(e.target.value),
+        placeholder: "Project Name",
+        options: [],
+      },
+      {
+        type: "select",
+        label: "Investment Token",
+        value: trees,
+        required: true,
+        onChange: (e) => setTrees(e.target.value),
+        options: [],
+        placeholder: "Select",
+      },
+      {
+        type: "number",
+        label: "Enter number of trees",
+        value: trees,
+        required: true,
+        onChange: (e) => setTrees(e.target.value),
+      },
+      {
+        type: "number",
+        label: "Total amount in selected token",
+        value: wallet.walletAddress,
+        onChange: (e) => setTrees(e.target.value),
+        placeholder: "Display Amount",
+      },
+      wallet.walletConnected && {
+        type: "text",
+        label: "Connected Wallet Address",
+        value: wallet.walletAddress,
+        onChange: (e) => setTrees(e.target.value),
+        placeholder: "Wallet Address",
+      },
+      wallet.walletConnected && {
+        type: "text",
+        label: "Connected Wallet Balance",
+        value: wallet.walletAddress,
+        onChange: (e) => setTrees(e.target.value),
+        placeholder: "Display Balance",
+      },
+    ],
+  ];
+
+  console.log(project);
 
   return (
     <div
@@ -252,6 +299,10 @@ const Donate = () => {
             /> */}
           </div>
 
+<<<<<<< HEAD
+          {/* <div style={{ color: "var(--error)" }}>{error}</div> */}
+=======
+>>>>>>> 0bf9333728cf8ef7c6a66aaf11cf535cb419fafe
           <div
             style={{
               display: "flex",
@@ -274,9 +325,105 @@ const Donate = () => {
             </button>
           </div>
         </form>
+<<<<<<< HEAD
+        {!wallet.walletInstalled && (
+          <div style={{ padding: "var(--padding-main)", color: "red" }}>
+            <p>
+              It seems Wallet is not Installed, Please Install{" "}
+              <span>
+                <a
+                  href="http://localhost:5173/wallet"
+                  style={{ textDecoration: "underline" }}
+                >
+                  BitWallet
+                </a>
+              </span>{" "}
+              to make any Investment
+            </p>
+          </div>
+        )}
+<<<<<<< HEAD
+        {/* {wallet.walletInstalled && !wallet.walletConnected && (
+          <div style={{ padding: "var(--padding-main)", color: "red" }}>
+            Please connect BitWallet to make the investment.
+            <div className="primarybutton">
+              <button onClick={() => wallet.connectWallet()}>Connect</button>
+            </div>
+          </div>
+        )} */}
+=======
+>>>>>>> 0bf9333728cf8ef7c6a66aaf11cf535cb419fafe
+=======
+>>>>>>> 90afaeffda289e03a467a116030ffa34676e2974
       </div>
     </div>
   );
+
+  // return (
+  //   <div
+  //     style={{
+  //       width: "100%",
+  //       display: "flex",
+  //       minHeight: "var(--min-height-page)",
+  //       alignItems: "center",
+  //       justifyContent: "center",
+  //       paddingTop: "var(--nav-height)",
+  //       flexDirection: "column",
+  //     }}
+  //   >
+  //     <Myform
+  //       heading={`${donationText} for ${project.name} (${project.donation}$/tree)`}
+  //       formButton={
+  //         totalValue > 0 ? `${donationText} ${totalValue}$` : `${donationText}`
+  //       }
+  //       close={() => {
+  //         navigate(-1);
+  //       }}
+  //       handleSubmit={() => wallet.transact(totalValue)}
+  //       formdata={[
+  //         [
+  //           {
+  //             type: "number",
+  //             label: "No of trees",
+  //             value: trees,
+  //             required: true,
+  //             onChange: (e) => setTrees(e.target.value),
+  //           },
+  //           {
+  //             type: "text",
+  //             label: "Wallet Address",
+  //             value: wallet.walletAddress,
+  //             required: true,
+  //           },
+  //         ],
+  //       ]}
+  //     />
+  //     {!wallet.walletInstalled && (
+  //       <div style={{ padding: "var(--padding-main)", color: "red" }}>
+  //         <p>
+  //           It seems Wallet is not Installed, Please Install{" "}
+  //           <span>
+  //             <a
+  //               href="http://localhost:5173/wallet"
+  //               style={{ textDecoration: "underline" }}
+  //             >
+  //               BitWallet
+  //             </a>
+  //           </span>{" "}
+  //           to make any Investment
+  //         </p>
+  //       </div>
+  //     )}
+  //     {wallet.walletInstalled && !wallet.walletConnected && (
+  //       <div style={{ padding: "var(--padding-main)", color: "red" }}>
+  //         Please connect BitWallet to make the investment.
+  //         <div className="primarybutton">
+  //           <button onClick={() => wallet.connectWallet()}>Connect</button>
+  //         </div>
+  //       </div>
+  //     )}
+  //   </div>
+  // );
 };
 
 export default Donate;

@@ -17,7 +17,8 @@ const Button = ({
       style={{ ...style }}
     >
       {startIcon && <img src={startIcon} alt={title} />}
-      {title}
+
+      <p style={{ width: "max-content" }}>{title}</p>
       {endIcon && <img src={endIcon} alt={title} />}
     </button>
   );

@@ -1,11 +1,10 @@
 .primarycontainer {
   width: 100%;
   max-width: var(--max-width);
-  background: white;
+
   border-radius: var(--border-radius);
-  padding: var(--padding-main);
+
   display: flex;
-  gap: var(--padding-light);
   position: relative;
   margin: var(--padding-main);
 }
@@ -24,9 +23,46 @@
   display: flex;
 }
 
+.orgInfo span {
+  font-weight: 700;
+}
+
+.orgInfo p {
+  padding: 3px;
+}
+
+@media only screen and (max-width: 800px) {
+  .myNftPage {
+    flex-direction: column;
+  }
+
+  .myNftPage > div:first-child {
+    text-align: center;
+  }
+}
+
 @media only screen and (max-width: 600px) {
   .primarycontainer {
-    flex-direction: column;
     align-items: center;
+  }
+  .profileDetails img {
+    width: var(--profile-pic-small) !important;
+    height: var(--profile-pic-small) !important;
+    /* margin-top: -70px !important; */
+  }
+
+  .buttonText p {
+    display: none;
+    align-content: space-evenly;
+  }
+}
+
+@media only screen and (max-width: 420px) {
+  .myNftPage {
+    padding: var(--padding-main) !important;
+  }
+
+  .myNftPage img {
+    width: 100% !important;
   }
 }
