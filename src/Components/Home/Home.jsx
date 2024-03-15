@@ -2,8 +2,7 @@ import About from "./About/About";
 
 import HeroSection from "./heroSection.jsx/heroSection";
 import "./Home.css";
-import Mission from "./mission/mission";
-
+import Mission from "./Mission/Mission";
 
 const Home = () => {
   return (

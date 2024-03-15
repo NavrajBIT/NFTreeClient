@@ -5,7 +5,7 @@ import { FaEdit } from "react-icons/fa";
 
 const ProjectDesc = ({ isOwnerView, details }) => {
   const imageref = useRef(null);
-  console.log(details);
+
   return (
     <div
       style={{

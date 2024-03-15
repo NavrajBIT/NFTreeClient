@@ -17,8 +17,6 @@ const ProjectOwnerDetails = ({ isOwnerView, details }) => {
     });
   }, [details]);
 
-  console.log(socialMedia);
-
   return (
     <div className="projectOwnerDetailsContainer">
       <div>
@@ -156,7 +154,6 @@ const ProjectOwnerDetails = ({ isOwnerView, details }) => {
                   border: "1px solid green",
                 }}
                 onError={(e) => {
-                  console.log(e);
                   e.target.src = "/userprofile.png";
                 }}
               />

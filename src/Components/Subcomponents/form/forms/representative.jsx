@@ -7,15 +7,18 @@ import userprofile from "./image/userprofile.png";
 import { GrLinkNext } from "react-icons/gr";
 import { GrFormNextLink } from "react-icons/gr";
 import "./forms.css";
+import { useAuth } from "../../../../Contexts/AuthContext";
 
 const Representative = ({ submit, data }) => {
   const api = useAPI();
+  const auth = useAuth();
   const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const [userData, setUserdata] = useState(null);
   const profilepicrref = useRef(null);
   const [NINError, setNINError] = useState("");
+  const [picError, setPicError] = useState("");
 
   useEffect(() => {
     poppulateUser();
@@ -125,11 +128,16 @@ const Representative = ({ submit, data }) => {
   const submitForm = async (e) => {
     e.preventDefault();
 
-    if (userData.nin_proof == null) {
+    if (userData.picture == null) {
+      setPicError("Upload profile pic");
+    } else if (userData.nin_proof == null) {
       setNINError("Upload NIN proof");
     } else {
       await handleSubmit();
+
       if (isComplete()) {
+        await auth.poppulateUserData();
+
         submit(userData);
       } else {
         setError("Please complete the form.");
@@ -271,23 +279,31 @@ const Representative = ({ submit, data }) => {
                 backgroundRepeat: "no-repeat",
                 backgroundPosition: "center",
               }}
-              onClick={() => profilepicrref.current.click()}
+              onClick={() => {
+                profilepicrref.current.click();
+              }}
             >
               <input
                 type="file"
                 style={{ display: "none" }}
                 ref={profilepicrref}
-                onChange={(e) => uploadFile(e.target.files[0], "picture")}
+                onChange={(e) => {
+                  uploadFile(e.target.files[0], "picture");
+                  setPicError("");
+                }}
               />
             </div>
             <br />
+
             <p
               style={{
-                fontWeight: "500",
+                fontWeight: "400",
                 marginBottom: "var(--padding-large)",
+                color: "red",
+                fontSize: "medium",
               }}
             >
-              {NINError}
+              {picError}
             </p>
           </div>
         </div>

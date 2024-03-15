@@ -1,4 +1,4 @@
-import "./mission.css";
+import "./Mission.css";
 import img1 from "../assets/cardimg1.png";
 import img2 from "../assets/cardimg2.png";
 import img3 from "../assets/cardimg3.png";
@@ -16,9 +16,9 @@ const Mission = () => {
         </div>
         <div className="missiondescription">
           At BitBhoomi, we're on a mission to redefine sustainability through
-          blockchain <br /> transparency and inclusivity. By tokenizing ownership, we
-          aim to <br /> democratize the ecosystem and foster positive change, thus
-          promoting a healthier planet.
+          blockchain <br /> transparency and inclusivity. By tokenizing
+          ownership, we aim to <br /> democratize the ecosystem and foster
+          positive change, thus promoting a healthier planet.
         </div>
       </div>
       <WhyBit />
@@ -33,20 +33,16 @@ const WhyBit = () => {
     <div className="whybitcontainer">
       <div className="whybitheading">Why BitBhoomi?</div>
       <div className="crouselMainContainer">
-          <CrouselContainer />
-          <div>
-            <img src="./GlobeImage.png" alt="global" className="globalimage"/>
-          </div>
+        <CrouselContainer />
+        <div>
+          <img src="./GlobeImage.png" alt="global" className="globalimage" />
+        </div>
       </div>
       <WhyBitCards />
       <GetStarted />
     </div>
   );
 };
-
-
-
-
 
 const CrouselContainer = () => {
   const [selectedcarousel, setSelectedCarousel] = useState(null);
