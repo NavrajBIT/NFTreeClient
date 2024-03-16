@@ -1,39 +1,32 @@
 import ProjectCard from "../../Subcomponents/projectCard/projectCard";
 import useAPI from "../../../api/useAPI";
 import { useState, useEffect } from "react";
-import "./profile.css"
+import "./profile.css";
 const MyContribution = ({ script }) => {
-  console.log(script)
+  console.log(script);
   return (
-    <div
-      className="myContributionDiv"
-    >
+    <div className="myContributionDiv">
       <div
         style={{
           display: "flex",
           justifyContent: "space-between",
-          alignItems: "center"
+          alignItems: "center",
         }}
       >
         <div>
-          <p
-            className="pTitle"
-
-          >
-            My Contributions
-          </p>
+          <p className="pTitle">My Contributions</p>
           {/* <p
             className="pPara"
           >
             Contributions made by you
           </p> */}
         </div>
-        <div>
+        {/* <div>
           <button className="profileButtons">
             <img src="./VectorPlus.svg" alt="Plus" />
             <span style={{}}>Make Contribution</span>
           </button>
-        </div>
+        </div> */}
       </div>
 
       <div className="projectCardDiv">
@@ -69,11 +62,11 @@ const Transaction = ({ transaction }) => {
   };
 
   if (!project) return null;
-  let project2 = project
-  project2.type = 2
+  let project2 = project;
+  project2.type = 2;
   return (
     // <div className="projectCardDiv">
-      <ProjectCard project={project2} transaction={transaction} />
+    <ProjectCard project={project2} transaction={transaction} />
     // </div>
   );
 };

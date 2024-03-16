@@ -16,6 +16,7 @@ const ProjectData = ({ submit, backStep, data }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [projectId, setProjectId] = useState();
   const [error, setError] = useState("");
+  const [docError, setDocError] = useState("");
 
   const changeValue = (key, value, index) => {
     setSpecies((prev) => {
@@ -81,6 +82,7 @@ const ProjectData = ({ submit, backStep, data }) => {
           })
         );
         await Promise.all(speciesRequests);
+
         const sendDoc = async (docFormData) => {
           await api.crud("POST", "project/docs/create", docFormData, true);
         };
@@ -106,10 +108,26 @@ const ProjectData = ({ submit, backStep, data }) => {
       speciesSum += parseInt(species[i].percentage);
     }
 
-    if (speciesSum == 100) {
-      handleSubmit();
-    } else {
+    const docValidation = () => {
+      for (let i in docs) {
+        if (docs[i].name || docs[i].file || docs[i].name === "") {
+          if ((!docs[i].name || docs[i].name === "") ^ !docs[i].file) {
+            return true;
+          }
+        }
+      }
+      return false;
+    };
+
+    if (speciesSum != 100) {
       setError("Species percentage sum should be 100");
+    } else if (docValidation()) {
+      setError("");
+      setDocError("name and file are required");
+    } else {
+      setError("");
+      setDocError("");
+      handleSubmit();
     }
   };
 
@@ -399,6 +417,13 @@ const ProjectData = ({ submit, backStep, data }) => {
               </div>
             </div>
           ))}
+          {docError ? (
+            <p style={{ color: "red", fontSize: "small", marginTop: "-15px" }}>
+              {docError}
+            </p>
+          ) : (
+            ""
+          )}
 
           <div
             className="secondarybutton"

@@ -4,6 +4,8 @@ import { useRef, useState, useEffect } from "react";
 import Input from "../../../Subcomponents/form/inputnew";
 
 const ProjectDocument = ({ isOwnerView, details }) => {
+  const API_URL = import.meta.env.VITE_BACKEND_URL;
+
   const [seeMore, setSeeMore] = useState(false);
   const [docPopUp, setDocPopUp] = useState(false);
   const [doc, setDoc] = useState({ name: "", file: "" });
@@ -15,6 +17,10 @@ const ProjectDocument = ({ isOwnerView, details }) => {
       document.body.style.overflow = "hidden";
     }
   }, [docPopUp]);
+
+  useEffect(() => {
+    details.poppulateProjectDocs();
+  }, []);
 
   const handleUpload = async () => {
     if (doc.name == "" || doc.file == "") {
@@ -56,9 +62,16 @@ const ProjectDocument = ({ isOwnerView, details }) => {
           doc={details?.project?.land_reg_proof}
           name={"land Reg proof"}
         />
+        <ProjectDocumentBox
+          doc={
+            API_URL.split("api")[0] +
+            details?.project?.owner.representative.nin_proof
+          }
+          name={"nin proof"}
+        />
         {details?.projectDocs?.map(
           (doc, index) =>
-            (index < 3 || seeMore) && (
+            (index < 2 || seeMore) && (
               <ProjectDocumentBox
                 doc={doc.file}
                 key={`project-doc-${index}`}
@@ -67,7 +80,7 @@ const ProjectDocument = ({ isOwnerView, details }) => {
             )
         )}
       </div>
-      {details?.projectDocs?.length >= 4 && (
+      {details?.projectDocs?.length >= 3 && (
         <span
           style={{
             fontWeight: "500",

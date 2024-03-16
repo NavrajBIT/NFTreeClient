@@ -55,8 +55,6 @@ const usedetails = (projectId, notMyProject) => {
     await api
       .crud("GET", `project/${projectId}/specie_images`)
       .then((res) => {
-        console.log("----------------------");
-        console.log(res);
         if (res.status === 200) {
           setPlantImages(res);
         }
@@ -306,6 +304,7 @@ const usedetails = (projectId, notMyProject) => {
     updateProjectPopup,
     setUpdateProjectPopup,
     updateProject,
+    poppulateProjectDocs,
   };
 };
 

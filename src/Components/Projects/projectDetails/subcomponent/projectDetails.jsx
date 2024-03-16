@@ -4,6 +4,7 @@ import ProjectPageButton from "./projectButton";
 import { useNavigate } from "react-router-dom";
 const ProjectDetails = ({ isOwnerView, details }) => {
   const navigate = useNavigate();
+
   return (
     <div style={{ padding: "5%" }}>
       <h1 className="projectHeading">Project Details</h1>
@@ -34,6 +35,12 @@ const ProjectDetails = ({ isOwnerView, details }) => {
                 : "Investment & Monitoring"
             }
           />
+          {details?.project?.type == 3 && (
+            <LabelValueBox
+              label="Investment Type"
+              value={details?.project?.investment_type}
+            />
+          )}
           <LabelValueBox
             label="Total Plantation Area (hect.)"
             value={details?.project?.area}
