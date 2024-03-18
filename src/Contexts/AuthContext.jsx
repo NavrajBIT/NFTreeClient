@@ -49,6 +49,7 @@ export function AuthProvider(props) {
     isLoggedIn,
     setIsLoggedIn,
     logout,
+    poppulateUserData,
   };
 
   return (

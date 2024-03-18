@@ -50,7 +50,8 @@ const BioChart1 = () => {
   const options = {
     plugins: {
       datalabels: {
-        color: '#fff',
+        color: '#000',
+        fontWeight: 16,
         formatter: (value, context) => {
           return  value + '%';
         }

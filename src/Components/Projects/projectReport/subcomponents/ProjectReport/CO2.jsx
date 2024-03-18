@@ -5,7 +5,7 @@ import ChartDataLabels from 'chartjs-plugin-datalabels';
 import "./Charts.css"
 
 
-const CO2 = () => {
+const CO2 = ({co2Value}) => {
   const [projectReportData, setProjectReportData] = useState({})
   const API_URL = import.meta.env.VITE_BACKEND_URL;
   const location = useLocation();
@@ -52,13 +52,14 @@ const CO2 = () => {
     labels: [''],
     datasets: [
       {
-        data: [25],
+        data: [1],
         backgroundColor: ["#436850", "#99BC85"],
         borderWidth: 0,
       },
     ],
   };
 
+  let i = 0
   const options = {
     // plugins: {
     //   datalabels: {
@@ -88,14 +89,14 @@ const CO2 = () => {
     events: [],
     cutoutPercentage: 70,
     // rotation: -Math.PI * 28.65 //first part to be in left side
-    rotation : -Math.PI * 57.5
+    // rotation : -Math.PI * 57.5
   };
 
 
   return (
     <div style={centerIconContainerStyle}>
       <Doughnut data={data} plugins={[ChartDataLabels]} options={options} />
-      <h4 className="centerText" style={centerIconStyle}>{qData_co2[0]} kg Co2 <br></br> Removal</h4>
+      <h4 className="centerText" style={centerIconStyle}>{co2Value} kg Co2 <br></br> Removal</h4>
       {/* {startDate.map((date, index) => (
         <div key={index} className="dates">
           <p>{startDate[index]} to {endDate[index]}</p>

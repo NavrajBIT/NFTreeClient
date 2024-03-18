@@ -6,7 +6,7 @@ import "./Charts.css"
 
 
 
-const CarbonChart = () => {
+const CarbonChart = ({carbonValue}) => {
   const [projectReportData, setProjectReportData] = useState({})
   const API_URL = import.meta.env.VITE_BACKEND_URL;
   const location = useLocation();
@@ -92,7 +92,7 @@ const CarbonChart = () => {
   return (
     <div style={centerIconContainerStyle}>
       <Doughnut data={data} plugins={[ChartDataLabels]} options={options} />
-      <h4 className="centerText" style={centerIconStyle}>{qData_carbon[0]} kg/ha</h4>
+      <h4 className="centerText" style={centerIconStyle}>{carbonValue} kg/ha</h4>
       {/* <p className="dates-carbon">{startDate[0]} To {endDate[0]}</p> */}
     </div>
   );

@@ -28,7 +28,7 @@ const PlantImages = ({ isOwnerView, details }) => {
         <ProjectPageButton
           text={" View Report"}
           icon={"/ViewReportIcon.png"}
-          onClick={() => navigate(`/projects/${details?.projectId}/report`)}
+          onClick={() => navigate(`/projects/${details?.projectId}/Duration`)}
         />
         {details?.project?.type === 3 && (
           <ProjectPageButton

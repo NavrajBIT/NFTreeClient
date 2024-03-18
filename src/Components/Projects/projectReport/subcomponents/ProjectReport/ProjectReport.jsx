@@ -13,13 +13,12 @@ import { useLocation } from "react-router-dom";
 import useAPI from "../../../../../api/useAPI";
 import html2canvas from "html2canvas";
 import QRCode from "react-qr-code";
+import { useParams } from "react-router-dom";
 
 const ProjectReport = () => {
   const API_URL = import.meta.env.VITE_BACKEND_URL;
-  const [projectReportData, setProjectReportData] = useState({}); // Initialize with an empty object
-  const species = projectReportData.species || []; // Use empty array if species is undefined
-  // const speciesType = species.map(item => item.plant);
-  // const speciesData = species.map(item => item.percentage);
+  const [projectReportData, setProjectReportData] = useState({});
+  const species = projectReportData.species || [];
   const location = useLocation();
   const path = location.pathname;
   const paths = path.split("/");
@@ -28,18 +27,21 @@ const ProjectReport = () => {
   const qDataCar = projectReportData.co2_sequestration || [];
   const carStartDate = qDataCar.map((item) => item.start_date);
   const carEndDate = qDataCar.map((item) => item.end_date);
-  const startDateCo2 = qDataCo2.map((item) => item.start_date);
-  const endDateCo2 = qDataCo2.map((item) => item.end_date);
-  // console.log(speciesType);
+  // const startDateCo2 = qDataCo2.map((item) => item.start_date);
+  // const endDateCo2 = qDataCo2.map((item) => item.end_date);
+  const comparingDates = `${carStartDate} to ${carEndDate}`
   const contentRef = useRef(null);
   const [isLoading, setIsLoading] = useState(false);
   const api = useAPI();
+  const queryParams = new URLSearchParams(location.search); 
+  const selectedDuration = queryParams.get('duration');
+  const [carbonValue, setCarbonValue] = useState(null);
+  const [co2Value, setCo2Value] = useState(null);
+
 
   const fetchReportData = async () => {
     try {
-      const response = await fetch(
-        `${API_URL}project/project-report/${projectId}/`
-      );
+      const response = await fetch(`${API_URL}project/project-report/${projectId}/`);
       const res = await response.json();
       setProjectReportData(res[0]);
       console.log(res);
@@ -51,6 +53,58 @@ const ProjectReport = () => {
   useEffect(() => {
     fetchReportData();
   }, []);
+
+  useEffect(() => {
+    if (!selectedDuration) return;
+    const [startDate, endDate] = selectedDuration.split(" to ");
+    const startDateObj = new Date(startDate);
+    const endDateObj = new Date(endDate);
+  
+    for (let i = 0; i < qDataCar.length; i++) {
+      const item = qDataCar[i];
+      const itemStartDate = new Date(item.start_date);
+      const itemEndDate = new Date(item.end_date);
+  
+  
+      if (
+        itemStartDate >= startDateObj &&
+        itemEndDate <= endDateObj
+      ) {
+      
+        const carbonValue = item.co2_sequestered;
+        setCarbonValue(carbonValue)
+        console.log("Carbon value:", carbonValue);
+        break; 
+      }
+    }
+  }, [selectedDuration, qDataCar]);
+  
+  useEffect(() => {
+    if (!selectedDuration) return; 
+    const [startDate, endDate] = selectedDuration.split(" to ");
+    const startDateObj = new Date(startDate);
+    const endDateObj = new Date(endDate);
+  
+    // Iterate through qDataCar
+    for (let i = 0; i < qDataCo2.length; i++) {
+      const item = qDataCo2[i];
+      const itemStartDate = new Date(item.start_date);
+      const itemEndDate = new Date(item.end_date);
+  
+      
+      if (
+        itemStartDate >= startDateObj &&
+        itemEndDate <= endDateObj
+      ) {
+    
+        const co2Value = item.co2_equivalent;
+        setCo2Value(co2Value)
+        console.log("CO2 value:", co2Value);
+        break;
+      }
+    }
+  }, [selectedDuration, qDataCo2]);
+
 
   const sendReport = async () => {
     setIsLoading(true);
@@ -111,7 +165,9 @@ const ProjectReport = () => {
             justifyContent: "space-between",
           }}
         >
-          <p className="projectRT">Project report</p>
+          <p className="projectRT">Project report <span className="dates-carbon">
+                 {selectedDuration}
+            </span></p>
           {true && (
             <div className="reportButton">
               {/* <button>
@@ -217,14 +273,14 @@ const ProjectReport = () => {
                       <th>SPECIES</th>
                       <th>AGE</th>
                       <th>TYPES OF VEGETATION</th>
-                      <th>ESTIMATED 20 Tr.GRG REMGAL RATE</th>
+                      <th>ESTIMATED 20 Tr.GHG REMOVAL RATE</th>
                     </tr>
                   </thead>
                   <tbody>
                     {species.map((element, index) => (
                       <tr key={index}>
                         <td>{element.plant}</td>
-                        <td>{element.age}</td>
+                        <td>{projectReportData.project_age}</td>
                         <td>{element.species_type}</td>
                         <td>{element.ghg_removal_rate}</td>
                       </tr>
@@ -238,14 +294,14 @@ const ProjectReport = () => {
           <div className="GridBox">
             <div className="gridBoxHeading">
               <h2>Carbon Sequestration</h2>
-              <p className="dates-carbon">
+              {/* <p className="dates-carbon">
                 {carStartDate[0]} To {carEndDate[0]}
-              </p>
+              </p> */}
             </div>
 
             <div className="gridBoxContent">
               <div style={{ width: "100%" }}>
-                <CarbonChart />
+                <CarbonChart carbonValue={carbonValue} />
               </div>
             </div>
           </div>
@@ -253,14 +309,14 @@ const ProjectReport = () => {
           <div className="GridBox">
             <div className="gridBoxHeading">
               <h2>CO2 Equivalent</h2>
-              <p className="dates-co2">
+              {/* <p className="dates-co2">
                 {startDateCo2[0]} To {endDateCo2[0]}
-              </p>
+              </p> */}
             </div>
 
             <div className="gridBoxContent">
               <div style={{ width: "90%" }}>
-                <CO2 />
+                <CO2 co2Value={co2Value}/>
               </div>
             </div>
           </div>

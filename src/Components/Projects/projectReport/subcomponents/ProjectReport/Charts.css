@@ -1,36 +1,143 @@
-.labels{
+.labels {
     display: flex;
     flex-direction: column;
     background-color: #fff;
     color: #000;
 }
 
-.apexcharts-legend.apx-legend-position-right{
+.apexcharts-legend.apx-legend-position-right {
     display: none;
 }
 
-.biochart{
+.biochart {
     display: flex;
 }
 
-.centerText{
+.centerText {
     font-size: 18px;
     font-weight: 600;
     text-align: center;
 }
 
-.dates-carbon, .dates-co2{
+.dates-carbon,
+.dates-co2 {
     margin-top: 1rem;
     font-size: 14px;
     font-weight: 800;
-    position: absolute;
+    /* position: absolute; */
     color: green;
+    /* align-items: center; */
 }
 
+.Ddates h3{
+    font-size: 24px;
+    font-weight: 600;
 
-@media only screen and (max-width: 768px) {
-    .dates-carbon, .dates-co2{
+}
+
+.duration{
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background: linear-gradient(240.41deg, #295017 -2.58%, #E1F0DA 100.43%);
+    padding-top: 8rem;
+    padding-bottom: 4rem;
+}
+.durationBox{
+    display: flex;
+    flex-direction: column;
+    border-radius: 40px;
+    width: 80vw;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    background: linear-gradient(253.85deg, #D6FFC9 1.63%, #FFFFFF 99.06%);
+}
+.Ddates{
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    align-items: center;
+}
+.wrapper{
+    position: relative;
+}
+.wrapper select{
+    padding: 1rem 3rem 1rem 2rem;
+    /* border-radius: 16px; */
+    border: none;
+    background-color: #BCE0AA;
+    appearance: none;
+    overflow: auto;
+    font-size: 14px;
+    font-weight: 700;
+}
+ option{
+    background-color: #E3FFD6;
+    border: none;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 1rem;
+}
+
+.wrapper::after {
+    content: '\25BC'; /* Unicode for down arrow */
+    font-size: 12px;
+    position: absolute;
+    top: 0;
+    right: 15px;
+    pointer-events: none;
+    /* background-color: #BCE0AA; */
+    padding: 1rem 0rem 1rem 0rem;
+  }
+
+.getReport{
+    margin-top: 8rem;
+}
+.getReport button{
+    color: #000;
+    width: 310px;
+    height: 66px;
+    border-radius: 17px;
+    font-size: 20px;
+    font-weight: 600;
+    background: #BCE0AA;
+    cursor: pointer;
+}
+
+@media only screen and (min-width: 1200px) and (max-width: 1400px) {
+    .biochart {
+        width: 12dvw;
+    }
+}
+
+@media only screen and (min-width: 1401px) {
+.biochart{
+    width: 100%;
+}
+}
+
+@media only screen and (max-width: 800px) {
+
+    .dates-carbon,
+    .dates-co2 {
         font-size: 12px !important;
+        display: flex;
         margin-top: 0;
     }
+
+    .Ddates h3{
+        font-size: 18px;
+    }
+    .Ddates{
+        flex-direction: column;
+    }
+
+    .getReport button{
+        width: 180px;
+        height: 60px;
+    }
+
 }
