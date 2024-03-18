@@ -111,7 +111,10 @@ const ProjectData = ({ submit, backStep, data }) => {
     const docValidation = () => {
       for (let i in docs) {
         if (docs[i].name || docs[i].file) {
-          if ((docs[i].name == undefined) ^ (docs[i].file == null)) {
+          if (
+            (docs[i].name == undefined || docs[i].name == "") ^
+            (docs[i].file == null)
+          ) {
             return true;
           }
         }
@@ -202,7 +205,8 @@ const ProjectData = ({ submit, backStep, data }) => {
                 <Input
                   inputData={{
                     placeholder: "Percentage",
-                    type: "number",
+                    type: "text",
+                    onlyNumber: true,
                     required: true,
                     value: type["percentage"],
                     onChange: (e) =>
