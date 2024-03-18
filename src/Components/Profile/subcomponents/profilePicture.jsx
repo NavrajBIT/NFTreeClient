@@ -15,8 +15,8 @@ const ProfilePicture = ({ script }) => {
             <p className="PName">
               {script?.user?.first_name} {script?.user?.last_name}
             </p>
-            <p className="PDesignation">{script?.account?.designation}</p>
-            <p className="PEmail">{script?.user?.email}</p>
+            {/* <p className="PDesignation">{script?.account?.designation}</p>
+            <p className="PEmail">{script?.user?.email}</p> */}
           </div>
         </div>
       </div>
