@@ -12,7 +12,7 @@ const Project = ({ submit, backStep, data }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const [project, setproject] = useState({
-    type: 1,
+    type: 3,
     investment_type: "Carbon Credits",
     name: "",
     description: "",
@@ -34,8 +34,12 @@ const Project = ({ submit, backStep, data }) => {
     phase: 1,
   });
 
+  const isProjectDetailEmpty = (keys) => {
+    return Object.keys(keys).length === 0;
+  };
+
   useEffect(() => {
-    data.projectDetail != {} && setproject(data.projectDetail);
+    !isProjectDetailEmpty(data.projectDetail) && setproject(data.projectDetail);
   }, [data.projectDetail]);
 
   const changeValue = (key, value) => {
@@ -47,14 +51,14 @@ const Project = ({ submit, backStep, data }) => {
   };
 
   const typeOptions = [
-    {
-      label: "Monitoring & Reporting",
-      value: 1,
-    },
-    {
-      label: "Funding and Monitoring",
-      value: 2,
-    },
+    // {
+    //   label: "Monitoring & Reporting",
+    //   value: 1,
+    // },
+    // {
+    //   label: "Funding and Monitoring",
+    //   value: 2,
+    // },
     {
       label: "Investment",
       value: 3,
@@ -102,7 +106,7 @@ const Project = ({ submit, backStep, data }) => {
     }
 
     if (project["type"] == null) {
-      project["type"] = "1";
+      project["type"] = "3";
     }
 
     if (project["phase"] == null) {
