@@ -17,6 +17,7 @@ const Sidebar = ({ filters, setFilters, data, isMobile }) => {
 
   const typefilterOptions = ["Monitoring", "Donation", "Investment"];
   const investmentTypeList = [];
+  const status = ["In Progress", "Completed"];
   const cityList = [];
   const countryList = [];
   data.map((project) => {
@@ -104,6 +105,43 @@ const Sidebar = ({ filters, setFilters, data, isMobile }) => {
     );
   };
 
+  const StatusFilter = ({ index }) => {
+    const [isChecked, setIsChecked] = useState(true);
+    useEffect(() => {
+      filters.map((filter) => {
+        if (filter.type === "status" && filter.value === index + 1) {
+          setIsChecked(false);
+        }
+      });
+    }, []);
+    const applyFilter = () => {
+      setFilters((prevFilters) => {
+        let newFilters = [...prevFilters];
+        let filtervalue = {
+          type: "status",
+          value: index + 1,
+        };
+        if (isChecked) {
+          newFilters.push(filtervalue);
+        } else {
+          newFilters.splice(newFilters.indexOf(filtervalue), 1);
+        }
+        return newFilters;
+      });
+    };
+    return (
+      <div className="filterrow">
+        <input
+          type="checkbox"
+          id={"type" + "-filter-" + index}
+          checked={isChecked}
+          onChange={applyFilter}
+        />
+        <label htmlFor={"type" + "-filter-" + index}>{status[index]}</label>
+      </div>
+    );
+  };
+
   const mobileStyle = !isMobile
     ? {}
     : {
@@ -149,6 +187,15 @@ const Sidebar = ({ filters, setFilters, data, isMobile }) => {
         )}
         Filter
       </div>
+
+      <div className="singlefiltercontainer">
+        <div style={{ fontSize: "18px", fontWeight: "700" }}>Status</div>
+
+        {status.map((type, index) => (
+          <StatusFilter index={index} key={"type-filter-" + index} />
+        ))}
+      </div>
+
       <div className="singlefiltercontainer">
         <div style={{ fontSize: "18px", fontWeight: "700" }}>Project Type</div>
         {typefilterOptions.map((type, index) => (

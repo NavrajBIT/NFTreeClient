@@ -1,7 +1,7 @@
 .projectCard {
   width: 100%;
   max-width: 320px;
-  background-color: #F6F6F6;
+  background-color: #f6f6f6;
   padding: var(--padding-light);
   border-radius: var(--border-radius-light);
   border: 2px solid var(--green-30);
@@ -50,13 +50,14 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-size: 16px;
+  font-size: 10px;
   color: #056060;
+  letter-spacing: 1px;
   font-weight: 600;
 }
 .projectCard .projecttags img {
-  height: 30px;
-  width: 30px;
+  height: 20px;
+  width: 20px;
 }
 .projectCard .clickhandler {
   background-color: transparent;
@@ -67,33 +68,26 @@
   width: 100%;
 }
 
-@media only screen and (max-width : 800px) {
-  .projectCard{
+@media only screen and (max-width: 800px) {
+  .projectCard {
     gap: 0.2rem;
     height: 263px;
     width: 190px;
   }
-  .projectCard img{
+  .projectCard img {
     height: 98px;
     width: 175px;
     /* object-fit: contain; */
   }
-  .projectCard .projectname{
+  .projectCard .projectname {
     font-size: 16px;
   }
-  .projectCard .projectlocation{
+  .projectCard .projectlocation {
     margin-bottom: 1rem;
     font-size: 12px;
   }
-  .projectCard .projectdescription{
+  .projectCard .projectdescription {
     font-size: 10px;
     height: 50px;
   }
-  .projectCard .projecttags{
-    font-size: 14px;
-  }
-.projectCard .projecttags img {
-  height: 18px;
-  width: 18px;
-}
 }

@@ -22,7 +22,20 @@ const ProjectCard = ({
   return (
     <div className="projectCard" onClick={() => navigate(navLink)}>
       <img src={project.image} alt={project.name} />
-      <div className="projectname">{project.name}</div>
+      <div>
+        <div className="projecttags">
+          {project.type == 1 && "Monitoring"}
+          {project.type == 2 && "Donation"}
+          {transaction &&
+            project.type == 2 &&
+            `Contibution : ${transaction?.amount}$`}
+          {project.type == 3 && "Investment"}
+          {project.type === 1 && <img src={monitoringtag} alt="" />}
+          {project.type === 2 && <img src={donationtag} alt="" />}
+          {project.type === 3 && <img src={investmenttag} alt="" />}
+        </div>
+        <div className="projectname">{project.name}</div>
+      </div>
       <div className="projectlocation">
         {project.city}.{project.country}
       </div>
@@ -30,17 +43,16 @@ const ProjectCard = ({
         <div className="projectdescription">{project.description}</div>
         <div className="readmore">Read More</div>
       </div>
-      <div className="projecttags">
-        {project.type == 1 && "Monitoring"}
-        {project.type == 2 && "Donation"}
-        {transaction &&
-          project.type == 2 &&
-          `Contibution : ${transaction?.amount}$`}
-        {project.type == 3 && "Investment"}
-        {project.type === 1 && <img src={monitoringtag} alt="" />}
-        {project.type === 2 && <img src={donationtag} alt="" />}
-        {project.type === 3 && <img src={investmenttag} alt="" />}
-      </div>
+      {project.type == 3 && (
+        <div className="projectlocation">
+          Status:&bull;{" "}
+          {project.funding.raised >= project.funding.total ? (
+            <span style={{ color: "rgba(209, 26, 42, 1)" }}>Completed</span>
+          ) : (
+            <span style={{ color: "rgba(18, 147, 46, 1)" }}>In Progress</span>
+          )}
+        </div>
+      )}
     </div>
   );
 };
