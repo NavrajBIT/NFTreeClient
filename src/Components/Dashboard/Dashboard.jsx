@@ -3,65 +3,73 @@ import "./dashboard.css";
 
 function Dashboard() {
   return (
-    <div
-      style={{
-        minHeight: "100vh",
-        backgroundImage: "linear-gradient(180deg, #0E1213 38%, #08370D 100%)",
-        display: "flex",
-      }}
-      className="DashboardContainer"
-    >
-      <div
-        style={{
-          width: "90%",
-          margin: "auto",
-          display: "flex",
-          flexDirection: "column",
-          gap: "var(--padding-main)",
-          maxWidth: "1163px",
-          padding: "var(--nav-height) 0",
-        }}
-      >
-        <div style={{ marginTop: "var(--padding-main)" }}>
-          <h1>BitBhoomi Dashboard</h1>
-        </div>
-        <div
-          style={{
-            border: "1px solid white",
-            borderRadius: "var(--border-radius)",
-            background: "rgba(255, 255, 255, 0.1)",
-            padding: "2vw 15px",
-          }}
-        >
-          <div
-            style={{ display: "flex", justifyContent: "space-around" }}
-            className="dashboardFlexBox"
-          >
-            <div className="dashboardBox">
-              <h2>23424</h2>
-              <p>Total Number of trees planted</p>
+    <div className="DashboardContainer">
+      <h1 className="dashboardTitle">BitBhoomi Dashboard</h1>
+      <div className="dashboards">
+        <div className="climateImpact">
+          <div>
+            <h2 className="climateTitle">Climate Impact</h2>
+          </div>
+          <div className="cboxes">
+            <div className="cBox">
+              <h1>23424</h1>
+              <p>Total Number of Trees Planted</p>
             </div>
-            <div className="dashboardBox">
-              <h2>5463</h2>
+            <div className="cBox">
+              <h1>5463</h1>
               <p>Total Carbon Sequestered</p>
             </div>
-            <div className="dashboardBox">
-              <h2>342</h2>
+          </div>
+          <div className="cboxes">
+            <div className="cBox">
+              <h1>342</h1>
               <p>Total Green Cover Created (in ha)</p>
             </div>
-          </div>
-
-          <div
-            style={{ display: "flex", justifyContent: "space-evenly" }}
-            className="dashboardFlexBox"
-          >
-            <div className="dashboardBox">
-              <h2>12</h2>
-              <p>Variety of species planted</p>
+            <div className="cBox">
+              <h1>12</h1>
+              <p>Variety of Species Planted</p>
             </div>
-            <div className="dashboardBox">
-              <h2>4563</h2>
-              <p>Cummulative projection value or GHG Removal</p>
+          </div>
+          <div className="cboxes">
+            <div className="cBox">
+              <h1>4563</h1>
+              <p>Cummulative Projection Value Of GHG Removal</p>
+            </div>
+          </div>
+        </div>
+        <div className="impactDetails">
+          <div className="tokenization">
+            <div>
+            <h2 className="tokenTitle">Tokenization Impact</h2>
+            </div>
+            <div className="tboxes">
+              <div className="tBox">
+                <h1>25</h1>
+                <p>Total Tokenized Trees</p>
+              </div>
+              <div className="tBox">
+                <h1>$124</h1>
+                <p>Total Tokenized Value</p>
+              </div>
+            </div>
+          </div>
+          <div className="bhoomiToken">
+            <div>
+            <h2 className="bhoomiTitle">Bhoomi Token Details</h2>
+            </div>
+            <div className="bboxes">
+              <div className="bBox">
+                <h1>100,000,00</h1>
+                <p>Total Supply</p>
+              </div>
+              <div className="bBox">
+                <h1>100,000,00</h1>
+                <p>Circulating Supply</p>
+              </div>
+              <div className="bBox">
+                <h1>$0.10</h1>
+                <p>$BHOOMI Price</p>
+              </div>
             </div>
           </div>
         </div>

@@ -5,7 +5,7 @@ import CO2 from "./CO2";
 import CarbonChart from "./CarbonChart";
 // import CarbonCopy from "./CarbonCopy"
 import "./ProjectReport.css";
-import "./charts.css";
+import "./Charts.css";
 import { HiMiniShare } from "react-icons/hi2";
 import { MdEdit } from "react-icons/md";
 import { elements } from "chart.js";
@@ -29,19 +29,20 @@ const ProjectReport = () => {
   const carEndDate = qDataCar.map((item) => item.end_date);
   // const startDateCo2 = qDataCo2.map((item) => item.start_date);
   // const endDateCo2 = qDataCo2.map((item) => item.end_date);
-  const comparingDates = `${carStartDate} to ${carEndDate}`
+  const comparingDates = `${carStartDate} to ${carEndDate}`;
   const contentRef = useRef(null);
   const [isLoading, setIsLoading] = useState(false);
   const api = useAPI();
-  const queryParams = new URLSearchParams(location.search); 
-  const selectedDuration = queryParams.get('duration');
+  const queryParams = new URLSearchParams(location.search);
+  const selectedDuration = queryParams.get("duration");
   const [carbonValue, setCarbonValue] = useState(null);
   const [co2Value, setCo2Value] = useState(null);
 
-
   const fetchReportData = async () => {
     try {
-      const response = await fetch(`${API_URL}project/project-report/${projectId}/`);
+      const response = await fetch(
+        `${API_URL}project/project-report/${projectId}/`
+      );
       const res = await response.json();
       setProjectReportData(res[0]);
       console.log(res);
@@ -59,52 +60,41 @@ const ProjectReport = () => {
     const [startDate, endDate] = selectedDuration.split(" to ");
     const startDateObj = new Date(startDate);
     const endDateObj = new Date(endDate);
-  
+
     for (let i = 0; i < qDataCar.length; i++) {
       const item = qDataCar[i];
       const itemStartDate = new Date(item.start_date);
       const itemEndDate = new Date(item.end_date);
-  
-  
-      if (
-        itemStartDate >= startDateObj &&
-        itemEndDate <= endDateObj
-      ) {
-      
+
+      if (itemStartDate >= startDateObj && itemEndDate <= endDateObj) {
         const carbonValue = item.co2_sequestered;
-        setCarbonValue(carbonValue)
+        setCarbonValue(carbonValue);
         console.log("Carbon value:", carbonValue);
-        break; 
+        break;
       }
     }
   }, [selectedDuration, qDataCar]);
-  
+
   useEffect(() => {
-    if (!selectedDuration) return; 
+    if (!selectedDuration) return;
     const [startDate, endDate] = selectedDuration.split(" to ");
     const startDateObj = new Date(startDate);
     const endDateObj = new Date(endDate);
-  
+
     // Iterate through qDataCar
     for (let i = 0; i < qDataCo2.length; i++) {
       const item = qDataCo2[i];
       const itemStartDate = new Date(item.start_date);
       const itemEndDate = new Date(item.end_date);
-  
-      
-      if (
-        itemStartDate >= startDateObj &&
-        itemEndDate <= endDateObj
-      ) {
-    
+
+      if (itemStartDate >= startDateObj && itemEndDate <= endDateObj) {
         const co2Value = item.co2_equivalent;
-        setCo2Value(co2Value)
+        setCo2Value(co2Value);
         console.log("CO2 value:", co2Value);
         break;
       }
     }
   }, [selectedDuration, qDataCo2]);
-
 
   const sendReport = async () => {
     setIsLoading(true);
@@ -165,9 +155,10 @@ const ProjectReport = () => {
             justifyContent: "space-between",
           }}
         >
-          <p className="projectRT">Project report <span className="dates-carbon">
-                 {selectedDuration}
-            </span></p>
+          <p className="projectRT">
+            Project report{" "}
+            <span className="dates-carbon">{selectedDuration}</span>
+          </p>
           {true && (
             <div className="reportButton">
               {/* <button>
@@ -316,7 +307,7 @@ const ProjectReport = () => {
 
             <div className="gridBoxContent">
               <div style={{ width: "90%" }}>
-                <CO2 co2Value={co2Value}/>
+                <CO2 co2Value={co2Value} />
               </div>
             </div>
           </div>
