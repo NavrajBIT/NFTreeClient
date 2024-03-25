@@ -62,7 +62,7 @@ const MenuOptions = ({ setIsmenu }) => {
         <div
           className="sidebarlink"
           onClick={() => {
-            window.open("https://bitbhoomiido.onrender.com/");
+            window.open("https://bitbhoomiido.tech/");
           }}
         >
           IDO

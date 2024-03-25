@@ -69,7 +69,7 @@ const NavContent = () => {
           ))}
           <div
             className="navlink"
-            onClick={() => window.open("https://bitbhoomiido.onrender.com/")}
+            onClick={() => window.open("https://bitbhoomiido.tech/")}
           >
             IDO
           </div>
