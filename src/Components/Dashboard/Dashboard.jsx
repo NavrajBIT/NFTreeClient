@@ -1,7 +1,18 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./dashboard.css";
+import { getTokenSupplyData } from "../../Contexts/walletContext";
 
 function Dashboard() {
+  const [circulatingToken, setCirculatingToken] = useState(100000000);
+
+  useEffect(() => {
+    async function getToken() {
+      return getTokenSupplyData().then((value) => {
+        setCirculatingToken((circulatingToken - value / 10 ** 9).toFixed(2));
+      });
+    }
+    getToken();
+  }, []);
   return (
     <div className="DashboardContainer">
       <h1 className="dashboardTitle">BitBhoomi Dashboard</h1>
@@ -40,7 +51,7 @@ function Dashboard() {
         <div className="impactDetails">
           <div className="tokenization">
             <div>
-            <h2 className="tokenTitle">Tokenization Impact</h2>
+              <h2 className="tokenTitle">Tokenization Impact</h2>
             </div>
             <div className="tboxes">
               <div className="tBox">
@@ -55,15 +66,15 @@ function Dashboard() {
           </div>
           <div className="bhoomiToken">
             <div>
-            <h2 className="bhoomiTitle">Bhoomi Token Details</h2>
+              <h2 className="bhoomiTitle">Bhoomi Token Details</h2>
             </div>
             <div className="bboxes">
               <div className="bBox">
-                <h1>100,000,00</h1>
+                <h1>100,000,000</h1>
                 <p>Total Supply</p>
               </div>
               <div className="bBox">
-                <h1>100,000,00</h1>
+                <h1>{circulatingToken}</h1>
                 <p>Circulating Supply</p>
               </div>
               <div className="bBox">
