@@ -6,64 +6,41 @@ import Input from "../inputnew";
 import { GrLinkNext } from "react-icons/gr";
 import { GrLinkPrevious } from "react-icons/gr";
 
-const Project = ({ submit, backStep, data }) => {
-  const api = useAPI();
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
-  const [isLoading, setIsLoading] = useState(false);
+const Project = ({ backStep, submit, data, setData }) => {
   const [error, setError] = useState("");
-  const [project, setproject] = useState({
-    type: 3,
-    investment_type: "Carbon Credits",
-    name: "",
-    description: "",
-    area: "",
-    age: "",
-    credits_produced: false,
-    plant_planned: "",
-    donation: "",
-    coordinates: "",
-    address: "",
-    city: "",
-    country: "",
-    pin_code: "",
-    land_reg_proof: null,
-    image: null,
-    revenue_dist_date: "",
-    revenue_dist_details: "",
-    roi: "",
-    phase: 1,
-  });
 
-  const isProjectDetailEmpty = (keys) => {
-    return Object.keys(keys).length === 0;
-  };
-
-  useEffect(() => {
-    !isProjectDetailEmpty(data.projectDetail) && setproject(data.projectDetail);
-  }, [data.projectDetail]);
+  const projectKeys = [
+    "type",
+    "investment_type",
+    "name",
+    "description",
+    "area",
+    "age",
+    "credits_produced",
+    "plant_planned",
+    "donation",
+    "coordinates",
+    "address",
+    "city",
+    "country",
+    "pin_code",
+    "land_reg_proof",
+    "image",
+    "revenue_dist_date",
+    "revenue_dist_details",
+    "roi",
+    "phase",
+  ];
 
   const changeValue = (key, value) => {
-    setproject((prev) => {
-      let newValues = { ...prev };
-      newValues[key] = value;
-      return newValues;
+    setError("");
+    setData((prev) => {
+      let newData = { ...prev };
+      newData[key] = value;
+      return newData;
     });
   };
 
-  const typeOptions = [
-    // {
-    //   label: "Monitoring & Reporting",
-    //   value: 1,
-    // },
-    // {
-    //   label: "Funding and Monitoring",
-    //   value: 2,
-    // },
-    {
-      label: "Investment",
-      value: 3,
-    },
-  ];
   const investOptions = [
     {
       label: "Carbon Credits",
@@ -95,51 +72,32 @@ const Project = ({ submit, backStep, data }) => {
     },
   ];
 
-  if (!isLoggedIn) return <AuthPopup close={() => setIsLoggedIn(true)} />;
-  if (isLoading) return <Loading />;
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!project.image || !project.land_reg_proof) {
-      setError("Please upload registration proof and project image.");
-      return;
-    }
-
-    if (project["type"] == null) {
-      project["type"] = "3";
-    }
-
-    if (project["phase"] == null) {
-      project["phase"] = "1";
-    }
-
-    if (project["type"] == "3") {
-      if (project["investment_type"] == null)
-        project["investment_type"] = "Carbon Credits";
-    } else {
-      delete project["investment_type"];
-    }
-
-    let formdata = new FormData();
-    Object.keys(project).map((key) => {
-      formdata.append(key, project[key]);
+    let isValid = true;
+    projectKeys.map((key) => {
+      if (key === "credits_produced" || key === "age") return;
+      if (!data[key] || data[key] === "") {
+        console.log(key);
+        setError("* All fields are required.");
+        isValid = false;
+      }
     });
-    setIsLoading(true);
-    submit(project);
 
-    // await api
-    //   .crud("POST", "project/myproject", formdata, true)
-    //   .then((res) => {
-    //     console.log(res);
-    //     if (res.status === 201) {
-    //       submit(res.id, project);
-    //     }
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //     if (err === 401) setIsLoggedIn(false);
-    //   });
-    setIsLoading(false);
+    if (isNaN(data["area"])) {
+      isValid = false;
+      setError("Project area is not a valid number");
+    }
+    if (data["phase"] !== 1 && isNaN(data["age"])) {
+      isValid = false;
+      setError("Project age is not a valid number");
+    }
+    if (isNaN(data["donation"])) {
+      isValid = false;
+      setError("Investment is not a valid number");
+    }
+
+    if (isValid) submit();
   };
 
   return (
@@ -180,30 +138,8 @@ const Project = ({ submit, backStep, data }) => {
             }}
           />
         </div>
-        <Input
-          inputData={{
-            label: "Project Type",
-            type: "select",
-            required: true,
-            value: (function () {
-              let label = "";
-              typeOptions.map((type) => {
-                if (type.value == project.type) {
-                  label = type.label;
-                }
-              });
 
-              return label;
-            })(),
-            options: typeOptions,
-            select: true,
-            onChange: (e) => {
-              changeValue("type", e.target.value);
-            },
-            maxLength: 50,
-          }}
-        />
-        {project.type == 3 && (
+        {data.type == 3 && (
           <Input
             inputData={{
               label: "Investment Type",
@@ -212,7 +148,7 @@ const Project = ({ submit, backStep, data }) => {
               value: (function () {
                 let label = "";
                 investOptions.map((type) => {
-                  if (type.value === project.investment_type) {
+                  if (type.value === data.investment_type) {
                     label = type.label;
                   }
                 });
@@ -232,7 +168,7 @@ const Project = ({ submit, backStep, data }) => {
             label: "Project Name (20 char max)",
             type: "text",
             required: true,
-            value: project["name"],
+            value: data["name"],
             onChange: (e) =>
               e.target.value.length <= 20 &&
               changeValue("name", e.target.value),
@@ -244,7 +180,7 @@ const Project = ({ submit, backStep, data }) => {
             label: "Description",
             type: "text",
             required: true,
-            value: project["description"],
+            value: data["description"],
             onChange: (e) =>
               e.target.value.length <= 500 &&
               changeValue("description", e.target.value),
@@ -257,9 +193,9 @@ const Project = ({ submit, backStep, data }) => {
           inputData={{
             label: "Plantation Area (hect)",
             type: "text",
-            onlyNumber: true,
+            acceptFloat: true,
             required: true,
-            value: project["area"],
+            value: data["area"],
             onChange: (e) => changeValue("area", e.target.value),
             maxLength: 100,
           }}
@@ -272,7 +208,7 @@ const Project = ({ submit, backStep, data }) => {
             value: (function () {
               let label = "";
               phaseOptions.map((type) => {
-                if (type.value == project.phase) {
+                if (type.value == data.phase) {
                   label = type.label;
                 }
               });
@@ -282,38 +218,36 @@ const Project = ({ submit, backStep, data }) => {
             select: true,
             onChange: (e) => {
               changeValue("phase", e.target.value);
+              changeValue("age", 0);
             },
             maxLength: 50,
           }}
         />
-        {project.phase == 2 && (
+        {data.phase == 2 && (
           <Input
             inputData={{
               label: "Project Age (Years)",
               type: "text",
-              onlyNumber: true,
+              // onlyNumber: trrue,
+              acceptFloat: true,
               required: true,
-              value: project["age"],
+              value: data["age"],
               onChange: (e) => changeValue("age", e.target.value),
               maxLength: 100,
             }}
           />
         )}
-        {project.phase == 2 && (
+        {data.phase == 2 && (
           <Input
             inputData={{
               label: "Have you Produced Carbon/Green Credits Earlier?",
               type: "select",
               required: true,
-              value: project.credits_produced ? "Yes" : "No",
+              value: data.credits_produced ? "Yes" : "No",
               options: creditsProducedOptions,
               select: true,
               onChange: (e) => {
-                setproject((prev) => {
-                  let newvalues = { ...prev };
-                  newvalues["credits_produced"] = e.target.value === "true";
-                  return newvalues;
-                });
+                changeValue("credits_produced", e.target.value === "true");
               },
               maxLength: 50,
             }}
@@ -325,23 +259,23 @@ const Project = ({ submit, backStep, data }) => {
             type: "text",
             onlyNumber: true,
             required: true,
-            value: project["plant_planned"],
+            value: data["plant_planned"],
             onChange: (e) => changeValue("plant_planned", e.target.value),
             maxLength: 100,
           }}
         />
-        {project.type != 1 && (
+        {data.type != 1 && (
           <Input
             inputData={{
               label:
-                project.type === 2
+                data.type === 2
                   ? "Donation per plant($USD)"
                   : "Investment per plant($USD)",
               type: "text",
               onlyNumber: true,
               acceptFloat: true,
               required: true,
-              value: project["donation"],
+              value: data["donation"],
               onChange: (e) => changeValue("donation", e.target.value),
               maxLength: 100,
             }}
@@ -359,13 +293,13 @@ const Project = ({ submit, backStep, data }) => {
             })()}
           </div>
         )} */}
-        {project.type == 3 && (
+        {data.type == 3 && (
           <Input
             inputData={{
               label: "Revenue Distribution Cycle Details",
               type: "text",
               required: true,
-              value: project["revenue_dist_details"],
+              value: data["revenue_dist_details"],
               onChange: (e) =>
                 changeValue("revenue_dist_details", e.target.value),
               maxLength: 500,
@@ -374,26 +308,27 @@ const Project = ({ submit, backStep, data }) => {
             }}
           />
         )}
-        {project.type == 3 && (
+        {data.type == 3 && (
           <Input
             inputData={{
               label: "Upcoming Revenue Distribution Date ",
               type: "date",
               required: true,
-              value: project["revenue_dist_date"],
+              value: data["revenue_dist_date"],
               onChange: (e) => changeValue("revenue_dist_date", e.target.value),
               maxLength: 500,
             }}
           />
         )}
-        {project.type == 3 && (
+        {data.type == 3 && (
           <Input
             inputData={{
               label: "Expected Approximate ROI(%)",
               type: "text",
               required: true,
               onlyNumber: true,
-              value: project["roi"],
+              acceptFloat: true,
+              value: data["roi"],
               onChange: (e) => changeValue("roi", e.target.value),
               maxLength: 10,
             }}
@@ -404,9 +339,8 @@ const Project = ({ submit, backStep, data }) => {
             label: "Project Coordinates(comma separated)",
             type: "text",
             required: true,
-            onlyNumber: true,
-            acceptFloat: true,
-            value: project["coordinates"],
+
+            value: data["coordinates"],
             onChange: (e) => changeValue("coordinates", e.target.value),
             maxLength: 500,
           }}
@@ -416,7 +350,7 @@ const Project = ({ submit, backStep, data }) => {
             label: "Address",
             type: "text",
             required: true,
-            value: project["address"],
+            value: data["address"],
             onChange: (e) => changeValue("address", e.target.value),
             maxLength: 500,
             multiline: true,
@@ -428,7 +362,7 @@ const Project = ({ submit, backStep, data }) => {
             label: "State",
             type: "text",
             required: true,
-            value: project["city"],
+            value: data["city"],
             onChange: (e) => changeValue("city", e.target.value),
             maxLength: 100,
           }}
@@ -438,7 +372,7 @@ const Project = ({ submit, backStep, data }) => {
             label: "Country",
             type: "text",
             required: true,
-            value: project["country"],
+            value: data["country"],
             onChange: (e) => changeValue("country", e.target.value),
             maxLength: 100,
           }}
@@ -448,7 +382,7 @@ const Project = ({ submit, backStep, data }) => {
             label: "Area Code",
             type: "text",
             required: true,
-            value: project["pin_code"],
+            value: data["pin_code"],
             onChange: (e) => changeValue("pin_code", e.target.value),
             maxLength: 100,
           }}
@@ -458,7 +392,7 @@ const Project = ({ submit, backStep, data }) => {
             label: "Land Registration Proof",
             type: "file",
             required: true,
-            value: project["land_reg_proof"],
+            value: data?.land_reg_proof?.name,
             onChange: (e) => changeValue("land_reg_proof", e.target.files[0]),
             maxLength: 100,
           }}
@@ -468,7 +402,7 @@ const Project = ({ submit, backStep, data }) => {
             label: "Project Image",
             type: "file",
             required: true,
-            value: project["image"],
+            value: data?.image?.name,
             onChange: (e) => changeValue("image", e.target.files[0]),
             maxLength: 100,
           }}

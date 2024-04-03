@@ -43,10 +43,10 @@ export default function Navbar() {
           path="/myprojects/:projectId"
           element={<UserView isOwnerView />}
         />
-        <Route
+        {/* <Route
           path="/myprojects/:projectId/update"
           element={<Updatereport />}
-        />
+        /> */}
         <Route
           path="/myprojects/:projectId/report"
           element={<ProjectReport isMyProject />}
