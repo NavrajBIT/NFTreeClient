@@ -7,14 +7,15 @@ import { Delete } from "@mui/icons-material";
 import { GrLinkNext } from "react-icons/gr";
 import { GrLinkPrevious } from "react-icons/gr";
 import "./forms.css";
+import { useNavigate } from "react-router-dom";
 
 const ProjectData = ({ submit, backStep, data }) => {
+  const navigate = useNavigate();
   const [species, setSpecies] = useState([{ plant: "", percentage: "" }]);
   const [docs, setdocs] = useState([{ file: null, name: "" }]);
   const api = useAPI();
   const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
-  const [projectId, setProjectId] = useState();
   const [error, setError] = useState("");
   const [docError, setDocError] = useState("");
 
@@ -61,8 +62,10 @@ const ProjectData = ({ submit, backStep, data }) => {
   const handleSubmit = async () => {
     setIsLoading(true);
     let projectFormdata = new FormData();
-    Object.keys(data.projectDetail).map((key) => {
-      projectFormdata.append(key, data.projectDetail[key]);
+    let apiData = { ...data };
+    apiData.org_social_links = JSON.stringify(data.org_social_links);
+    Object.keys(apiData).map((key) => {
+      projectFormdata.append(key, data[key]);
     });
     try {
       const projectResponse = await api.crud(
@@ -71,9 +74,10 @@ const ProjectData = ({ submit, backStep, data }) => {
         projectFormdata,
         true
       );
+      console.log(projectResponse);
+
       if (projectResponse.status === 201) {
         const project_Id = projectResponse.id;
-        setProjectId(project_Id);
         const speciesRequests = species.map((type) =>
           api.crud("POST", "project/species", {
             project: project_Id,
@@ -86,13 +90,16 @@ const ProjectData = ({ submit, backStep, data }) => {
         const sendDoc = async (docFormData) => {
           await api.crud("POST", "project/docs/create", docFormData, true);
         };
-        docs.forEach((doc, index) => {
+        const docsRequests = docs.map(async (doc, index) => {
           const docFormData = new FormData();
           docFormData.append(`file`, doc.file);
           docFormData.append(`name`, doc.name);
           docFormData.append("project", project_Id);
-          sendDoc(docFormData);
+          await sendDoc(docFormData);
         });
+
+        await Promise.all(docsRequests);
+        navigate(`/myprojects/${project_Id}`);
       }
     } catch (err) {
       if (err === 401) setIsLoggedIn(false);
@@ -110,8 +117,11 @@ const ProjectData = ({ submit, backStep, data }) => {
 
     const docValidation = () => {
       for (let i in docs) {
-        if (docs[i].name || docs[i].file || docs[i].name === "") {
-          if ((!docs[i].name || docs[i].name === "") ^ !docs[i].file) {
+        if (docs[i].name || docs[i].file) {
+          if (
+            (docs[i].name == undefined || docs[i].name == "") ^
+            (docs[i].file == null)
+          ) {
             return true;
           }
         }
@@ -131,7 +141,7 @@ const ProjectData = ({ submit, backStep, data }) => {
     }
   };
 
-  projectId && submit(projectId);
+  // projectId && submit(projectId);
 
   if (!isLoggedIn) return <AuthPopup close={() => setIsLoggedIn(true)} />;
   if (isLoading) return <Loading />;
@@ -202,7 +212,8 @@ const ProjectData = ({ submit, backStep, data }) => {
                 <Input
                   inputData={{
                     placeholder: "Percentage",
-                    type: "number",
+                    type: "text",
+                    onlyNumber: true,
                     required: true,
                     value: type["percentage"],
                     onChange: (e) =>

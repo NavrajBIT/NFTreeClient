@@ -166,3 +166,39 @@ export function WalletProvider(props) {
 //     }, 3000);
 //   }
 // };
+
+// export async function getTokenSupplyData() {
+//   const body = {
+//     jsonrpc: "2.0",
+//     id: 1,
+//     method: "getTokenAccountBalance",
+//     params: ["3J2XuhzaduFquYkMEjcqQwgY7MSGwz4cvuo1ctSuNehx"],
+//   };
+
+//   const requestOption = {
+//     method: "POST",
+//     body: JSON.stringify(body),
+//     headers: {
+//       "Content-Type": "application/json",
+//     },
+//   };
+
+//   await fetch("https://api.mainnet-beta.solana.com/", requestOption)
+//     .then((res) => res.json())
+//     .then((data) => {
+//       console.log(data);
+//     });
+// }
+
+// getTokenSupplyData();
+
+export async function getTokenSupplyData() {
+  let connection = new web3.Connection(
+    "https://solana-mainnet.g.alchemy.com/v2/8ywPL9IoZtnieJGZdu1bT1VDEAK1Mw6b"
+  );
+  const address = new web3.PublicKey(
+    "3J2XuhzaduFquYkMEjcqQwgY7MSGwz4cvuo1ctSuNehx"
+  );
+  const res = await connection.getTokenAccountBalance(address);
+  return res.value.amount;
+}

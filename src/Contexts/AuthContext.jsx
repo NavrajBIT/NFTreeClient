@@ -27,13 +27,15 @@ export function AuthProvider(props) {
     }
   }, [isLoggedIn]);
 
-  const poppulateUserData = () => {
-    api
-      .crud("GET", "user/account")
+  const poppulateUserData = async () => {
+    await api
+      .crud("GET", "user")
       .then((res) => {
+        console.log(res);
         if (res.status === 200) setAvatar(res[0].picture);
       })
       .catch((err) => {
+        console.log(err);
         if (err === 401) logout();
       });
   };

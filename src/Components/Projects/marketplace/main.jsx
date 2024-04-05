@@ -41,6 +41,21 @@ export default function ProjectPage() {
     data.map((project) => {
       let isApplicable = true;
       filters.map((filter) => {
+        if (filter.type == "status") {
+          console.log(filter);
+          if (
+            filter.value == 1 &&
+            project.funding.raised < project.funding.total
+          ) {
+            isApplicable = false;
+          }
+          if (
+            filter.value == 2 &&
+            project.funding.raised >= project.funding.total
+          ) {
+            isApplicable = false;
+          }
+        }
         if (project[filter.type] === filter.value) isApplicable = false;
       });
       if (search && search !== "") {
@@ -52,6 +67,7 @@ export default function ProjectPage() {
       }
       if (isApplicable) newdata.push(project);
     });
+
     setFilterData(newdata);
   }, [filters, search]);
 

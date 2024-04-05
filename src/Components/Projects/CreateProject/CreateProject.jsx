@@ -1,22 +1,55 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Representative from "../../Subcomponents/form/forms/representative";
 import Stepper from "../../Subcomponents/stepper/stepper";
 import Organization from "../../Subcomponents/form/forms/organization";
 import Project from "../../Subcomponents/form/forms/project";
 import ProjectData from "../../Subcomponents/form/forms/projectData";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../../Contexts/AuthContext";
+import Auth from "../../Auth/Auth";
 
 import "./CreateProject.css";
 
 function CreateProject() {
-  const navigate = useNavigate();
-  const [projectId, setProjectId] = useState(null);
+  const auth = useAuth();
   const [step, setStep] = useState(1);
-  const [createFormData, setCreateFormData] = useState({
-    representative: {},
-    organization: {},
-    projectDetail: {},
-    projectData: {},
+  const [data, setData] = useState({
+    // representative data
+    designation: "",
+    phone: "",
+    nin: "",
+    nin_proof: null,
+    picture: null,
+    // organization data
+    org_name: "",
+    org_description: "",
+    org_website: "",
+    org_address: "",
+    org_country: "",
+    org_pin_code: "",
+    org_reg_id: "",
+    org_social_links: null,
+    // project details
+    type: 3,
+    investment_type: "Carbon Credits",
+    name: "",
+    description: "",
+    area: "",
+    age: 0,
+    credits_produced: false,
+    plant_planned: "",
+    donation: "",
+    coordinates: "",
+    address: "",
+    city: "",
+    country: "",
+    pin_code: "",
+    land_reg_proof: null,
+    image: null,
+    revenue_dist_date: "",
+    revenue_dist_details: "",
+    roi: "",
+    phase: 1,
   });
 
   const stepperData = [
@@ -25,6 +58,12 @@ function CreateProject() {
     "Project Details",
     "Project Data",
   ];
+
+  useEffect(() => {
+    auth.poppulateUserData();
+  }, []);
+
+  if (!auth.isLoggedIn) return <Auth close={() => auth.setIsLoggedIn(true)} />;
 
   return (
     <div
@@ -59,46 +98,43 @@ function CreateProject() {
 
         {step === 1 && (
           <Representative
-            submit={(data) => {
+            submit={() => {
               setStep(2);
-              setCreateFormData({ ...createFormData, representative: data });
             }}
-            data={createFormData}
+            data={data}
+            setData={setData}
           />
         )}
         {step === 2 && (
           <Organization
-            submit={(data) => {
+            submit={() => {
               setStep(3);
-              setCreateFormData({ ...createFormData, organization: data });
             }}
             backStep={() => {
               setStep(1);
             }}
-            data={createFormData}
+            data={data}
+            setData={setData}
           />
         )}
         {step === 3 && (
           <Project
-            submit={(data) => {
-              setCreateFormData({ ...createFormData, projectDetail: data });
+            submit={() => {
               setStep(4);
             }}
             backStep={() => {
               setStep(2);
             }}
-            data={createFormData}
+            data={data}
+            setData={setData}
           />
         )}
         {step === 4 && (
           <ProjectData
-            submit={(projectId) => {
-              navigate(`/myprojects/${projectId}`);
-            }}
             backStep={() => {
               setStep(3);
             }}
-            data={createFormData}
+            data={data}
           />
         )}
       </div>

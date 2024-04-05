@@ -10,7 +10,7 @@ const ProjectOwnerDetails = ({ isOwnerView, details }) => {
   useEffect(() => {
     setSocialMedia((prev) => {
       try {
-        return JSON.parse(details?.project?.owner?.organization?.social_links);
+        return JSON.parse(details?.project?.org_social_links);
       } catch {
         return null;
       }
@@ -45,33 +45,30 @@ const ProjectOwnerDetails = ({ isOwnerView, details }) => {
               flexGrow: "1",
             }}
           >
-            <LabelValueBox
-              label="Name"
-              value={details?.project?.owner?.organization?.name}
-            />
+            <LabelValueBox label="Name" value={details?.project?.org_name} />
             <LabelValueBox
               label="Description"
-              value={details?.project?.owner?.organization?.description}
+              value={details?.project?.org_description}
             />{" "}
             <LabelValueBox
               label="Address"
-              value={details?.project?.owner?.organization?.address}
+              value={details?.project?.org_address}
             />{" "}
             <LabelValueBox
               label="Country"
-              value={details?.project?.owner?.organization?.country}
+              value={details?.project?.org_country}
             />{" "}
             <LabelValueBox
               label="Area Code"
-              value={details?.project?.owner?.organization?.pin_code}
+              value={details?.project?.org_pin_code}
             />{" "}
             <LabelValueBox
               label="Website"
-              value={details?.project?.owner?.organization?.website}
+              value={details?.project?.org_website}
             />{" "}
             <LabelValueBox
               label="Reg. Id"
-              value={details?.project?.owner?.organization?.reg_id}
+              value={details?.project?.org_reg_id}
             />
             <div style={{ display: "flex" }}>
               <div style={{ width: "50%" }}>
@@ -147,7 +144,7 @@ const ProjectOwnerDetails = ({ isOwnerView, details }) => {
               className="Responsiveflex900"
             >
               <img
-                src={`https://bitbhoomi.com${details?.project?.owner?.representative?.picture}`}
+                src={details?.project?.picture}
                 alt="profile"
                 style={{
                   width: "100px",
@@ -170,18 +167,12 @@ const ProjectOwnerDetails = ({ isOwnerView, details }) => {
               label="E-mail"
               value={details?.project?.owner?.representative?.email}
             />{" "}
-            <LabelValueBox
-              label="Phone"
-              value={details?.project?.owner?.representative?.phone}
-            />{" "}
+            <LabelValueBox label="Phone" value={details?.project?.phone} />{" "}
             <LabelValueBox
               label="Designation"
-              value={details?.project?.owner?.representative?.designation}
+              value={details?.project?.designation}
             />
-            <LabelValueBox
-              label="NIN"
-              value={details?.project?.owner?.representative?.nin}
-            />
+            <LabelValueBox label="NIN" value={details?.project?.nin} />
             {/* <LabelValueBox
               label="Wallet"
               value={details?.project?.owner?.representative?.wallet}
