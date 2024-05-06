@@ -63,7 +63,7 @@ const ProjectDocument = ({ isOwnerView, details }) => {
           name={"land Reg proof"}
         />
         <ProjectDocumentBox
-          doc={API_URL.split("api")[0] + details?.project?.nin_proof}
+          doc={details?.project?.nin_proof}
           name={"nin proof"}
         />
         {details?.projectDocs?.map(

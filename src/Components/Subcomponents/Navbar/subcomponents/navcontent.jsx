@@ -67,12 +67,12 @@ const NavContent = () => {
               {link}
             </div>
           ))}
-          <div
+          {/* <div
             className="navlink"
             onClick={() => window.open("https://bitbhoomiido.tech/")}
           >
             IDO
-          </div>
+          </div> */}
         </div>
 
         <div className="logincontainer">

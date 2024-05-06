@@ -8,7 +8,7 @@ const ProfilePicture = ({ script }) => {
           <div className="profilePicContainer">
             <div className="profilePic">
               <img
-                src={script.account?.picture || defaultProfilePicture}
+                src={script.user?.picture || defaultProfilePicture}
                 alt="profile pic"
               />
             </div>
