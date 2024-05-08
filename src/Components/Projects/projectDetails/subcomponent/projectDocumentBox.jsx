@@ -10,6 +10,7 @@ const ProjectDocumentBox = ({ doc, name }) => {
           color: "white",
           fontWeight: "500",
           textAlign: "center",
+          cursor:"pointer"
         }}
       >
         {name}

@@ -149,7 +149,7 @@ const Sidebar = ({ filters, setFilters, data, isMobile }) => {
         position: "absolute",
         zIndex: 10,
         top: "0px",
-        left: "0px",
+        left: "-20px",
         borderRadius: "0 10px 10px 10px",
         height: "fit-content",
       };
@@ -236,6 +236,8 @@ const Sidebar = ({ filters, setFilters, data, isMobile }) => {
             key={"city-filter-" + index}
           />
         ))}
+      </div>
+      <div style={{marginBottom:"15vh"}}>
       </div>
     </div>
   );

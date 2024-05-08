@@ -63,15 +63,15 @@ const Duration = () => {
                     </div>
                 </div>
                 <div className='getReport'>
-                    <button>
                     <Link
                       to={{
                           pathname: `/projects/${projectId}/report/`,
                           search: `?duration=${encodeURIComponent(selectedDuration)}`
                         }}>
+                          <button>
                         Get Report
-                    </Link>
                         </button>
+                    </Link>
                 </div>
             </div>
         </div>
