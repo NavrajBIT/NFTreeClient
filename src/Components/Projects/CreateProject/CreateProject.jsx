@@ -50,6 +50,7 @@ function CreateProject() {
     revenue_dist_details: "",
     roi: "",
     phase: 1,
+    donation_method: 1,
   });
 
   const stepperData = [

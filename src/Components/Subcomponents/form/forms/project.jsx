@@ -30,6 +30,7 @@ const Project = ({ backStep, submit, data, setData }) => {
     "revenue_dist_details",
     "roi",
     "phase",
+    "donation_method",
   ];
 
   const changeValue = (key, value) => {
@@ -49,6 +50,20 @@ const Project = ({ backStep, submit, data, setData }) => {
     {
       label: "Green Credits",
       value: "Green Credits",
+    },
+  ];
+  const donationOptions = [
+    {
+      label: "Both (Fiat and Crypto)",
+      value: 1,
+    },
+    {
+      label: "Crypto (Sol)",
+      value: 2,
+    },
+    {
+      label: "Fiat(USD, INR etc..)",
+      value: 3,
     },
   ];
   const phaseOptions = [
@@ -163,6 +178,28 @@ const Project = ({ backStep, submit, data, setData }) => {
             }}
           />
         )}
+        <Input
+          inputData={{
+            label: "Investment Method",
+            type: "select",
+            required: true,
+            value: (function () {
+              let label = "";
+              donationOptions.map((type) => {
+                if (type.value === data.donation_method) {
+                  label = type.label;
+                }
+              });
+              return label;
+            })(),
+            options: donationOptions,
+            select: true,
+            onChange: (e) => {
+              changeValue("donation_method", e.target.value);
+            },
+            maxLength: 50,
+          }}
+        />
         <Input
           inputData={{
             label: "Project Name (20 char max)",

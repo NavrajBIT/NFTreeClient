@@ -26,6 +26,7 @@ const usecreate = () => {
     revenue_dist_date: null,
     revenue_dist_details: "",
     roi: 0,
+    donation_method: 1,
   });
 
   const handleSubmit = async () => {
