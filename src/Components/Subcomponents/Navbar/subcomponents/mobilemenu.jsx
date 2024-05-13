@@ -24,7 +24,8 @@ const MenuOptions = ({ setIsmenu }) => {
   const navlinks = {
     Home: "/",
     Projects: "/projects",
-    Dashboard: "/dashboard",
+    // Dashboard: "/dashboard",
+    'White Paper': "/whitepaper"
     // "Contact Us": auth.isLoggedIn ? null : "/contact",
     // "Connect Wallet": auth.isLoggedIn ? "/connect-wallet" : null,
   };
@@ -59,14 +60,14 @@ const MenuOptions = ({ setIsmenu }) => {
             {link}
           </div>
         ))}
-        <div
+        {/* <div
           className="sidebarlink"
           onClick={() => {
             window.open("https://bitbhoomiido.tech/");
           }}
         >
           IDO
-        </div>
+        </div> */}
         {auth.isLoggedIn ? (
           <div>
             <div className="sidebarlink">
