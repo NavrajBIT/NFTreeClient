@@ -22,7 +22,6 @@ export default function ProjectPage() {
       await api
         .crud("GET", "project/projectlist")
         .then((response) => {
-          console.log(response);
           if (response.status === 200) {
             setData(response);
             setFilterData(response);

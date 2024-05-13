@@ -197,11 +197,14 @@ const Sidebar = ({ filters, setFilters, data, isMobile }) => {
       </div>
 
       <div className="singlefiltercontainer">
+        {/* 
+      
         <div style={{ fontSize: "18px", fontWeight: "700" }}>Project Type</div>
         {typefilterOptions.map((type, index) => (
           <TypeFilter index={index} key={"type-filter-" + index} />
         ))}
         <br />
+      */}
 
         <div style={{ fontSize: "18px", fontWeight: "700" }}>
           Investment Type
@@ -237,8 +240,7 @@ const Sidebar = ({ filters, setFilters, data, isMobile }) => {
           />
         ))}
       </div>
-      <div style={{marginBottom:"15vh"}}>
-      </div>
+      <div style={{ marginBottom: "15vh" }}></div>
     </div>
   );
 };
