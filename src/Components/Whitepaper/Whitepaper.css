@@ -1,0 +1,50 @@
+.paperContainer {
+    background: linear-gradient(180deg, #0E1213 38%, #08370D 100%);
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 4rem 4rem;
+    width: 100%;
+  }
+
+.paperTitle {
+    font-size: 48px;
+    font-weight: 700;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .downloadBtnDiv img {
+    height: 1.3rem;
+  }
+  
+  .downloadBtn {
+    /* margin-top: 2rem; */
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 0.5rem 1.5rem;
+    background: transparent;
+    color: white;
+    border: 3px solid white;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    /* outline: none; */
+    cursor: pointer;
+    margin: 3rem auto;
+    border-radius: 48px;
+  }
+  
+  @media only screen and (max-width: 730px) {
+    .paperTitle {
+        font-size: 26px;
+      }
+      .paper{
+        display:flex ;
+        justify-content:center ;
+      }
+    .paper img{
+        width: 80%;
+    }
+  }

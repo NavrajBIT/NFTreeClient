@@ -20,6 +20,7 @@ import UserView from "../../Projects/projectDetails/userView";
 import ProjectReport from "../../Projects/projectReport/subcomponents/ProjectReport/ProjectReport";
 import Dashboard from "../../Dashboard/Dashboard";
 import Duration from "../../Projects/projectReport/subcomponents/ProjectReport/Duration";
+import Whitepaper from "../../Whitepaper/Whitepaper";
 
 export default function Navbar() {
   return (
@@ -31,6 +32,7 @@ export default function Navbar() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/login" element={<Auth />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/whitepaper" element={<Whitepaper />} />
         <Route path="/forgotpassword" element={<Forgotpassword />} />
         <Route path="/projects" element={<ProjectPage />} />
         <Route path="/projects/create" element={<CreateProject />} />
