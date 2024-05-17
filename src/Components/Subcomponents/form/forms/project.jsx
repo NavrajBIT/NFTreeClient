@@ -20,17 +20,17 @@ const Project = ({ backStep, submit, data, setData }) => {
     "plant_planned",
     "donation",
     "coordinates",
-    "address",
+    // "address",
     "city",
     "country",
-    "pin_code",
-    "land_reg_proof",
+    // "pin_code",
+    // "land_reg_proof",
     "image",
-    "revenue_dist_date",
-    "revenue_dist_details",
-    "roi",
-    "phase",
-    "donation_method",
+    // "revenue_dist_date",
+    // "revenue_dist_details",
+    // "roi",
+    // "phase",
+    // "donation_method",
   ];
 
   const changeValue = (key, value) => {
@@ -47,10 +47,10 @@ const Project = ({ backStep, submit, data, setData }) => {
       label: "Carbon Credits",
       value: "Carbon Credits",
     },
-    {
-      label: "Green Credits",
-      value: "Green Credits",
-    },
+    // {
+    //   label: "Green Credits",
+    //   value: "Green Credits",
+    // },
   ];
   const donationOptions = [
     {
@@ -178,7 +178,7 @@ const Project = ({ backStep, submit, data, setData }) => {
             }}
           />
         )}
-        <Input
+        {/*  <Input
           inputData={{
             label: "Investment Method",
             type: "select",
@@ -199,7 +199,7 @@ const Project = ({ backStep, submit, data, setData }) => {
             },
             maxLength: 50,
           }}
-        />
+        /> */}
         <Input
           inputData={{
             label: "Project Name (20 char max)",
@@ -237,7 +237,7 @@ const Project = ({ backStep, submit, data, setData }) => {
             maxLength: 100,
           }}
         />
-        <Input
+        {/* <Input
           inputData={{
             label: "Project Phase",
             type: "select",
@@ -259,7 +259,7 @@ const Project = ({ backStep, submit, data, setData }) => {
             },
             maxLength: 50,
           }}
-        />
+        /> */}
         {data.phase == 2 && (
           <Input
             inputData={{
@@ -306,8 +306,8 @@ const Project = ({ backStep, submit, data, setData }) => {
             inputData={{
               label:
                 data.type === 2
-                  ? "Donation per plant($USD)"
-                  : "Investment per plant($USD)",
+                  ? "Donation per plant(SAR ﷼)"
+                  : "Cost per plant(SAR ﷼)",
               type: "text",
               onlyNumber: true,
               acceptFloat: true,
@@ -330,7 +330,7 @@ const Project = ({ backStep, submit, data, setData }) => {
             })()}
           </div>
         )} */}
-        {data.type == 3 && (
+        {/* {data.type == 3 && (
           <Input
             inputData={{
               label: "Revenue Distribution Cycle Details",
@@ -370,7 +370,7 @@ const Project = ({ backStep, submit, data, setData }) => {
               maxLength: 10,
             }}
           />
-        )}
+        )} */}
         <Input
           inputData={{
             label: "Project Coordinates(comma separated)",
@@ -382,7 +382,7 @@ const Project = ({ backStep, submit, data, setData }) => {
             maxLength: 500,
           }}
         />
-        <Input
+        {/* <Input
           inputData={{
             label: "Address",
             type: "text",
@@ -393,7 +393,7 @@ const Project = ({ backStep, submit, data, setData }) => {
             multiline: true,
             rows: 4,
           }}
-        />
+        /> */}
         <Input
           inputData={{
             label: "State",
@@ -414,7 +414,7 @@ const Project = ({ backStep, submit, data, setData }) => {
             maxLength: 100,
           }}
         />
-        <Input
+        {/* <Input
           inputData={{
             label: "Area Code",
             type: "text",
@@ -423,8 +423,8 @@ const Project = ({ backStep, submit, data, setData }) => {
             onChange: (e) => changeValue("pin_code", e.target.value),
             maxLength: 100,
           }}
-        />
-        <Input
+        /> */}
+        {/* <Input
           inputData={{
             label: "Land Registration Proof",
             type: "file",
@@ -433,7 +433,7 @@ const Project = ({ backStep, submit, data, setData }) => {
             onChange: (e) => changeValue("land_reg_proof", e.target.files[0]),
             maxLength: 100,
           }}
-        />
+        /> */}
         <Input
           inputData={{
             label: "Project Image",

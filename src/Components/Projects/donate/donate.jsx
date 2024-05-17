@@ -21,11 +21,12 @@ const Donate = () => {
   const [exchangeRate, setExchangerate] = useState(0);
   const wallet = useWallet();
   const navigate = useNavigate();
+  const [contributionType, setContributionType] = useState("Donation");
 
   useEffect(() => {
     poppulateProject();
     checkLogIn();
-    getExchangeRate();
+    // getExchangeRate();
   }, []);
 
   const checkLogIn = async () => {
@@ -51,22 +52,22 @@ const Donate = () => {
     setIsLoading(false);
   };
 
-  const getExchangeRate = async () => {
-    // setExchangerate(149);
-    // return;
-    setIsLoading(true);
-    await fetch(
-      "https://min-api.cryptocompare.com/data/pricemulti?fsyms=SOL&tsyms=SOL,USD&api_key=a0d74da5182505e471796936416d849166115c9f413ddad7f7e2caff213b0ae5"
-    )
-      .then((res) => res.json())
-      .then((res) => {
-        console.log(res);
-        console.log(`SOL exchange rate = ${res["SOL"]["USD"]}`);
-        setExchangerate(parseFloat(res["SOL"]["USD"]));
-      })
-      .catch((err) => console.log(err));
-    setIsLoading(false);
-  };
+  // const getExchangeRate = async () => {
+  //   // setExchangerate(149);
+  //   // return;
+  //   setIsLoading(true);
+  //   await fetch(
+  //     "https://min-api.cryptocompare.com/data/pricemulti?fsyms=SOL&tsyms=SOL,USD&api_key=a0d74da5182505e471796936416d849166115c9f413ddad7f7e2caff213b0ae5"
+  //   )
+  //     .then((res) => res.json())
+  //     .then((res) => {
+  //       console.log(res);
+  //       console.log(`SOL exchange rate = ${res["SOL"]["USD"]}`);
+  //       setExchangerate(parseFloat(res["SOL"]["USD"]));
+  //     })
+  //     .catch((err) => console.log(err));
+  //   setIsLoading(false);
+  // };
 
   if (!isLoggedIn) return <Auth close={() => setIsLoggedIn(true)} />;
 
@@ -79,48 +80,76 @@ const Donate = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!wallet.isWalletConnected) {
-      wallet.connect();
-    } else {
-      setIsLoading(true);
-      let tx = await wallet
-        .sendSol(totalSol)
-        .then((res) => res)
-        .catch((err) => {
-          alert("Transaction Unsuccessful.");
-          return null;
-        });
-      console.log("------------------");
-      console.log(tx);
-      if (!tx) {
-        setIsLoading(false);
-        return;
-      }
-      api
-        .crud("POST", "project/invest", {
-          projectId: project.id,
-          amount: totalUSD,
-          trees: trees,
-          hash: tx,
-        })
-        .then((res) => {
-          console.log(res);
-        })
-        .catch((err) => console.log(err));
+
+    if (
+      contributionType === "Donation" &&
+      trees < parseInt(project?.min_trees_for_donation)
+    ) {
       alert(
-        "Order has been placed. You NFT will reflect in your wallet shortly."
+        `Minimum ${project?.min_trees_for_donation} trees are required for donation.`
       );
-      setIsLoading(false);
-      navigate("/");
+      return;
     }
+    if (
+      contributionType === "Investment" &&
+      trees < parseInt(project?.min_trees_for_investment)
+    ) {
+      alert(
+        `Minimum ${project?.min_trees_for_investment} trees are required for investment.`
+      );
+      return;
+    }
+
+    setIsLoading(true);
+    // let tx = await wallet
+    //   .sendSol(totalSol)
+    //   .then((res) => res)
+    //   .catch((err) => {
+    //     alert("Transaction Unsuccessful.");
+    //     return null;
+    //   });
+    // console.log("------------------");
+    // console.log(tx);
+    // if (!tx) {
+    //   setIsLoading(false);
+    //   return;
+    // }
+
+    api
+      .crud("POST", "project/invest", {
+        projectId: project.id,
+        amount: totalUSD,
+        trees: trees,
+        hash: "",
+      })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => console.log(err));
+    alert(
+      "Order has been placed. You NFT will reflect in your profile shortly."
+    );
+    setIsLoading(false);
+    navigate("/");
   };
 
   const totalUSD = project?.donation ? project?.donation * trees : 0;
-  const totalSol =
-    exchangeRate && exchangeRate > 0 && project?.donation
-      ? parseFloat(totalUSD) / parseFloat(exchangeRate)
-      : 0;
+  // const totalSol =
+  //   exchangeRate && exchangeRate > 0 && project?.donation
+  //     ? parseFloat(totalUSD) / parseFloat(exchangeRate)
+  //     : 0;
   const availableTrees = project?.funding?.total - project?.funding?.raised;
+
+  const investOptions = [
+    {
+      label: "Donation",
+      value: "Donation",
+    },
+    {
+      label: "Investment",
+      value: "Investment",
+    },
+  ];
 
   return (
     <div
@@ -189,6 +218,41 @@ const Donate = () => {
 
           <Input
             inputData={{
+              label: "Contribution Type",
+              type: "select",
+              required: true,
+              value: (function () {
+                let label = "";
+                investOptions.map((type) => {
+                  if (type.value === contributionType) {
+                    label = type.label;
+                  }
+                });
+                return label;
+              })(),
+              options: investOptions,
+              select: true,
+              onChange: (e) => {
+                console.log(e.target.value);
+                setContributionType(e.target.value);
+              },
+              maxLength: 50,
+            }}
+          />
+
+          <div
+            style={{
+              marginBottom: "10px",
+            }}
+          >
+            {contributionType === "Donation" &&
+              `Note: Minimum ${project?.min_trees_for_donation} trees are required.`}
+            {contributionType === "Investment" &&
+              `Note: Minimum ${project?.min_trees_for_investment} trees are required.`}
+          </div>
+
+          <Input
+            inputData={{
               label: "Enter number of trees",
               type: "number",
               required: true,
@@ -203,7 +267,8 @@ const Donate = () => {
               maxLength: 50,
             }}
           />
-          <Input
+
+          {/* <Input
             inputData={{
               label: "Investment Token",
               type: "select",
@@ -219,17 +284,17 @@ const Donate = () => {
               },
               maxLength: 50,
             }}
-          />
+          /> */}
           <Input
             inputData={{
-              label: "Total amount in $USD",
+              label: "Total amount in SAR (﷼)",
               type: "text",
-              value: `$${totalUSD}`,
+              value: `${totalUSD}`,
               onChange: (e) => {},
               maxLength: 500,
             }}
           />
-          <Input
+          {/* <Input
             inputData={{
               label: `Total amount in ${token.value} token`,
               type: "text",
@@ -241,10 +306,10 @@ const Donate = () => {
               onChange: (e) => {},
               maxLength: 500,
             }}
-          />
+          /> */}
 
           <div>
-            <Input
+            {/* <Input
               inputData={{
                 label: "Connected Wallet Address",
                 type: "text",
@@ -254,7 +319,7 @@ const Donate = () => {
                 onChange: () => {},
                 maxLength: 500,
               }}
-            />
+            /> */}
             {/* <Input
               inputData={{
                 label: "Connected Wallet Balance",
@@ -273,7 +338,7 @@ const Donate = () => {
               justifyContent: "center",
             }}
           >
-            {wallet?.isWalletConnected ? (
+            {/* {wallet?.isWalletConnected ? (
               <button
                 type="submit"
                 style={{
@@ -289,7 +354,20 @@ const Donate = () => {
               </button>
             ) : (
               <div>Please connect wallet!</div>
-            )}
+            )} */}
+            <button
+              type="submit"
+              style={{
+                padding: "var(--padding-light)",
+                background: "#354A12",
+                width: "var(--project-button)",
+                borderRadius: "5px",
+                marginTop: "var(--padding-large)",
+                marginBottom: "100px",
+              }}
+            >
+              Contribute
+            </button>
           </div>
         </form>
       </div>

@@ -24,8 +24,8 @@ const MenuOptions = ({ setIsmenu }) => {
   const navlinks = {
     Home: "/",
     Projects: "/projects",
-    Dashboard: "/dashboard",
-    // "Contact Us": auth.isLoggedIn ? null : "/contact",
+    // Dashboard: "/dashboard",
+    "Contact Us": "/contact",
     // "Connect Wallet": auth.isLoggedIn ? "/connect-wallet" : null,
   };
   const handleDropdownOpen = () => {
@@ -59,17 +59,17 @@ const MenuOptions = ({ setIsmenu }) => {
             {link}
           </div>
         ))}
-        <div
+        {/* <div
           className="sidebarlink"
           onClick={() => {
             window.open("https://bitbhoomiido.tech/");
           }}
         >
           IDO
-        </div>
+        </div> */}
         {auth.isLoggedIn ? (
           <div>
-            <div className="sidebarlink">
+            {/* <div className="sidebarlink">
               <div>
                 <button
                   className="walletButtonMobile"
@@ -96,7 +96,7 @@ const MenuOptions = ({ setIsmenu }) => {
                   </div>
                 )}
               </div>
-            </div>
+            </div> */}
             <div
               className="profilepiccontainer"
               style={{ width: "100%", padding: "var(--padding-main)" }}

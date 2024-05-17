@@ -3,12 +3,24 @@ import LabelValueBox from "./labelValueBox";
 import ProjectPageButton from "./projectButton";
 import { useNavigate } from "react-router-dom";
 const ProjectDetails = ({ isOwnerView, details }) => {
-  const navigate = useNavigate();
+  console.log(details?.project?.date);
+  let projectage = "00/00/0000";
+
+  if (details?.project?.date) {
+    const dateOfBirth = new Date(details?.project?.date);
+    const currentDate = new Date();
+    const differenceMs = currentDate - dateOfBirth;
+    const ageInYears = differenceMs / (1000 * 60 * 60 * 24 * 365.25);
+    const years = Math.floor(ageInYears);
+    const months = Math.floor((ageInYears - years) * 12);
+    const days = Math.floor((ageInYears - years) * 365.25 - months * 30.4375);
+    const formattedAge = `${months} months`;
+    projectage = formattedAge;
+  }
 
   return (
     <div style={{ padding: "5%" }}>
       <h1 className="projectHeading">Project Details</h1>
-
       <div
         style={{
           display: "flex",
@@ -45,10 +57,7 @@ const ProjectDetails = ({ isOwnerView, details }) => {
             label="Total Plantation Area (hect.)"
             value={details?.project?.area}
           />
-          <LabelValueBox
-            label="Project Age"
-            value={details?.project?.age + " years"}
-          />
+          <LabelValueBox label="Project Age" value={projectage} />
           {details?.project?.type === 2 && (
             <LabelValueBox
               label="Donation CostPer Plant ($)"
@@ -57,7 +66,7 @@ const ProjectDetails = ({ isOwnerView, details }) => {
           )}
           {details?.project?.type === 3 && (
             <LabelValueBox
-              label="Investment Per Plant ($)"
+              label="Cost Per Plant (SAR ﷼)"
               value={details?.project?.donation}
             />
           )}
@@ -82,19 +91,18 @@ const ProjectDetails = ({ isOwnerView, details }) => {
             gap: "20px",
           }}
         >
-          <LabelValueBox
+          {/* <LabelValueBox
             label="Full Address"
             value={details?.project?.address}
-          />
+          /> */}
           <LabelValueBox label="State" value={details?.project?.city} />
           <LabelValueBox label="Country" value={details?.project?.country} />
-          <LabelValueBox
+          {/* <LabelValueBox
             label="Area Pin Code"
             value={details?.project?.pin_code}
-          />
+          /> */}
         </div>
       </div>
-
       <div
         style={{
           display: "flex",
@@ -138,7 +146,6 @@ const ProjectDetails = ({ isOwnerView, details }) => {
           ))}
         </div>
       </div>
-
       <div
         style={{
           padding: "30px 0",
@@ -163,21 +170,20 @@ const ProjectDetails = ({ isOwnerView, details }) => {
               value={details?.project?.revenue_dist_details}
             />
           )}
-          {details?.project?.type === 3 && (
+          {/* {details?.project?.type === 3 && (
             <LabelValueBox
               label={"Upcoming Revenue Dirtribution Date"}
               value={details?.project?.revenue_dist_date}
             />
-          )}
+          )} */}
           {details?.project?.type === 3 && (
             <LabelValueBox
-              label={"Expected Approximate ROI"}
-              value={`${details?.project?.roi}%`}
+              label={"Expected Carbon Credits"}
+              value={`${details?.project?.expected_carbon_credits}`}
             />
           )}
         </div>
       </div>
-
       {/* {isOwnerView && (
         <div
           style={{

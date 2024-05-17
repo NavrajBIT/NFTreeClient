@@ -10,6 +10,8 @@ const ProjectOwnerDetails = ({ isOwnerView, details }) => {
   useEffect(() => {
     setSocialMedia((prev) => {
       try {
+        console.log("---------------");
+        console.log(JSON.parse(details?.project?.org_social_links));
         return JSON.parse(details?.project?.org_social_links);
       } catch {
         return null;
@@ -83,15 +85,15 @@ const ProjectOwnerDetails = ({ isOwnerView, details }) => {
               </div>
 
               <div className="socialMediaIcons">
-                {socialMedia?.instagram && (
-                  <a href={socialMedia?.instagram} target="_blank">
+                {socialMedia?.Instagram && (
+                  <a href={socialMedia?.Instagram} target="_blank">
                     {" "}
                     <img src="/Component 6.png" alt="Instagram" />
                   </a>
                 )}
-                {socialMedia?.linkedin && (
+                {socialMedia?.LinkedIn && (
                   <a
-                    href={socialMedia?.linkedin}
+                    href={socialMedia?.LinkedIn}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -99,12 +101,13 @@ const ProjectOwnerDetails = ({ isOwnerView, details }) => {
                     <img src="/Component 7.png" alt="LinkedIn" />
                   </a>
                 )}
-                {socialMedia?.twitter && (
-                  <a href={socialMedia?.twitter} target="_blank">
+                {socialMedia?.Twitter && (
+                  <a href={socialMedia?.Twitter} target="_blank">
                     {" "}
                     <img src="/Component 8.png" alt="Twitter" />
                   </a>
                 )}
+                {!socialMedia && "N/A"}
               </div>
             </div>
           </div>

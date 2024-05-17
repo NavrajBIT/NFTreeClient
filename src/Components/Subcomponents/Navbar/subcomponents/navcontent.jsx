@@ -18,7 +18,7 @@ const NavContent = () => {
   const navlinks = {
     Home: "/",
     Projects: "/projects",
-    Dashboard: "/dashboard",
+    // Dashboard: "/dashboard",
   };
 
   const handleScroll = () => {
@@ -76,7 +76,7 @@ const NavContent = () => {
         </div>
 
         <div className="logincontainer">
-          {auth.isLoggedIn ? (
+          {/* {auth.isLoggedIn ? (
             <div onMouseLeave={() => setIsDropdownOpen(false)}>
               <button
                 className="walletButton"
@@ -114,7 +114,13 @@ const NavContent = () => {
               title="Contact Us"
               onClick={() => navigate("/contact")}
             />
-          )}
+          )} */}
+
+          <Button
+            variant={"secondary"}
+            title="Contact Us"
+            onClick={() => navigate("/contact")}
+          />
 
           {auth.isLoggedIn ? (
             <div

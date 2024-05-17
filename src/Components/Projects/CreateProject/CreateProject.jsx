@@ -44,7 +44,7 @@ function CreateProject() {
     city: "",
     country: "",
     pin_code: "",
-    land_reg_proof: null,
+    // land_reg_proof: null,
     image: null,
     revenue_dist_date: "",
     revenue_dist_details: "",

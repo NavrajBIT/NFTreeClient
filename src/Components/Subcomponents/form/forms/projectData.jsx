@@ -65,7 +65,7 @@ const ProjectData = ({ submit, backStep, data }) => {
     let apiData = { ...data };
     apiData.org_social_links = JSON.stringify(data.org_social_links);
     Object.keys(apiData).map((key) => {
-      projectFormdata.append(key, data[key]);
+      projectFormdata.append(key, apiData[key]);
     });
     try {
       const projectResponse = await api.crud(
@@ -99,6 +99,9 @@ const ProjectData = ({ submit, backStep, data }) => {
         });
 
         await Promise.all(docsRequests);
+        alert(
+          "Project submitted successfully. Please wait for review or contact support@beimagine.tech."
+        );
         navigate(`/myprojects/${project_Id}`);
       }
     } catch (err) {

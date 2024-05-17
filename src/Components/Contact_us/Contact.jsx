@@ -65,9 +65,7 @@ const Contact = ({ page }) => {
           type="submit"
           onSubmit={handleSubmit}
         >
-          <div className="contactHeading">
-            Contact Us
-          </div>
+          <div className="contactHeading">Contact Us</div>
 
           <div className="form">
             <OpenInput
@@ -115,30 +113,29 @@ const ContactDetails = () => {
         </div>
         <a
           href="mailto:support@beimagine.tech"
-          style={{ fontWeight: 'normal', fontSize: '14px' }}
+          style={{ fontWeight: "normal", fontSize: "14px" }}
         >
-          support@beimagine.tech
+          {/* support@beimagine.tech */}
+          sales@abaadalkhayal.com
         </a>
       </div>
       <div className="contactInfoContainer">
-        <div style={{ fontSize: "1.5rem", fontWeight: "600" }}>
-          Visit Us:
-        </div>
+        <div style={{ fontSize: "1.5rem", fontWeight: "600" }}>Visit Us:</div>
         <div className="addressContainer">
-          <div>Beyond imagination tech LLC</div>
-          <div>M03 Laffa restaurant building,</div>
-          <div>Sheikh Khalifa Bin Zayed St - Opp. Burjuman Mall,</div>
-          <div>Dubai, United Arab Emirates</div>
+          {/* <div>Beyond imagination tech LLC</div> */}
+          <div>Aba’ad Alkhayal (Limited Liability Company)</div>
+          <div>7909 Al Qalaa, Al Rabie District 2955, Riyadh.</div>
+          <div>Saudi Arabia</div>
         </div>
       </div>
-      <div className="socialcontainer">
+      {/* <div className="socialcontainer">
         <a href="https://t.co/4LJmYD56rc" target="_blank">
           <img src={telegram} alt="Telegram" className="socialIcon" />
         </a>
         <a href="https://twitter.com/BITBhoomi" target="_blank">
           <img src={twitter} className="socialIcon" alt="Twitter" />
         </a>
-      </div>
+      </div> */}
     </div>
   );
 };

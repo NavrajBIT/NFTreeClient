@@ -58,10 +58,10 @@ const ProjectDocument = ({ isOwnerView, details }) => {
           minHeight: "clamp(100px,20vw,282px)",
         }}
       >
-        <ProjectDocumentBox
+        {/* <ProjectDocumentBox
           doc={details?.project?.land_reg_proof}
           name={"land Reg proof"}
-        />
+        /> */}
         <ProjectDocumentBox
           doc={details?.project?.nin_proof}
           name={"nin proof"}

@@ -49,21 +49,21 @@ const Organization = ({ backStep, submit, data, setData }) => {
   };
 
   const handleSubmit = async () => {
-    let isValid = true;
+    // let isValid = true;
 
-    if (data.org_social_links) {
-      Object.keys(data.org_social_links).map((key) => {
-        if (!data.org_social_links[key] || data.org_social_links[key] === "")
-          isValid = false;
-      });
-    } else isValid = false;
+    // if (data.org_social_links) {
+    //   Object.keys(data.org_social_links).map((key) => {
+    //     if (!data.org_social_links[key] || data.org_social_links[key] === "")
+    //       isValid = false;
+    //   });
+    // } else isValid = false;
 
-    if (!isValid) {
-      setError("Please provide atleast one social media link.");
-    } else {
-      console.log(data);
-    }
-
+    // if (!isValid) {
+    //   setError("Please provide atleast one social media link.");
+    // } else {
+    //   console.log(data);
+    // }
+    console.log(data.org_social_links);
     submit();
   };
 
@@ -93,17 +93,17 @@ const Organization = ({ backStep, submit, data, setData }) => {
         required: true,
       },
 
-      {
-        label: "Solana Wallet Address",
-        type: "text",
-        required: true,
-        value: data?.wallet,
-        onChange: (e) => {
-          updateData("wallet", e.target.value);
-        },
-        required: true,
-        maxLength: 100,
-      },
+      // {
+      //   label: "Solana Wallet Address",
+      //   type: "text",
+      //   required: true,
+      //   value: data?.wallet,
+      //   onChange: (e) => {
+      //     updateData("wallet", e.target.value);
+      //   },
+      //   required: true,
+      //   maxLength: 100,
+      // },
 
       {
         label: "Address",
@@ -159,7 +159,7 @@ const Organization = ({ backStep, submit, data, setData }) => {
       },
 
       {
-        label: "Social Media Links (atleast one link is mandatory)*",
+        label: "Social Media Links (optional)",
         type: "socialMediaData",
         value: data?.org_social_links,
         onChange: (e, label) => {
@@ -181,7 +181,7 @@ const Organization = ({ backStep, submit, data, setData }) => {
             org_social_links: socials,
           }));
         },
-        required: true,
+        required: false,
         options: { socialMediaOptions },
       },
     ],
