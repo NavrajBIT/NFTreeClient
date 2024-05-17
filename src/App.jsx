@@ -7,6 +7,7 @@ import { GoogleOAuthProvider } from "@react-oauth/google";
 import { AuthProvider, useAuth } from "./Contexts/AuthContext";
 import { useWallet, WalletProvider } from "./Contexts/walletContext";
 import ScrollToTop from "./Components/Subcomponents/Navbar/subcomponents/scrollToTop";
+import GoogleTagManager from "./GoogleTagManager";
 
 function App() {
   var client_id =
@@ -14,6 +15,7 @@ function App() {
   return (
     <AuthProvider>
       <WalletProvider>
+        <GoogleTagManager />
         <GoogleOAuthProvider clientId={client_id}>
           <BrowserRouter>
             <ScrollToTop />
