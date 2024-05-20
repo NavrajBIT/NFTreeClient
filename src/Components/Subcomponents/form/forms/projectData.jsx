@@ -374,7 +374,7 @@ const ProjectData = ({ submit, backStep, data }) => {
                 <div
                   className="secondarybutton"
                   style={{
-                    width: "fit-content",
+                    // width: "fit-content",
                     margin: "auto",
                     display: "flex",
 

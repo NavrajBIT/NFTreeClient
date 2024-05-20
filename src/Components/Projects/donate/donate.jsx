@@ -152,6 +152,21 @@ const Donate = () => {
   ];
 
   return (
+     <div
+      style={{
+        minHeight: "var(--min-height-page)",
+        width: "100vw",
+        background: "var(--bg-bright)",
+      }}
+    >
+         <div
+        style={{
+          width: "100%",
+          height: "var(--nav-height)",
+          backgroundImage: "linear-gradient(170deg, #1B2F2F, #224629)",
+        }}
+      />
+      
     <div
       style={{
         backgroundImage: "linear-gradient(to left top, #243900, #eaffc6)",
@@ -371,6 +386,7 @@ const Donate = () => {
           </div>
         </form>
       </div>
+    </div>
     </div>
   );
 };

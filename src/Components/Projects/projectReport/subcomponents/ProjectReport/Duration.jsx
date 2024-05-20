@@ -4,6 +4,7 @@ import { useLocation, Link } from 'react-router-dom';
 
 const Duration = () => {
     const API_URL = import.meta.env.VITE_BACKEND_URL;
+
     const [projectReportData, setProjectReportData] = useState({}); // Initialize with an empty object
     const [selectedDuration, setSelectedDuration] = useState('')
     const dates = projectReportData.co2_equivalent || [];
@@ -23,6 +24,12 @@ const Duration = () => {
 
 
     useEffect(() => {
+        // const navbar = document.querySelector(".navbarcontainer");
+        // if (navbar) {
+        //     navbar.style.backgroundColor ="green";
+
+        // }
+    
         const fetchReportData = async () => {
             try {
                 const response = await fetch(
@@ -52,7 +59,22 @@ const Duration = () => {
 
 
     return (
+        <div
+      style={{
+        minHeight: "var(--min-height-page)",
+        width: "100vw",
+        background: "var(--bg-bright)",
+      }}
+    >
+         <div
+        style={{
+          width: "100%",
+          height: "var(--nav-height)",
+          backgroundImage: "linear-gradient(170deg, #1B2F2F, #224629)",
+        }}
+      />
         <div className="duration">
+        
             <div className='durationBox'>
                 <div className='Ddates'>
                     <h3>Select The Timeline:</h3>
@@ -74,6 +96,10 @@ const Duration = () => {
                     </Link>
                 </div>
             </div>
+
+      
+        
+        </div>
         </div>
     )
 }

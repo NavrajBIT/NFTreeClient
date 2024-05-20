@@ -154,7 +154,9 @@ const Input = ({ inputData, error }) => {
           }}
         >
           {error ? "This field is required" : ""}
-          {inputData.socialMediaError != "" && inputData.socialMediaError}
+          {inputData.socialMediaError.instagram != "" && inputData.socialMediaError.instagram}<br/>
+          {inputData.socialMediaError.linkedin != "" && inputData.socialMediaError.linkedin}<br/>
+          {inputData.socialMediaError.twitter != "" && inputData.socialMediaError.twitter}<br/>
         </div>
       </div>
     );

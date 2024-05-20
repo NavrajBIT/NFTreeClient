@@ -113,7 +113,7 @@ const Representative = ({ submit, data, setData }) => {
               onChange={(e) => {
                 updateData("nin_proof", e.target.files[0]);
               }}
-              maxLength="50"
+              maxLength="35"
             />
 
             <div style={{ color: "red", height: "30px" }}>{error}</div>
@@ -155,6 +155,7 @@ const Representative = ({ submit, data, setData }) => {
               />
             </div>
             <br />
+            <label className="profileName">Upload Profile</label>
           </div>
         </div>
         <button

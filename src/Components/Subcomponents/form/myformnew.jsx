@@ -13,6 +13,7 @@ const Myform = ({
   back,
   socialMediaError,
 }) => {
+ 
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const handleFormSubmit = (e) => {

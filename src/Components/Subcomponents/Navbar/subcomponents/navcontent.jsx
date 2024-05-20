@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import Button from "../../buttons/button";
 import { useAuth } from "../../../../Contexts/AuthContext";
 import Profiledropdown from "./profiledropdown";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, } from "react";
 import Mobilemenu from "./mobilemenu";
 import "../Navbar.css";
 import { useWallet } from "../../../../Contexts/walletContext";
@@ -14,6 +14,9 @@ const NavContent = () => {
   const [profile, setIsprofile] = useState(false);
   const [scroll, setScroll] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  
+
+
 
   const navlinks = {
     Home: "/",
@@ -21,8 +24,13 @@ const NavContent = () => {
     // Dashboard: "/dashboard",
   };
 
+
+
+
   const handleScroll = () => {
+ 
     window.scrollY >= 2 ? setScroll(true) : setScroll(false);
+
   };
 
   useEffect(() => {
@@ -33,9 +41,12 @@ const NavContent = () => {
     };
   }, []);
 
+  // console.log(scroll);
+
   return (
     <div
       className="navbarcontainer"
+      id="navbar"
       style={{
         backgroundColor: scroll ? "var(--green-100)" : "transparent",
         backgroundImage: scroll

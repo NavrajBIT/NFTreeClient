@@ -7,6 +7,11 @@ import { GrLinkNext } from "react-icons/gr";
 
 const Organization = ({ backStep, submit, data, setData }) => {
   const [error, setError] = useState("");
+  const [socialMediaError, setSocialMediaError] = useState({
+    linkedin: "",
+    instagram: "",
+    twitter: "",  
+  });
   const orgKeys = [
     "org_name",
     "org_description",
@@ -48,6 +53,26 @@ const Organization = ({ backStep, submit, data, setData }) => {
     });
   };
 
+
+  const validateURL = (url, platform) => {
+    if (!url) {
+      return '';
+    }
+    const patterns = {
+      instagram: /^https:\/\/(www\.)?instagram\.com\/[A-Za-z0-9._%+-]+\/?$/,
+      linkedin: /^(https?:\/\/)?(www\.)?linkedin\.com\/company\/[A-Za-z0-9._%+-]+/,
+      twitter: /^(https?:\/\/)?(www\.)?x\.com\/[A-Za-z0-9._%+-]+/
+    };
+
+    if (!patterns[platform].test(url)) {
+      return `Invalid ${platform} URL`;
+    }
+
+    return '';
+  };
+
+
+
   const handleSubmit = async () => {
     // let isValid = true;
 
@@ -63,9 +88,28 @@ const Organization = ({ backStep, submit, data, setData }) => {
     // } else {
     //   console.log(data);
     // }
-    console.log(data.org_social_links);
-    submit();
+    if(data.org_social_links) {
+      const instagramError =  validateURL(data.org_social_links.Instagram, 'instagram');
+      const linkedinError = validateURL(data.org_social_links.LinkedIn, 'linkedin');
+      const twitterError = validateURL(data.org_social_links.Twitter, 'twitter');
+      
+      if (instagramError || linkedinError || twitterError) {
+        console.log({ instagramError, linkedinError, twitterError });
+        setSocialMediaError({
+          instagram: instagramError,
+          linkedin: linkedinError,
+          twitter: twitterError
+        });
+        return;
+      }else{
+        submit();
+      }
+
+    }
+     submit();
   };
+
+ 
 
   const accountFormData = [
     [
@@ -161,6 +205,7 @@ const Organization = ({ backStep, submit, data, setData }) => {
       {
         label: "Social Media Links (optional)",
         type: "socialMediaData",
+        socialMediaError: socialMediaError,
         value: data?.org_social_links,
         onChange: (e, label) => {
           setError("");
@@ -182,7 +227,9 @@ const Organization = ({ backStep, submit, data, setData }) => {
           }));
         },
         required: false,
+
         options: { socialMediaOptions },
+       
       },
     ],
   ];
@@ -206,6 +253,7 @@ const Organization = ({ backStep, submit, data, setData }) => {
       back={backStep}
       handleSubmit={handleSubmit}
       error={error}
+      
     >
       {error && <div style={{ color: "red" }}>*{error}</div>}
     </Myform>

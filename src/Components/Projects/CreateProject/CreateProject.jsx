@@ -69,6 +69,20 @@ function CreateProject() {
   return (
     <div
       style={{
+        minHeight: "var(--min-height-page)",
+        width: "100vw",
+        background: "var(--bg-bright)",
+      }}
+    >
+         <div
+        style={{
+          width: "100%",
+          height: "var(--nav-height)",
+          backgroundImage: "linear-gradient(170deg, #1B2F2F, #224629)",
+        }}
+      />
+    <div
+      style={{
         backgroundImage:
           step == 1 || step == 3
             ? "linear-gradient(to bottom right, #243900, #EAFFC6)"
@@ -139,6 +153,7 @@ function CreateProject() {
           />
         )}
       </div>
+    </div>
     </div>
   );
 }

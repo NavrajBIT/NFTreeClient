@@ -21,10 +21,13 @@ import ProjectReport from "../../Projects/projectReport/subcomponents/ProjectRep
 import Dashboard from "../../Dashboard/Dashboard";
 import Duration from "../../Projects/projectReport/subcomponents/ProjectReport/Duration";
 
+
 export default function Navbar() {
+  
+
   return (
     <>
-      <NavContent />
+      <NavContent  />
       <Routes>
         <Route index element={<Home />} />
         <Route path="/home" element={<Home />} />
@@ -36,7 +39,7 @@ export default function Navbar() {
         <Route path="/projects/create" element={<CreateProject />} />
         <Route path="/projects/:projectId" element={<UserView />} />
         <Route path="/projects/:projectId/report" element={<ProjectReport />} />
-        <Route path="/projects/:projectId/Duration" element={<Duration />} />
+        <Route path="/projects/:projectId/Duration" element={<Duration  />} />
         <Route path="/projects/:projectId/donate" element={<Donate />} />
 
         <Route

@@ -1,8 +1,15 @@
 import { useState } from "react";
 import "./input.css";
-
 import { IoMdAttach } from "react-icons/io";
 import { IoAttachSharp } from "react-icons/io5";
+
+
+const truncateFileName = (fileName, maxLength) => {
+  if (fileName.length > maxLength) {
+    return fileName.substring(0, maxLength - 3) + '...';
+  }
+  return fileName;
+};
 
 const ProjectFormInput = ({
   label,
@@ -186,6 +193,16 @@ const ProjectFormInput = ({
   }
 
   if (type == "file") {
+    let displayName = "Click to Upload";
+    if (value) {
+      if (typeof value === "string") {
+        displayName = value.split("/").pop();
+      } else {
+        displayName = value.name;
+      }
+      // Truncate the file name if necessary
+     displayName = truncateFileName(displayName, maxLength);
+    }
     return (
       <div className="projectFormContainer">
         <p style={{ marginBottom: "2px", fontWeight: "500", color: "#404040" }}>
@@ -195,16 +212,11 @@ const ProjectFormInput = ({
         <div className="projectFormFileupload">
           <div>
             <p>
-              {value
-                ? typeof value == "string"
-                  ? value.split("/")[value.split("/").length - 1]
-                  : value.name
-                : "Click to Upload"}
+             {displayName}
             </p>
             <IoAttachSharp style={{ color: "black" }} size={24} />
           </div>
-
-          <input type="file" onChange={onChange} />
+          <input type="file"  onChange={onChange} />
         </div>
       </div>
     );

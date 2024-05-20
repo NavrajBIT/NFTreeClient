@@ -215,7 +215,7 @@ const ProjectDocument = ({ isOwnerView, details }) => {
                 background: "#cce5a0",
                 padding: "10px 35px",
                 borderRadius: "10px",
-                fontWeight: "500",
+                // fontWeight: "500",
                 cursor: "pointer",
               }}
               onClick={handleUpload}
