@@ -206,9 +206,7 @@ const Sidebar = ({ filters, setFilters, data, isMobile }) => {
         <br />
       */}
 
-        <div style={{ fontSize: "18px", fontWeight: "700" }}>
-          Investment Type
-        </div>
+        <div style={{ fontSize: "18px", fontWeight: "700" }}>Project Type</div>
 
         {investmentTypeList.map((type, index) => (
           <Filter

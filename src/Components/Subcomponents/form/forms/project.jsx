@@ -5,6 +5,7 @@ import Loading from "../../loading/loading";
 import Input from "../inputnew";
 import { GrLinkNext } from "react-icons/gr";
 import { GrLinkPrevious } from "react-icons/gr";
+import currencies from "./currencies";
 
 const Project = ({ backStep, submit, data, setData }) => {
   const [error, setError] = useState("");
@@ -32,6 +33,15 @@ const Project = ({ backStep, submit, data, setData }) => {
     // "phase",
     // "donation_method",
   ];
+
+  let currencyOptions = [];
+
+  Object.keys(currencies).map((curr) => {
+    currencyOptions.push({
+      label: `${curr}(${currencies[curr]})`,
+      value: `${curr}(${currencies[curr]})`,
+    });
+  });
 
   const changeValue = (key, value) => {
     setError("");
@@ -301,23 +311,43 @@ const Project = ({ backStep, submit, data, setData }) => {
             maxLength: 100,
           }}
         />
-        {data.type != 1 && (
-          <Input
-            inputData={{
-              label:
-                data.type === 2
-                  ? "Donation per plant(SAR ﷼)"
-                  : "Cost per plant(SAR ﷼)",
-              type: "text",
-              onlyNumber: true,
-              acceptFloat: true,
-              required: true,
-              value: data["donation"],
-              onChange: (e) => changeValue("donation", e.target.value),
-              maxLength: 100,
-            }}
-          />
-        )}
+
+        <Input
+          inputData={{
+            label: `Cost per plant ${data.currency}`,
+
+            type: "text",
+            onlyNumber: true,
+            acceptFloat: true,
+            required: true,
+            value: data["donation"],
+            onChange: (e) => changeValue("donation", e.target.value),
+            maxLength: 100,
+          }}
+        />
+
+        <Input
+          inputData={{
+            label: "Currency",
+            type: "select",
+            required: true,
+            value: (function () {
+              let label = "";
+              currencyOptions.map((type) => {
+                if (type.value === data.currency) {
+                  label = type.label;
+                }
+              });
+              return label;
+            })(),
+            options: currencyOptions,
+            select: true,
+            onChange: (e) => {
+              changeValue("currency", e.target.value);
+            },
+            maxLength: 50,
+          }}
+        />
         {/* {project.type != 1 && (
           <div style={{ padding: "var(--padding-main) 0" }}>
             Total amount to be raised = {project.type === 2 ? " $" : " $"}

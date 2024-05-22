@@ -64,12 +64,12 @@ const ProjectDetails = ({ isOwnerView, details }) => {
               value={details?.project?.donation}
             />
           )}
-          {details?.project?.type === 3 && (
-            <LabelValueBox
-              label="Cost Per Plant (SAR ﷼)"
-              value={details?.project?.donation}
-            />
-          )}
+
+          <LabelValueBox
+            label={`Cost Per Plant ${details?.project?.currency}`}
+            value={details?.project?.donation}
+          />
+
           <LabelValueBox
             label="Total Number Of Plants Planned"
             value={details?.project?.plant_planned}

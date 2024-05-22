@@ -152,138 +152,126 @@ const Donate = () => {
   ];
 
   return (
-     <div
+    <div
       style={{
         minHeight: "var(--min-height-page)",
         width: "100vw",
         background: "var(--bg-bright)",
       }}
     >
-         <div
+      <div
         style={{
           width: "100%",
           height: "var(--nav-height)",
           backgroundImage: "linear-gradient(170deg, #1B2F2F, #224629)",
         }}
       />
-      
-    <div
-      style={{
-        backgroundImage: "linear-gradient(to left top, #243900, #eaffc6)",
-        width: "100%",
-        minHeight: "var(--min-height-page)",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-      }}
-    >
-      {isLoading && <LocalLoading />}
+
       <div
         style={{
+          backgroundImage: "linear-gradient(to left top, #243900, #eaffc6)",
           width: "100%",
-          maxWidth: "var(--max-width-form)",
-          minHeight: "var(--min-height-form)",
-          background: "white",
-          padding: "50px",
+          minHeight: "var(--min-height-page)",
           display: "flex",
-          flexDirection: "column",
-          gap: "var(--padding-light)",
-          borderRadius: "var(--border-radius)",
-          boxShadow: "3px 4px 30px 0px",
-          margin: "10% 0",
+          alignItems: "center",
+          justifyContent: "center",
         }}
       >
-        <form
+        {isLoading && <LocalLoading />}
+        <div
           style={{
             width: "100%",
             maxWidth: "var(--max-width-form)",
-            margin: "auto",
+            minHeight: "var(--min-height-form)",
+            background: "white",
+            padding: "50px",
             display: "flex",
             flexDirection: "column",
             gap: "var(--padding-light)",
+            borderRadius: "var(--border-radius)",
+            boxShadow: "3px 4px 30px 0px",
+            margin: "10% 0",
           }}
-          id={"formId"}
-          onSubmit={handleSubmit}
         >
-          <div
+          <form
             style={{
-              fontSize: "1.5rem",
-              fontWeight: "bold",
-              color: "var(--green-80)",
+              width: "100%",
+              maxWidth: "var(--max-width-form)",
+              margin: "auto",
+              display: "flex",
+              flexDirection: "column",
+              gap: "var(--padding-light)",
             }}
+            id={"formId"}
+            onSubmit={handleSubmit}
           >
-            Investment Details
-            <p
+            <div
               style={{
-                border: "1px solid #E6E6E6",
-                margin: "var(--padding-light) 0 var(--padding-large)",
+                fontSize: "1.5rem",
+                fontWeight: "bold",
+                color: "var(--green-80)",
+              }}
+            >
+              Investment Details
+              <p
+                style={{
+                  border: "1px solid #E6E6E6",
+                  margin: "var(--padding-light) 0 var(--padding-large)",
+                }}
+              />
+            </div>
+            <Input
+              inputData={{
+                label: "Invest In",
+                type: "text",
+
+                value: project?.name,
+                onChange: () => {},
+                maxLength: 5000,
               }}
             />
-          </div>
-          <Input
-            inputData={{
-              label: "Invest In",
-              type: "text",
-              required: true,
-              value: project?.name,
-              onChange: () => {},
-              maxLength: 5000,
-            }}
-          />
 
-          <Input
-            inputData={{
-              label: "Contribution Type",
-              type: "select",
-              required: true,
-              value: (function () {
-                let label = "";
-                investOptions.map((type) => {
-                  if (type.value === contributionType) {
-                    label = type.label;
+            <Input
+              inputData={{
+                label: "Contribution Type",
+                type: "text",
+
+                value: project?.contribution_type,
+
+                onChange: (e) => {},
+                maxLength: 50,
+              }}
+            />
+
+            <div
+              style={{
+                marginBottom: "10px",
+              }}
+            >
+              {contributionType === "Donation" &&
+                `Note: Minimum ${project?.min_trees_for_donation} trees are required.`}
+              {contributionType === "Investment" &&
+                `Note: Minimum ${project?.min_trees_for_investment} trees are required.`}
+            </div>
+
+            <Input
+              inputData={{
+                label: "Enter number of trees",
+                type: "number",
+                required: true,
+                value: trees,
+                onChange: (e) => {
+                  if (e.target.value > availableTrees) {
+                    setTrees(availableTrees);
+                  } else {
+                    setTrees(e.target.value);
                   }
-                });
-                return label;
-              })(),
-              options: investOptions,
-              select: true,
-              onChange: (e) => {
-                console.log(e.target.value);
-                setContributionType(e.target.value);
-              },
-              maxLength: 50,
-            }}
-          />
+                },
+                maxLength: 50,
+              }}
+            />
 
-          <div
-            style={{
-              marginBottom: "10px",
-            }}
-          >
-            {contributionType === "Donation" &&
-              `Note: Minimum ${project?.min_trees_for_donation} trees are required.`}
-            {contributionType === "Investment" &&
-              `Note: Minimum ${project?.min_trees_for_investment} trees are required.`}
-          </div>
-
-          <Input
-            inputData={{
-              label: "Enter number of trees",
-              type: "number",
-              required: true,
-              value: trees,
-              onChange: (e) => {
-                if (e.target.value > availableTrees) {
-                  setTrees(availableTrees);
-                } else {
-                  setTrees(e.target.value);
-                }
-              },
-              maxLength: 50,
-            }}
-          />
-
-          {/* <Input
+            {/* <Input
             inputData={{
               label: "Investment Token",
               type: "select",
@@ -300,16 +288,16 @@ const Donate = () => {
               maxLength: 50,
             }}
           /> */}
-          <Input
-            inputData={{
-              label: "Total amount in SAR (﷼)",
-              type: "text",
-              value: `${totalUSD}`,
-              onChange: (e) => {},
-              maxLength: 500,
-            }}
-          />
-          {/* <Input
+            <Input
+              inputData={{
+                label: `Total amount in ${project?.currency}`,
+                type: "text",
+                value: `${totalUSD}`,
+                onChange: (e) => {},
+                maxLength: 500,
+              }}
+            />
+            {/* <Input
             inputData={{
               label: `Total amount in ${token.value} token`,
               type: "text",
@@ -323,8 +311,8 @@ const Donate = () => {
             }}
           /> */}
 
-          <div>
-            {/* <Input
+            <div>
+              {/* <Input
               inputData={{
                 label: "Connected Wallet Address",
                 type: "text",
@@ -335,7 +323,7 @@ const Donate = () => {
                 maxLength: 500,
               }}
             /> */}
-            {/* <Input
+              {/* <Input
               inputData={{
                 label: "Connected Wallet Balance",
                 type: "text",
@@ -344,16 +332,16 @@ const Donate = () => {
                 maxLength: 500,
               }}
             /> */}
-          </div>
+            </div>
 
-          <div
-            style={{
-              display: "flex",
-              gap: "var(--padding-large)",
-              justifyContent: "center",
-            }}
-          >
-            {/* {wallet?.isWalletConnected ? (
+            <div
+              style={{
+                display: "flex",
+                gap: "var(--padding-large)",
+                justifyContent: "center",
+              }}
+            >
+              {/* {wallet?.isWalletConnected ? (
               <button
                 type="submit"
                 style={{
@@ -370,23 +358,23 @@ const Donate = () => {
             ) : (
               <div>Please connect wallet!</div>
             )} */}
-            <button
-              type="submit"
-              style={{
-                padding: "var(--padding-light)",
-                background: "#354A12",
-                width: "var(--project-button)",
-                borderRadius: "5px",
-                marginTop: "var(--padding-large)",
-                marginBottom: "100px",
-              }}
-            >
-              Contribute
-            </button>
-          </div>
-        </form>
+              <button
+                type="submit"
+                style={{
+                  padding: "var(--padding-light)",
+                  background: "#354A12",
+                  width: "var(--project-button)",
+                  borderRadius: "5px",
+                  marginTop: "var(--padding-large)",
+                  marginBottom: "100px",
+                }}
+              >
+                Contribute
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
-    </div>
     </div>
   );
 };

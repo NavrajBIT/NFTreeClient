@@ -51,6 +51,7 @@ function CreateProject() {
     roi: "",
     phase: 1,
     donation_method: 1,
+    currency: "USD($)",
   });
 
   const stepperData = [
@@ -74,86 +75,86 @@ function CreateProject() {
         background: "var(--bg-bright)",
       }}
     >
-         <div
+      <div
         style={{
           width: "100%",
           height: "var(--nav-height)",
           backgroundImage: "linear-gradient(170deg, #1B2F2F, #224629)",
         }}
       />
-    <div
-      style={{
-        backgroundImage:
-          step == 1 || step == 3
-            ? "linear-gradient(to bottom right, #243900, #EAFFC6)"
-            : "linear-gradient(to top left, #243900, #EAFFC6)",
-        width: "100%",
-        minHeight: "var(--min-height-page)",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-      }}
-    >
       <div
         style={{
+          backgroundImage:
+            step == 1 || step == 3
+              ? "linear-gradient(to bottom right, #243900, #EAFFC6)"
+              : "linear-gradient(to top left, #243900, #EAFFC6)",
           width: "100%",
-          maxWidth: "var(--max-width-form)",
-          minHeight: "var(--min-height-form)",
-          background: "white",
-          padding: "var(--padding-main)",
+          minHeight: "var(--min-height-page)",
           display: "flex",
-          flexDirection: "column",
-          gap: "var(--padding-light)",
-          borderRadius: "var(--border-radius)",
-          boxShadow: "3px 4px 30px 0px",
-          margin: "var(--nav-height) 0",
+          alignItems: "center",
+          justifyContent: "center",
         }}
       >
-        <Stepper data={stepperData} step={step} />
+        <div
+          style={{
+            width: "100%",
+            maxWidth: "var(--max-width-form)",
+            minHeight: "var(--min-height-form)",
+            background: "white",
+            padding: "var(--padding-main)",
+            display: "flex",
+            flexDirection: "column",
+            gap: "var(--padding-light)",
+            borderRadius: "var(--border-radius)",
+            boxShadow: "3px 4px 30px 0px",
+            margin: "var(--nav-height) 0",
+          }}
+        >
+          <Stepper data={stepperData} step={step} />
 
-        {step === 1 && (
-          <Representative
-            submit={() => {
-              setStep(2);
-            }}
-            data={data}
-            setData={setData}
-          />
-        )}
-        {step === 2 && (
-          <Organization
-            submit={() => {
-              setStep(3);
-            }}
-            backStep={() => {
-              setStep(1);
-            }}
-            data={data}
-            setData={setData}
-          />
-        )}
-        {step === 3 && (
-          <Project
-            submit={() => {
-              setStep(4);
-            }}
-            backStep={() => {
-              setStep(2);
-            }}
-            data={data}
-            setData={setData}
-          />
-        )}
-        {step === 4 && (
-          <ProjectData
-            backStep={() => {
-              setStep(3);
-            }}
-            data={data}
-          />
-        )}
+          {step === 1 && (
+            <Representative
+              submit={() => {
+                setStep(2);
+              }}
+              data={data}
+              setData={setData}
+            />
+          )}
+          {step === 2 && (
+            <Organization
+              submit={() => {
+                setStep(3);
+              }}
+              backStep={() => {
+                setStep(1);
+              }}
+              data={data}
+              setData={setData}
+            />
+          )}
+          {step === 3 && (
+            <Project
+              submit={() => {
+                setStep(4);
+              }}
+              backStep={() => {
+                setStep(2);
+              }}
+              data={data}
+              setData={setData}
+            />
+          )}
+          {step === 4 && (
+            <ProjectData
+              backStep={() => {
+                setStep(3);
+              }}
+              data={data}
+            />
+          )}
+        </div>
       </div>
-    </div>
     </div>
   );
 }
