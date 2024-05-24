@@ -167,7 +167,7 @@ const Project = ({ backStep, submit, data, setData }) => {
         {data.type == 3 && (
           <Input
             inputData={{
-              label: "Investment Type",
+              label: "Project Type",
               type: "select",
               required: true,
               value: (function () {
@@ -212,7 +212,7 @@ const Project = ({ backStep, submit, data, setData }) => {
         /> */}
         <Input
           inputData={{
-            label: "Project Name (20 char max)",
+            label: "Project Name (20 characters max)",
             type: "text",
             required: true,
             value: data["name"],
@@ -314,20 +314,6 @@ const Project = ({ backStep, submit, data, setData }) => {
 
         <Input
           inputData={{
-            label: `Cost per plant ${data.currency}`,
-
-            type: "text",
-            onlyNumber: true,
-            acceptFloat: true,
-            required: true,
-            value: data["donation"],
-            onChange: (e) => changeValue("donation", e.target.value),
-            maxLength: 100,
-          }}
-        />
-
-        <Input
-          inputData={{
             label: "Currency",
             type: "select",
             required: true,
@@ -348,6 +334,21 @@ const Project = ({ backStep, submit, data, setData }) => {
             maxLength: 50,
           }}
         />
+
+        <Input
+          inputData={{
+            label: `Cost per plant ${data.currency}`,
+
+            type: "text",
+            onlyNumber: true,
+            acceptFloat: true,
+            required: true,
+            value: data["donation"],
+            onChange: (e) => changeValue("donation", e.target.value),
+            maxLength: 100,
+          }}
+        />
+
         {/* {project.type != 1 && (
           <div style={{ padding: "var(--padding-main) 0" }}>
             Total amount to be raised = {project.type === 2 ? " $" : " $"}
@@ -466,7 +467,7 @@ const Project = ({ backStep, submit, data, setData }) => {
         /> */}
         <Input
           inputData={{
-            label: "Project Image",
+            label: "Project Banner Image",
             type: "file",
             required: true,
             value: data?.image?.name,

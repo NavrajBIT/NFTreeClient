@@ -19,6 +19,7 @@ const UserView = ({ isOwnerView }) => {
         width: "100%",
         minHeight: "var(--min-height-page)",
         display: "flex",
+        flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
         zIndex: "1",
@@ -26,6 +27,17 @@ const UserView = ({ isOwnerView }) => {
       }}
       className="projectContainer"
     >
+      {isOwnerView && (
+        <div
+          style={{
+            paddingTop: "50px",
+            fontSize: "50px",
+            color: "white",
+          }}
+        >
+          Project Preview
+        </div>
+      )}
       <div
         style={{
           width: " 95%",

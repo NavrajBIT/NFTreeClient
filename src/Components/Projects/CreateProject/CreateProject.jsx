@@ -19,7 +19,7 @@ function CreateProject() {
     phone: "",
     nin: "",
     nin_proof: null,
-    picture: null,
+    // picture: null,
     // organization data
     org_name: "",
     org_description: "",

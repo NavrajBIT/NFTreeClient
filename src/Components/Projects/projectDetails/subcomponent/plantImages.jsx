@@ -32,7 +32,7 @@ const PlantImages = ({ isOwnerView, details }) => {
         />
         {details?.project?.type === 3 && (
           <ProjectPageButton
-            text={"Invest"}
+            text={"Contribute"}
             icon={"/Group.png"}
             onClick={() => navigate(`/projects/${details?.projectId}/donate`)}
           />

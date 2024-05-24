@@ -8,7 +8,7 @@ const Representative = ({ submit, data, setData }) => {
   const [error, setError] = useState("");
   const profilepicrref = useRef(null);
 
-  const userKeys = ["designation", "phone", "nin", "nin_proof", "picture"];
+  const userKeys = ["designation", "phone", "nin", "nin_proof"];
 
   const updateData = (key, value) => {
     setError("");
@@ -26,7 +26,7 @@ const Representative = ({ submit, data, setData }) => {
       if (!data[key] || data[key] == "") {
         isValid = false;
         if (key === "nin_proof") setError("Please Upload NIN Proof");
-        else if (key === "picture") setError("Please Upload Profile Picture");
+        // else if (key === "picture") setError("Please Upload Profile Picture");
         else setError("* All fields are required.");
       }
     });
@@ -106,7 +106,7 @@ const Representative = ({ submit, data, setData }) => {
               maxLength="50"
             />
             <ProjectFormInput
-              label="NIN Proof"
+              label="National Identification Number Proof"
               type="file"
               required
               value={data?.nin_proof?.name}
@@ -155,7 +155,7 @@ const Representative = ({ submit, data, setData }) => {
               />
             </div>
             <br />
-            <label className="profileName">Upload Profile</label>
+            <label className="profileName">Click to Upload Photo</label>
           </div>
         </div>
         <button

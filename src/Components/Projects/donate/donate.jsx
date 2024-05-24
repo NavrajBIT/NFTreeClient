@@ -212,7 +212,7 @@ const Donate = () => {
                 color: "var(--green-80)",
               }}
             >
-              Investment Details
+              Contribution Details
               <p
                 style={{
                   border: "1px solid #E6E6E6",
@@ -222,7 +222,7 @@ const Donate = () => {
             </div>
             <Input
               inputData={{
-                label: "Invest In",
+                label: "Project:",
                 type: "text",
 
                 value: project?.name,
