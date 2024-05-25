@@ -5,6 +5,7 @@ import PlantImages from "./subcomponent/plantImages";
 import ProjectDocument from "./subcomponent/projectDocument";
 import ProjectGallery from "./subcomponent/projectGallery";
 import ProjectOwnerDetails from "./subcomponent/projectOwnerDetails";
+import ProjectChainDetails from "./subcomponent/projectChainDetails";
 import usedetails from "./usedetails";
 import LocalLoading from "../../Subcomponents/loading/localloading";
 import { useParams } from "react-router-dom";
@@ -51,6 +52,9 @@ const UserView = ({ isOwnerView }) => {
       >
         <ProjectDesc isOwnerView={isOwnerView} details={details} />
         <ProjectDetails isOwnerView={isOwnerView} details={details} />
+
+        <ProjectChainDetails details={details} />
+
         {details?.project?.type !== 1 && (
           <FundingProcess isOwnerView={isOwnerView} details={details} />
         )}
