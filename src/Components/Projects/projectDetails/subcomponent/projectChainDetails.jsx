@@ -5,33 +5,29 @@ const ProjectChainDetails = ({ details }) => {
     <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
       <h1 className="projectHeading">Blockchain Details</h1>
       <div className="blockchainDetails" >
-        <div style={{ display: "flex", gap: "10px" }}>
+        <div style={{ display: "flex", gap: "30px", flexDirection: "column",width: "100%" }}>
           <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              gap: "20px",
-              wordWrap: "break-word",
-            }}
+          className="blockchainText"
           >
-            <div style={{fontWeight:"600"}}>Tx Signature : </div>
-            <div style={{fontWeight:"600"}}>
-              Program Account :
+            <div className="signiture" style={{whiteSpace:"nowrap"}}>
+               <b> Tx Signature :</b>
             </div>
+              <div style={{wordBreak:"break-word"}}>
+              {details?.project?.blockchain?.signature}
+              </div>
           </div>
+
           <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              gap: "20px",
-              wordWrap: "break-word",
-            }}
+          className="blockchainText"
           >
-            <div> {details?.project?.blockchain?.signature}</div>
-            <div>
+            <div style={{whiteSpace:"nowrap"}}>
+            <b> Program Account :</b>
+            </div>
+            <div style={{wordBreak:"break-word"}}>
               {details?.project?.blockchain?.program_account}
             </div>
           </div>
+
         </div>
         <button
           className="progressBtn"

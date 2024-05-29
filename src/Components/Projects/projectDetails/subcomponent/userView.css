@@ -41,11 +41,22 @@ p {
   flex-direction: column;
   gap: 2rem;
   width: 90%;
+  height: auto;
   padding: 40px 50px;
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
   background: linear-gradient(190.83deg, #D4F6D6 0%, #FFFFFF 97.91%);
   box-shadow: -2px 4px 20px 0px #BEDDC1;
+}
+
+.blockchainText{
+  display: flex;
+  gap: 20px;
+  width: 100%;
+}
+
+.signiture{
+  margin-right: 2.5rem;
 }
 
 .btnsAndPlantImageContainer {
@@ -246,6 +257,19 @@ p {
   .updateDocButton span {
     font-size: 12px !important;
   }
+
+  .blockchainDetails{
+    padding: 15px 20px;
+  }
+
+  .blockchainText{
+    font-size: 13px;
+  }
+
+  .signiture{
+    margin-right: 2rem;
+  }
+
 }
 
 @media screen and (max-width: 500px) {
