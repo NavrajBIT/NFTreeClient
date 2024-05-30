@@ -2,10 +2,17 @@ import React from "react";
 
 const ProjectChainDetails = ({ details }) => {
   return (
-    <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
       <h1 className="projectHeading">Blockchain Details</h1>
-      <div className="blockchainDetails" >
-        <div style={{ display: "flex", gap: "30px", flexDirection: "column",width: "100%" }}>
+      <div className="blockchainDetails">
+        {/* <div style={{ display: "flex", gap: "30px", flexDirection: "column",width: "100%" }}>
           <div
           className="blockchainText"
           >
@@ -28,7 +35,10 @@ const ProjectChainDetails = ({ details }) => {
             </div>
           </div>
 
-        </div>
+        </div> */}
+        We have created a digital locker system that stores all the project
+        details and documents on solana blockchain. To view the details click
+        the link below.
         <button
           className="progressBtn"
           onClick={() => {
@@ -38,7 +48,7 @@ const ProjectChainDetails = ({ details }) => {
           }}
           style={{
             margin: "auto",
-            padding: "1.3% 8%"
+            padding: "1.3% 8%",
           }}
         >
           Explorer
