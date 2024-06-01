@@ -37,6 +37,11 @@ const PlantImages = ({ isOwnerView, details }) => {
             onClick={() => navigate(`/projects/${details?.projectId}/donate`)}
           />
         )}
+
+        {/* <ProjectPageButton 
+        text={"Proof"}
+        onClick={() => navigate(`/projects/${details?.projectId}/Proof`)}/> */}
+        
       </div>
       {/* {isOwnerView && (
         <div div className="buttonContainer">

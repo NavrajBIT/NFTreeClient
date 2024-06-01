@@ -20,6 +20,7 @@ import UserView from "../../Projects/projectDetails/userView";
 import ProjectReport from "../../Projects/projectReport/subcomponents/ProjectReport/ProjectReport";
 import Dashboard from "../../Dashboard/Dashboard";
 import Duration from "../../Projects/projectReport/subcomponents/ProjectReport/Duration";
+import Proof from "../../Projects/projectProof/proof.jsx"
 
 
 export default function Navbar() {
@@ -41,6 +42,7 @@ export default function Navbar() {
         <Route path="/projects/:projectId/report" element={<ProjectReport />} />
         <Route path="/projects/:projectId/Duration" element={<Duration  />} />
         <Route path="/projects/:projectId/donate" element={<Donate />} />
+        <Route path="/projects/:projectId/Proof" element={<Proof />} />
 
         <Route
           path="/myprojects/:projectId"

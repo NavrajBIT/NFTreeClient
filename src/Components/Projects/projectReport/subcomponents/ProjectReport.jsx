@@ -283,4 +283,4 @@ const ProjectReport = () => {
     </div>
   );
 };
-export default ProjectReport;
+export default ProjectReport(projectReportData);
