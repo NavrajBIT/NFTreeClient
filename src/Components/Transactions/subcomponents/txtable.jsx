@@ -53,7 +53,7 @@ const Txtable = ({ usetx }) => {
       </div>
       {transactionsToShow?.map((tx, txindex) => (
         <div className="txTableRow" key={`tx-${txindex}`}>
-          <div className="txTableCell">{tx.id}</div>
+          <div className="txTableCell">{tx.tx_id}</div>
           <div className="txTableCell">{tx.name}</div>
           <div className="txTableCell">{tx.email}</div>
           <div className="txTableCell">{tx.amount}</div>
