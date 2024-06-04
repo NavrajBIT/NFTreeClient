@@ -1,6 +1,5 @@
 const Pagination = ({ usetx }) => {
   const noOfPages = Math.floor(usetx?.transactionsInView?.length / 10) + 1;
-  console.log(noOfPages);
 
   if (usetx?.transactionsInView?.length <= 10) return null;
   return (

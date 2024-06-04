@@ -103,6 +103,7 @@ const usetransactions = () => {
     transactions,
     setTransactions,
     transactionsInView,
+    setTransactionsInView,
     changeValue,
     currentPage,
     setCurrentPage,

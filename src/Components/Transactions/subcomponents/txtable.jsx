@@ -67,11 +67,26 @@ const Txtable = ({ usetx }) => {
                 setHasChanged(true);
                 usetx.setTransactions((prev) => {
                   let newTransaction = [...prev];
-                  let txIndex = usetx.transactions.indexOf(tx);
-                  newTransaction[txIndex] = {
-                    ...tx,
-                    confirmed: !prev[txIndex].confirmed,
-                  };
+                  newTransaction.map((t, i) => {
+                    if (t.id === tx.id) {
+                      newTransaction[i] = {
+                        ...tx,
+                        confirmed: !newTransaction[i]["confirmed"],
+                      };
+                    }
+                  });
+                  return newTransaction;
+                });
+                usetx.setTransactionsInView((prev) => {
+                  let newTransaction = [...prev];
+                  newTransaction.map((t, i) => {
+                    if (t.id === tx.id) {
+                      newTransaction[i] = {
+                        ...tx,
+                        confirmed: !newTransaction[i]["confirmed"],
+                      };
+                    }
+                  });
                   return newTransaction;
                 });
               }}
@@ -90,8 +105,20 @@ const Txtable = ({ usetx }) => {
               setHasChanged(true);
               usetx.setTransactions((prev) => {
                 let newTransaction = [...prev];
-                let txIndex = usetx.transactions.indexOf(tx);
-                newTransaction[txIndex] = { ...tx, comment: e.target.value };
+                newTransaction.map((t, i) => {
+                  if (t.id === tx.id) {
+                    newTransaction[i] = { ...tx, comment: e.target.value };
+                  }
+                });
+                return newTransaction;
+              });
+              usetx.setTransactionsInView((prev) => {
+                let newTransaction = [...prev];
+                newTransaction.map((t, i) => {
+                  if (t.id === tx.id) {
+                    newTransaction[i] = { ...tx, comment: e.target.value };
+                  }
+                });
                 return newTransaction;
               });
             }}
