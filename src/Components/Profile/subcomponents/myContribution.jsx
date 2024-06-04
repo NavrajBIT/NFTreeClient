@@ -2,6 +2,7 @@ import ProjectCard from "../../Subcomponents/projectCard/projectCard";
 import useAPI from "../../../api/useAPI";
 import { useState, useEffect } from "react";
 import "./profile.css";
+
 const MyContribution = ({ script }) => {
   console.log(script);
   return (

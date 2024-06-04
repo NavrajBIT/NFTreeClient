@@ -7,7 +7,7 @@ import Loading from "../../Subcomponents/loading/loading";
 import LocalLoading from "../../Subcomponents/loading/localloading";
 import { useEffect } from "react";
 import Input from "../../Subcomponents/form/inputnew";
-import { useWallet } from "../../../Contexts/walletContext";
+import { useAuth } from "../../../Contexts/AuthContext";
 
 const Donate = () => {
   const params = useParams();
@@ -17,28 +17,16 @@ const Donate = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [project, setProject] = useState(null);
   const [trees, setTrees] = useState("");
-  const [token, setToken] = useState({ label: "$BHOOMI", value: "$BHOOMI" });
-  const [exchangeRate, setExchangerate] = useState(0);
-  const wallet = useWallet();
   const navigate = useNavigate();
   const [contributionType, setContributionType] = useState("Donation");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [user, setUser] = useState(null);
+  const auth = useAuth();
 
   useEffect(() => {
     poppulateProject();
-    checkLogIn();
-    // getExchangeRate();
   }, []);
-
-  const checkLogIn = async () => {
-    setIsLoading(true);
-    await api
-      .crud("GET", "user/account")
-      .then((res) => console.log(res))
-      .catch((err) => {
-        if (err === 401) setIsLoggedIn(false);
-      });
-    setIsLoading(false);
-  };
 
   const poppulateProject = async () => {
     setIsLoading(true);
@@ -52,31 +40,23 @@ const Donate = () => {
     setIsLoading(false);
   };
 
-  // const getExchangeRate = async () => {
-  //   // setExchangerate(149);
-  //   // return;
-  //   setIsLoading(true);
-  //   await fetch(
-  //     "https://min-api.cryptocompare.com/data/pricemulti?fsyms=SOL&tsyms=SOL,USD&api_key=a0d74da5182505e471796936416d849166115c9f413ddad7f7e2caff213b0ae5"
-  //   )
-  //     .then((res) => res.json())
-  //     .then((res) => {
-  //       console.log(res);
-  //       console.log(`SOL exchange rate = ${res["SOL"]["USD"]}`);
-  //       setExchangerate(parseFloat(res["SOL"]["USD"]));
-  //     })
-  //     .catch((err) => console.log(err));
-  //   setIsLoading(false);
-  // };
-
-  if (!isLoggedIn) return <Auth close={() => setIsLoggedIn(true)} />;
-
   let totalValue = 0;
   try {
     totalValue = project.donation * trees;
   } catch {}
 
-  const donationText = project?.type === 3 ? "Invest" : "Donate";
+  function generateRandomString(length) {
+    const characters =
+      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    let result = "";
+    const charactersLength = characters.length;
+
+    for (let i = 0; i < length; i++) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+
+    return result;
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -101,55 +81,31 @@ const Donate = () => {
     }
 
     setIsLoading(true);
-    // let tx = await wallet
-    //   .sendSol(totalSol)
-    //   .then((res) => res)
-    //   .catch((err) => {
-    //     alert("Transaction Unsuccessful.");
-    //     return null;
-    //   });
-    // console.log("------------------");
-    // console.log(tx);
-    // if (!tx) {
-    //   setIsLoading(false);
-    //   return;
-    // }
+
+    let endpoint = "project/invest";
+
+    if (auth.isLoggedIn) endpoint = "project/userinvest";
 
     api
-      .crud("POST", "project/invest", {
+      .crud("POST", endpoint, {
         projectId: project.id,
         amount: totalUSD,
         trees: trees,
-        hash: "",
+        tx_id: generateRandomString(50),
+        name: name,
+        email: email,
       })
       .then((res) => {
         console.log(res);
       })
       .catch((err) => console.log(err));
-    alert(
-      "Order has been placed. You NFT will reflect in your profile shortly."
-    );
+    alert("Transaction Successfull! Thank you for your contribution.");
     setIsLoading(false);
     navigate("/");
   };
 
   const totalUSD = project?.donation ? project?.donation * trees : 0;
-  // const totalSol =
-  //   exchangeRate && exchangeRate > 0 && project?.donation
-  //     ? parseFloat(totalUSD) / parseFloat(exchangeRate)
-  //     : 0;
   const availableTrees = project?.funding?.total - project?.funding?.raised;
-
-  const investOptions = [
-    {
-      label: "Donation",
-      value: "Donation",
-    },
-    {
-      label: "Investment",
-      value: "Investment",
-    },
-  ];
 
   return (
     <div
@@ -230,7 +186,6 @@ const Donate = () => {
                 maxLength: 5000,
               }}
             />
-
             <Input
               inputData={{
                 label: "Contribution Type",
@@ -242,7 +197,6 @@ const Donate = () => {
                 maxLength: 50,
               }}
             />
-
             <div
               style={{
                 marginBottom: "10px",
@@ -253,7 +207,6 @@ const Donate = () => {
               {contributionType === "Investment" &&
                 `Note: Minimum ${project?.min_trees_for_investment} trees are required.`}
             </div>
-
             <Input
               inputData={{
                 label: "Enter number of trees",
@@ -270,24 +223,6 @@ const Donate = () => {
                 maxLength: 50,
               }}
             />
-
-            {/* <Input
-            inputData={{
-              label: "Investment Token",
-              type: "select",
-              required: true,
-              value: token.value,
-              options: [
-                { label: "$BHOOMI", value: "$BHOOMI" },
-                { label: "$SOL", value: "$SOL" },
-              ],
-              select: true,
-              onChange: (e) => {
-                setToken({ label: e.target.value, value: e.target.value });
-              },
-              maxLength: 50,
-            }}
-          /> */}
             <Input
               inputData={{
                 label: `Total amount in ${project?.currency}`,
@@ -297,42 +232,30 @@ const Donate = () => {
                 maxLength: 500,
               }}
             />
-            {/* <Input
-            inputData={{
-              label: `Total amount in ${token.value} token`,
-              type: "text",
-              // value:
-              //   exchangeRate && exchangeRate > 0
-              //     ? (project?.donation * trees) / exchangeRate
-              //     : 0,
-              value: `${totalSol}SOL`,
-              onChange: (e) => {},
-              maxLength: 500,
-            }}
-          /> */}
-
-            <div>
-              {/* <Input
+            <Input
               inputData={{
-                label: "Connected Wallet Address",
+                label: "Name",
                 type: "text",
-                value: wallet?.isWalletConnected
-                  ? wallet?.publicKey?.toString()
-                  : "",
-                onChange: () => {},
-                maxLength: 500,
+                value: name,
+                required: true,
+                onChange: (e) => {
+                  setName(e.target.value);
+                },
+                maxLength: 100,
               }}
-            /> */}
-              {/* <Input
+            />
+            <Input
               inputData={{
-                label: "Connected Wallet Balance",
-                type: "text",
-                value: `${wallet?.solbalance}${token.value}`,
-                onChange: () => {},
-                maxLength: 500,
+                label: "Email",
+                type: "email",
+                value: email,
+                required: true,
+                onChange: (e) => {
+                  setEmail(e.target.value);
+                },
+                maxLength: 100,
               }}
-            /> */}
-            </div>
+            />
 
             <div
               style={{
@@ -341,23 +264,6 @@ const Donate = () => {
                 justifyContent: "center",
               }}
             >
-              {/* {wallet?.isWalletConnected ? (
-              <button
-                type="submit"
-                style={{
-                  padding: "var(--padding-light)",
-                  background: "#354A12",
-                  width: "var(--project-button)",
-                  borderRadius: "5px",
-                  marginTop: "var(--padding-large)",
-                  marginBottom: "100px",
-                }}
-              >
-                {wallet?.isWalletConnected ? donationText : "Connect Wallet"}
-              </button>
-            ) : (
-              <div>Please connect wallet!</div>
-            )} */}
               <button
                 type="submit"
                 style={{

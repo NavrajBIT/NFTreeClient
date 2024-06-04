@@ -11,7 +11,7 @@ const ProjectChainDetails = ({ details }) => {
       }}
     >
       <h1 className="projectHeading">Blockchain Details</h1>
-      <div className="blockchainDetails">
+      <div className="blockchainDetails" style={{ textAlign: "center" }}>
         {/* <div style={{ display: "flex", gap: "30px", flexDirection: "column",width: "100%" }}>
           <div
           className="blockchainText"

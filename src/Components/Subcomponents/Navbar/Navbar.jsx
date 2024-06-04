@@ -20,15 +20,13 @@ import UserView from "../../Projects/projectDetails/userView";
 import ProjectReport from "../../Projects/projectReport/subcomponents/ProjectReport/ProjectReport";
 import Dashboard from "../../Dashboard/Dashboard";
 import Duration from "../../Projects/projectReport/subcomponents/ProjectReport/Duration";
-import Proof from "../../Projects/projectProof/proof.jsx"
-
+import Proof from "../../Projects/projectProof/proof.jsx";
+import Transactions from "../../Transactions/transactions.jsx";
 
 export default function Navbar() {
-  
-
   return (
     <>
-      <NavContent  />
+      <NavContent />
       <Routes>
         <Route index element={<Home />} />
         <Route path="/home" element={<Home />} />
@@ -40,9 +38,9 @@ export default function Navbar() {
         <Route path="/projects/create" element={<CreateProject />} />
         <Route path="/projects/:projectId" element={<UserView />} />
         <Route path="/projects/:projectId/report" element={<ProjectReport />} />
-        <Route path="/projects/:projectId/Duration" element={<Duration  />} />
+        <Route path="/projects/:projectId/Duration" element={<Duration />} />
         <Route path="/projects/:projectId/donate" element={<Donate />} />
-        <Route path="/projects/:projectId/Proof" element={<Proof />} />
+        <Route path="/transactions/nft/:nftId" element={<Proof />} />
 
         <Route
           path="/myprojects/:projectId"
@@ -59,6 +57,7 @@ export default function Navbar() {
 
         {/* <Route path="/forget-password" element={<ForgetPassword />} /> */}
         <Route path="/profile" element={<Profile />} />
+        <Route path="/transactions" element={<Transactions />} />
         <Route path="/profile/mynft" element={<Profile myNft />} />
         <Route path="/kyc" element={<KYCPage />} />
         <Route path="/wallet" element={<BitWallet />} />

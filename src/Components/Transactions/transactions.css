@@ -1,0 +1,44 @@
+.txpage {
+  min-height: 100vh;
+  background-color: white;
+}
+
+.navbg {
+  height: var(--nav-height);
+  background-color: var(--green-100);
+  background-image: linear-gradient(170deg, #1b2f2f, #224629);
+}
+
+.txcontainer {
+  /* max-width: var(--max-width); */
+  padding: var(--padding-main);
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+}
+
+.txTableRow {
+  width: 100%;
+  padding: var(--padding-light);
+  text-align: center;
+  display: grid;
+  grid-template-columns: 3fr 2fr 4fr 1fr 1fr 2fr 1fr 1fr 1fr 3fr;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.txTableCell {
+  /* border: 1px solid #ccc; Border for visual separation */
+  word-wrap: break-word; /* Break long words */
+  overflow: hidden; /* Hide overflow text */
+  text-overflow: ellipsis; /* Add ellipsis for overflowing text */
+  white-space: nowrap; /* Prevent text from wrapping */
+}
+
+.paginationbutton {
+  padding: var(--padding-light);
+  font-size: 1rem;
+  background-color: transparent;
+  color: rgba(0, 0, 0, 0.7);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+}

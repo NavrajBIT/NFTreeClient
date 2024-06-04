@@ -9,6 +9,12 @@ const Profiledropdown = () => {
       <div className="profiledropdownitem" onClick={() => navigate("/profile")}>
         Profile
       </div>
+      <div
+        className="profiledropdownitem"
+        onClick={() => navigate("/transactions")}
+      >
+        Dashboard
+      </div>
       <div className="profiledropdownitem" onClick={() => auth.logout()}>
         Logout
       </div>

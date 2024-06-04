@@ -22,7 +22,8 @@ const Profile = ({ myNft }) => {
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        background: "linear - gradient(5.22deg, #FFFFFF 58.58 %, #EEFFE9 79.08 %, #265914 91.64 %)",
+        background:
+          "linear - gradient(5.22deg, #FFFFFF 58.58 %, #EEFFE9 79.08 %, #265914 91.64 %)",
       }}
     >
       <div
@@ -32,20 +33,20 @@ const Profile = ({ myNft }) => {
           backgroundImage: "linear-gradient(170deg, #1B2F2F, #224629)",
         }}
       />
-      {
-        myNft ?
-          <>
-            <MyNftDetails script={script} />
-          </>
-          :
-          <>
-            <ProfilePicture script={script} />
-            <MyProject script={script} />
-            <MyContribution script={script} />
-            <MyNFTs script={script} />
-          </>
-      }
-    </div >
+
+      {myNft ? (
+        <>
+          <MyNftDetails script={script} />
+        </>
+      ) : (
+        <>
+          <ProfilePicture script={script} />
+          <MyProject script={script} />
+          <MyContribution script={script} />
+          <MyNFTs script={script} />
+        </>
+      )}
+    </div>
   );
 };
 

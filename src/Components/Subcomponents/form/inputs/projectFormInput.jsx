@@ -3,10 +3,9 @@ import "./input.css";
 import { IoMdAttach } from "react-icons/io";
 import { IoAttachSharp } from "react-icons/io5";
 
-
 const truncateFileName = (fileName, maxLength) => {
   if (fileName.length > maxLength) {
-    return fileName.substring(0, maxLength - 3) + '...';
+    return fileName.substring(0, maxLength - 3) + "...";
   }
   return fileName;
 };
@@ -56,7 +55,7 @@ const ProjectFormInput = ({
     );
   }
 
-  if (type == "text" || type == "number") {
+  if (type == "text" || type == "number" || type == "email") {
     return (
       <div
         className="projectFormContainer"
@@ -201,7 +200,7 @@ const ProjectFormInput = ({
         displayName = value.name;
       }
       // Truncate the file name if necessary
-     displayName = truncateFileName(displayName, maxLength);
+      displayName = truncateFileName(displayName, maxLength);
     }
     return (
       <div className="projectFormContainer">
@@ -211,12 +210,10 @@ const ProjectFormInput = ({
         </p>
         <div className="projectFormFileupload">
           <div>
-            <p>
-             {displayName}
-            </p>
+            <p>{displayName}</p>
             <IoAttachSharp style={{ color: "black" }} size={24} />
           </div>
-          <input type="file"  onChange={onChange} />
+          <input type="file" onChange={onChange} />
         </div>
       </div>
     );

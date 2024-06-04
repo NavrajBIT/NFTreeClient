@@ -120,6 +120,15 @@ const MenuOptions = ({ setIsmenu }) => {
               className="sidebarlink"
               onClick={() => {
                 setIsmenu(false);
+                navigate("/transactions");
+              }}
+            >
+              Dashboard
+            </div>
+            <div
+              className="sidebarlink"
+              onClick={() => {
+                setIsmenu(false);
                 auth.logout();
               }}
             >
