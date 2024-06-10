@@ -2,9 +2,9 @@ import ProjectCard from "../../Subcomponents/projectCard/projectCard";
 import useAPI from "../../../api/useAPI";
 import { useState, useEffect } from "react";
 import "./profile.css";
+import { useNavigate } from "react-router-dom";
 
 const MyContribution = ({ script }) => {
-  console.log(script);
   return (
     <div className="myContributionDiv">
       <div
@@ -45,6 +45,7 @@ const MyContribution = ({ script }) => {
 export default MyContribution;
 
 const Transaction = ({ transaction }) => {
+  const navigate = useNavigate();
   const api = useAPI();
   const [project, setProject] = useState(null);
   useEffect(() => {
@@ -66,8 +67,11 @@ const Transaction = ({ transaction }) => {
   let project2 = project;
   project2.type = 2;
   return (
-    // <div className="projectCardDiv">
-    <ProjectCard project={project2} transaction={transaction} />
-    // </div>
+    <div
+      style={{ width: "100%", maxWidth: "320px" }}
+      onClick={() => navigate(`/transactions/nft/${transaction?.nft?.cert_id}`)}
+    >
+      <ProjectCard project={project2} transaction={transaction} />
+    </div>
   );
 };

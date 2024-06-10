@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const Txtable = ({ usetx }) => {
+const Txtable = ({ usetx, isMobile }) => {
   const [hasChanged, setHasChanged] = useState(false);
 
   useEffect(() => {
@@ -14,7 +14,7 @@ const Txtable = ({ usetx }) => {
     return <div>No results found...</div>;
   }
 
-  const headers = [
+  let headers = [
     "TX ID",
     "Name",
     "Email ID",
@@ -26,6 +26,25 @@ const Txtable = ({ usetx }) => {
     "NFT",
     "Comment",
   ];
+
+  if (isMobile) {
+    headers = ["TX ID", "Amount", "Date", "Payment", "Comment"];
+  }
+
+  function formatDateToLocal(dateString) {
+    // Create a new Date object from the given date string
+    let date = new Date(dateString);
+
+    // Extract the day, month, and year from the date object
+    let day = String(date.getDate()).padStart(2, "0"); // Pad with leading zero if necessary
+    let month = String(date.getMonth() + 1).padStart(2, "0"); // Months are zero-based, so add 1
+    let year = String(date.getFullYear()).slice(-2); // Get the last two digits of the year
+
+    // Format the date as dd/mm/yy
+    let formattedDate = `${day}/${month}/${year}`;
+
+    return formattedDate;
+  }
 
   const transactionsToShow = usetx.transactionsInView.slice(
     (usetx.currentPage - 1) * 10,
@@ -39,6 +58,10 @@ const Txtable = ({ usetx }) => {
         className="txTableRow"
         style={{
           background: "rgba(100,100,100,0.1)",
+
+          gridTemplateColumns: isMobile
+            ? "3fr 1fr 2fr 1fr 3fr"
+            : "3fr 2fr 4fr 1fr 1fr 2fr 1fr 1fr 1fr 3fr",
         }}
       >
         {headers.map((heading, index) => (
@@ -52,13 +75,22 @@ const Txtable = ({ usetx }) => {
         ))}
       </div>
       {transactionsToShow?.map((tx, txindex) => (
-        <div className="txTableRow" key={`tx-${txindex}`}>
+        <div
+          className="txTableRow"
+          key={`tx-${txindex}`}
+          style={{
+            gridTemplateColumns: isMobile
+              ? "3fr 1fr 2fr 1fr 3fr"
+              : "3fr 2fr 4fr 1fr 1fr 2fr 1fr 1fr 1fr 3fr",
+          }}
+        >
           <div className="txTableCell">{tx.tx_id}</div>
-          <div className="txTableCell">{tx.name}</div>
-          <div className="txTableCell">{tx.email}</div>
+          {!isMobile && <div className="txTableCell">{tx.name}</div>}
+          {!isMobile && <div className="txTableCell">{tx.email}</div>}
+
           <div className="txTableCell">{tx.amount}</div>
-          <div className="txTableCell">{tx.trees_count}</div>
-          <div className="txTableCell">{tx.date}</div>
+          {!isMobile && <div className="txTableCell">{tx.trees_count}</div>}
+          <div className="txTableCell">{formatDateToLocal(tx.date)}</div>
           <div className="txTableCell">
             <input
               type="checkbox"
@@ -92,37 +124,48 @@ const Txtable = ({ usetx }) => {
               }}
             />
           </div>
-          <div className="txTableCell">{tx.email_sent ? "Yes" : "No"}</div>
-          <div className="txTableCell">{tx.is_minted ? "Yes" : "No"}</div>
-          <input
-            value={tx.comment}
+          {!isMobile && (
+            <div className="txTableCell">{tx.email_sent ? "Yes" : "No"}</div>
+          )}
+          {!isMobile && (
+            <div className="txTableCell">{tx.is_minted ? "Yes" : "No"}</div>
+          )}
+          <div
             style={{
-              outline: "none",
-              border: "none",
-              borderBottom: "1px solid rgba(0,0,0,0.2)",
+              width: "100%",
             }}
-            onChange={(e) => {
-              setHasChanged(true);
-              usetx.setTransactions((prev) => {
-                let newTransaction = [...prev];
-                newTransaction.map((t, i) => {
-                  if (t.id === tx.id) {
-                    newTransaction[i] = { ...tx, comment: e.target.value };
-                  }
+          >
+            <input
+              value={tx.comment}
+              style={{
+                outline: "none",
+                border: "none",
+                borderBottom: "1px solid rgba(0,0,0,0.2)",
+                maxWidth: "100px",
+              }}
+              onChange={(e) => {
+                setHasChanged(true);
+                usetx.setTransactions((prev) => {
+                  let newTransaction = [...prev];
+                  newTransaction.map((t, i) => {
+                    if (t.id === tx.id) {
+                      newTransaction[i] = { ...tx, comment: e.target.value };
+                    }
+                  });
+                  return newTransaction;
                 });
-                return newTransaction;
-              });
-              usetx.setTransactionsInView((prev) => {
-                let newTransaction = [...prev];
-                newTransaction.map((t, i) => {
-                  if (t.id === tx.id) {
-                    newTransaction[i] = { ...tx, comment: e.target.value };
-                  }
+                usetx.setTransactionsInView((prev) => {
+                  let newTransaction = [...prev];
+                  newTransaction.map((t, i) => {
+                    if (t.id === tx.id) {
+                      newTransaction[i] = { ...tx, comment: e.target.value };
+                    }
+                  });
+                  return newTransaction;
                 });
-                return newTransaction;
-              });
-            }}
-          />
+              }}
+            />
+          </div>
         </div>
       ))}
       {hasChanged && (

@@ -55,7 +55,7 @@ const usetransactions = () => {
     setTransactions(null);
     setIsLoading(true);
     await api
-      .crud("GET", `project/${selectedProject.id}/txns`)
+      .crud("GET", `project/${selectedProject?.id}/txns`)
       .then((res) => {
         console.log("transactions----------------------------");
         console.log(res);

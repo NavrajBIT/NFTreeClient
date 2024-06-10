@@ -43,7 +43,7 @@ const Profile = ({ myNft }) => {
           <ProfilePicture script={script} />
           <MyProject script={script} />
           <MyContribution script={script} />
-          <MyNFTs script={script} />
+          {/* <MyNFTs script={script} /> */}
         </>
       )}
     </div>

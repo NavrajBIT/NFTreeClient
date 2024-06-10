@@ -1,7 +1,44 @@
-const Pagination = ({ usetx }) => {
+const Pagination = ({ usetx, isMobile }) => {
   const noOfPages = Math.floor(usetx?.transactionsInView?.length / 10) + 1;
 
   if (usetx?.transactionsInView?.length <= 10) return null;
+
+  if (isMobile) {
+    return (
+      <div
+        style={{
+          margin: "20px 0px",
+          display: "flex",
+          gap: "10px",
+          alignItems: "center",
+          justifyContent: "flex-end",
+        }}
+      >
+        <button
+          className="paginationbutton"
+          onClick={() => {
+            if (usetx.currentPage !== 1) {
+              usetx.setCurrentPage((prev) => prev - 1);
+            }
+          }}
+        >
+          {"<"}
+        </button>
+        {usetx?.currentPage} of {noOfPages}
+        <button
+          className="paginationbutton"
+          onClick={() => {
+            if (usetx.currentPage !== noOfPages) {
+              usetx.setCurrentPage((prev) => prev + 1);
+            }
+          }}
+        >
+          {">"}
+        </button>
+      </div>
+    );
+  }
+
   return (
     <div
       style={{
