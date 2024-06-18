@@ -64,7 +64,7 @@ const useprofile = () => {
         .crud("PATCH", endpoint, formdata, true)
         .then((res) => {})
         .catch((err) => alert("Could not upload image."));
-      await poppulateData("user/account", setAccount);
+      await poppulateData("user", setuser);
       setIsLoading(false);
     } else {
       alert("Please select a valid image file.");

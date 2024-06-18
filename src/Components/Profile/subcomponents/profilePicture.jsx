@@ -1,6 +1,8 @@
+import { useRef } from "react";
 import "./profile.css";
 const ProfilePicture = ({ script }) => {
   const defaultProfilePicture = "/user.svg";
+  const picRef = useRef(null);
   return (
     <div className="profileMainDiv">
       <div className="profileSubContainer">
@@ -10,7 +12,15 @@ const ProfilePicture = ({ script }) => {
               <img
                 src={script.user?.picture || defaultProfilePicture}
                 alt="profile pic"
+                onClick={() => picRef.current.click()}
               />
+              <div
+                style={{
+                  textAlign: "center",
+                }}
+              >
+                Click to Update
+              </div>
             </div>
             <p className="PName">
               {script?.user?.first_name} {script?.user?.last_name}
@@ -20,6 +30,14 @@ const ProfilePicture = ({ script }) => {
           </div>
         </div>
       </div>
+      <input
+        type="file"
+        ref={picRef}
+        style={{
+          display: "none",
+        }}
+        onChange={(e) => script.uploadProfilepic(e.target.files[0])}
+      />
     </div>
   );
 };
