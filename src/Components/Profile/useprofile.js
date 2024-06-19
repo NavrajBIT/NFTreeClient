@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
 import useAPI from "../../api/useAPI";
+import { useAuth } from "../../Contexts/AuthContext";
 
 const useprofile = () => {
   const api = useAPI();
+  const auth = useAuth();
   const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const [user, setuser] = useState(null);
@@ -65,6 +67,7 @@ const useprofile = () => {
         .then((res) => {})
         .catch((err) => alert("Could not upload image."));
       await poppulateData("user", setuser);
+      auth.poppulateUserData();
       setIsLoading(false);
     } else {
       alert("Please select a valid image file.");

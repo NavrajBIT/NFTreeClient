@@ -67,6 +67,7 @@ const ProjectData = ({ submit, backStep, data }) => {
     Object.keys(apiData).map((key) => {
       projectFormdata.append(key, apiData[key]);
     });
+
     try {
       const projectResponse = await api.crud(
         "POST",

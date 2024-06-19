@@ -6,6 +6,7 @@ import Input from "../inputnew";
 import { GrLinkNext } from "react-icons/gr";
 import { GrLinkPrevious } from "react-icons/gr";
 import currencies from "./currencies";
+import countries from "../../../Projects/CreateProject/countries";
 
 const Project = ({ backStep, submit, data, setData }) => {
   const [error, setError] = useState("");
@@ -438,13 +439,35 @@ const Project = ({ backStep, submit, data, setData }) => {
         <Input
           inputData={{
             label: "Country",
+            type: "select",
+            required: true,
+            value: (function () {
+              let label = "";
+              investOptions.map((type) => {
+                if (type.value === data.country) {
+                  label = type.label;
+                }
+              });
+              return label;
+            })(),
+            options: countries,
+            select: true,
+            onChange: (e) => {
+              changeValue("country", e.target.value);
+            },
+            maxLength: 50,
+          }}
+        />
+        {/* <Input
+          inputData={{
+            label: "Country",
             type: "text",
             required: true,
             value: data["country"],
             onChange: (e) => changeValue("country", e.target.value),
             maxLength: 100,
           }}
-        />
+        /> */}
         {/* <Input
           inputData={{
             label: "Area Code",

@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import AuthPopup from "../../../Auth/authPopup";
 import Loading from "../../loading/loading";
 import { GrLinkNext } from "react-icons/gr";
+import countries from "../../../Projects/CreateProject/countries";
 
 const Organization = ({ backStep, submit, data, setData }) => {
   const [error, setError] = useState("");
@@ -159,7 +160,8 @@ const Organization = ({ backStep, submit, data, setData }) => {
       },
       {
         label: "Country",
-        type: "text",
+        type: "select",
+        options: countries,
         value: data?.org_country,
         onChange: (e) => {
           updateData("org_country", e.target.value);
