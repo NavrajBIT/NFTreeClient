@@ -15,9 +15,14 @@ const usetransactions = () => {
   useEffect(() => {
     poppulateProjects();
   }, []);
+
   useEffect(() => {
     poppulateTransactions();
+    try {
+      localStorage.setItem("project", selectedProject.id);
+    } catch {}
   }, [selectedProject]);
+
   useEffect(() => {
     if (transactions && transactions?.length > 0)
       setTransactionsInView((prev) => {
@@ -44,6 +49,15 @@ const usetransactions = () => {
         if (res.status === 200) {
           setProjects(res);
           setSelectedProject(res[0]);
+          try {
+            let selectedId = localStorage.getItem("project");
+            console.log(`selected project -----  ${selectedId}`);
+            res.map((proj) => {
+              if (proj.id == selectedId) {
+                setSelectedProject(proj);
+              }
+            });
+          } catch {}
         }
       })
       .catch((err) => {
@@ -51,14 +65,13 @@ const usetransactions = () => {
       });
     setIsLoading(false);
   };
+
   const poppulateTransactions = async () => {
     setTransactions(null);
     setIsLoading(true);
     await api
       .crud("GET", `project/${selectedProject?.id}/txns`)
       .then((res) => {
-        console.log("transactions----------------------------");
-        console.log(res);
         if (res.status === 200) {
           setTransactions(res);
           setTransactionsInView(res);

@@ -81,7 +81,6 @@ const Searchbar = ({ usetx }) => {
             onChange: (e) => {
               usetx?.projects?.map((proj) => {
                 if (proj.id == e.target.value) {
-                  console.log("updating");
                   usetx.setSelectedProject(proj);
                 }
               });

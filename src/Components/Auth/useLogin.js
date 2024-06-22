@@ -38,8 +38,14 @@ const useLogin = (close) => {
           if (res.status === 200) {
             setCurrentPage("otp");
           }
+          if (res.status === 409) {
+            setErrorMessage(
+              "User with this email already exists. Please login or use another email."
+            );
+          }
         })
         .catch((err) => {
+          console.log(err);
           setErrorMessage("Something went wrong. please try again.");
         });
       setIsLoading(false);
