@@ -6,7 +6,20 @@ const Searchbar = ({ usetx }) => {
   const [isHighlighted, setIsHighlighted] = useState(false);
 
   let projectOptions = [];
+
+  if (usetx?.selectedProject) {
+    projectOptions.push({
+      label: usetx.selectedProject.name,
+      value: usetx.selectedProject.id,
+    });
+  }
+
   usetx?.projects?.map((proj) => {
+    if (usetx?.selectedProject) {
+      if (proj.id == usetx.selectedProject.id) {
+        return;
+      }
+    }
     projectOptions.push({
       label: proj.name,
       value: proj.id,
@@ -70,12 +83,17 @@ const Searchbar = ({ usetx }) => {
             value: (function () {
               let label = "";
               projectOptions.map((type) => {
-                if (type.value === usetx.selectedProject) {
+                if (
+                  type.value === usetx.selectedProject ||
+                  type.value == usetx?.selectedProject?.id
+                ) {
                   label = type.label;
                 }
               });
+              console.log(label);
               return label;
             })(),
+
             options: projectOptions,
             select: true,
             onChange: (e) => {
