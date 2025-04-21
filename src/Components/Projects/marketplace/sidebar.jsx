@@ -1,8 +1,14 @@
-import { useState, useEffect } from "react";
+import {useState, useEffect} from "react";
 import filterimage from "./assets/Tune.svg";
 
-const Sidebar = ({ filters, setFilters, data, isMobile }) => {
+const Sidebar = ({filters, setFilters, data, isMobile}) => {
   const [scroll, setScroll] = useState(false);
+
+  // Reset filters when component mounts
+  useEffect(() => {
+    setFilters([]);
+  }, []);
+
   const handleScroll = () => {
     window.scrollY >= 2 ? setScroll(true) : setScroll(false);
   };
@@ -20,44 +26,40 @@ const Sidebar = ({ filters, setFilters, data, isMobile }) => {
   const status = ["In Progress", "Completed"];
   const cityList = [];
   const countryList = [];
-  data.map((project) => {
+  data.map(project => {
     let city = project.city;
     let country = project.country;
     if (!cityList.includes(city)) cityList.push(city);
     if (!countryList.includes(country)) countryList.push(country);
     if (!investmentTypeList.includes(project.investment_type))
-      project.investment_type != null &&
-        investmentTypeList.push(project.investment_type);
+      project.investment_type != null && investmentTypeList.push(project.investment_type);
   });
 
-  const Filter = ({ type, value, index }) => {
-    const [isChecked, setIsChecked] = useState(true);
-    useEffect(() => {
-      filters.map((filter) => {
-        if (filter.type === type && filter.value === value) {
-          setIsChecked(false);
-        }
-      });
-    }, []);
+  const Filter = ({type, value, index}) => {
+    const isFiltered = filters.some(
+      filter => filter.type === type && filter.value === value
+    );
+    const [isChecked, setIsChecked] = useState(!isFiltered);
+
     const applyFilter = () => {
-      setFilters((prevFilters) => {
-        let newFilters = [...prevFilters];
-        let filtervalue = {
-          type: type,
-          value: value,
-        };
+      setFilters(prevFilters => {
         if (isChecked) {
-          newFilters.push(filtervalue);
+          // If currently checked, add to filters
+          return [...prevFilters, {type, value}];
         } else {
-          newFilters.splice(newFilters.indexOf(filtervalue), 1);
+          // If currently unchecked, remove from filters
+          return prevFilters.filter(
+            filter => !(filter.type === type && filter.value === value)
+          );
         }
-        return newFilters;
       });
+      setIsChecked(!isChecked);
     };
+
     return (
-      <div className="filterrow">
+      <div className='filterrow'>
         <input
-          type="checkbox"
+          type='checkbox'
           id={type + "-filter-" + index}
           checked={isChecked}
           onChange={applyFilter}
@@ -66,21 +68,21 @@ const Sidebar = ({ filters, setFilters, data, isMobile }) => {
       </div>
     );
   };
-  const TypeFilter = ({ index }) => {
+  const TypeFilter = ({index}) => {
     const [isChecked, setIsChecked] = useState(true);
     useEffect(() => {
-      filters.map((filter) => {
+      filters.map(filter => {
         if (filter.type === "type" && filter.value === index + 1) {
           setIsChecked(false);
         }
       });
     }, []);
     const applyFilter = () => {
-      setFilters((prevFilters) => {
+      setFilters(prevFilters => {
         let newFilters = [...prevFilters];
         let filtervalue = {
           type: "type",
-          value: index + 1,
+          value: index + 1
         };
         if (isChecked) {
           newFilters.push(filtervalue);
@@ -91,53 +93,48 @@ const Sidebar = ({ filters, setFilters, data, isMobile }) => {
       });
     };
     return (
-      <div className="filterrow">
+      <div className='filterrow'>
         <input
-          type="checkbox"
+          type='checkbox'
           id={"type" + "-filter-" + index}
           checked={isChecked}
           onChange={applyFilter}
         />
-        <label htmlFor={"type" + "-filter-" + index}>
-          {typefilterOptions[index]}
-        </label>
+        <label htmlFor={"type" + "-filter-" + index}>{typefilterOptions[index]}</label>
       </div>
     );
   };
 
-  const StatusFilter = ({ index }) => {
-    const [isChecked, setIsChecked] = useState(true);
-    useEffect(() => {
-      filters.map((filter) => {
-        if (filter.type === "status" && filter.value === index + 1) {
-          setIsChecked(false);
-        }
-      });
-    }, []);
+  const StatusFilter = ({index}) => {
+    const isFiltered = filters.some(
+      filter => filter.type === "status" && filter.value === index + 1
+    );
+    const [isChecked, setIsChecked] = useState(!isFiltered);
+
     const applyFilter = () => {
-      setFilters((prevFilters) => {
-        let newFilters = [...prevFilters];
-        let filtervalue = {
-          type: "status",
-          value: index + 1,
-        };
+      setFilters(prevFilters => {
         if (isChecked) {
-          newFilters.push(filtervalue);
+          // If currently checked, add to filters
+          return [...prevFilters, {type: "status", value: index + 1}];
         } else {
-          newFilters.splice(newFilters.indexOf(filtervalue), 1);
+          // If currently unchecked, remove from filters
+          return prevFilters.filter(
+            filter => !(filter.type === "status" && filter.value === index + 1)
+          );
         }
-        return newFilters;
       });
+      setIsChecked(!isChecked);
     };
+
     return (
-      <div className="filterrow">
+      <div className='filterrow'>
         <input
-          type="checkbox"
-          id={"type" + "-filter-" + index}
+          type='checkbox'
+          id={"status-filter-" + index}
           checked={isChecked}
           onChange={applyFilter}
         />
-        <label htmlFor={"type" + "-filter-" + index}>{status[index]}</label>
+        <label htmlFor={"status-filter-" + index}>{status[index]}</label>
       </div>
     );
   };
@@ -151,18 +148,17 @@ const Sidebar = ({ filters, setFilters, data, isMobile }) => {
         top: "0px",
         left: "-20px",
         borderRadius: "0 10px 10px 10px",
-        height: "fit-content",
+        height: "fit-content"
       };
 
   return (
     <div
-      className="sidebarcontainer"
+      className='sidebarcontainer'
       style={{
         top: "var(--nav-height-small)",
         ...mobileStyle,
-        overflowY: "scroll",
-      }}
-    >
+        overflowY: "scroll"
+      }}>
       <div
         style={{
           display: "flex",
@@ -172,33 +168,35 @@ const Sidebar = ({ filters, setFilters, data, isMobile }) => {
           fontWeight: "700",
           padding: "var(--padding-main)",
           borderBottom: "2px solid white",
-          width: "100%",
-        }}
-      >
+          width: "100%"
+        }}>
         {!isMobile && (
           <img
             src={filterimage}
-            alt=""
+            alt=''
             style={{
               height: "30px",
-              width: "30px",
+              width: "30px"
             }}
           />
         )}
         Filter
       </div>
 
-      <div className="singlefiltercontainer">
-        <div style={{ fontSize: "18px", fontWeight: "700" }}>Status</div>
+      <div className='singlefiltercontainer'>
+        <div style={{fontSize: "18px", fontWeight: "700"}}>Status</div>
 
         {status.map((type, index) => (
-          <StatusFilter index={index} key={"type-filter-" + index} />
+          <StatusFilter
+            index={index}
+            key={"type-filter-" + index}
+          />
         ))}
       </div>
 
-      <div className="singlefiltercontainer">
-        {/* 
-      
+      <div className='singlefiltercontainer'>
+        {/*
+
         <div style={{ fontSize: "18px", fontWeight: "700" }}>Project Type</div>
         {typefilterOptions.map((type, index) => (
           <TypeFilter index={index} key={"type-filter-" + index} />
@@ -206,7 +204,7 @@ const Sidebar = ({ filters, setFilters, data, isMobile }) => {
         <br />
       */}
 
-        <div style={{ fontSize: "18px", fontWeight: "700" }}>Project Type</div>
+        <div style={{fontSize: "18px", fontWeight: "700"}}>Project Type</div>
 
         {investmentTypeList.map((type, index) => (
           <Filter
@@ -217,8 +215,8 @@ const Sidebar = ({ filters, setFilters, data, isMobile }) => {
           />
         ))}
       </div>
-      <div className="singlefiltercontainer">
-        <div style={{ fontSize: "18px", fontWeight: "700" }}>Country</div>
+      <div className='singlefiltercontainer'>
+        <div style={{fontSize: "18px", fontWeight: "700"}}>Country</div>
         {countryList.map((type, index) => (
           <Filter
             type={"country"}
@@ -228,7 +226,7 @@ const Sidebar = ({ filters, setFilters, data, isMobile }) => {
           />
         ))}
         <br />
-        <div style={{ fontSize: "18px", fontWeight: "700" }}>State</div>
+        <div style={{fontSize: "18px", fontWeight: "700"}}>State</div>
         {cityList.map((type, index) => (
           <Filter
             type={"city"}
@@ -238,7 +236,7 @@ const Sidebar = ({ filters, setFilters, data, isMobile }) => {
           />
         ))}
       </div>
-      <div style={{ marginBottom: "15vh" }}></div>
+      <div style={{marginBottom: "15vh"}}></div>
     </div>
   );
 };

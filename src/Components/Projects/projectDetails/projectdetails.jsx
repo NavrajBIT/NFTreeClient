@@ -1,4 +1,4 @@
-import usedetails from "./usedetails";
+import useProjectDetails from "./usedetails";
 import PrimaryDetails from "./primaryDetails";
 import ProjectImages from "./projectImages";
 import Ownerdetails from "./ownerdetails";
@@ -6,17 +6,17 @@ import Projectdocs from "./projectdocs";
 import PlantImages from "./plantImages";
 import Loading from "../../Subcomponents/loading/loading";
 import Recipients from "./recipients";
-import { useParams } from "react-router-dom";
+import {useParams} from "react-router-dom";
 import Auth from "../../Auth/Auth";
+import PropTypes from "prop-types";
 
-const Projectdetails = ({ notMyProject }) => {
+const Projectdetails = ({notMyProject}) => {
   const params = useParams();
   const projectId = params.projectId;
 
-  const details = usedetails(projectId, notMyProject);
+  const details = useProjectDetails(projectId);
 
-  if (!details.isLoaggedIn)
-    return <Auth close={() => details.setIsLoggedIn(true)} />;
+  if (!details.isLoggedIn) return <Auth close={() => details.setIsLoggedIn(true)} />;
   if (details.isLoading || !details.project) return <Loading />;
 
   return (
@@ -28,21 +28,37 @@ const Projectdetails = ({ notMyProject }) => {
         alignItems: "center",
         flexDirection: "column",
         gap: "var(--padding-main)",
-        padding: "var(--nav-height) 0",
-      }}
-    >
-      <PrimaryDetails details={details} notMyProject={notMyProject} />
+        padding: "var(--nav-height) 0"
+      }}>
+      <PrimaryDetails
+        details={details}
+        notMyProject={notMyProject}
+      />
       {!notMyProject && (
-        <Recipients details={details} notMyProject={notMyProject} />
+        <Recipients
+          details={details}
+          notMyProject={notMyProject}
+        />
       )}
-      <PlantImages details={details} notMyProject={notMyProject} />
-      <Projectdocs details={details} notMyProject={notMyProject} />
-      <ProjectImages details={details} notMyProject={notMyProject} />
-      {details.project.carbonCredit_enabled != true && (
-        <Ownerdetails details={details} />
-      )}
+      <PlantImages
+        details={details}
+        notMyProject={notMyProject}
+      />
+      <Projectdocs
+        details={details}
+        notMyProject={notMyProject}
+      />
+      <ProjectImages
+        details={details}
+        notMyProject={notMyProject}
+      />
+      {details.project.carbonCredit_enabled != true && <Ownerdetails details={details} />}
     </div>
   );
+};
+
+Projectdetails.propTypes = {
+  notMyProject: PropTypes.bool
 };
 
 export default Projectdetails;

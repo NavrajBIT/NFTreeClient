@@ -1,8 +1,9 @@
-import { useState, useEffect } from "react";
+import {useState, useEffect} from "react";
 import useAPI from "../../../api/useAPI";
 import Sidebar from "./sidebar";
 import Projectsview from "./projectsview";
 import "./marketplace.css";
+import {mockProjects} from "../../../api/mockProjectData";
 
 export default function ProjectPage() {
   const api = useAPI();
@@ -11,6 +12,12 @@ export default function ProjectPage() {
   const [filters, setFilters] = useState([]);
   const [search, setSearch] = useState("");
 
+  // Reset filters when component mounts
+  useEffect(() => {
+    setFilters([]);
+    setSearch("");
+  }, []);
+
   useEffect(() => {
     let footer = document.getElementById("footer");
     footer.style.display = "none";
@@ -18,6 +25,8 @@ export default function ProjectPage() {
   }, []);
 
   useEffect(() => {
+    // Commenting out the API call but keeping it for reference
+    /*
     const projectListData = async () => {
       await api
         .crud("GET", "project/projectlist")
@@ -33,25 +42,24 @@ export default function ProjectPage() {
     };
 
     projectListData();
+    */
+
+    // Using mock data instead
+    setData(mockProjects);
+    setFilterData(mockProjects);
   }, []);
 
   useEffect(() => {
     let newdata = [];
-    data.map((project) => {
+    data.map(project => {
       let isApplicable = true;
-      filters.map((filter) => {
+      filters.map(filter => {
         if (filter.type == "status") {
           console.log(filter);
-          if (
-            filter.value == 1 &&
-            project.funding.raised < project.funding.total
-          ) {
+          if (filter.value == 1 && project.funding.raised < project.funding.total) {
             isApplicable = false;
           }
-          if (
-            filter.value == 2 &&
-            project.funding.raised >= project.funding.total
-          ) {
+          if (filter.value == 2 && project.funding.raised >= project.funding.total) {
             isApplicable = false;
           }
         }
@@ -75,18 +83,21 @@ export default function ProjectPage() {
       style={{
         minHeight: "var(--min-height-page)",
         width: "100vw",
-        background: "var(--bg-bright)",
-      }}
-    >
+        background: "var(--bg-bright)"
+      }}>
       <div
         style={{
           width: "100%",
           height: "var(--nav-height)",
-          backgroundImage: "linear-gradient(170deg, #1B2F2F, #224629)",
+          backgroundImage: "linear-gradient(170deg, #1B2F2F, #224629)"
         }}
       />
-      <div style={{ display: "flex" }}>
-        <Sidebar filters={filters} setFilters={setFilters} data={data} />
+      <div style={{display: "flex"}}>
+        <Sidebar
+          filters={filters}
+          setFilters={setFilters}
+          data={data}
+        />
 
         <Projectsview
           filteredData={filterData}
