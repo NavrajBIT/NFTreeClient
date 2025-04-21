@@ -59,3 +59,135 @@
   width: 20%;
   min-width: fit-content;
 }
+
+.projectDetailsContainer {
+  width: 100%;
+  min-height: var(--min-height-page);
+  display: flex;
+  flex-direction: column;
+  gap: var(--padding-main);
+  padding: var(--nav-height) 0;
+}
+
+.projectHeader {
+  display: flex;
+  gap: var(--padding-main);
+  padding: var(--padding-main);
+  background: var(--color-background-secondary);
+  border-radius: var(--border-radius);
+}
+
+.projectImage {
+  width: 300px;
+  height: 300px;
+  border-radius: var(--border-radius);
+  overflow: hidden;
+}
+
+.projectImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.projectInfo {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--padding-main);
+}
+
+.projectLocation {
+  color: var(--color-text-secondary);
+  font-size: 1.1rem;
+}
+
+.projectStats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--padding-main);
+}
+
+.statItem {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.statLabel {
+  color: var(--color-text-secondary);
+  font-size: 0.9rem;
+}
+
+.statValue {
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.projectProgress {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.progressBar {
+  width: 100%;
+  height: 8px;
+  background: var(--color-background-tertiary);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  background: var(--color-primary);
+  transition: width 0.3s ease;
+}
+
+.progressText {
+  font-size: 0.9rem;
+  color: var(--color-text-secondary);
+}
+
+.projectDescription {
+  padding: var(--padding-main);
+  background: var(--color-background-secondary);
+  border-radius: var(--border-radius);
+}
+
+.projectDescription h2 {
+  margin-bottom: var(--padding-main);
+}
+
+.projectSpecies {
+  padding: var(--padding-main);
+  background: var(--color-background-secondary);
+  border-radius: var(--border-radius);
+}
+
+.projectSpecies h2 {
+  margin-bottom: var(--padding-main);
+}
+
+.speciesList {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--padding-main);
+}
+
+.speciesItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem;
+  background: var(--color-background-tertiary);
+  border-radius: var(--border-radius);
+}
+
+.speciesName {
+  font-weight: 500;
+}
+
+.speciesPercentage {
+  color: var(--color-text-secondary);
+}

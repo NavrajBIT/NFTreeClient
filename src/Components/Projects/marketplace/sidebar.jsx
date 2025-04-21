@@ -1,28 +1,15 @@
 import {useState, useEffect} from "react";
+import PropTypes from "prop-types";
 import filterimage from "./assets/Tune.svg";
 
 const Sidebar = ({filters, setFilters, data, isMobile}) => {
-  const [scroll, setScroll] = useState(false);
-
   // Reset filters when component mounts
   useEffect(() => {
     setFilters([]);
   }, []);
 
-  const handleScroll = () => {
-    window.scrollY >= 2 ? setScroll(true) : setScroll(false);
-  };
-
-  useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
-
   const typefilterOptions = ["Monitoring", "Donation", "Investment"];
-  const investmentTypeList = [];
+  const investmentTypeList = ["Carbon Credits"];
   const status = ["In Progress", "Completed"];
   const cityList = [];
   const countryList = [];
@@ -31,8 +18,6 @@ const Sidebar = ({filters, setFilters, data, isMobile}) => {
     let country = project.country;
     if (!cityList.includes(city)) cityList.push(city);
     if (!countryList.includes(country)) countryList.push(country);
-    if (!investmentTypeList.includes(project.investment_type))
-      project.investment_type != null && investmentTypeList.push(project.investment_type);
   });
 
   const Filter = ({type, value, index}) => {
@@ -57,188 +42,128 @@ const Sidebar = ({filters, setFilters, data, isMobile}) => {
     };
 
     return (
-      <div className='filterrow'>
+      <div
+        className='filterrow'
+        key={index}>
         <input
           type='checkbox'
-          id={type + "-filter-" + index}
           checked={isChecked}
           onChange={applyFilter}
+          id={`${type}-${value}`}
         />
-        <label htmlFor={type + "-filter-" + index}>{value}</label>
-      </div>
-    );
-  };
-  const TypeFilter = ({index}) => {
-    const [isChecked, setIsChecked] = useState(true);
-    useEffect(() => {
-      filters.map(filter => {
-        if (filter.type === "type" && filter.value === index + 1) {
-          setIsChecked(false);
-        }
-      });
-    }, []);
-    const applyFilter = () => {
-      setFilters(prevFilters => {
-        let newFilters = [...prevFilters];
-        let filtervalue = {
-          type: "type",
-          value: index + 1
-        };
-        if (isChecked) {
-          newFilters.push(filtervalue);
-        } else {
-          newFilters.splice(newFilters.indexOf(filtervalue), 1);
-        }
-        return newFilters;
-      });
-    };
-    return (
-      <div className='filterrow'>
-        <input
-          type='checkbox'
-          id={"type" + "-filter-" + index}
-          checked={isChecked}
-          onChange={applyFilter}
-        />
-        <label htmlFor={"type" + "-filter-" + index}>{typefilterOptions[index]}</label>
+        <label htmlFor={`${type}-${value}`}>{value}</label>
       </div>
     );
   };
 
-  const StatusFilter = ({index}) => {
-    const isFiltered = filters.some(
-      filter => filter.type === "status" && filter.value === index + 1
-    );
-    const [isChecked, setIsChecked] = useState(!isFiltered);
-
-    const applyFilter = () => {
-      setFilters(prevFilters => {
-        if (isChecked) {
-          // If currently checked, add to filters
-          return [...prevFilters, {type: "status", value: index + 1}];
-        } else {
-          // If currently unchecked, remove from filters
-          return prevFilters.filter(
-            filter => !(filter.type === "status" && filter.value === index + 1)
-          );
-        }
-      });
-      setIsChecked(!isChecked);
-    };
-
-    return (
-      <div className='filterrow'>
-        <input
-          type='checkbox'
-          id={"status-filter-" + index}
-          checked={isChecked}
-          onChange={applyFilter}
-        />
-        <label htmlFor={"status-filter-" + index}>{status[index]}</label>
-      </div>
-    );
+  Filter.propTypes = {
+    type: PropTypes.string.isRequired,
+    value: PropTypes.string.isRequired,
+    index: PropTypes.number.isRequired
   };
-
-  const mobileStyle = !isMobile
-    ? {}
-    : {
-        display: "flex",
-        position: "absolute",
-        zIndex: 10,
-        top: "0px",
-        left: "-20px",
-        borderRadius: "0 10px 10px 10px",
-        height: "fit-content"
-      };
 
   return (
     <div
-      className='sidebarcontainer'
+      className={isMobile ? "mobilesidebar" : "sidebarcontainer"}
       style={{
-        top: "var(--nav-height-small)",
-        ...mobileStyle,
-        overflowY: "scroll"
+        position: isMobile ? "relative" : "fixed",
+        top: isMobile ? "0" : "var(--nav-height)",
+        left: isMobile ? "0" : "0px",
+        width: isMobile ? "100%" : "180px",
+        background: isMobile ? "transparent" : "#335d51",
+        color: "white",
+        display: "flex",
+        flexDirection: "column",
+        height: isMobile ? "auto" : "100vh",
+        overflowY: isMobile ? "visible" : "scroll",
+        zIndex: isMobile ? "1" : "0",
+        padding: isMobile ? "var(--padding-main)" : "0"
       }}>
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          gap: "var(--padding-light)",
-          fontSize: "22px",
-          fontWeight: "700",
-          padding: "var(--padding-main)",
-          borderBottom: "2px solid white",
-          width: "100%"
-        }}>
-        {!isMobile && (
+      {!isMobile && (
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "var(--padding-light)",
+            padding: "var(--padding-main)",
+            borderBottom: "2px solid white"
+          }}>
           <img
             src={filterimage}
             alt=''
-            style={{
-              height: "30px",
-              width: "30px"
-            }}
           />
-        )}
-        Filter
-      </div>
-
+          <div>Filters</div>
+        </div>
+      )}
       <div className='singlefiltercontainer'>
-        <div style={{fontSize: "18px", fontWeight: "700"}}>Status</div>
-
-        {status.map((type, index) => (
-          <StatusFilter
-            index={index}
-            key={"type-filter-" + index}
-          />
-        ))}
-      </div>
-
-      <div className='singlefiltercontainer'>
-        {/*
-
-        <div style={{ fontSize: "18px", fontWeight: "700" }}>Project Type</div>
+        <div>Project Type</div>
         {typefilterOptions.map((type, index) => (
-          <TypeFilter index={index} key={"type-filter-" + index} />
+          <Filter
+            type='type'
+            value={type}
+            key={index}
+          />
         ))}
-        <br />
-      */}
-
-        <div style={{fontSize: "18px", fontWeight: "700"}}>Project Type</div>
-
+      </div>
+      <div className='singlefiltercontainer'>
+        <div>Investment Type</div>
         {investmentTypeList.map((type, index) => (
           <Filter
-            type={"investment_type"}
-            index={index}
+            type='investment_type'
             value={type}
-            key={"investment_type-filter-" + index}
+            key={index}
           />
         ))}
       </div>
       <div className='singlefiltercontainer'>
-        <div style={{fontSize: "18px", fontWeight: "700"}}>Country</div>
-        {countryList.map((type, index) => (
+        <div>Status</div>
+        {status.map((status, index) => (
           <Filter
-            type={"country"}
-            index={index}
-            value={type}
-            key={"type-filter-" + index}
-          />
-        ))}
-        <br />
-        <div style={{fontSize: "18px", fontWeight: "700"}}>State</div>
-        {cityList.map((type, index) => (
-          <Filter
-            type={"city"}
-            index={index}
-            value={type}
-            key={"city-filter-" + index}
+            type='status'
+            value={status}
+            key={index}
           />
         ))}
       </div>
-      <div style={{marginBottom: "15vh"}}></div>
+      <div className='singlefiltercontainer'>
+        <div>City</div>
+        {cityList.map((city, index) => (
+          <Filter
+            type='city'
+            value={city}
+            key={index}
+          />
+        ))}
+      </div>
+      <div className='singlefiltercontainer'>
+        <div>Country</div>
+        {countryList.map((country, index) => (
+          <Filter
+            type='country'
+            value={country}
+            key={index}
+          />
+        ))}
+      </div>
     </div>
   );
+};
+
+Sidebar.propTypes = {
+  filters: PropTypes.arrayOf(
+    PropTypes.shape({
+      type: PropTypes.string.isRequired,
+      value: PropTypes.string.isRequired
+    })
+  ).isRequired,
+  setFilters: PropTypes.func.isRequired,
+  data: PropTypes.arrayOf(
+    PropTypes.shape({
+      city: PropTypes.string.isRequired,
+      country: PropTypes.string.isRequired
+    })
+  ).isRequired,
+  isMobile: PropTypes.bool
 };
 
 export default Sidebar;

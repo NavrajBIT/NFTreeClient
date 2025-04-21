@@ -1,12 +1,10 @@
 import {useState, useEffect} from "react";
-import useAPI from "../../../api/useAPI";
 import Sidebar from "./sidebar";
 import Projectsview from "./projectsview";
 import "./marketplace.css";
 import {mockProjects} from "../../../api/mockProjectData";
 
 export default function ProjectPage() {
-  const api = useAPI();
   const [data, setData] = useState([]);
   const [filterData, setFilterData] = useState([]);
   const [filters, setFilters] = useState([]);
@@ -25,26 +23,7 @@ export default function ProjectPage() {
   }, []);
 
   useEffect(() => {
-    // Commenting out the API call but keeping it for reference
-    /*
-    const projectListData = async () => {
-      await api
-        .crud("GET", "project/projectlist")
-        .then((response) => {
-          if (response.status === 200) {
-            setData(response);
-            setFilterData(response);
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    };
-
-    projectListData();
-    */
-
-    // Using mock data instead
+    // Using mock data
     setData(mockProjects);
     setFilterData(mockProjects);
   }, []);
@@ -54,12 +33,11 @@ export default function ProjectPage() {
     data.map(project => {
       let isApplicable = true;
       filters.map(filter => {
-        if (filter.type == "status") {
-          console.log(filter);
-          if (filter.value == 1 && project.funding.raised < project.funding.total) {
+        if (filter.type === "status") {
+          if (filter.value === 1 && project.funding.raised < project.funding.total) {
             isApplicable = false;
           }
-          if (filter.value == 2 && project.funding.raised >= project.funding.total) {
+          if (filter.value === 2 && project.funding.raised >= project.funding.total) {
             isApplicable = false;
           }
         }
