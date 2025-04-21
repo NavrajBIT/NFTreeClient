@@ -63,31 +63,9 @@ const Sidebar = ({filters, setFilters, data, isMobile}) => {
   };
 
   return (
-    <div
-      className={isMobile ? "mobilesidebar" : "sidebarcontainer"}
-      style={{
-        position: isMobile ? "relative" : "fixed",
-        top: isMobile ? "0" : "var(--nav-height)",
-        left: isMobile ? "0" : "0px",
-        width: isMobile ? "100%" : "180px",
-        background: isMobile ? "transparent" : "#335d51",
-        color: "white",
-        display: "flex",
-        flexDirection: "column",
-        height: isMobile ? "auto" : "100vh",
-        overflowY: isMobile ? "visible" : "scroll",
-        zIndex: isMobile ? "1" : "0",
-        padding: isMobile ? "var(--padding-main)" : "0"
-      }}>
+    <div className={isMobile ? "mobilesidebar" : "sidebarcontainer"}>
       {!isMobile && (
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: "var(--padding-light)",
-            padding: "var(--padding-main)",
-            borderBottom: "2px solid white"
-          }}>
+        <div className='sidebarheader'>
           <img
             src={filterimage}
             alt=''

@@ -25,7 +25,7 @@ const ProjectCard = ({project, isMyProject}) => {
         </p>
         <div className='projectDetails'>
           <div className='detailItem'>
-            <span className='detailLabel'>Project Type:</span>
+            <span className='detailLabel'>Type:</span>
             <span className='detailValue'>{project.project_type}</span>
           </div>
           <div className='detailItem'>
@@ -34,15 +34,7 @@ const ProjectCard = ({project, isMyProject}) => {
           </div>
           <div className='detailItem'>
             <span className='detailLabel'>Age:</span>
-            <span className='detailValue'>{project.age} Years</span>
-          </div>
-          <div className='detailItem'>
-            <span className='detailLabel'>Carbon Credits:</span>
-            <span className='detailValue'>{project.estimated_carbon_credits}</span>
-          </div>
-          <div className='detailItem'>
-            <span className='detailLabel'>Survival Rate:</span>
-            <span className='detailValue'>{project.estimated_survival_rate}</span>
+            <span className='detailValue'>{project.age} Yrs</span>
           </div>
         </div>
         <div className='projectProgress'>
@@ -79,8 +71,6 @@ const ProjectCard = ({project, isMyProject}) => {
           />
         )}
       </div>
-      <div className='projectdescription'>{project.description}</div>
-      <div className='readmore'>Read More</div>
     </div>
   );
 };
@@ -95,14 +85,11 @@ ProjectCard.propTypes = {
     project_type: PropTypes.string.isRequired,
     area: PropTypes.number.isRequired,
     age: PropTypes.number.isRequired,
-    estimated_carbon_credits: PropTypes.string.isRequired,
-    estimated_survival_rate: PropTypes.string.isRequired,
     funding: PropTypes.shape({
       raised: PropTypes.number.isRequired,
       total: PropTypes.number.isRequired
     }).isRequired,
-    type: PropTypes.number.isRequired,
-    description: PropTypes.string.isRequired
+    type: PropTypes.number.isRequired
   }).isRequired,
   isMyProject: PropTypes.bool
 };

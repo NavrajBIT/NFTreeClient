@@ -1,71 +1,68 @@
-import { useState } from "react";
+import {useState} from "react";
+import PropTypes from "prop-types";
 import ProjectCard from "../../Subcomponents/projectCard/projectCard";
 import SearchBar from "./SearchBar";
-import { CreateButton } from "./SearchBar";
+import {CreateButton} from "./SearchBar";
 import filtericon from "./assets/filter.png";
 import filterunselectedicon from "./assets/filterunselected.png";
 import Sidebar from "./sidebar";
 
-const Projectsview = ({
-  filteredData,
-  filters,
-  setFilters,
-  data,
-  search,
-  setSearch,
-}) => {
+const Projectsview = ({filteredData, filters, setFilters, data, search, setSearch}) => {
   const [filterMenu, setFilterMenu] = useState(false);
+
   return (
-    <div className="projectsviewcontainer">
-      <div className="projectsviewcontainerheading">
+    <div className='projectsviewcontainer'>
+      <div className='projectsviewcontainerheading'>
         Welcome to BitBhoomi Sustainability Marketplace!!
       </div>
-      <div className="searchbarcontainer">
+      <div className='searchbarcontainer'>
         <div
-          className="filterIcon"
-          style={{
-            background: filterMenu ? "#335D51" : "transparent",
-            borderRadius: filterMenu ? "10px 10px 0px 0px" : "10px",
-            position: "relative",
-          }}
-        >
+          className='filterIcon'
+          onClick={() => setFilterMenu(!filterMenu)}>
           <img
             src={filterMenu ? filtericon : filterunselectedicon}
-            alt=""
-            onClick={() => setFilterMenu(!filterMenu)}
+            alt='filter'
           />
-          {filterMenu && (
-            <div
-              style={{
-                position: "absolute",
-                background: "#335D51",
-                top: "100%",
-                width: "400px",
-                borderRadius: "30px",
-                borderTopLeftRadius: "0px",
-                color: "white",
-                fontWeight: "600",
-              }}
-            >
-              <Sidebar
-                isMobile
-                filters={filters}
-                setFilters={setFilters}
-                data={data}
-              />
-            </div>
-          )}
         </div>
-        <SearchBar searchValue={search} setSearchValue={setSearch} />
+        <SearchBar
+          searchValue={search}
+          setSearchValue={setSearch}
+        />
         <CreateButton />
       </div>
-      <div className="marketplaceprojectscontainer">
+      <Sidebar
+        filters={filters}
+        setFilters={setFilters}
+        data={data}
+        isMobile={false}
+      />
+      {filterMenu && (
+        <Sidebar
+          filters={filters}
+          setFilters={setFilters}
+          data={data}
+          isMobile={true}
+        />
+      )}
+      <div className='marketplaceprojectscontainer'>
         {filteredData.map((project, index) => (
-          <ProjectCard project={project} key={"project-" + index} />
+          <ProjectCard
+            project={project}
+            key={"project-" + index}
+          />
         ))}
       </div>
     </div>
   );
+};
+
+Projectsview.propTypes = {
+  filteredData: PropTypes.arrayOf(PropTypes.object).isRequired,
+  filters: PropTypes.object.isRequired,
+  setFilters: PropTypes.func.isRequired,
+  data: PropTypes.arrayOf(PropTypes.object).isRequired,
+  search: PropTypes.string.isRequired,
+  setSearch: PropTypes.func.isRequired
 };
 
 export default Projectsview;
