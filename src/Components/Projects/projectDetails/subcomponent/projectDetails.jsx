@@ -1,24 +1,8 @@
-import {useEffect, useState} from "react";
 import "./userView.css";
 import PropTypes from "prop-types";
 import LabelValueBox from "./labelValueBox";
 
 const ProjectDetails = ({details}) => {
-  const [projectage, setProjectage] = useState("");
-
-  useEffect(() => {
-    if (details?.project?.planting_date) {
-      const date = new Date(details.project.planting_date);
-      const now = new Date();
-      const diffTime = Math.abs(now - date);
-      const diffYears = Math.floor(diffTime / (1000 * 60 * 60 * 24 * 365));
-      const diffMonths = Math.floor(
-        (diffTime % (1000 * 60 * 60 * 24 * 365)) / (1000 * 60 * 60 * 24 * 30)
-      );
-      setProjectage(`${diffYears} Years ${diffMonths} Months`);
-    }
-  }, [details?.project?.planting_date]);
-
   return (
     <div style={{padding: "5%"}}>
       <h1 className='projectHeading'>Project Details</h1>
@@ -62,7 +46,7 @@ const ProjectDetails = ({details}) => {
           />
           <LabelValueBox
             label='Project Age'
-            value={projectage}
+            value={`${details?.project?.age} years`}
           />
           <LabelValueBox
             label='Planting Date'
@@ -75,16 +59,6 @@ const ProjectDetails = ({details}) => {
           <LabelValueBox
             label='Estimated Survival Rate'
             value={details?.project?.estimated_survival_rate}
-          />
-          {details?.project?.type === 2 && (
-            <LabelValueBox
-              label='Donation Cost Per Plant ($)'
-              value={details?.project?.donation}
-            />
-          )}
-          <LabelValueBox
-            label={`Cost Per Plant ${details?.project?.currency}`}
-            value={details?.project?.donation}
           />
           <LabelValueBox
             label='Total Number Of Plants Planned'
@@ -181,6 +155,7 @@ ProjectDetails.propTypes = {
       project_type: PropTypes.string,
       investment_type: PropTypes.string,
       area: PropTypes.number,
+      age: PropTypes.number,
       planting_date: PropTypes.string,
       estimated_carbon_credits: PropTypes.string,
       estimated_survival_rate: PropTypes.string,
