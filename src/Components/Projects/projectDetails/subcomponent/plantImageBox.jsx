@@ -1,9 +1,14 @@
 import "./userView.css";
-const PlantImageBox = ({ img }) => {
+const PlantImageBox = ({img}) => {
   return (
-    <div className="plantImageBox" onClick={() => window.open(src)}>
-      <img src={img.image} alt={img.name + " image"} className="plantImage" />
-      <p className="plantImageText">{img.name}</p>
+    <div
+      className='plantImageBox'
+      onClick={() => window.open(img.image)}>
+      <img
+        src={img.image}
+        alt='Project image'
+        className='plantImage'
+      />
     </div>
   );
 };

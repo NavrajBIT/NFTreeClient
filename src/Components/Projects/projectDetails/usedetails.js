@@ -21,6 +21,33 @@ const useProjectDetails = projectId => {
         {id: 1, name: "Land Registration Proof", file: "/docs/land_reg.pdf"},
         {id: 2, name: "NIN Proof", file: "/docs/nin.pdf"}
       ]);
+
+      // Initialize project images based on project ID
+      if (parseInt(projectId) === 1) {
+        const kanoImages = [
+          {id: 1, image: "/project-scrnshts/p11.png"},
+          {id: 2, image: "/project-scrnshts/p12.png"},
+          {id: 3, image: "/project-scrnshts/p13.png"},
+          {id: 4, image: "/project-scrnshts/p14.png"}
+        ];
+        setProjectImages(kanoImages);
+      } else if (parseInt(projectId) === 2) {
+        const jigawaImages = [
+          {id: 1, image: "/project-scrnshts/jigawa_p31.png"},
+          {id: 2, image: "/project-scrnshts/jigawa_p32.png"},
+          {id: 3, image: "/project-scrnshts/jigawa_p33.png"},
+          {id: 4, image: "/project-scrnshts/jigawa_p34.png"}
+        ];
+        setProjectImages(jigawaImages);
+      } else if (parseInt(projectId) === 3) {
+        const michikaImages = [
+          {id: 1, image: "/project-scrnshts/michika_p21.png"},
+          {id: 2, image: "/project-scrnshts/michika_p22.png"},
+          {id: 3, image: "/project-scrnshts/michika_p23.png"},
+          {id: 4, image: "/project-scrnshts/michika_p24.png"}
+        ];
+        setProjectImages(michikaImages);
+      }
     }
     setIsLoading(false);
   }, [projectId]);

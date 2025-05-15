@@ -1,8 +1,23 @@
 import "./userView.css";
+import {useEffect, useState} from "react";
 import PropTypes from "prop-types";
 import LabelValueBox from "./labelValueBox";
 
 const ProjectDetails = ({details}) => {
+  const [projectage, setProjectage] = useState(0);
+
+  useEffect(() => {
+    if (details?.project?.planting_date) {
+      const [month, year] = details.project.planting_date.split("/");
+      const plantingDate = new Date(year, month - 1);
+      const today = new Date();
+      const ageInMonths =
+        (today.getFullYear() - plantingDate.getFullYear()) * 12 +
+        (today.getMonth() - plantingDate.getMonth());
+      setProjectage(ageInMonths / 12);
+    }
+  }, [details?.project?.planting_date]);
+
   return (
     <div style={{padding: "5%"}}>
       <h1 className='projectHeading'>Project Details</h1>
@@ -42,11 +57,11 @@ const ProjectDetails = ({details}) => {
           )}
           <LabelValueBox
             label='Total Plantation Area (hect.)'
-            value={details?.project?.area}
+            value={`${details?.project?.area} HA`}
           />
           <LabelValueBox
             label='Project Age'
-            value={`${details?.project?.age} years`}
+            value={details?.project?.age + " Years"}
           />
           <LabelValueBox
             label='Planting Date'
@@ -71,6 +86,22 @@ const ProjectDetails = ({details}) => {
           <LabelValueBox
             label='Donation Method'
             value={details?.project?.donation_method}
+          />
+          <LabelValueBox
+            label='Social Impact'
+            value={details?.project?.social_impact || "Creating jobs and livelihoods"}
+          />
+          <LabelValueBox
+            label='Plantation Common in Area'
+            value={details?.project?.is_common_in_area ? "Yes" : "No"}
+          />
+          <LabelValueBox
+            label='Average Girth'
+            value={details?.project?.girth || "50cm"}
+          />
+          <LabelValueBox
+            label='Average Height'
+            value={details?.project?.average_height || "5 Meters"}
           />
         </div>
         <div
@@ -121,6 +152,24 @@ const ProjectDetails = ({details}) => {
             label='Carbon Credit Enabled'
             value={details?.project?.carbonCredit_enabled ? "Yes" : "No"}
           />
+          <LabelValueBox
+            label='Commercial Benefits Received'
+            value={details?.project?.received_commercial_benefit ? "Yes" : "Not Yet"}
+          />
+          <LabelValueBox
+            label='Local Community Involvement'
+            value={
+              details?.project?.local_community_involved ||
+              "Yes(Management & Forest Guards)"
+            }
+          />
+          <LabelValueBox
+            label='Carbon Credit Owner'
+            value={
+              details?.project?.carbon_credit_owner ||
+              "National Agency of the Great Green Wall"
+            }
+          />
         </div>
       </div>
       <div
@@ -155,7 +204,7 @@ ProjectDetails.propTypes = {
       project_type: PropTypes.string,
       investment_type: PropTypes.string,
       area: PropTypes.number,
-      age: PropTypes.number,
+      age: PropTypes.string,
       planting_date: PropTypes.string,
       estimated_carbon_credits: PropTypes.string,
       estimated_survival_rate: PropTypes.string,
@@ -180,7 +229,14 @@ ProjectDetails.propTypes = {
             percentage: PropTypes.number
           })
         )
-      })
+      }),
+      social_impact: PropTypes.string,
+      is_common_in_area: PropTypes.bool,
+      received_commercial_benefit: PropTypes.bool,
+      local_community_involved: PropTypes.string,
+      carbon_credit_owner: PropTypes.string,
+      girth: PropTypes.string,
+      average_height: PropTypes.string
     })
   })
 };

@@ -5,19 +5,16 @@ import telegram from "./assets/TelegramApp.svg";
 
 const Footer = () => {
   return (
-    <div className="footercontainerouter" id="footer">
-      <div className="footerconatiner">
-        <div className="footercontentcontainer">
-          <img src={logo} alt="BitBhoomi" />
-          <div className="paraText" style={{ marginLeft: "30px" }}>
-            Join us in making a lasting impact.
-          </div>
-          <div className="paraText" style={{ marginLeft: "30px" }}>
-            Embrace Sustainability.
-          </div>
-          <div className="paraText" style={{ marginLeft: "30px" }}>
-            Embrace Transparency.
-          </div>
+    <div
+      className='footercontainerouter'
+      id='footer'>
+      <div className='footerconatiner'>
+        <div className='footercontentcontainer'>
+          <img
+            src={logo}
+            alt='BitBhoomi'
+          />
+
           {/* <div className="footersocialcontainer" style={{ marginLeft: "30px" }}>
             Follow us on:
             <img
@@ -46,62 +43,51 @@ const Footer = () => {
           </div> */}
         </div>
         <div
-          id="address"
-          className="footercontentcontainer"
+          id='address'
+          className='footercontentcontainer'
           style={{
-            fontFamily: "'Fira Sans'",
-          }}
-        >
-          <div
+            fontFamily: "'Fira Sans'"
+          }}>
+          {/* <div
             style={{
               width: "200px",
-              height: "150px",
-            }}
-          >
+              height: "150px"
+            }}>
             <img
-              src="https://abaadalkhayal.com/logo2.png"
-              alt="AbaadAlKhayal"
+              src='https://abaadalkhayal.com/logo2.png'
+              alt='AbaadAlKhayal'
             />
           </div>
-          {/* <div style={{ fontWeight: 700, fontSize: "1.2rem" }}>
-            Dubai Address:
-          </div> */}
+
           <div>
-            {/* <div className="paraText">Beyond Imagination Tech LLC</div> */}
-            {/* <div className="paraText">M03 Laffa restaurant building</div> */}
-            {/* <div className="paraText">
-              Sheikh Khalifa Bin Zayed St - Opp. Burjuman Mall,
-            </div> */}
-            {/* <div className="paraText">Dubai, United Arab Emirates</div> */}
+
           </div>
-          {/* <div className="paraText">support@beimagine.tech</div> */}
-          {/* Dubai Address ------ */}
-          <div style={{ fontWeight: 700, fontSize: "1.2rem" }}>Address:</div>
+
+
+          <div style={{fontWeight: 700, fontSize: "1.2rem"}}>Address:</div>
           <div>
-            <div className="paraText">
-              Aba’ad Alkhayal (Limited Liability Company)
-            </div>
-            <div className="paraText">
-              7909 Al Qalaa, Al Rabie District 2955, Riyadh.
-            </div>
-            <div className="paraText">Saudi Arabia</div>
+            <div className='paraText'>Aba’ad Alkhayal (Limited Liability Company)</div>
+            <div className='paraText'>7909 Al Qalaa, Al Rabie District 2955, Riyadh.</div>
+            <div className='paraText'>Saudi Arabia</div>
           </div>
-          <div className="paraText">sales@abaadalkhayal.com</div>
-          <div></div>
+          <div className='paraText'>sales@abaadalkhayal.com</div> */}
+          <div
+            className='paraText'
+            style={{marginLeft: "30px"}}>
+            Join us in making a lasting impact.
+          </div>
+          <div
+            className='paraText'
+            style={{marginLeft: "30px"}}>
+            Embrace Sustainability.
+          </div>
+          <div
+            className='paraText'
+            style={{marginLeft: "30px"}}>
+            Embrace Transparency.
+          </div>
         </div>
       </div>
-      {/* <div
-        style={{
-          fontFamily: "Inter",
-          textAlign: "center",
-          paddingBottom: "16px",
-          fontSize: "1rem",
-          color: "rgb(255,255,255,0.5)",
-        }}
-      >
-        Copyright © 2024 Beyond Imagination Technologies Pvt. Ltd. All rights
-        reserved.
-      </div> */}
     </div>
   );
 };
