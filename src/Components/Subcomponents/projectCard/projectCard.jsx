@@ -1,6 +1,6 @@
 import {useNavigate} from "react-router-dom";
 import PropTypes from "prop-types";
-import "./projectCard.css";
+import "./projectcard.css";
 import monitoringtag from "./assets/Monitoring.png";
 import donationtag from "./assets/Crowdfunding.png";
 import investmenttag from "./assets/Investment.png";
